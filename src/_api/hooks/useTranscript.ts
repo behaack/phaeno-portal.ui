@@ -1,12 +1,12 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query"
-import { fastaService } from "@/_api/services/fasta.service"
+import { transcriptService } from "@/_api/services/transcript.service"
 import type { GenomicListParams } from "@/_api/types/genomic.common"
 import { useImpersonationStore } from "@/_stores/impersonation.store"
 import { useAuthStore } from "@/_stores/auth.store" // or wherever your roles live
 import { isPhaenoEmployee } from "@/_api/types/auth.guards"
 import { LookupListParams } from "../types/common"
 
-export function useFastaLookup(params: LookupListParams) {
+export function useTranscriptLookup(params: LookupListParams) {
   const roles = useAuthStore((s) => s.userAccount?.roles) // adapt to your auth store
   const employee = isPhaenoEmployee(roles)
 
@@ -17,16 +17,16 @@ export function useFastaLookup(params: LookupListParams) {
   const enabled = !employee || selectedOrgId !== null
 
   return useQuery({
-    queryKey: ["fasta", "lookup", employee ? selectedOrgId : "self", params.q],
+    queryKey: ["transcript", "lookup", employee ? selectedOrgId : "self", params.q],
     enabled,
     queryFn: () => {
-      if (!employee) return fastaService.lookup(params)
-      return fastaService.lookupForOrganization(params, selectedOrgId!)
+      if (!employee) return transcriptService.lookup(params)
+      return transcriptService.lookupForOrganization(params, selectedOrgId!)
     },
   })
 }
 
-export function useFastaList(params: GenomicListParams) {
+export function useTranscriptList(params: GenomicListParams) {
   const roles = useAuthStore((s) => s.userAccount?.roles)
   const employee = isPhaenoEmployee(roles)
   const selectedOrgId = useImpersonationStore((s) => s.selectedOrganizationId)
@@ -35,7 +35,7 @@ export function useFastaList(params: GenomicListParams) {
 
   return useQuery({
     queryKey: [
-      "fasta",
+      "transcript",
       "list",
       employee ? selectedOrgId : "self",
       params.sampleId ?? null,
@@ -46,16 +46,16 @@ export function useFastaList(params: GenomicListParams) {
     enabled,
     placeholderData: keepPreviousData,
     queryFn: () => {
-      if (!employee) return fastaService.list(params)
-      return fastaService.listForOrganization({ organizationId: selectedOrgId!, ...params })
+      if (!employee) return transcriptService.list(params)
+      return transcriptService.listForOrganization({ organizationId: selectedOrgId!, ...params })
     },
   })
 }
 
-export function useFastaDetails(id: string | null | undefined) {
+export function useTranscriptDetails(id: string | null | undefined) {
   return useQuery({
-    queryKey: ["fasta", "details", id ?? null],
+    queryKey: ["transcript", "details", id ?? null],
     enabled: !!id,
-    queryFn: () => fastaService.get(id!),
+    queryFn: () => transcriptService.get(id!),
   })
 }

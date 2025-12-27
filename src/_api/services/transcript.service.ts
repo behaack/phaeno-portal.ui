@@ -4,7 +4,7 @@ import type { CursorPage } from "@/_api/types/paging"
 import type { GenomicListParams, GenomicListForOrgParams, GenomicLookupItem } from "@/_api/types/genomic.common"
 import type { TranscriptListItem, TranscriptDetailsItem } from "@/_api/types/transcript"
 import { toListQueryParams } from "@/_api/types/genomic.common"
-import { enc } from "../types/common"
+import { enc, LookupListParams, toLookupListQueryParams } from "../types/common"
 
 export const transcriptService = {
   /** GET /transcript (current org from JWT claims) */
@@ -25,12 +25,15 @@ export const transcriptService = {
     axiosInstance.get<unknown, TranscriptDetailsItem>(`/transcript/${enc(id)}`),
 
   /** GET /transcript/lookup (current org) */
-  lookup: () =>
-    axiosInstance.get<unknown, GenomicLookupItem[]>("/transcript/lookup"),
+  lookup: (params: LookupListParams) =>
+    axiosInstance.get<unknown, GenomicLookupItem[]>("/transcript/lookup", {
+      params: toLookupListQueryParams(params)
+    }),
 
   /** GET /transcript/lookup/{organizationId} */
-  lookupForOrganization: (organizationId: string) =>
+  lookupForOrganization: (params: LookupListParams, organizationId: string) =>
     axiosInstance.get<unknown, GenomicLookupItem[]>(
-      `/transcript/lookup/${enc(organizationId)}`
-    ),
+      `/transcript/lookup/${enc(organizationId)}`, {
+          params: toLookupListQueryParams(params)
+      }),
 }

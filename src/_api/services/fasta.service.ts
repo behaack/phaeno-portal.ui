@@ -4,7 +4,7 @@ import type { CursorPage } from "@/_api/types/paging"
 import type { GenomicListParams, GenomicListForOrgParams, GenomicLookupItem } from "@/_api/types/genomic.common"
 import type { FastaListItem, FastaDetailsItem } from "@/_api/types/fasta"
 import { toListQueryParams } from "@/_api/types/genomic.common"
-import { enc } from "../types/common"
+import { enc, LookupListParams, toLookupListQueryParams } from "../types/common"
 
 export const fastaService = {
   list: (params: GenomicListParams) =>
@@ -21,8 +21,12 @@ export const fastaService = {
   get: (id: string) =>
     axiosInstance.get<unknown, FastaDetailsItem>(`/fasta/${enc(id)}`),
 
-  lookup: () => axiosInstance.get<unknown, GenomicLookupItem[]>("/fasta/lookup"),
+  lookup: (params: LookupListParams) => axiosInstance.get<unknown, GenomicLookupItem[]>("/fasta/lookup", {
+    params: toLookupListQueryParams(params)
+  }),
 
-  lookupForOrganization: (organizationId: string) =>
-    axiosInstance.get<unknown, GenomicLookupItem[]>(`/fasta/lookup/${enc(organizationId)}`),
+  lookupForOrganization: (params: LookupListParams, organizationId: string) =>
+    axiosInstance.get<unknown, GenomicLookupItem[]>(`/fasta/lookup/${enc(organizationId)}`, {
+      params: toLookupListQueryParams(params)
+    }),
 }

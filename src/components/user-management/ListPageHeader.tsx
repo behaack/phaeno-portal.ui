@@ -3,7 +3,7 @@ import { JSX, useEffect, useMemo } from 'react';
 import { Button } from '@mantine/core';
 import { useAuthStore } from '@/stores/authStore';
 import { EOrganizationType } from '@/assets/enums/_index';
-import Paginator from '@/components/Paginator';
+import Paginator from '@/_shared/ui/components/Paginator';
 import SearchInput from '@/components/SearchInput';
 
 export interface IProps {
