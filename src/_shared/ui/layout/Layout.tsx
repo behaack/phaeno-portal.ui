@@ -82,7 +82,7 @@ export default function PrivateLayout() {
     if (typeof AUTO_LOGOUT_TICK_COUNT !== 'number') { return };
 
     if (inactivityTicks >= AUTO_LOGOUT_TICK_COUNT) {
-      authStore.logout();
+      //authStore.logout();
     }
   }, [inactivityTicks, AUTO_LOGOUT_TICK_COUNT, authStore.logout, navigate]);
 

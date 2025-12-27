@@ -30,7 +30,7 @@ export function useFastaList(params: GenomicListParams) {
   const employee = isPhaenoEmployee(roles)
   const selectedOrgId = useImpersonationStore((s) => s.selectedOrganizationId)
 
-  const enabled = !employee || selectedOrgId !== null
+  const enabled = !employee || !!selectedOrgId
 
   return useQuery({
     queryKey: [

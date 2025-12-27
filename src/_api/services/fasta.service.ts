@@ -3,7 +3,8 @@ import { axiosInstance } from "@/_api/core/axios.instance"
 import type { CursorPage } from "@/_api/types/paging"
 import type { GenomicListParams, GenomicListForOrgParams, GenomicLookupItem } from "@/_api/types/genomic.common"
 import type { FastaListItem, FastaDetailsItem } from "@/_api/types/fasta"
-import { toListQueryParams, enc } from "@/_api/types/genomic.common"
+import { toListQueryParams } from "@/_api/types/genomic.common"
+import { enc } from "../types/common"
 
 export const fastaService = {
   list: (params: GenomicListParams) =>

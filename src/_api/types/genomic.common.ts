@@ -20,7 +20,3 @@ export function toListQueryParams(params: GenomicListParams) {
     q: params.q ?? undefined,
   }
 }
-
-export function enc(segment: string) {
-  return encodeURIComponent(segment)
-}
