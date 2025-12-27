@@ -30,4 +30,4 @@ export { PFormField } from "./form";
 export type { PFormFieldProps } from "./form";
 
 export { PChip } from "./feedback";
-export type { PChipProps, PChipVariant } from "./feedback";
+export type { PChipProps } from "./feedback";

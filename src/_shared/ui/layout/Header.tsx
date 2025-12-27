@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useLocation } from '@tanstack/react-router';
 import { constants } from '@/assets/constants';
 import { useDeviceSize } from '@/hooks/useDeviceSize';
-import { useAuthStore } from '@/_stores/authStore';
+import { useAuthStore } from '@/_stores/auth.store';
 import DropdownMenu from './DropdownMenu';
 import Menu from './Menu';
 

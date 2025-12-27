@@ -1,3 +1,4 @@
+import { UserAccount } from "@/_api/types/account"
 import { create } from "zustand"
 import { createJSONStorage, devtools, persist } from "zustand/middleware"
 
@@ -5,6 +6,7 @@ export interface IAuthState {
   accessToken: string | null
   refreshToken: string | null
   accessTokenExpiresAtUtc: string | null
+  userAccount: UserAccount | null
 
   // hydration flag
   hasHydrated: boolean
@@ -14,6 +16,7 @@ export interface IAuthState {
   login: (accessToken: string, refreshToken: string, expiresInSeconds: number) => void
   rotateTokens: (accessToken: string, refreshToken: string, expiresInSeconds: number) => void
   logout: () => void
+  setUserAccount: (userAccount: UserAccount | null) => void
 }
 
 function computeExpiresAtUtc(expiresInSeconds?: number): string | null {
@@ -30,9 +33,14 @@ export const useAuthStore = create<IAuthState>()(
         accessToken: null,
         refreshToken: null,
         accessTokenExpiresAtUtc: null,
-
+        userAccount: null,
         hasHydrated: false,
+        
         setHasHydrated: (v) => set({ hasHydrated: v }),
+
+        setUserAccount: (userAccount: UserAccount | null) => set({
+          userAccount: userAccount
+        }),
 
         isAuthenticated: () => {
           const token = get().accessToken
@@ -66,6 +74,7 @@ export const useAuthStore = create<IAuthState>()(
             accessToken: null,
             refreshToken: null,
             accessTokenExpiresAtUtc: null,
+            userAccount: null
           }),
       }),
       {

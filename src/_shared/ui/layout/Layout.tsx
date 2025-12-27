@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from '@tanstack/react-router';
 import { useInterval, useWindowEvent } from '@mantine/hooks';
 ////import { FullScreenLoader, PModalConfirm } from '@/components/_index';
-import { useAuthStore } from '@/_stores/authStore';
+import { useAuthStore } from '@/_stores/auth.store';
 //import { useDialogConfirmStore } from '@/stores/dialogConfirmStore';
 //import { useDatabase } from '@/hooks/useDatabase';
 //import { ILookupItem } from '@/assets/interfaces/_index';

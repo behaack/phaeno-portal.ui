@@ -3,36 +3,35 @@
 export type SignInRequest = {
   email: string
   password: string
+  rememberMe?: boolean
 }
 
-export enum ETwoFactorMethod {
-  OutOfBandCode = 1, // code sent to user (email/SMS)
-  Totp = 2,          // authenticator app
-}
-
-/**
- * Matches your API JSON:
- *   state: "Authenticated" | "TwoFactorRequired"
- */
-export enum SignInState {
+// Matches C# ESignInState with JsonStringEnumConverter
+export enum ESignInState {
   Authenticated = "Authenticated",
   TwoFactorRequired = "TwoFactorRequired",
 }
 
+// Matches C# ETwoFactorMethod
+export enum ETwoFactorMethod {
+  OutOfBandCode = 1,
+  Totp = 2,
+}
+
 export type SignInAuthenticated = {
-  state: SignInState.Authenticated
+  state: ESignInState.Authenticated
   accessToken: string
   refreshToken: string
   expiresInSeconds: number
 }
 
 export type SignInTwoFactorRequired = {
-  state: SignInState.TwoFactorRequired
+  state: ESignInState.TwoFactorRequired
   method: ETwoFactorMethod
-  loginChallengeId: string
+  loginChallengeId: string // Guid serialized as string
 }
 
-export type SignInResult = SignInAuthenticated | SignInTwoFactorRequired
+export type SignInResponse = SignInAuthenticated | SignInTwoFactorRequired
 
 export type TwoFactorVerifyRequest = {
   loginChallengeId: string
@@ -43,3 +42,7 @@ export type TwoFactorVerifyRequest = {
 export type TwoFactorResendRequest = {
   loginChallengeId: string
 }
+
+export type AuthTokens = Pick<SignInAuthenticated, "accessToken" | "refreshToken" | "expiresInSeconds">
+
+

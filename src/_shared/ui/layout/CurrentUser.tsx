@@ -1,5 +1,5 @@
 import { useMeQuery } from '@/_api/hooks/account.hooks';
-import { useAuthStore } from '@/_stores/authStore';
+import { useAuthStore } from '@/_stores/auth.store';
 
 export default function CurrentUser() {
 const isAuthenticated = useAuthStore((s) => s.isAuthenticated())

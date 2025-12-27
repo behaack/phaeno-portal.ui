@@ -5,7 +5,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { EOrganizationType } from '@/assets/enums/_index';
 import { useDatabase } from '@/hooks/useDatabase';
 import { useDeviceSize } from '@/hooks/useDeviceSize';
-import { useAuthStore } from '@/_stores/authStore';
+import { useAuthStore } from '@/_stores/auth.store';
 import { Subtype } from './components/IMenuListItem';
 import MenuItem from './components/MenuItem';
 import userMenuList from './components/menuList';
@@ -153,6 +153,10 @@ export default function DropdownMenu({ baseRoute }: IProps) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [opened, close]);
+
+  const buttonHndl = (subType: string) => {
+
+  }  
 
   return (
     <nav className="relative">

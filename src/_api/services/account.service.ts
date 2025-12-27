@@ -1,6 +1,6 @@
 import { axiosInstance } from "../core/axios.instance"
-import type { MeDto } from "../types/account"
+import type { UserAccount } from "../types/account"
 
 export const accountService = {
-  me: () => axiosInstance.get<unknown, MeDto>("/account/me"),
+  me: () => axiosInstance.get<unknown, UserAccount>("/account/me"),
 }

@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/_stores/authStore"
+import { useAuthStore } from "@/_stores/auth.store"
 
 export const authSession = {
   getAccessToken: () => useAuthStore.getState().accessToken,

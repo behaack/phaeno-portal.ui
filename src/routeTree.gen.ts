@@ -18,6 +18,7 @@ import { Route as AnalyticsIndexRouteImport } from './routes/analytics/index'
 import { Route as AuthTwoFactorRouteImport } from './routes/auth/two-factor'
 import { Route as AuthTfaCodeRouteImport } from './routes/auth/tfa-Code'
 import { Route as AuthSigninRouteImport } from './routes/auth/signin'
+import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
 import { Route as AuthPasswordRecoveryIndexRouteImport } from './routes/auth/password-recovery/index'
 import { Route as ManageUsersCustomersIdRouteImport } from './routes/manage-users/customers/$id'
 import { Route as AuthPasswordRecoveryStep3RouteImport } from './routes/auth/password-recovery/step-3'
@@ -71,6 +72,11 @@ const AuthSigninRoute = AuthSigninRouteImport.update({
   path: '/auth/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/auth/forgot-password',
+  path: '/auth/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthPasswordRecoveryIndexRoute =
   AuthPasswordRecoveryIndexRouteImport.update({
     id: '/auth/password-recovery/',
@@ -113,6 +119,7 @@ const AuthAccountSetupIdCodeRoute = AuthAccountSetupIdCodeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/tfa-Code': typeof AuthTfaCodeRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/tfa-Code': typeof AuthTfaCodeRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
@@ -150,6 +158,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/tfa-Code': typeof AuthTfaCodeRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth/forgot-password'
     | '/auth/signin'
     | '/auth/tfa-Code'
     | '/auth/two-factor'
@@ -188,6 +198,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth/forgot-password'
     | '/auth/signin'
     | '/auth/tfa-Code'
     | '/auth/two-factor'
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/auth/forgot-password'
     | '/auth/signin'
     | '/auth/tfa-Code'
     | '/auth/two-factor'
@@ -225,6 +237,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthSigninRoute: typeof AuthSigninRoute
   AuthTfaCodeRoute: typeof AuthTfaCodeRoute
   AuthTwoFactorRoute: typeof AuthTwoFactorRoute
@@ -307,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSigninRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/forgot-password': {
+      id: '/auth/forgot-password'
+      path: '/auth/forgot-password'
+      fullPath: '/auth/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/password-recovery/': {
       id: '/auth/password-recovery/'
       path: '/auth/password-recovery'
@@ -361,6 +381,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSigninRoute: AuthSigninRoute,
   AuthTfaCodeRoute: AuthTfaCodeRoute,
   AuthTwoFactorRoute: AuthTwoFactorRoute,

@@ -1,6 +1,6 @@
-import type { EOrganizationType } from "./enums" // wherever your enum lives
+import type { EOrganizationType } from "./enums.ts"
 
-export type MeDto = {
+export type UserAccount = {
   userId: string
   organizationType: EOrganizationType
   organizationId: string

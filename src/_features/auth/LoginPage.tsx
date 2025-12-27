@@ -63,7 +63,7 @@ export function LoginPage() {
               <button
                 type="button"
                 className="text-sm underline opacity-80 hover:opacity-100"
-                onClick={() => navigate({ to: "/forgot-password" })}
+                onClick={() => navigate({ to: "/auth/forgot-password" })}
               >
                 Forgot password?
               </button>

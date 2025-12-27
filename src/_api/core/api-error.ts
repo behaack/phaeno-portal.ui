@@ -1,10 +1,10 @@
-import type { ApiErrorEnvelope } from "@/_api/core/types"
+import type { ApiEnvelopeError } from "@/_api/core/types"
 
 export function getApiErrorMessage(err: unknown): string {
   const e = err as any
 
   // Envelope error
-  const env = e as ApiErrorEnvelope
+  const env = e as ApiEnvelopeError
   if (env?.success === false && env?.error?.message) {
     const details = env.error.details
     if (Array.isArray(details) && details.length) {
