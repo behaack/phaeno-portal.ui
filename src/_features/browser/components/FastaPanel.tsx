@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useFastaList, useFastaLookup } from "@/_api/hooks/useFasta";
 import { SearchInput } from "./SearchInput";
 import Paginator from "@/_shared/ui/components/Paginator"; // adjust path to where you keep it
+import FastaTable from "./fasta/Table";
 
 export interface IProps {
   sampleId: string;
@@ -76,14 +77,8 @@ export function FastaPanel({ sampleId }: IProps) {
       />
 
       <div className="mt-3">
-        {/* Replace this with your real FASTA row UI */}
-        {(list.data?.items ?? []).map((f: any) => (
-          <div key={f.id} className="py-1">
-            {f.name ?? f.smid ?? f.id}
-          </div>
-        ))}
-
-        <div className="mt-3">
+        <FastaTable data={list.data?.items ?? []} forAllSamples={!sampleId}/>
+        <div className="flex justify-center mt-4">
           <Paginator page={page} pageCount={150} onPageChange={onPageChange} />
         </div>
       </div>

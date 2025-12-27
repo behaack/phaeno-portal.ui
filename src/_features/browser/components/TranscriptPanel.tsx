@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranscriptList, useTranscriptLookup } from "@/_api/hooks/useTranscript";
 import { SearchInput } from "./SearchInput";
 import Paginator from "@/_shared/ui/components/Paginator";
+import TranscriptTable from "./transcript/Table";
 
 export interface IProps {
   sampleId: string;
@@ -72,8 +73,6 @@ export function TranscriptPanel({ sampleId }: IProps) {
 
   return (
     <div className="mt-5">
-      <div className="mb-2 text-sm opacity-70">{searchValue}</div>
-      <div>{sampleId}</div>
       <SearchInput
         data={lookup.data ?? []}
         placeholder="Select a SMID"
@@ -81,15 +80,9 @@ export function TranscriptPanel({ sampleId }: IProps) {
       />
 
       <div className="mt-3">
-        {/* replace with your transcript row UI */}
-        {(list.data?.items ?? []).map((t: any) => (
-          <div key={t.id} className="py-1">
-            {t.name ?? t.transcriptId ?? t.id}
-          </div>
-        ))}
-
-        <div className="mt-3">
-          <Paginator page={page} pageCount={50} onPageChange={onPageChange} />
+        <TranscriptTable data={list.data?.items ?? []} forAllSamples={!sampleId}/>
+        <div className="flex justify-center mt-4">
+          <Paginator page={page} pageCount={150} onPageChange={onPageChange} />
         </div>
       </div>
     </div>
