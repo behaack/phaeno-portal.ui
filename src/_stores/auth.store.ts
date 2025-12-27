@@ -5,25 +5,27 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware"
 export interface IAuthState {
   accessToken: string | null
   refreshToken: string | null
-  accessTokenExpiresAtUtc: string | null
+  accessTokenExpiresAtMs: number | null
   userAccount: UserAccount | null
 
   // hydration flag
   hasHydrated: boolean
   setHasHydrated: (v: boolean) => void
-
+  isAccessTokenExpired: () => boolean
   isAuthenticated: () => boolean
+  hasToken: () => boolean
   login: (accessToken: string, refreshToken: string, expiresInSeconds: number) => void
   rotateTokens: (accessToken: string, refreshToken: string, expiresInSeconds: number) => void
-  logout: () => void
+  setAccessToken: (accessToken: string, expiresInSeconds: number) => void
   setUserAccount: (userAccount: UserAccount | null) => void
+  logout: () => void
 }
 
-function computeExpiresAtUtc(expiresInSeconds?: number): string | null {
+function computeExpiresAtMs(expiresInSeconds?: number): number | null {
   if (typeof expiresInSeconds !== "number" || !Number.isFinite(expiresInSeconds) || expiresInSeconds <= 0) {
     return null
   }
-  return new Date(Date.now() + expiresInSeconds * 1000).toISOString()
+  return Date.now() + expiresInSeconds * 1000
 }
 
 export const useAuthStore = create<IAuthState>()(
@@ -32,7 +34,7 @@ export const useAuthStore = create<IAuthState>()(
       (set, get) => ({
         accessToken: null,
         refreshToken: null,
-        accessTokenExpiresAtUtc: null,
+        accessTokenExpiresAtMs: null,
         userAccount: null,
         hasHydrated: false,
         
@@ -42,38 +44,41 @@ export const useAuthStore = create<IAuthState>()(
           userAccount: userAccount
         }),
 
-        isAuthenticated: () => {
-          const token = get().accessToken
-          if (!token) return false
+        hasToken: () => !!get().accessToken,
 
-          const exp = get().accessTokenExpiresAtUtc
-          if (!exp) return true
-
-          const expMs = Date.parse(exp)
-          if (Number.isNaN(expMs)) return true
-
-          return Date.now() < expMs
+        isAccessTokenExpired: () => {
+          const exp = get().accessTokenExpiresAtMs
+          if (exp == null) return false
+          if (!Number.isFinite(exp)) return true
+          const SKEW_MS = 30_000
+          return Date.now() >= (exp - SKEW_MS)
         },
+
+        isAuthenticated: () => !!get().accessToken && !get().isAccessTokenExpired(),
 
         login: (accessToken, refreshToken, expiresInSeconds) =>
           set({
             accessToken,
             refreshToken,
-            accessTokenExpiresAtUtc: computeExpiresAtUtc(expiresInSeconds),
+            accessTokenExpiresAtMs: computeExpiresAtMs(expiresInSeconds),
           }),
-
+        setAccessToken: (accessToken: string, expiresInSeconds: number) =>
+          set({ 
+            accessToken, 
+            accessTokenExpiresAtMs: computeExpiresAtMs(expiresInSeconds) 
+          }),
         rotateTokens: (accessToken, refreshToken, expiresInSeconds) =>
           set({
             accessToken,
             refreshToken,
-            accessTokenExpiresAtUtc: computeExpiresAtUtc(expiresInSeconds),
+            accessTokenExpiresAtMs: computeExpiresAtMs(expiresInSeconds),
           }),
 
         logout: () =>
           set({
             accessToken: null,
             refreshToken: null,
-            accessTokenExpiresAtUtc: null,
+            accessTokenExpiresAtMs: null,
             userAccount: null
           }),
       }),
@@ -81,13 +86,14 @@ export const useAuthStore = create<IAuthState>()(
         name: "auth-store",
         storage: createJSONStorage(() => sessionStorage),
 
-        // ✅ this is the reliable place to flip the flag
+        partialize: (s) => ({
+          accessToken: s.accessToken,
+          refreshToken: s.refreshToken,
+          accessTokenExpiresAtMs: s.accessTokenExpiresAtMs,
+          userAccount: s.userAccount,
+        }),
+
         onRehydrateStorage: () => (state, error) => {
-          if (error) {
-            // even on error, unblock the app
-            state?.setHasHydrated(true)
-            return
-          }
           state?.setHasHydrated(true)
         },
       }

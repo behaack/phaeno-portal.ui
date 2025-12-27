@@ -43,6 +43,12 @@ export type TwoFactorResendRequest = {
   loginChallengeId: string
 }
 
+export type AuthResult = {
+  accessToken: string
+  refreshToken: string
+  expiresInSeconds: number
+}
+
 export type AuthTokens = Pick<SignInAuthenticated, "accessToken" | "refreshToken" | "expiresInSeconds">
 
 

@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from '@tanstack/react-router';
 import { useInterval, useWindowEvent } from '@mantine/hooks';
-////import { FullScreenLoader, PModalConfirm } from '@/components/_index';
 import { useAuthStore } from '@/_stores/auth.store';
+import { usePipelineHub } from '@/_shared/hooks/usePipelineHub';
+import { useProactiveTokenRefresh } from '@/_shared/hooks/useProactiveTokenRefresh';
+import { Route as SigninRoute} from '@/routes/auth/signin';
+import Header from './Header';
+////import { FullScreenLoader, PModalConfirm } from '@/components/_index';
 //import { useDialogConfirmStore } from '@/stores/dialogConfirmStore';
 //import { useDatabase } from '@/hooks/useDatabase';
 //import { ILookupItem } from '@/assets/interfaces/_index';
-import { NIL } from 'uuid';
 //import { EOrganizationType } from '@/assets/enums/_index';
-//import { usePipelineHub } from '@/hooks/usePipelineHub';
-//import { Route as SigninRoute} from '@/routes/auth/signin';
-import Header from './Header';
 
 export default function PrivateLayout() {
   const location = useLocation();
@@ -21,32 +21,33 @@ export default function PrivateLayout() {
   const [inactivityTicks, setInactivityTicks] = useState(0);
   //const msgDialogStore = useDialogConfirmStore();
 
-//  usePipelineHub();
+  useProactiveTokenRefresh()
+  usePipelineHub();
 
-  // useEffect(() => {
-  //   if (!authStore.isAuthenticated) {
-  //     const url = new URL(window.location.href);
-  //     const urlIsAuth = url.pathname.startsWith('/auth')
+  useEffect(() => {
+    if (!authStore.isAuthenticated) {
+      const url = new URL(window.location.href);
+      const urlIsAuth = url.pathname.startsWith('/auth')
 
-  //     if (urlIsAuth) return;
+      if (urlIsAuth) return;
 
-  //     navigate({
-  //       to: SigninRoute.to,
-  //       search: {
-  //         redirectTo: location.pathname,
-  //       },
-  //       replace: true
-  //     });    
-  //   }
-  // }, [authStore.isAuthenticated])  
+      navigate({
+        to: SigninRoute.to,
+        search: {
+          redirectTo: location.pathname,
+        },
+        replace: true
+      });    
+    }
+  }, [authStore.isAuthenticated])  
 
-  // const AUTO_LOGOUT_TICK_COUNT = useMemo(() => {
-  //   const minutes = authStore.authToken?.user?.inactiveSignout;
-  //   if (typeof minutes === 'number') {
-  //     return minutes * (60000 / POLLING_FREQUENCY);
-  //   }
-  //   return null;
-  // }, [authStore.authToken?.user?.inactiveSignout]);
+  const AUTO_LOGOUT_TICK_COUNT = useMemo(() => {
+    const minutes = 100000 // GET FROM USER SETTINGS
+    if (typeof minutes === 'number') {
+      return minutes * (60000 / POLLING_FREQUENCY);
+    }
+    return null;
+  }, []) // TODO: NEED TO REPLACE WITH USER SETTINGS
 
   useInterval(
     () => {
@@ -75,15 +76,15 @@ export default function PrivateLayout() {
   //   })
   // }, [authStore.authToken?.organization])
 
-  // useEffect(() => {
-  //   if (import.meta.env.DEV) { return };
+  useEffect(() => {
+    if (import.meta.env.DEV) { return };
 
-  //   if (typeof AUTO_LOGOUT_TICK_COUNT !== 'number') { return };
+    if (typeof AUTO_LOGOUT_TICK_COUNT !== 'number') { return };
 
-  //   if (inactivityTicks >= AUTO_LOGOUT_TICK_COUNT) {
-  //     authStore.logout();
-  //   }
-  // }, [inactivityTicks, AUTO_LOGOUT_TICK_COUNT, authStore.logout, navigate]);
+    if (inactivityTicks >= AUTO_LOGOUT_TICK_COUNT) {
+      authStore.logout();
+    }
+  }, [inactivityTicks, AUTO_LOGOUT_TICK_COUNT, authStore.logout, navigate]);
 
   const activityListener = useCallback(() => {
     setInactivityTicks(0);
@@ -107,3 +108,4 @@ export default function PrivateLayout() {
     </>
   );
 }
+
