@@ -1,0 +1,81 @@
+ul.property-group-container {
+  border: dotted grey 1px;
+  border-radius: 10px;
+  list-style: none;
+  padding: 0;
+  li {
+    display: flex;
+    .property-name {
+      min-width: 180px;
+      width: 180px;
+      padding: 5px;
+      &::after {
+        content: ":";
+      }
+      font-weight: 600;
+      border-right: dotted grey 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      user-select: none;
+    }
+    .property-value {
+      width: 100%;
+      padding: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;      
+    }
+  }
+  li:not(:last-child) {
+    border-bottom: dotted grey 1px;;
+  }
+}
+
+ul.list-group-container {
+  border: dotted grey 1px;
+  border-radius: 7px;
+  list-style: none;
+  padding: 0;
+  font-size: .8em;
+  li {
+    padding: 5px;
+    .list-item {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &.primary {
+        font-weight: bold;
+        font-size: larger;
+      }
+    }
+  }
+  li:nth-child(even) {
+    background-color: rgb(231, 230, 230);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  ul.property-group-container {
+    display: block;
+    li {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;   
+      padding: 5px;
+      .property-name {
+        padding: 0;
+        border-right: none;
+        width: 100%;
+        &::after {
+          content: "";
+        }        
+      }
+      .property-value {
+        padding: 0;
+        &::after {
+          content: "\00a0";
+        }                
+      }
+    }
+  }  
+}

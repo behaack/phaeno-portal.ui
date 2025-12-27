@@ -1,0 +1,1 @@
+export { PChip, type PChipProps, type PChipVariant } from "./PChip";

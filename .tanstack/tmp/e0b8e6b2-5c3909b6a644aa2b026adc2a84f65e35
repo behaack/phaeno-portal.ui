@@ -1,0 +1,81 @@
+import { Tabs } from '@mantine/core';
+import { beforeLoadAuth } from '@/assets/route-guard';
+import { searchSchema } from '@/assets/route-validator/genome';
+import { TranscriptListErrorBoundary } from '@/components/errorBoundries/TranscriptList';
+import { createFileRoute, Outlet, redirect, useNavigate, useRouterState } from '@tanstack/react-router';
+import { IconDna, IconDna2 } from '@tabler/icons-react';
+
+
+export const Route = createFileRoute('/browser/')({
+  component: Browser,
+  validateSearch: (search) => searchSchema.parse(search),
+  beforeLoad: async (ctx) => {
+    if (ctx.location.pathname === '/browser') {
+      throw redirect({
+        to: '/browser/transcript',
+        search: {
+          pageno: 1,
+          direction: 'next',
+        },
+        replace: true,
+      });
+    }
+
+    await beforeLoadAuth(ctx);
+  },
+  errorComponent: TranscriptListErrorBoundary,
+});
+
+function Browser() {
+  const router = useRouterState();
+  const navigate = useNavigate();
+  const currentPath = router.location.pathname;  
+  const activeTab = currentPath.includes('fasta') ? 'fasta' : 'transcript';
+  const size = 18;
+
+  const changeHndl = (value: string | null) => {
+    if (!value) { return };
+    navigate({
+      to: `/browser/${value}`,
+      search: {
+        pageno: 1,
+        searchstr: value,
+        direction: 'next',
+      },
+    });
+  }
+
+  return (
+    <main>
+      <section>
+        <Tabs 
+          value={activeTab}
+          onChange={(value) => changeHndl(value)}
+        >
+          <Tabs.List>
+            <Tabs.Tab 
+              value="transcript" 
+              leftSection={<IconDna2 size={size} />}
+            >              
+              Transcript
+            </Tabs.Tab>
+            
+            <Tabs.Tab 
+              value="fasta" 
+              leftSection={<IconDna size={size} />}
+            >
+              Fasta
+            </Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="transcript">
+            <Outlet />
+          </Tabs.Panel>
+
+          <Tabs.Panel value="fasta">
+            <Outlet />
+          </Tabs.Panel>
+        </Tabs>
+    </section>    
+    </main>
+  );
+}

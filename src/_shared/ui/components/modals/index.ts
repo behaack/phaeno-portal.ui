@@ -1,0 +1,1 @@
+export { PModal, type PModalProps } from './PModal'

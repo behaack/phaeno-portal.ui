@@ -1,0 +1,23 @@
+//POST https://pipeline.cadexgenomics.com/api/run-job HTTP/1.1
+
+//POST https://localhost:44349/v1/DataPipeline/api HTTP/1.1
+
+# POST https://localhost:44384/api/auth/sign-in HTTP/1.1
+# content-type: application/json
+
+# {
+#   "email": "bhaack@phaenobiotech.com",
+#   "password": "sdfasdfasdf"
+# }
+
+POST https://localhost:44384/api/auth/sign-in HTTP/1.1
+content-type: application/json
+
+{
+  "email": "bhaack@phaenobiotech.com",
+  "password": "Password1!"
+}
+  
+  
+  
+  

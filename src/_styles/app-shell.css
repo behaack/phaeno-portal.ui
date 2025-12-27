@@ -1,0 +1,68 @@
+@layer components {
+  .app-shell {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: var(--header-h) 1fr;
+    background: oklch(var(--bg));
+    color: oklch(var(--fg));
+  }
+
+  .app-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    height: var(--header-h);
+    background: oklch(var(--surface));
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid oklch(var(--fg) / 0.08);
+
+    /* Important for absolutely-positioned dropdowns */
+    overflow: visible;
+  }
+
+  .header-container {
+    height: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    overflow: visible;
+  }
+
+  .header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    overflow: visible;
+  }
+
+  .logo-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+
+  .app-main {
+    background: oklch(var(--bg-subtle));
+  }
+
+  .app-container {
+    max-width: var(--container-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--container-py) var(--container-px);
+  }
+
+  /* If your dropdown is positioned absolute inside nav, anchor it */
+  .app-header nav {
+    position: relative;
+  }
+}

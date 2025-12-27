@@ -1,0 +1,71 @@
+@layer components {
+  ul.main-menu {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0;
+      margin: 0;
+
+      a {
+        display: block;
+        padding: var(--menu-link-py) var(--menu-link-px);
+
+        color: oklch(var(--fg));
+        text-decoration: none;
+        outline: none;
+
+        .menu-label {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--menu-pill-gap);
+          border-radius: var(--menu-pill-radius);
+          padding: var(--menu-pill-py) var(--menu-pill-px);
+        }
+
+        &:focus {
+          background: var(--menu-focus-bg);
+        }
+
+        &:focus .menu-label,
+        &:focus-visible .menu-label {
+          outline: 2px solid oklch(var(--focus-ring));
+          outline-offset: 2px;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &.disabled {
+          color: var(--menu-disabled-fg);
+          font-weight: 400;
+
+          &:hover {
+            cursor: default;
+          }
+        }
+
+        &.active {
+          font-weight: 600;
+          background: var(--menu-active-bg);
+          color: var(--menu-active-fg);
+
+          &:hover {
+            cursor: default;
+          }
+
+          &:focus .menu-label,
+          &:focus-visible .menu-label {
+            outline: 2px solid oklch(var(--on-primary));
+            outline-offset: 2px;
+          }
+        }
+      }
+    }
+  }
+}

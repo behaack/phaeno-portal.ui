@@ -1,0 +1,15 @@
+//POST https://localhost:44371/Auth/login HTTP/1.1
+//POST https://7579-52288.el-alt.com/Auth/login  HTTP/1.1
+
+POST https://localhost:44349/v1/Auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "deviceId": null,
+    "email": "bhaack@phaenobiotech.com",
+    "password": "v2Hayek1!",
+    "tfaCode": "",
+    "rememberMe": true
+}
+
+

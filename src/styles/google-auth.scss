@@ -1,0 +1,74 @@
+div.google-auth-module {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 20px;
+  div.qbr-container {
+    width: 160px;
+    .image-container {
+      margin-left: -8px;
+      .code-container {
+        margin-left: 8px;
+        .code-label {
+          font-size: 10px;
+          margin-top: -7px;
+        }
+        .code {
+          width: calc(100% - 10px);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          border: 1px dotted grey;
+          border-radius: 6px;
+          user-select: none;
+          padding: 3px;
+          font-size: 8px;
+          &:hover {
+            cursor: pointer;
+            background-color: lightgray;
+          }
+        }
+      }
+    }
+  }
+  div.verification-container {
+    div.pin-input-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: end;    
+    }
+    div.verification-result {
+      margin-top: -8px;
+      font-size: 11px;
+    } 
+  }
+  div.step-label {
+    font-size: 0.9rem;
+    line-height: 1rem;
+    font-weight: 600;
+    min-height: 2rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  div.google-auth-module {
+    display: inline-block;
+    padding: 0 5px;
+    div.qbr-container {
+      width: 100%;
+      .image-container {
+        .code {
+          width: calc(100%);
+        }
+      }
+    }
+    div.verification-container {
+      margin-top: 15px;
+    } 
+    div.step-label {
+      font-size: 0.9rem;
+      line-height: 0.9rem;
+      min-height: 100%;
+    }
+  }
+}  

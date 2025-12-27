@@ -1,0 +1,9 @@
+POST https://localhost:44371/v1/Organization/GenerateApiKey HTTP/1.1
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYmQ3NDM3Yy1jMTA0LTQ2YzMtOWMwZi0zYmFhMGUzZGI5YWQiLCJlbWFpbCI6InVzZXJAY3VzdG9tZXIxLmNvbSIsImp0aSI6IjQyZDFmMDE5LTQ5MTItNGYwOS04NWRiLWZhNDQwMDY2Y2EyNyIsImV4cCI6MTczNzYwMjgwNSwiaXNzIjoiQ29tcGx5IiwiYXVkIjoiY29tcGx5In0.mXOE-Rm2uwuPclf3jwh_wMUG5NEQwCRc7TQkhzKfk30
+
+{
+}
+
+
+

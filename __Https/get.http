@@ -1,0 +1,4 @@
+//GET https://localhost:44349/v1/website/searchpages?search=agnew HTTP/1.1
+
+GET https://localhost:44349/v1/SqlAiAssistant/GenerateSql
+content-type: application/json

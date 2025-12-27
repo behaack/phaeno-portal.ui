@@ -1,0 +1,6 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PipelineDashboard } from "@/components/analytics/PipelineDashboard";
+
+export const Route = createFileRoute("/analytics/dashboard")({
+  component: PipelineDashboard,
+});

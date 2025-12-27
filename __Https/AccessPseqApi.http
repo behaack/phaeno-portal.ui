@@ -1,0 +1,13 @@
+GET https://localhost:44371/api/v1/Transcripts HTTP/1.1
+content-type: application/json
+Api-Key: P.ZxiT41IPW6O+IX+nxZeLFPhzIbe7jg5EI1haZ1RnEcI=
+Organization-Id: 9d52e9a2-ff98-4243-b3d3-760c8dab12a0
+
+{
+  "pageNo": 1,
+  "pageSize": 100,
+  "searchValue": ""
+}
+
+
+

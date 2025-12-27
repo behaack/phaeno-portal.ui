@@ -1,0 +1,14 @@
+import { beforeLoadAuth } from "@/assets/route-guard";
+import { searchSchema } from "@/assets/route-validator/genome";
+import { FastaListErrorBoundary } from "@/components/errorBoundries/FastaList";
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute('/browser/')({
+  component: FastasIndex,
+  validateSearch: (search) => searchSchema.parse(search),
+  beforeLoad: beforeLoadAuth,
+  errorComponent: FastaListErrorBoundary,
+});
+
+function FastasIndex() {
+}

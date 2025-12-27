@@ -1,0 +1,123 @@
+@layer base {
+  :root {
+    /* -----------------------------------
+       COLORS (OKLCH — perceptually stable)
+    ----------------------------------- */
+
+    /* Page backgrounds */
+    --bg: 0.98 0.01 150;
+    --bg-subtle: 0.96 0.01 150;
+
+    /* Surfaces (cards, panels) */
+    --surface: 1 0 0;
+    --on-surface: 0.18 0.02 150;
+
+    /* Text */
+    --fg: 0.18 0.02 150;
+    --fg-muted: 0.45 0.03 150;
+
+    /* Brand */
+    --primary: 0.62 0.18 145;          /* Phaeno green */
+    --primary-soft: 0.92 0.04 145;
+
+    /* Semantic */
+    --success: 0.70 0.15 145;
+    --warning: 0.78 0.14 80;
+    --error: 0.62 0.20 25;
+
+    /* Focus */
+    --focus-ring: 0.62 0.18 145;
+
+    /* “On color” helpers */
+    --on-primary: 1 0 0; /* white */
+
+    /* -----------------------------------
+       RADIUS
+    ----------------------------------- */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+
+    /* -----------------------------------
+       ELEVATION
+    ----------------------------------- */
+    --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.06);
+    --shadow-md: 0 6px 24px oklch(0 0 0 / 0.08);
+    --shadow-lg: 0 16px 48px oklch(0 0 0 / 0.12);
+
+    /* -----------------------------------
+       MOTION
+    ----------------------------------- */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --fast: 120ms;
+    --normal: 160ms;
+
+    /* -----------------------------------
+       APP LAYOUT TOKENS
+    ----------------------------------- */
+    --header-h: 64px;
+    --container-max: 1280px;
+    --gutter: 16px;
+
+    /* Page section padding inside container */
+    --container-py: 16px;
+    --container-px: var(--gutter);
+
+    /* -----------------------------------
+       MENU TOKENS
+    ----------------------------------- */
+    --menu-link-py: 1.2rem;
+    --menu-link-px: 0.4rem;
+
+    --menu-pill-radius: var(--radius-sm);
+    --menu-pill-py: 2px;
+    --menu-pill-px: 4px;
+    --menu-pill-gap: 6px;
+
+    --menu-focus-bg: oklch(var(--bg-subtle));
+    --menu-active-bg: oklch(var(--primary));
+    --menu-active-fg: oklch(var(--on-primary));
+    --menu-disabled-fg: oklch(var(--fg) / 0.45);
+
+    /* -----------------------------------
+       DROPDOWN TOKENS
+    ----------------------------------- */
+    --dropdown-w: 18rem;
+    --dropdown-top: calc(var(--header-h) - 0.8rem);
+
+    --dropdown-bg: oklch(var(--surface));
+    --dropdown-item-bg: oklch(var(--bg-subtle));
+    --dropdown-item-hover-bg: oklch(var(--bg));
+    --dropdown-item-fg: oklch(var(--fg));
+    --dropdown-divider: oklch(var(--fg) / 0.12);
+
+    --dropdown-active-bg: oklch(var(--primary));
+    --dropdown-active-fg: oklch(var(--on-primary));
+
+    --dropdown-disabled-bg: oklch(var(--fg) / 0.06);
+    --dropdown-disabled-fg: oklch(var(--fg) / 0.45);
+
+    --dropdown-radius: var(--radius-md);
+    --dropdown-item-radius: var(--radius-sm);
+
+    --dropdown-px: 0.75rem;
+    --dropdown-py: 0.75rem;
+    --dropdown-gap: 1rem;
+  }
+
+  /* -----------------------------------
+     DARK MODE (READY — OPTIONAL)
+  ----------------------------------- */
+  [data-theme="dark"] {
+    --bg: 0.16 0.02 150;
+    --bg-subtle: 0.20 0.02 150;
+    --surface: 0.22 0.02 150;
+
+    --fg: 0.92 0.02 150;
+    --fg-muted: 0.65 0.03 150;
+    --on-surface: 0.92 0.02 150;
+
+    /* keep on-primary as white unless you want otherwise */
+    --on-primary: 1 0 0;
+  }
+}

@@ -1,0 +1,11 @@
+POST https://localhost:44371/Authentication/tfaverify HTTP/1.1
+content-type: application/json
+
+{
+    "DeviceId": "70048d61-fc14-45bf-110f-08dc21ab97f8",
+    "UserName": "bhaack@phaenobiotech.com",
+    "Password": "Password!",
+    "TfaCode": "674112",
+    "RememberMe": true
+}
+
