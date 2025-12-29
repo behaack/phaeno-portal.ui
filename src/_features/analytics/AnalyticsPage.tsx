@@ -17,7 +17,7 @@ export function AnalyticsPage() {
     jobRef.current?.open()
   }
 
-  const FormComponent = lazy(() => import(/* @vite-ignore */ `./forms/${jobType}Form`))
+  const FormComponent = lazy(() => import('./forms/ReportForm'))  //import(/* @vite-ignore */ `./forms/${jobType}Form`))
 
   return (
     <main>
@@ -26,7 +26,7 @@ export function AnalyticsPage() {
           ref={jobRef}
           title={`Create ${jobType} Job`}
           >
-          <FormComponent onSubmit={() => {}}/>
+          <FormComponent onClose={() => jobRef.current?.close()} />
         </CreateJobModal>
         <PSelect
           label="Job Type"

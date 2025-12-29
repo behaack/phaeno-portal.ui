@@ -13,7 +13,11 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
-export default function ReportForm({ onSubmit }: { onSubmit: (v: FormValues) => void }) {
+export interface IProps {
+  onClose: () => void
+}
+
+export default function ReportForm({ onClose }: IProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -23,14 +27,19 @@ export default function ReportForm({ onSubmit }: { onSubmit: (v: FormValues) => 
     },
   })
 
+  const submitHandle = (data: FormValues) => {
+    console.log(data)
+    onClose()
+  }
+
   return (    
     <FormProvider {...form}>
       <PModalBody>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+        <form onSubmit={form.handleSubmit(submitHandle)} className="space-y-3">
           <RHFTextInput name="jobName" label="Job Name" />
           <RHFTextInput name="h5adPath" label="h5ad File Path" />
           <RHFTextInput name="outFileName" label="Out File Name" />
-          <PModalFormFooter isDisabled onClose={() => {}} />
+          <PModalFormFooter isDisabled={!form.formState.isValid} onClose={onClose} />
         </form>
       </PModalBody>
     </FormProvider>

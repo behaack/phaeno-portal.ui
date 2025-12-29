@@ -10,6 +10,7 @@ export interface IProps {
 
 export interface IHandles {
   open: () => void;
+  close: () => void;
 }
 
 export const CreateJobModal = forwardRef<IHandles, IProps>((props, ref) => {
@@ -20,6 +21,9 @@ export const CreateJobModal = forwardRef<IHandles, IProps>((props, ref) => {
     open() {
       setIsOpen(true);
     },
+    close() {
+      setIsOpen(false)
+    }
   }));  
 
   return (
