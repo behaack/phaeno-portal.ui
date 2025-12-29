@@ -1,7 +1,6 @@
-// account.service.ts
+import { api } from "../core/api-call";
 import type { UserAccount } from "../types/account";
-import { axiosInstance } from "../core/axios.instance";
 
 export const accountService = {
-  me: () => axiosInstance.get<UserAccount>("/account/me"),
+  me: () => api.get<UserAccount>("/account/me"),
 };

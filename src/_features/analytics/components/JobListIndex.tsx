@@ -6,7 +6,7 @@ import { JobList } from "./List";
 import { JobTable } from "./Table";
 
 export interface IProps {
-  data: IPagedList<DataPipelineItem[]>
+  data: IPagedList<DataPipelineItem>
 }
 
 export function JobListIndex({ data }: IProps) {

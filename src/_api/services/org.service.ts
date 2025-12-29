@@ -1,9 +1,9 @@
-import { axiosInstance } from "../core/axios.instance"
-import { enc, LookupListParams, toLookupListQueryParams, type LookupListItem } from "../types/common"
+import { api } from "../core/api-call"
+import { LookupListParams, toLookupListQueryParams, type LookupListItem } from "../types/common"
 
 export const orgService = {
   customerLookup: (params: LookupListParams) => 
-    axiosInstance.get<unknown, LookupListItem[]>("/organization/lookup/customer", {
+    api.get<LookupListItem[]>("/organization/lookup/customer", {
       params: toLookupListQueryParams(params)
     }),
 }

@@ -1,22 +1,21 @@
-import { apiCall } from "@/_api/core/api-client"
 import type {
   SignInRequest,
   SignInResponse,
   SignInAuthenticated,
   TwoFactorVerifyRequest,
 } from "@/_api/types/auth"
+import { api } from "../core/api-call"
 
 export const authService = {
   signIn: (req: SignInRequest) =>
-    apiCall<SignInResponse, SignInRequest>("/auth/sign-in", "post", req),
+    api.post<SignInResponse, SignInRequest>("/auth/sign-in", req),
 
   verifyTwoFactor: (req: TwoFactorVerifyRequest) =>
-    apiCall<SignInAuthenticated, TwoFactorVerifyRequest>("/auth/2fa/verify", "post", req),
+    api.post<SignInAuthenticated, TwoFactorVerifyRequest>("/auth/2fa/verify", req),
 
   resendTwoFactor: (loginChallengeId: string) =>
-    apiCall<{ ok: true }, { loginChallengeId: string }>(
+    api.post<{ ok: true }, { loginChallengeId: string }>(
       "/auth/2fa/resend",
-      "post",
       { loginChallengeId }
     ),
 }
