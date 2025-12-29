@@ -8,7 +8,7 @@ import { TranscriptPanel } from "./TranscriptPanel";
 import { FastaPanel } from "./FastaPanel";
 import { NaturalLangPanel } from "./NaturalLangPanel";
 import { useBrowserStore } from '@/_stores/browser.store';
-import SampleSelector from "./components/shared/SampleSelector";
+import { SampleSelector } from "./components/shared/SampleSelector";
 
 export function BrowserIndexPage() {
   const [sampleId, changeSampleId] = useState<string | null>()

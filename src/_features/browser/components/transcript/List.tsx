@@ -8,7 +8,7 @@ export interface IProps {
   forAllSamples: boolean;
 }
 
-export default function TranscriptList({
+export function TranscriptList({
   data,
   forAllSamples
 }: IProps) {

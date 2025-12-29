@@ -2,11 +2,11 @@ import { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 import { IconBuilding, IconSearch } from '@tabler/icons-react';
 import { useImpersonationStore } from '@/_stores/impersonation.store';
 import { useRouterState } from '@tanstack/react-router';
-import PModalDialog from '@/_shared/ui/components/modals/PModalDialog'
+import { PModalDialog } from '@/_shared/ui/components/modals/PModalDialog'
 import { useCustomerLookup } from '@/_api/hooks/org.hooks';
 import { Combobox, Paper, rem, ScrollArea, useCombobox } from '@mantine/core';
-import { PTextInput } from '../../components';
-import { PBox } from '../../components/layout';
+import { PTextInput } from '../components';
+import { PBox } from '../components/layout';
 
 export interface IProps {}
 

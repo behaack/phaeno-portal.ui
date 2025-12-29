@@ -2,15 +2,15 @@ import { useRef } from 'react';
 import { IconEye } from '@tabler/icons-react';
 import { ActionIcon, Table, Tooltip } from '@mantine/core';
 import { FastaListItem } from '@/_api/types/fasta';
-import DisplayEnumListItem from '../shared/DisplayEnumListItem';
-import readNumberList from '../shared/readNumberList';
+import { DisplayEnumListItem } from '../shared/DisplayEnumListItem';
+import { readNumberList } from '../shared/readNumberList';
 
 export interface IProps {
   data: FastaListItem[];
   forAllSamples: boolean;
 }
 
-export default function FastaTable({
+export function FastaTable({
   data,
   forAllSamples
 }: IProps) {

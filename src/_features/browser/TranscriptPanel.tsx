@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranscriptList, useTranscriptLookup } from "@/_api/hooks/transcript.hooks";
 import { SearchInput } from "./components/shared/SearchInput";
-import TranscriptTable from ".//components/transcript/Table";
+import { TranscriptTable } from ".//components/transcript/Table";
 import { useBrowserStore } from '@/_stores/browser.store';
 import { CursorPaginator } from "@/_shared/ui/components/inputs";
 

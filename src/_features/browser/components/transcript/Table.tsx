@@ -9,7 +9,7 @@ export interface IProps {
   forAllSamples: boolean;
 }
 
-export default function TranscriptTable({
+export function TranscriptTable({
   data,
   forAllSamples
 }: IProps) {

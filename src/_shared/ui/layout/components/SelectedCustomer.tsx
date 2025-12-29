@@ -3,7 +3,7 @@ import { IconBuilding } from '@tabler/icons-react';
 import { ActionIcon } from '@mantine/core';
 import { useAuthStore } from '@/_stores/auth.store';
 import { useImpersonationStore } from '@/_stores/impersonation.store';
-import CustomerSelector, { IHandles } from './CustomerSelector.Modal';
+import CustomerSelector, { IHandles } from '../CustomerSelector.Modal';
 import { EOrganizationType } from '@/_api/types/enums';
 
 export interface IProps {

@@ -10,7 +10,7 @@ export interface IProps {
   forAllSamples: boolean;
 }
 
-export default function FastaList({
+export function FastaList({
   data,
   forAllSamples
 }: IProps) {

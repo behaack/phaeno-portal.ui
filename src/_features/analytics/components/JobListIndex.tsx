@@ -2,8 +2,8 @@ import { useEffect, useRef, useCallback, useMemo } from "react";
 import { IDataPipelineItem, IPagedList } from "@/assets/interfaces/_index";
 import { useDeviceSize } from "@/_shared/hooks/useDeviceSize";
 import { DataPipelineItem } from "@/_api/types/job-pipeline";
-import JobList from "./List";
-import JobTable from "./Table";
+import { JobList } from "./List";
+import { JobTable } from "./Table";
 
 export interface IProps {
   data: IPagedList<DataPipelineItem[]>

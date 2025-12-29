@@ -16,7 +16,7 @@ export interface SampleSelectorProps
   value: string
 }
 
-export default function SampleSelector({
+export function SampleSelector({
   onSampleChange,
   sampleId = null,
   limit = 50,

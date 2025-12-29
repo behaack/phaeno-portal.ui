@@ -8,7 +8,7 @@ export interface IProps {
   list: IDataPipelineItem[];
 }
 
-export function JobList({ list }: IProps) {
+export function JobTable({ list }: IProps) {
   return (
     <Table withTableBorder withColumnBorders stickyHeader striped>
       <Table.Thead>

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFastaList, useFastaLookup } from "@/_api/hooks/fasta.hooks";
 import { SearchInput } from "./components/shared/SearchInput";
-import FastaTable from "./components/fasta/Table";
+import { FastaTable } from "./components/fasta/Table";
 import { ProTable } from "./components/fasta/ProTable";
 import { useBrowserStore } from '@/_stores/browser.store';
 import { CursorPaginator } from "@/_shared/ui/components/inputs";

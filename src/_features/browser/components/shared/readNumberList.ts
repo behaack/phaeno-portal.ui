@@ -1,6 +1,6 @@
 import { IListItem } from '@/assets/interfaces/_index';
 
-const readNumberList: IListItem[] = [
+export const readNumberList: IListItem[] = [
   {
     value: 0,
     label: 'None',
@@ -14,5 +14,3 @@ const readNumberList: IListItem[] = [
     label: 'Two',
   },
 ];
-
-export default readNumberList;
