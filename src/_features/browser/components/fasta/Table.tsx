@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { IconEye } from '@tabler/icons-react';
 import { ActionIcon, Table, Tooltip } from '@mantine/core';
-import { readNumberList } from '@/assets/lookupLists/_index';
-import { DisplayEnumListItem } from '@/components/_index';
 import { FastaListItem } from '@/_api/types/fasta';
+import DisplayEnumListItem from '../shared/DisplayEnumListItem';
+import readNumberList from '../shared/readNumberList';
 
 export interface IProps {
   data: FastaListItem[];

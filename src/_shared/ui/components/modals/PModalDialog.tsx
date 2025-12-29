@@ -17,7 +17,7 @@ export interface IProps {
   children: React.ReactNode;
 }
 
-export default function PModalDialog({
+export function PModalDialog({
   opened,
   title,
   onClose,
@@ -54,7 +54,6 @@ export default function PModalDialog({
           </div>
           <PCloseButton onClick={onClose} size="lg" color="" />
         </div>
-        <PDivider />
         <div className={`p-0 h-fit ${hideFooter ? '' : 'mb-[50px]'}`}>
           <PBox mah={deviceHeight - 110} className="py-2 px-4 overflow-y-auto">
             {children}

@@ -10,31 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ManageUsersIndexRouteImport } from './routes/manage-users/index'
 import { Route as FilesIndexRouteImport } from './routes/files/index'
 import { Route as BrowserIndexRouteImport } from './routes/browser/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as AnalyticsIndexRouteImport } from './routes/analytics/index'
 import { Route as AuthTwoFactorRouteImport } from './routes/auth/two-factor'
-import { Route as AuthTfaCodeRouteImport } from './routes/auth/tfa-Code'
 import { Route as AuthSigninRouteImport } from './routes/auth/signin'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
-import { Route as AuthPasswordRecoveryIndexRouteImport } from './routes/auth/password-recovery/index'
-import { Route as ManageUsersCustomersIdRouteImport } from './routes/manage-users/customers/$id'
-import { Route as AuthPasswordRecoveryStep3RouteImport } from './routes/auth/password-recovery/step-3'
-import { Route as AuthPasswordRecoveryStep2RouteImport } from './routes/auth/password-recovery/step-2'
-import { Route as AuthPasswordRecoveryStep1RouteImport } from './routes/auth/password-recovery/step-1'
-import { Route as AuthPasswordresetIdCodeRouteImport } from './routes/auth/passwordreset/$id/$code'
-import { Route as AuthAccountSetupIdCodeRouteImport } from './routes/auth/account-setup/$id/$code'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ManageUsersIndexRoute = ManageUsersIndexRouteImport.update({
-  id: '/manage-users/',
-  path: '/manage-users/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FilesIndexRoute = FilesIndexRouteImport.update({
@@ -62,11 +48,6 @@ const AuthTwoFactorRoute = AuthTwoFactorRouteImport.update({
   path: '/auth/two-factor',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthTfaCodeRoute = AuthTfaCodeRouteImport.update({
-  id: '/auth/tfa-Code',
-  path: '/auth/tfa-Code',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthSigninRoute = AuthSigninRouteImport.update({
   id: '/auth/signin',
   path: '/auth/signin',
@@ -77,103 +58,37 @@ const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   path: '/auth/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthPasswordRecoveryIndexRoute =
-  AuthPasswordRecoveryIndexRouteImport.update({
-    id: '/auth/password-recovery/',
-    path: '/auth/password-recovery/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ManageUsersCustomersIdRoute = ManageUsersCustomersIdRouteImport.update({
-  id: '/manage-users/customers/$id',
-  path: '/manage-users/customers/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthPasswordRecoveryStep3Route =
-  AuthPasswordRecoveryStep3RouteImport.update({
-    id: '/auth/password-recovery/step-3',
-    path: '/auth/password-recovery/step-3',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AuthPasswordRecoveryStep2Route =
-  AuthPasswordRecoveryStep2RouteImport.update({
-    id: '/auth/password-recovery/step-2',
-    path: '/auth/password-recovery/step-2',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AuthPasswordRecoveryStep1Route =
-  AuthPasswordRecoveryStep1RouteImport.update({
-    id: '/auth/password-recovery/step-1',
-    path: '/auth/password-recovery/step-1',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AuthPasswordresetIdCodeRoute = AuthPasswordresetIdCodeRouteImport.update({
-  id: '/auth/passwordreset/$id/$code',
-  path: '/auth/passwordreset/$id/$code',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthAccountSetupIdCodeRoute = AuthAccountSetupIdCodeRouteImport.update({
-  id: '/auth/account-setup/$id/$code',
-  path: '/auth/account-setup/$id/$code',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
-  '/auth/tfa-Code': typeof AuthTfaCodeRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
   '/analytics': typeof AnalyticsIndexRoute
   '/auth': typeof AuthIndexRoute
   '/browser': typeof BrowserIndexRoute
   '/files': typeof FilesIndexRoute
-  '/manage-users': typeof ManageUsersIndexRoute
-  '/auth/password-recovery/step-1': typeof AuthPasswordRecoveryStep1Route
-  '/auth/password-recovery/step-2': typeof AuthPasswordRecoveryStep2Route
-  '/auth/password-recovery/step-3': typeof AuthPasswordRecoveryStep3Route
-  '/manage-users/customers/$id': typeof ManageUsersCustomersIdRoute
-  '/auth/password-recovery': typeof AuthPasswordRecoveryIndexRoute
-  '/auth/account-setup/$id/$code': typeof AuthAccountSetupIdCodeRoute
-  '/auth/passwordreset/$id/$code': typeof AuthPasswordresetIdCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
-  '/auth/tfa-Code': typeof AuthTfaCodeRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
   '/analytics': typeof AnalyticsIndexRoute
   '/auth': typeof AuthIndexRoute
   '/browser': typeof BrowserIndexRoute
   '/files': typeof FilesIndexRoute
-  '/manage-users': typeof ManageUsersIndexRoute
-  '/auth/password-recovery/step-1': typeof AuthPasswordRecoveryStep1Route
-  '/auth/password-recovery/step-2': typeof AuthPasswordRecoveryStep2Route
-  '/auth/password-recovery/step-3': typeof AuthPasswordRecoveryStep3Route
-  '/manage-users/customers/$id': typeof ManageUsersCustomersIdRoute
-  '/auth/password-recovery': typeof AuthPasswordRecoveryIndexRoute
-  '/auth/account-setup/$id/$code': typeof AuthAccountSetupIdCodeRoute
-  '/auth/passwordreset/$id/$code': typeof AuthPasswordresetIdCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
-  '/auth/tfa-Code': typeof AuthTfaCodeRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
   '/analytics/': typeof AnalyticsIndexRoute
   '/auth/': typeof AuthIndexRoute
   '/browser/': typeof BrowserIndexRoute
   '/files/': typeof FilesIndexRoute
-  '/manage-users/': typeof ManageUsersIndexRoute
-  '/auth/password-recovery/step-1': typeof AuthPasswordRecoveryStep1Route
-  '/auth/password-recovery/step-2': typeof AuthPasswordRecoveryStep2Route
-  '/auth/password-recovery/step-3': typeof AuthPasswordRecoveryStep3Route
-  '/manage-users/customers/$id': typeof ManageUsersCustomersIdRoute
-  '/auth/password-recovery/': typeof AuthPasswordRecoveryIndexRoute
-  '/auth/account-setup/$id/$code': typeof AuthAccountSetupIdCodeRoute
-  '/auth/passwordreset/$id/$code': typeof AuthPasswordresetIdCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -181,78 +96,42 @@ export interface FileRouteTypes {
     | '/'
     | '/auth/forgot-password'
     | '/auth/signin'
-    | '/auth/tfa-Code'
     | '/auth/two-factor'
     | '/analytics'
     | '/auth'
     | '/browser'
     | '/files'
-    | '/manage-users'
-    | '/auth/password-recovery/step-1'
-    | '/auth/password-recovery/step-2'
-    | '/auth/password-recovery/step-3'
-    | '/manage-users/customers/$id'
-    | '/auth/password-recovery'
-    | '/auth/account-setup/$id/$code'
-    | '/auth/passwordreset/$id/$code'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth/forgot-password'
     | '/auth/signin'
-    | '/auth/tfa-Code'
     | '/auth/two-factor'
     | '/analytics'
     | '/auth'
     | '/browser'
     | '/files'
-    | '/manage-users'
-    | '/auth/password-recovery/step-1'
-    | '/auth/password-recovery/step-2'
-    | '/auth/password-recovery/step-3'
-    | '/manage-users/customers/$id'
-    | '/auth/password-recovery'
-    | '/auth/account-setup/$id/$code'
-    | '/auth/passwordreset/$id/$code'
   id:
     | '__root__'
     | '/'
     | '/auth/forgot-password'
     | '/auth/signin'
-    | '/auth/tfa-Code'
     | '/auth/two-factor'
     | '/analytics/'
     | '/auth/'
     | '/browser/'
     | '/files/'
-    | '/manage-users/'
-    | '/auth/password-recovery/step-1'
-    | '/auth/password-recovery/step-2'
-    | '/auth/password-recovery/step-3'
-    | '/manage-users/customers/$id'
-    | '/auth/password-recovery/'
-    | '/auth/account-setup/$id/$code'
-    | '/auth/passwordreset/$id/$code'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthSigninRoute: typeof AuthSigninRoute
-  AuthTfaCodeRoute: typeof AuthTfaCodeRoute
   AuthTwoFactorRoute: typeof AuthTwoFactorRoute
   AnalyticsIndexRoute: typeof AnalyticsIndexRoute
   AuthIndexRoute: typeof AuthIndexRoute
   BrowserIndexRoute: typeof BrowserIndexRoute
   FilesIndexRoute: typeof FilesIndexRoute
-  ManageUsersIndexRoute: typeof ManageUsersIndexRoute
-  AuthPasswordRecoveryStep1Route: typeof AuthPasswordRecoveryStep1Route
-  AuthPasswordRecoveryStep2Route: typeof AuthPasswordRecoveryStep2Route
-  AuthPasswordRecoveryStep3Route: typeof AuthPasswordRecoveryStep3Route
-  ManageUsersCustomersIdRoute: typeof ManageUsersCustomersIdRoute
-  AuthPasswordRecoveryIndexRoute: typeof AuthPasswordRecoveryIndexRoute
-  AuthAccountSetupIdCodeRoute: typeof AuthAccountSetupIdCodeRoute
-  AuthPasswordresetIdCodeRoute: typeof AuthPasswordresetIdCodeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -262,13 +141,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/manage-users/': {
-      id: '/manage-users/'
-      path: '/manage-users'
-      fullPath: '/manage-users'
-      preLoaderRoute: typeof ManageUsersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/files/': {
@@ -306,13 +178,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthTwoFactorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/tfa-Code': {
-      id: '/auth/tfa-Code'
-      path: '/auth/tfa-Code'
-      fullPath: '/auth/tfa-Code'
-      preLoaderRoute: typeof AuthTfaCodeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth/signin': {
       id: '/auth/signin'
       path: '/auth/signin'
@@ -327,55 +192,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/password-recovery/': {
-      id: '/auth/password-recovery/'
-      path: '/auth/password-recovery'
-      fullPath: '/auth/password-recovery'
-      preLoaderRoute: typeof AuthPasswordRecoveryIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/manage-users/customers/$id': {
-      id: '/manage-users/customers/$id'
-      path: '/manage-users/customers/$id'
-      fullPath: '/manage-users/customers/$id'
-      preLoaderRoute: typeof ManageUsersCustomersIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/password-recovery/step-3': {
-      id: '/auth/password-recovery/step-3'
-      path: '/auth/password-recovery/step-3'
-      fullPath: '/auth/password-recovery/step-3'
-      preLoaderRoute: typeof AuthPasswordRecoveryStep3RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/password-recovery/step-2': {
-      id: '/auth/password-recovery/step-2'
-      path: '/auth/password-recovery/step-2'
-      fullPath: '/auth/password-recovery/step-2'
-      preLoaderRoute: typeof AuthPasswordRecoveryStep2RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/password-recovery/step-1': {
-      id: '/auth/password-recovery/step-1'
-      path: '/auth/password-recovery/step-1'
-      fullPath: '/auth/password-recovery/step-1'
-      preLoaderRoute: typeof AuthPasswordRecoveryStep1RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/passwordreset/$id/$code': {
-      id: '/auth/passwordreset/$id/$code'
-      path: '/auth/passwordreset/$id/$code'
-      fullPath: '/auth/passwordreset/$id/$code'
-      preLoaderRoute: typeof AuthPasswordresetIdCodeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/account-setup/$id/$code': {
-      id: '/auth/account-setup/$id/$code'
-      path: '/auth/account-setup/$id/$code'
-      fullPath: '/auth/account-setup/$id/$code'
-      preLoaderRoute: typeof AuthAccountSetupIdCodeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -383,20 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSigninRoute: AuthSigninRoute,
-  AuthTfaCodeRoute: AuthTfaCodeRoute,
   AuthTwoFactorRoute: AuthTwoFactorRoute,
   AnalyticsIndexRoute: AnalyticsIndexRoute,
   AuthIndexRoute: AuthIndexRoute,
   BrowserIndexRoute: BrowserIndexRoute,
   FilesIndexRoute: FilesIndexRoute,
-  ManageUsersIndexRoute: ManageUsersIndexRoute,
-  AuthPasswordRecoveryStep1Route: AuthPasswordRecoveryStep1Route,
-  AuthPasswordRecoveryStep2Route: AuthPasswordRecoveryStep2Route,
-  AuthPasswordRecoveryStep3Route: AuthPasswordRecoveryStep3Route,
-  ManageUsersCustomersIdRoute: ManageUsersCustomersIdRoute,
-  AuthPasswordRecoveryIndexRoute: AuthPasswordRecoveryIndexRoute,
-  AuthAccountSetupIdCodeRoute: AuthAccountSetupIdCodeRoute,
-  AuthPasswordresetIdCodeRoute: AuthPasswordresetIdCodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,5 +1,5 @@
 export enum EOrganizationType {
-  Phaeno,
-  Partner,
-  Customer,
+  Phaeno = 0,
+  Partner = 1,
+  Customer = 2,
 }

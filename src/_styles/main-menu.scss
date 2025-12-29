@@ -2,68 +2,99 @@
   ul.main-menu {
     display: flex;
     align-items: center;
-    gap: 0;
+    height: var(--menu-link-h);
+    gap: 0; /* keep clean; pill provides spacing */
     list-style: none;
     padding: 0;
     margin: 0;
 
     li {
+      height: 100%;
+      display: flex;
       padding: 0;
       margin: 0;
+    }
 
-      a {
-        display: block;
-        padding: var(--menu-link-py) var(--menu-link-px);
+    a,
+    button {
+      /* stable hit area + real centering */
+      height: 100%;
+      display: flex;
+      align-items: center;
 
-        color: oklch(var(--fg));
-        text-decoration: none;
-        outline: none;
+      padding: 0 var(--menu-link-px);
+      background: transparent;
+      border: 0;
+      cursor: pointer;
 
-        .menu-label {
-          display: inline-flex;
-          align-items: center;
-          gap: var(--menu-pill-gap);
-          border-radius: var(--menu-pill-radius);
-          padding: var(--menu-pill-py) var(--menu-pill-px);
+      color: oklch(var(--fg));
+      text-decoration: none;
+      outline: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+
+      /* Support both wrappers:
+         - links use .menu-label  :contentReference[oaicite:3]{index=3}
+         - buttons use .item-label :contentReference[oaicite:4]{index=4}
+      */
+      .menu-label,
+      .item-label {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--menu-pill-gap);
+
+        padding: var(--menu-pill-py) var(--menu-pill-px);
+        border-radius: var(--menu-pill-radius);
+
+        line-height: 1;
+        font-weight: 550;
+
+        /* make Tabler icons visually align */
+        svg {
+          display: block;
         }
 
-        &:focus {
+        transition:
+          background-color var(--fast) var(--ease-out),
+          color var(--fast) var(--ease-out),
+          box-shadow var(--fast) var(--ease-out);
+      }
+
+      &:hover {
+        .menu-label,
+        .item-label {
+          background: var(--menu-hover-bg);
+        }
+      }
+
+      &:focus-visible {
+        .menu-label,
+        .item-label {
           background: var(--menu-focus-bg);
-        }
-
-        &:focus .menu-label,
-        &:focus-visible .menu-label {
           outline: 2px solid oklch(var(--focus-ring));
           outline-offset: 2px;
         }
+      }
 
-        &:hover {
-          cursor: pointer;
-        }
+      &.active {
+        cursor: default;
 
-        &.disabled {
-          color: var(--menu-disabled-fg);
-          font-weight: 400;
-
-          &:hover {
-            cursor: default;
-          }
-        }
-
-        &.active {
-          font-weight: 600;
+        .menu-label,
+        .item-label {
           background: var(--menu-active-bg);
           color: var(--menu-active-fg);
+          font-weight: 650;
+        }
+      }
 
-          &:hover {
-            cursor: default;
-          }
+      &.disabled {
+        pointer-events: none;
 
-          &:focus .menu-label,
-          &:focus-visible .menu-label {
-            outline: 2px solid oklch(var(--on-primary));
-            outline-offset: 2px;
-          }
+        .menu-label,
+        .item-label {
+          background: transparent;
+          color: var(--menu-disabled-fg);
+          font-weight: 450;
         }
       }
     }

@@ -2,17 +2,17 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useNavigate, useLocation } from '@tanstack/react-router';
 import { Burger, Collapse } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { EOrganizationType } from '@/assets/enums/_index';
-import { useDatabase } from '@/hooks/useDatabase';
-import { useDeviceSize } from '@/hooks/useDeviceSize';
+import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
 import { useAuthStore } from '@/_stores/auth.store';
 import { Subtype } from './components/IMenuListItem';
 import MenuItem from './components/MenuItem';
 import userMenuList from './components/menuList';
 import CurrentUser from './CurrentUser';
-import SelectedOrganization from './components/SelectedOrganization';
-import ApiKeys, { IHandles as IApiKeysHndls } from '@/components/apiKey/ApiKeys.modal';
-import SecuritySettings, { IHandles } from '@/components/security-settings/SecuritySettings.modal';
+import { Route } from '@/routes/auth/signin'
+import SelectedCustomer from './components/SelectedCustomer';
+import { useMeQuery } from '@/_api/hooks/account.hooks';
+// import ApiKeys, { IHandles as IApiKeysHndls } from '@/components/apiKey/ApiKeys.modal';
+// import SecuritySettings, { IHandles } from '@/components/security-settings/SecuritySettings.modal';
 
 export interface IProps {
   baseRoute: string;
@@ -23,36 +23,36 @@ export default function DropdownMenu({ baseRoute }: IProps) {
   const burgerRef = useRef<HTMLButtonElement>(null);
   const [width] = useDeviceSize();
   const authStore = useAuthStore();
-  const db = useDatabase();
   const navigate = useNavigate();
   const location = useLocation();
-  const securitySettingFrm = useRef<IHandles>(null);
-  const apiKeysFrm = useRef<IApiKeysHndls>(null);
   const [opened, { close, toggle }] = useDisclosure(false);
+  
+  const { data: me, isLoading, isError } = useMeQuery() 
 
-  // const buttonHndl = (buttonType: Subtype) => {
-  //   toggle();
-  //   switch (buttonType) {
-  //     case 'api keys':
-  //       apiKeysFrm.current?.open();
-  //       break;
-  //     case 'security settings':
-  //       securitySettingFrm.current?.open();
-  //       break;
-  //     case 'signout': {
-  //       const data = {
-  //         userId: authStore.authToken?.userId,
-  //         refreshToken: authStore.authToken?.refreshToken,
-  //       };
-  //       db.httpPost<null, any>('auth/logout', data, false).then(() => {
-  //         authStore.logout();
-  //       });
-  //       break;
-  //     }
-  //     default:
-  //       break;
-  //   }
-  // };
+  const buttonHndl = (buttonType: Subtype) => {
+    toggle();
+    switch (buttonType) {
+      // case 'api keys':
+      //   apiKeysFrm.current?.open();
+      //   break;
+      // case 'security settings':
+      //   securitySettingFrm.current?.open();
+      //   break;
+      case 'signout': {
+        // TODO: Call sign-out in API
+        authStore.logout();
+        navigate({
+          to: Route.to,
+          search: {
+            // TODO: Add current route to search 
+          }
+        })
+        break;
+      }
+      default:
+        break;
+    }
+  };
 
   // const showManageUser = useMemo(() => {
   //   return (
@@ -154,14 +154,8 @@ export default function DropdownMenu({ baseRoute }: IProps) {
     };
   }, [opened, close]);
 
-  const buttonHndl = (subType: string) => {
-
-  }  
-
   return (
     <nav className="relative">
-      <SecuritySettings ref={securitySettingFrm} />
-      <ApiKeys ref={apiKeysFrm} />
       <Burger
         ref={burgerRef}
         className="menu-burger"
@@ -176,7 +170,7 @@ export default function DropdownMenu({ baseRoute }: IProps) {
           <div>
             <div className="bg-black">
               <CurrentUser />
-              <SelectedOrganization onSelectOrganization={() => close()} />
+              <SelectedCustomer onSelectCustomer={() => close()} />
             </div>
             <ul className="dropdown-menu">
               {filteredMenuList.map((item) => (

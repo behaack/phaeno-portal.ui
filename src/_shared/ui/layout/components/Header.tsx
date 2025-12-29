@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { Tooltip } from '@mantine/core';
-import { EOrganizationType } from '@/assets/enums/_index';
 import { useAuthStore } from '@/stores/authStore';
 import DropdownMenu from '../DropdownMenu';
 import type IMainMenuItem from './IMenuListItem';
@@ -16,19 +15,19 @@ export default function Header() {
     return currentRoute.toLowerCase().split('/')[1];
   }, [location.pathname]);
 
-  const disableMenuItem = (item: IMainMenuItem) => {
-    return (
-      authStore.selectedOrganization === null &&
-      authStore.authToken?.organization.organizationType === EOrganizationType.Phaeno &&
-      item.userDataRoute
-    );
-  };
+  // const disableMenuItem = (item: IMainMenuItem) => {
+  //   return (
+  //     authStore.selectedOrganization === null &&
+  //     authStore.authToken?.organization.organizationType === EOrganizationType.Phaeno &&
+  //     item.userDataRoute
+  //   );
+  // };
 
-  const hideTooltip = useMemo(() => {
-    const isPhaenoOrg =
-      authStore.authToken?.organization.organizationType === EOrganizationType.Phaeno;
-    return isPhaenoOrg ? authStore.selectedOrganization !== null : true;
-  }, [authStore.selectedOrganization, authStore.authToken?.organization.organizationType]);
+  // const hideTooltip = useMemo(() => {
+  //   const isPhaenoOrg =
+  //     authStore.authToken?.organization.organizationType === EOrganizationType.Phaeno;
+  //   return isPhaenoOrg ? authStore.selectedOrganization !== null : true;
+  // }, [authStore.selectedOrganization, authStore.authToken?.organization.organizationType]);
 
   return (
     <header>
@@ -46,7 +45,7 @@ export default function Header() {
             </li>
             {mainMenuList.map((item) => (
               <li key={item.index}>
-                <Link
+                {/* <Link
                   tabIndex={disableMenuItem(item) ? -1 : 0}
                   to={disableMenuItem(item) ? '#' : item.route}
                   className={`${item.route === baseRoute ? 'active' : ''} ${disableMenuItem(item) ? 'disable' : ''} no-underline text-black`}
@@ -57,7 +56,7 @@ export default function Header() {
                   >
                     <div>{item.label}</div>
                   </Tooltip>
-                </Link>
+                </Link> */}
               </li>
             ))}
           </ul>

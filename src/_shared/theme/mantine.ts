@@ -1,8 +1,13 @@
 import { createTheme } from "@mantine/core";
 
 export const theme = createTheme({
-  fontFamily: "Inter, system-ui, sans-serif",
-
+  fontFamily: "Geist, Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
+  
+  headings: {
+    fontFamily: "Geist, Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
+    fontWeight: "650",
+  },
+  
   primaryColor: "green",
 
   colors: {

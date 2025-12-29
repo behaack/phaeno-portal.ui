@@ -1,9 +1,9 @@
-import { useRef } from 'react';
 import { IconEye } from '@tabler/icons-react';
-import { ActionIcon, Tooltip } from '@mantine/core';
 import { IFasta } from '@/assets/interfaces/_index';
 import { readNumberList } from '@/assets/lookupLists/_index';
-import DisplayEnumListItem from '@/components/DisplayEnumListItem';
+import { PToolTip } from '@/_shared/ui/components/feedback';
+import { PActionIcon } from '@/_shared/ui/components/inputs';
+import { DisplayEnumListItem } from '../shared/DisplayEnumListItem';
 
 export interface IProps {
   data: IFasta[];
@@ -23,8 +23,8 @@ export default function FastaList({
             <li key={item.id}>
               <div className="flex justify-between">
                 <div className="list-item primary">{item.smid}</div>
-                <Tooltip label="View details">
-                  <ActionIcon 
+                <PToolTip label="View details">
+                  <PActionIcon 
                     variant="filled" 
                     size="sm" 
                     radius="xl" 
@@ -32,8 +32,8 @@ export default function FastaList({
                     // onClick={() => detailsHndl(item.id)}
                   >
                     <IconEye size="1em" />
-                  </ActionIcon>
-                </Tooltip>
+                  </PActionIcon>
+                </PToolTip>
               </div>
               {(forAllSamples)
                 ? (

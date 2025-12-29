@@ -2,7 +2,7 @@
   .app-shell {
     min-height: 100dvh;
     display: grid;
-    grid-template-rows: var(--header-h) 1fr;
+     grid-template-rows: auto 1fr;
     background: oklch(var(--bg));
     color: oklch(var(--fg));
   }
@@ -12,7 +12,8 @@
     top: 0;
     z-index: 50;
 
-    height: var(--header-h);
+    height: auto;                 
+    min-height: var(--header-h);
     background: oklch(var(--surface));
     box-shadow: var(--shadow-sm);
     border-bottom: 1px solid oklch(var(--fg) / 0.08);

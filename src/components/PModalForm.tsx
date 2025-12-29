@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { Box, Button, CloseButton, Divider, Modal, type MantineSize as Size } from '@mantine/core';
-import { useDeviceSize } from '@/hooks/useDeviceSize';
+import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
 
 export interface IProps {
   title: string;
