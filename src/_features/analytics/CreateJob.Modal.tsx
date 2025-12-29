@@ -1,14 +1,11 @@
-import { forwardRef, JSX, Suspense, useImperativeHandle, useState } from "react"
-import { PModal } from "@/_shared/ui/components/modals"
-import { PButton, PCloseButton } from "@/_shared/ui/components/inputs";
-import PModalForm from "@/components/PModalForm";
+import { forwardRef, lazy, Suspense, useImperativeHandle, useState } from "react"
 import { IconMath } from "@tabler/icons-react";
+import { PModalHeader } from "@/_shared/ui/modals/Parts/PModalHeader";
+import { PModal } from "@/_shared/ui/modals/Parts/PModal";
 
 export interface IProps {
   title: string
-  disableSubmit: boolean;
   children: React.ReactNode
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
 }
 
 export interface IHandles {
@@ -16,7 +13,7 @@ export interface IHandles {
 }
 
 export const CreateJobModal = forwardRef<IHandles, IProps>((props, ref) => {
-  const { title, children, onSubmit, disableSubmit} = props
+  const { title, children} = props
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useImperativeHandle(ref, () => ({
@@ -26,19 +23,11 @@ export const CreateJobModal = forwardRef<IHandles, IProps>((props, ref) => {
   }));  
 
   return (
-    <PModalForm
-      title={title}
-      opened={isOpen}
-      onClose={() => setIsOpen(false)}
-      size="lg"
-      actionBtnLabel="Create Job"
-      onSubmit={(e) => onSubmit(e)}
-      disableSubmit={disableSubmit}
-      icon={<IconMath size={21} />}
-    >
-      <Suspense fallback="Loading form...">
-        {children}
-      </Suspense>
-    </PModalForm>
+    <PModal opened={isOpen} onClose={() => setIsOpen(false)}>
+      <div>
+        <PModalHeader title={title} icon={<IconMath />} onClose={() => setIsOpen(false)} />
+        { children }
+      </div>
+    </PModal>
   )
 })

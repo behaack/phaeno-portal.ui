@@ -1,4 +1,4 @@
-import { lazy, useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { JobTypesList, JobType, JobStatusList } from "@/_api/types/job-pipeline"
 import { PButton, PSelect } from "@/_shared/ui/components";
 import { PDivider } from "@/_shared/ui/components/layout";
@@ -17,7 +17,7 @@ export function AnalyticsPage() {
     jobRef.current?.open()
   }
 
-  const FormComponent = lazy(() => import("./forms/UmapForm"))
+  const FormComponent = lazy(() => import(/* @vite-ignore */ `./forms/${jobType}Form`))
 
   return (
     <main>
@@ -25,9 +25,7 @@ export function AnalyticsPage() {
         <CreateJobModal 
           ref={jobRef}
           title={`Create ${jobType} Job`}
-          disableSubmit={false}
-          onSubmit={(e) => { console.log(e)}}
-        >
+          >
           <FormComponent onSubmit={() => {}}/>
         </CreateJobModal>
         <PSelect

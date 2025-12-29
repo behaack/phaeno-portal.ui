@@ -1,0 +1,1 @@
+export type PSize = "xs" | "sm" | "md" | "lg" | "xl"

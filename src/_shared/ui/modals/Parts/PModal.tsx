@@ -7,7 +7,7 @@ export interface PModalProps extends ModalProps {
 
 export function PModal({ children, centered = true, radius = 'lg', ...props }: PModalProps) {
   return (
-    <MantineModal centered={centered} radius={radius} {...props}>
+    <MantineModal padding="0" withCloseButton={false} centered={centered} radius={radius} {...props}>
       {children}
     </MantineModal>
   )
