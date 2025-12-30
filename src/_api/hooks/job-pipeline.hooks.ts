@@ -1,6 +1,6 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
-import { jobPipelineService } from "../services/job-pipeline.service"
-import { GetJobsParams } from "../types/job-pipeline";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { CreateReportJob, CreateScoreJob, CreateSummaryJob, CreateUmapJob, DataPipelineItem, GetJobsParams } from "../types/job-pipeline";
+import { jobPipelineService } from "../services/job-pipeline.service";
 
 export function useGetJobs({
   jobType,
@@ -16,4 +16,44 @@ export function useGetJobs({
     queryFn: () => jobPipelineService.getJobs({jobType, jobStatus, page, pageSize}),
     placeholderData: keepPreviousData
   });
+}
+
+export function useCreateUmapJobMutation() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (job: CreateUmapJob): Promise<DataPipelineItem> => jobPipelineService.createUmapJob(job),
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: ["job-pipeline","jobs"] })
+    },
+  })
+}
+
+export function useCreateReportJobMutation() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (job: CreateReportJob): Promise<DataPipelineItem> => jobPipelineService.createReportJob(job),
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: ["job-pipeline","jobs"] })
+    },
+  })
+}
+
+export function useCreateSummaryJobMutation() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (job: CreateSummaryJob): Promise<DataPipelineItem> => jobPipelineService.createSummaryJob(job),
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: ["job-pipeline","jobs"] })
+    },
+  })
+}
+
+export function useCreateScoreJobMutation() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (job: CreateScoreJob): Promise<DataPipelineItem> => jobPipelineService.createScoreJob(job),
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: ["job-pipeline","jobs"] })
+    },
+  })
 }

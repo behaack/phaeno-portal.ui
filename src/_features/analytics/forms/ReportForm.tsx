@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { RHFTextInput } from "@/_shared/ui/components/form/rhf"
 import { PModalBody } from "@/_shared/ui/modals/Parts/PModalBody"
 import { PModalFormFooter } from "@/_shared/ui/modals/Parts/PModalFormFooter"
+import { useCreateReportJobMutation } from "@/_api/hooks/job-pipeline.hooks"
 
 const schema = z.object({
   jobName: z.string().min(1),
@@ -18,6 +19,7 @@ export interface IProps {
 }
 
 export default function ReportForm({ onClose }: IProps) {
+  const jobMutation = useCreateReportJobMutation()
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -28,7 +30,7 @@ export default function ReportForm({ onClose }: IProps) {
   })
 
   const submitHandle = (data: FormValues) => {
-    console.log(data)
+    jobMutation.mutateAsync(data);
     onClose()
   }
 

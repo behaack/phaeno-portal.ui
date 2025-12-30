@@ -30,6 +30,26 @@ export type GetJobsParams = {
   pageSize?: number;
 };
 
+export type CreateUmapJob = {
+  jobName: string,
+  h5adPath: string,
+  nNeighbors: number,
+  minDist: number
+}
 
+export type CreateSummaryJob = {
+  jobName: string,
+  h5adPath: string
+}
 
+export type CreateScoreJob = {
+  jobName: string,
+  h5adPath: string
+}
+
+export type CreateReportJob = {
+  jobName: string,
+  h5adPath: string,
+  outFileName: string
+}
 
