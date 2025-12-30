@@ -4,13 +4,13 @@ import { Burger, Collapse } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
 import { useAuthStore } from '@/_stores/auth.store';
-import { Subtype } from './components/IMenuListItem';
-import MenuItem from './components/MenuItem';
-import userMenuList from './components/menuList';
-import CurrentUser from './CurrentUser';
+import { Subtype } from '../types/IMenuListItem';
 import { Route } from '@/routes/auth/sign-in'
-import SelectedCustomer from './components/SelectedCustomer';
 import { useMeQuery } from '@/_api/hooks/account.hooks';
+import userMenuList from '../menu-lists/menuList';
+import CurrentUser from '../components/CurrentUser';
+import MenuItem from '../components/MenuItem';
+import { SelectedCustomer } from '../components/SelectedCustomer';
 // import ApiKeys, { IHandles as IApiKeysHndls } from '@/components/apiKey/ApiKeys.modal';
 // import SecuritySettings, { IHandles } from '@/components/security-settings/SecuritySettings.modal';
 
@@ -18,7 +18,7 @@ export interface IProps {
   baseRoute: string;
 }
 
-export default function DropdownMenu({ baseRoute }: IProps) {
+export function DropdownMenu({ baseRoute }: IProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLButtonElement>(null);
   const [width] = useDeviceSize();

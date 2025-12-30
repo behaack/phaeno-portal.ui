@@ -1,4 +1,4 @@
-import type IUserMenuItem from './IMenuListItem';
+import type IUserMenuItem from './types/IMenuListItem';
 
 const userMenuList: IUserMenuItem[] = [
   // {

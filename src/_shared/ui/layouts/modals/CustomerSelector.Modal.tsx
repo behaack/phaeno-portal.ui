@@ -5,8 +5,8 @@ import { useRouterState } from '@tanstack/react-router';
 import { PModalDialog }  from '@/_shared/ui/modals/PModalDialog'
 import { useCustomerLookup } from '@/_api/hooks/org.hooks';
 import { Combobox, Paper, rem, ScrollArea, useCombobox } from '@mantine/core';
-import { PTextInput } from '../components';
-import { PBox } from '../components/layout';
+import { PTextInput } from '@/_shared/ui/components/inputs';
+import { PBox } from '@/_shared/ui/components/layout';
 
 export interface IProps {}
 
@@ -14,7 +14,7 @@ export interface IHandles {
   open: () => void;
 }
 
-const CustomerSelector = forwardRef<IHandles, IProps>((_props, ref) => {
+export const CustomerSelector = forwardRef<IHandles, IProps>((_props, ref) => {
   const store = useImpersonationStore()
   const routerState = useRouterState();
   const [opened, setOpened] = useState<boolean>(false);
@@ -109,5 +109,3 @@ const CustomerSelector = forwardRef<IHandles, IProps>((_props, ref) => {
     </PModalDialog>
   );
 });
-
-export default CustomerSelector;

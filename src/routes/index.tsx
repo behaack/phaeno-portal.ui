@@ -4,13 +4,7 @@ import { NIL } from 'uuid';
 export const Route = createFileRoute('/')({
   component: () => {
     return <Navigate 
-            to="/browser" 
-            search={{
-              subject: 'transcript',
-              sampleid: NIL,
-              pageno: 1,
-              direction: 'next'
-            }}            
+            to="/app/browser" 
            />
   },
 });

@@ -1,10 +1,12 @@
 import { Outlet } from "@tanstack/react-router"
-import Header from "./Header"
+import { AppHeader } from "./headers/AppHeader"
+import { usePipelineHub } from "@/_shared/hooks/usePipelineHub";
 
 export function AppShellLayout() {
+  usePipelineHub();
   return (
     <div className="app-shell">
-      <Header />
+      <AppHeader />
       <main className="app-main">
         <div className="app-container">
           <Outlet />

@@ -10,7 +10,7 @@ import {
   IconMath,
 } from '@tabler/icons-react';
 import { Link, useLocation } from '@tanstack/react-router';
-import IUserMenuItem from './IMenuListItem';
+import IUserMenuItem from '../types/IMenuListItem';
 
 export interface IProps {
   item: IUserMenuItem;

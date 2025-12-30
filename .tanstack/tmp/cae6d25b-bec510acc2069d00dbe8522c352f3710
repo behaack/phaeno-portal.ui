@@ -1,7 +1,7 @@
 import { AppShellLayout } from '@/_shared/ui/layouts/AppShellLayout';
-import { createRootRoute } from '@tanstack/react-router';
+import { createRootRoute, createFileRoute } from '@tanstack/react-router'
 
-export const Route = createRootRoute({
+export const Route = createRootRoute('/app')({
   shellComponent: RootDocument,
 });
 
