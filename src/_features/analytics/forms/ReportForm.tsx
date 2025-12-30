@@ -9,7 +9,7 @@ import { useCreateReportJobMutation } from "@/_api/hooks/job-pipeline.hooks"
 const schema = z.object({
   jobName: z.string().min(1),
   h5adPath: z.string().min(1),
-  outFileName: z.string().min(1),
+  outFile: z.string().min(1),
 })
 
 type FormValues = z.infer<typeof schema>
@@ -25,7 +25,7 @@ export default function ReportForm({ onClose }: IProps) {
     defaultValues: {
       jobName: "",
       h5adPath: "",
-      outFileName: "",
+      outFile: "",
     },
   })
 
@@ -40,7 +40,7 @@ export default function ReportForm({ onClose }: IProps) {
         <form onSubmit={form.handleSubmit(submitHandle)} className="space-y-3">
           <RHFTextInput name="jobName" label="Job Name" />
           <RHFTextInput name="h5adPath" label="h5ad File Path" />
-          <RHFTextInput name="outFileName" label="Out File Name" />
+          <RHFTextInput name="outFile" label="Out File Name" />
           <PModalFormFooter isDisabled={!form.formState.isValid} onClose={onClose} />
         </form>
       </PModalBody>

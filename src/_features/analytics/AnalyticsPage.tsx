@@ -11,13 +11,12 @@ export function AnalyticsPage() {
   const [jobType, setType] = useState("Report")
   const [jobStatus, setStatus] = useState("Queued")
   const jobRef = useRef<IHandles>(null)
-  const result = useGetJobs({ jobType, jobStatus, page: 1})
+  const { data } = useGetJobs({ jobType, jobStatus, page: 1})
+  const FormComponent = lazy(() => import('./forms/ReportForm'))  //import(/* @vite-ignore */ `./forms/${jobType}Form`))
 
   const createJobHndl = () => {
     jobRef.current?.open()
   }
-
-  const FormComponent = lazy(() => import('./forms/ReportForm'))  //import(/* @vite-ignore */ `./forms/${jobType}Form`))
 
   return (
     <main>
@@ -50,7 +49,7 @@ export function AnalyticsPage() {
           <PButton my={10} onClick={createJobHndl} >Create Job</PButton>
         </div>
         <PDivider my={10}/>
-        <JobListIndex data={result.data || emptyPagedList}  />
+        <JobListIndex data={data || emptyPagedList}  />
       </section>
     </main>
   );

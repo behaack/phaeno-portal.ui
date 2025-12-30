@@ -1,23 +1,20 @@
 import axios from "axios";
-import { useAuthStore } from "@/stores/authStore";
+import { useAuthStore } from "@/_stores/auth.store";
 import { notifications } from "@mantine/notifications";
-import { constants } from '@/assets/constants';
 
 export async function refreshAuthToken(): Promise<string> {
-  const BASE_URL = import.meta.env.DEV ? constants.DEV_URL : constants.PROD_URL;
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
   try {
     const data = {
-      userId: useAuthStore.getState().authToken?.userId,
-      refreshToken: useAuthStore.getState().authToken?.refreshToken,
+      refreshToken: useAuthStore.getState().refreshToken,
     };
 
     const response = await axios.post(
-      `${BASE_URL}auth/RefreshAccessToken`,
-      data
+      `${BASE_URL}/auth/refresh_token`, data
     );
-
-    useAuthStore.getState().refreshToken(response.data);
+    console.log("FROM refreshAuthToken", response)
+    //useAuthStore.getState().refreshToken(response.data);
     return response.data.token;
   } catch (error) {
     notifications.show({

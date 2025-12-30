@@ -8,6 +8,20 @@ type RetryConfig = any & { __refreshRetried?: boolean }
 let isRefreshing = false
 let waiters: Array<(token: string | null) => void> = []
 
+const NO_REFRESH_PATHS = [
+  "/auth/sign-in",
+  "/auth/two-factor",
+  "/auth/forgot-password",
+  "/auth/reset-password",
+  "/auth/refresh-token", // already handled, but keep here too
+]
+
+function shouldSkipRefresh(config: RetryConfig) {
+  if (config.skipAuthRefresh) return true
+  const url = String(config.url ?? "")
+  return NO_REFRESH_PATHS.some((p) => url.includes(p))
+}
+
 function notifyWaiters(token: string | null) {
   for (const w of waiters) w(token)
   waiters = []
@@ -27,13 +41,16 @@ export function attachRefreshInterceptor(client: AxiosInstance) {
     if (!config) throw error
     if (status !== 401) throw error
 
+    // ✅ NEW: don't refresh for sign-in / auth flows
+    if (shouldSkipRefresh(config)) throw error    
+
     // prevent infinite loops
     if (config.__refreshRetried) throw error
     config.__refreshRetried = true
 
     // don't refresh a refresh call
     const url: string = config.url ?? ""
-    if (url.includes("/auth/refresh")) {
+    if (url.includes("/auth/refresh-token")) {
       authSession.logout()
       throw error
     }
@@ -55,7 +72,7 @@ export function attachRefreshInterceptor(client: AxiosInstance) {
       // NOTE: if your envelope interceptor unwraps response.data,
       // this will already be the AuthResultDto.
       const dto = await client.post<unknown, AuthResult>(
-        "/auth/refresh",
+        "/auth/refresh-token",
         {},
         { withCredentials: true }
       )

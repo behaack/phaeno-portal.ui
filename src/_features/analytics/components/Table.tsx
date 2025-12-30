@@ -7,7 +7,6 @@ import { ActionButtons } from './ActionButtons';
 export interface IProps {
   list: IDataPipelineItem[];
 }
-
 export function JobTable({ list }: IProps) {
   return (
     <Table withTableBorder withColumnBorders stickyHeader striped>

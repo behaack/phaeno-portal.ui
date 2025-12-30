@@ -50,6 +50,6 @@ export type CreateScoreJob = {
 export type CreateReportJob = {
   jobName: string,
   h5adPath: string,
-  outFileName: string
+  outFile: string
 }
 

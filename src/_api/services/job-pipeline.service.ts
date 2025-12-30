@@ -12,14 +12,14 @@ export const jobPipelineService = {
     }),
 
   createUmapJob: (job: CreateUmapJob) => 
-    api.post<DataPipelineItem, CreateUmapJob>("data-pipelines/umap", job),
+    api.post<DataPipelineItem, CreateUmapJob>("data-pipeline/umap", job),
 
   createReportJob: (job: CreateReportJob) => 
-    api.post<DataPipelineItem, CreateReportJob>("data-pipelines/umap", job),
+    api.post<DataPipelineItem, CreateReportJob>("data-pipeline/report", job),
 
   createScoreJob: (job: CreateScoreJob) => 
-    api.post<DataPipelineItem, CreateScoreJob>("data-pipelines/umap", job),
+    api.post<DataPipelineItem, CreateScoreJob>("data-pipeline/score", job),
 
   createSummaryJob: (job: CreateSummaryJob) => 
-    api.post<DataPipelineItem, CreateSummaryJob>("data-pipelines/umap", job),
+    api.post<DataPipelineItem, CreateSummaryJob>("data-pipeline/summary", job),
 };

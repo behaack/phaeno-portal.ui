@@ -1,8 +1,8 @@
-import { useMeQuery } from '@/_api/hooks/account.hooks';
+import { usePipelineHub } from '@/_shared/hooks/usePipelineHub';
 import { useAuthStore } from '@/_stores/auth.store';
-import { useEffect } from 'react';
 
 export default function CurrentUser() {
+  usePipelineHub();
   const store = useAuthStore()
   if (!store.isAuthenticated) return null  
   return (

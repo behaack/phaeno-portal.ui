@@ -1,5 +1,5 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
-import { IDataPipelineItem, IPagedList } from "@/assets/interfaces/_index";
+import { useRef } from "react";
+import { IPagedList } from "@/assets/interfaces/_index";
 import { useDeviceSize } from "@/_shared/hooks/useDeviceSize";
 import { DataPipelineItem } from "@/_api/types/job-pipeline";
 import { JobList } from "./List";
@@ -12,11 +12,11 @@ export interface IProps {
 export function JobListIndex({ data }: IProps) {
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const [width] = useDeviceSize()
-  
+
   return (
     <div style={{ overflow: "auto" }}>
       {width >= 750 
-        ? <JobTable list={[]} /> 
+        ? <JobTable list={data.list} /> 
         : <JobList list={[]} /> 
       }
 
