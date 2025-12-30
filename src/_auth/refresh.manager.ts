@@ -1,6 +1,6 @@
 // src/_auth/refresh.manager.ts
 import { axiosInstance } from "@/_api/core/axios.instance"
-import { authSession } from "@/_auth/auth-session"
+import { authSession } from "@/_auth/auth.session"
 
 type AuthResultDto = {
   accessToken: string

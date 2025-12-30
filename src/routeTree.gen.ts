@@ -14,6 +14,7 @@ import { Route as FilesIndexRouteImport } from './routes/files/index'
 import { Route as BrowserIndexRouteImport } from './routes/browser/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as AnalyticsIndexRouteImport } from './routes/analytics/index'
+import { Route as R403IndexRouteImport } from './routes/403/index'
 import { Route as AuthTwoFactorRouteImport } from './routes/auth/two-factor'
 import { Route as AuthSigninRouteImport } from './routes/auth/signin'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
@@ -43,6 +44,11 @@ const AnalyticsIndexRoute = AnalyticsIndexRouteImport.update({
   path: '/analytics/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const R403IndexRoute = R403IndexRouteImport.update({
+  id: '/403/',
+  path: '/403/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthTwoFactorRoute = AuthTwoFactorRouteImport.update({
   id: '/auth/two-factor',
   path: '/auth/two-factor',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
+  '/403': typeof R403IndexRoute
   '/analytics': typeof AnalyticsIndexRoute
   '/auth': typeof AuthIndexRoute
   '/browser': typeof BrowserIndexRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
+  '/403': typeof R403IndexRoute
   '/analytics': typeof AnalyticsIndexRoute
   '/auth': typeof AuthIndexRoute
   '/browser': typeof BrowserIndexRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
+  '/403/': typeof R403IndexRoute
   '/analytics/': typeof AnalyticsIndexRoute
   '/auth/': typeof AuthIndexRoute
   '/browser/': typeof BrowserIndexRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/signin'
     | '/auth/two-factor'
+    | '/403'
     | '/analytics'
     | '/auth'
     | '/browser'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/signin'
     | '/auth/two-factor'
+    | '/403'
     | '/analytics'
     | '/auth'
     | '/browser'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/signin'
     | '/auth/two-factor'
+    | '/403/'
     | '/analytics/'
     | '/auth/'
     | '/browser/'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthSigninRoute: typeof AuthSigninRoute
   AuthTwoFactorRoute: typeof AuthTwoFactorRoute
+  R403IndexRoute: typeof R403IndexRoute
   AnalyticsIndexRoute: typeof AnalyticsIndexRoute
   AuthIndexRoute: typeof AuthIndexRoute
   BrowserIndexRoute: typeof BrowserIndexRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnalyticsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/403/': {
+      id: '/403/'
+      path: '/403'
+      fullPath: '/403'
+      preLoaderRoute: typeof R403IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/two-factor': {
       id: '/auth/two-factor'
       path: '/auth/two-factor'
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSigninRoute: AuthSigninRoute,
   AuthTwoFactorRoute: AuthTwoFactorRoute,
+  R403IndexRoute: R403IndexRoute,
   AnalyticsIndexRoute: AnalyticsIndexRoute,
   AuthIndexRoute: AuthIndexRoute,
   BrowserIndexRoute: BrowserIndexRoute,

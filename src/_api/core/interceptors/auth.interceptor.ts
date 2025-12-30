@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios"
 import { AxiosHeaders } from "axios"
-import { authSession } from "@/_auth/auth-session"
+import { authSession } from "@/_auth/auth.session"
 
 export function attachAuthInterceptor(client: AxiosInstance) {
   client.interceptors.request.use((config) => {
