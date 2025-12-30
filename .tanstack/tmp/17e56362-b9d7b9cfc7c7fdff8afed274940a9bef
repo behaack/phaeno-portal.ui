@@ -11,11 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
-import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as R403IndexRouteImport } from './routes/403/index'
-import { Route as AuthTwoFactorIndexRouteImport } from './routes/auth/two-factor/index'
-import { Route as AuthSignInIndexRouteImport } from './routes/auth/sign-in/index'
-import { Route as AuthForgotPasswordIndexRouteImport } from './routes/auth/forgot-password/index'
+import { Route as AuthTwoFactorRouteImport } from './routes/auth/two-factor'
+import { Route as AuthSigninRouteImport } from './routes/auth/signin'
+import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
 import { Route as AppFilesIndexRouteImport } from './routes/app/files/index'
 import { Route as AppBrowserIndexRouteImport } from './routes/app/browser/index'
 import { Route as AppAnalyticsIndexRouteImport } from './routes/app/analytics/index'
@@ -30,29 +29,24 @@ const AuthIndexRoute = AuthIndexRouteImport.update({
   path: '/auth/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppIndexRoute = AppIndexRouteImport.update({
-  id: '/app/',
-  path: '/app/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const R403IndexRoute = R403IndexRouteImport.update({
   id: '/403/',
   path: '/403/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthTwoFactorIndexRoute = AuthTwoFactorIndexRouteImport.update({
-  id: '/auth/two-factor/',
-  path: '/auth/two-factor/',
+const AuthTwoFactorRoute = AuthTwoFactorRouteImport.update({
+  id: '/auth/two-factor',
+  path: '/auth/two-factor',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthSignInIndexRoute = AuthSignInIndexRouteImport.update({
-  id: '/auth/sign-in/',
-  path: '/auth/sign-in/',
+const AuthSigninRoute = AuthSigninRouteImport.update({
+  id: '/auth/signin',
+  path: '/auth/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthForgotPasswordIndexRoute = AuthForgotPasswordIndexRouteImport.update({
-  id: '/auth/forgot-password/',
-  path: '/auth/forgot-password/',
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/auth/forgot-password',
+  path: '/auth/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppFilesIndexRoute = AppFilesIndexRouteImport.update({
@@ -73,91 +67,84 @@ const AppAnalyticsIndexRoute = AppAnalyticsIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/two-factor': typeof AuthTwoFactorRoute
   '/403': typeof R403IndexRoute
-  '/app': typeof AppIndexRoute
   '/auth': typeof AuthIndexRoute
   '/app/analytics': typeof AppAnalyticsIndexRoute
   '/app/browser': typeof AppBrowserIndexRoute
   '/app/files': typeof AppFilesIndexRoute
-  '/auth/forgot-password': typeof AuthForgotPasswordIndexRoute
-  '/auth/sign-in': typeof AuthSignInIndexRoute
-  '/auth/two-factor': typeof AuthTwoFactorIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/two-factor': typeof AuthTwoFactorRoute
   '/403': typeof R403IndexRoute
-  '/app': typeof AppIndexRoute
   '/auth': typeof AuthIndexRoute
   '/app/analytics': typeof AppAnalyticsIndexRoute
   '/app/browser': typeof AppBrowserIndexRoute
   '/app/files': typeof AppFilesIndexRoute
-  '/auth/forgot-password': typeof AuthForgotPasswordIndexRoute
-  '/auth/sign-in': typeof AuthSignInIndexRoute
-  '/auth/two-factor': typeof AuthTwoFactorIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/two-factor': typeof AuthTwoFactorRoute
   '/403/': typeof R403IndexRoute
-  '/app/': typeof AppIndexRoute
   '/auth/': typeof AuthIndexRoute
   '/app/analytics/': typeof AppAnalyticsIndexRoute
   '/app/browser/': typeof AppBrowserIndexRoute
   '/app/files/': typeof AppFilesIndexRoute
-  '/auth/forgot-password/': typeof AuthForgotPasswordIndexRoute
-  '/auth/sign-in/': typeof AuthSignInIndexRoute
-  '/auth/two-factor/': typeof AuthTwoFactorIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth/forgot-password'
+    | '/auth/signin'
+    | '/auth/two-factor'
     | '/403'
-    | '/app'
     | '/auth'
     | '/app/analytics'
     | '/app/browser'
     | '/app/files'
-    | '/auth/forgot-password'
-    | '/auth/sign-in'
-    | '/auth/two-factor'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth/forgot-password'
+    | '/auth/signin'
+    | '/auth/two-factor'
     | '/403'
-    | '/app'
     | '/auth'
     | '/app/analytics'
     | '/app/browser'
     | '/app/files'
-    | '/auth/forgot-password'
-    | '/auth/sign-in'
-    | '/auth/two-factor'
   id:
     | '__root__'
     | '/'
+    | '/auth/forgot-password'
+    | '/auth/signin'
+    | '/auth/two-factor'
     | '/403/'
-    | '/app/'
     | '/auth/'
     | '/app/analytics/'
     | '/app/browser/'
     | '/app/files/'
-    | '/auth/forgot-password/'
-    | '/auth/sign-in/'
-    | '/auth/two-factor/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
+  AuthSigninRoute: typeof AuthSigninRoute
+  AuthTwoFactorRoute: typeof AuthTwoFactorRoute
   R403IndexRoute: typeof R403IndexRoute
-  AppIndexRoute: typeof AppIndexRoute
   AuthIndexRoute: typeof AuthIndexRoute
   AppAnalyticsIndexRoute: typeof AppAnalyticsIndexRoute
   AppBrowserIndexRoute: typeof AppBrowserIndexRoute
   AppFilesIndexRoute: typeof AppFilesIndexRoute
-  AuthForgotPasswordIndexRoute: typeof AuthForgotPasswordIndexRoute
-  AuthSignInIndexRoute: typeof AuthSignInIndexRoute
-  AuthTwoFactorIndexRoute: typeof AuthTwoFactorIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -176,13 +163,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app/': {
-      id: '/app/'
-      path: '/app'
-      fullPath: '/app'
-      preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/403/': {
       id: '/403/'
       path: '/403'
@@ -190,25 +170,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R403IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/two-factor/': {
-      id: '/auth/two-factor/'
+    '/auth/two-factor': {
+      id: '/auth/two-factor'
       path: '/auth/two-factor'
       fullPath: '/auth/two-factor'
-      preLoaderRoute: typeof AuthTwoFactorIndexRouteImport
+      preLoaderRoute: typeof AuthTwoFactorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/sign-in/': {
-      id: '/auth/sign-in/'
-      path: '/auth/sign-in'
-      fullPath: '/auth/sign-in'
-      preLoaderRoute: typeof AuthSignInIndexRouteImport
+    '/auth/signin': {
+      id: '/auth/signin'
+      path: '/auth/signin'
+      fullPath: '/auth/signin'
+      preLoaderRoute: typeof AuthSigninRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/forgot-password/': {
-      id: '/auth/forgot-password/'
+    '/auth/forgot-password': {
+      id: '/auth/forgot-password'
       path: '/auth/forgot-password'
       fullPath: '/auth/forgot-password'
-      preLoaderRoute: typeof AuthForgotPasswordIndexRouteImport
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/files/': {
@@ -237,15 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
+  AuthSigninRoute: AuthSigninRoute,
+  AuthTwoFactorRoute: AuthTwoFactorRoute,
   R403IndexRoute: R403IndexRoute,
-  AppIndexRoute: AppIndexRoute,
   AuthIndexRoute: AuthIndexRoute,
   AppAnalyticsIndexRoute: AppAnalyticsIndexRoute,
   AppBrowserIndexRoute: AppBrowserIndexRoute,
   AppFilesIndexRoute: AppFilesIndexRoute,
-  AuthForgotPasswordIndexRoute: AuthForgotPasswordIndexRoute,
-  AuthSignInIndexRoute: AuthSignInIndexRoute,
-  AuthTwoFactorIndexRoute: AuthTwoFactorIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

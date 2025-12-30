@@ -16,7 +16,7 @@ const userMenuList: IUserMenuItem[] = [
     type: 'link',
     subtype: 'browser',
     label: 'Browser',
-    route: '/browser',
+    route: '/app/browser',
     userDataRoute: true,
   },
   {
@@ -25,7 +25,7 @@ const userMenuList: IUserMenuItem[] = [
     type: 'link',
     subtype: 'analytics',
     label: 'Analytics',
-    route: '/analytics',
+    route: '/app/analytics',
     userDataRoute: true,
   },  
   {
@@ -34,7 +34,7 @@ const userMenuList: IUserMenuItem[] = [
     type: 'link',
     subtype: 'files',
     label: 'Files',
-    route: '/files',
+    route: '/app/files',
     userDataRoute: true,
   },
   {
@@ -52,7 +52,7 @@ const userMenuList: IUserMenuItem[] = [
     type: 'link',
     subtype: 'manage users',
     label: 'Manage Users',
-    route: '/manage-users?type=user&pageno=1',
+    route: '/app/manage-users?type=user&pageno=1',
     userDataRoute: false,
   },
   {

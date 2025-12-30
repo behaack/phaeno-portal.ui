@@ -4,7 +4,7 @@ import { useInterval, useWindowEvent } from '@mantine/hooks';
 import { useAuthStore } from '@/_stores/auth.store';
 import { usePipelineHub } from '@/_shared/hooks/usePipelineHub';
 import { useProactiveTokenRefresh } from '@/_shared/hooks/useProactiveTokenRefresh';
-import { Route as SigninRoute} from '@/routes/auth/signin';
+import { Route as SigninRoute} from '@/routes/auth/sign-in';
 import Header from './Header';
 ////import { FullScreenLoader, PModalConfirm } from '@/components/_index';
 //import { useDialogConfirmStore } from '@/stores/dialogConfirmStore';

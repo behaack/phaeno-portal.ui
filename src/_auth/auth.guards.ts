@@ -13,6 +13,14 @@ export function requireAuth() {
   }
 }
 
+export function requireGuest() {
+  if (!authSession.hasHydrated()) return
+
+  if (authSession.isAuthenticated()) {
+    throw redirect({ to: "/app" })
+  }
+}
+
 export function requireRole(...roles: Role[]) {
   return () => {
     if (!authSession.hasHydrated()) return
@@ -34,7 +42,7 @@ export function requireAreaAccess(area: RouteArea) {
     if (!authSession.hasHydrated()) return
 
     if (!authSession.isAuthenticated()) {
-      throw redirect({ to: "/auth/signin" })
+      throw redirect({ to: "/auth/sign-in" })
     }
 
     if (!canAccessArea(area)) {

@@ -4,15 +4,15 @@ import { Notifications } from '@mantine/notifications';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { theme } from '@/_shared/theme/mantine';
-import NotFound from './components/NotFound';
 import { routeTree } from './routeTree.gen';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from "@/_app/providers/queryClient"
+import { NotFoundPage } from './_features/not-found/NotFoundPage';
 
 const router = createRouter({
   routeTree,
   context: { queryClient },
-  defaultNotFoundComponent: NotFound,
+  defaultNotFoundComponent: NotFoundPage,
 });
 
 

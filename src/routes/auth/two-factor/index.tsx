@@ -8,7 +8,7 @@ const searchSchema = z.object({
   method: z.coerce.number().pipe(z.nativeEnum(ETwoFactorMethod)),
 })
 
-export const Route = createFileRoute("/auth/two-factor")({
+export const Route = createFileRoute("/auth/two-factor/")({
   validateSearch: (search) => searchSchema.parse(search),
   component: TwoFactorPage  
 })

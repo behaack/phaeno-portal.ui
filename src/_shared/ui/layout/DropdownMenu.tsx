@@ -8,7 +8,7 @@ import { Subtype } from './components/IMenuListItem';
 import MenuItem from './components/MenuItem';
 import userMenuList from './components/menuList';
 import CurrentUser from './CurrentUser';
-import { Route } from '@/routes/auth/signin'
+import { Route } from '@/routes/auth/sign-in'
 import SelectedCustomer from './components/SelectedCustomer';
 import { useMeQuery } from '@/_api/hooks/account.hooks';
 // import ApiKeys, { IHandles as IApiKeysHndls } from '@/components/apiKey/ApiKeys.modal';

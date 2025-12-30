@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { useLocation } from '@tanstack/react-router';
-import { constants } from '@/assets/constants';
 import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
 import { useAuthStore } from '@/_stores/auth.store';
 import DropdownMenu from './DropdownMenu';
@@ -25,7 +24,7 @@ export default function AuthHeader() {
               <img
                 className="logo"
                 alt="Phaeno logo"
-                src={`${constants.IMAGES_URL}/phaeno180x58.png`}
+                src="/phaeno124x40.webp"
               />
             </div>
           </div>
