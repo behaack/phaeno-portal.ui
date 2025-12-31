@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import { refreshAuthToken } from "@/_shared/hooks/refreshAuthToken";
-import { useAuthStore } from "@/_stores/auth.store";
+import { useAuthStore } from "@/stores/auth.store";
 
 export function usePipelineHub() {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL

@@ -1,7 +1,7 @@
 import { z } from "zod"
-import { ETwoFactorMethod } from "@/_api/types/auth"
+import { ETwoFactorMethod } from "@/api/types/auth"
 import { createFileRoute } from "@tanstack/react-router"
-import { TwoFactorPage } from "@/_features/auth/TwoFactorPage"
+import { TwoFactorPage } from "@/features/auth/TwoFactorPage"
 
 const searchSchema = z.object({
   loginChallengeId: z.string().uuid(),

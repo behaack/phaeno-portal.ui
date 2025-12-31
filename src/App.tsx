@@ -6,8 +6,8 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { theme } from '@/_shared/theme/mantine';
 import { routeTree } from './routeTree.gen';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from "@/_app/providers/queryClient"
-import { NotFoundPage } from './_features/not-found/NotFoundPage';
+import { queryClient } from "@/app/providers/queryClient"
+import { NotFoundPage } from './features/not-found/NotFoundPage';
 
 const router = createRouter({
   routeTree,

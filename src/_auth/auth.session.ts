@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/_stores/auth.store"
+import { useAuthStore } from "@/stores/auth.store"
 import type { NavigateFn } from "@tanstack/react-router"
 
 export const authSession = {

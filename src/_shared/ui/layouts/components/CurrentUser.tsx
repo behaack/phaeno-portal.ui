@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/_stores/auth.store';
+import { useAuthStore } from '@/stores/auth.store';
 
 export default function CurrentUser() {
   const store = useAuthStore()

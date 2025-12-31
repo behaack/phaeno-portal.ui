@@ -1,6 +1,6 @@
 // src/_auth/useProactiveTokenRefresh.ts
 import { useEffect } from "react"
-import { useAuthStore } from "@/_stores/auth.store"
+import { useAuthStore } from "@/stores/auth.store"
 import { refreshTokensSingleFlight } from "@/_auth/refresh.manager"
 
 export function useProactiveTokenRefresh() {

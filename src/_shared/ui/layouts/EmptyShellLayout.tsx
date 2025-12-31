@@ -1,6 +1,6 @@
-import { useMeQuery } from "@/_api/hooks/account.hooks"
+import { useMeQuery } from "@/api/hooks/account.hooks"
 import { Outlet, useNavigate } from "@tanstack/react-router"
-import { useAuthStore } from "@/_stores/auth.store"
+import { useAuthStore } from "@/stores/auth.store"
 import { useEffect } from "react";
 
 export function EmptyShellLayout() {

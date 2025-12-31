@@ -1,5 +1,5 @@
 // src/_auth/refresh.manager.ts
-import { axiosInstance } from "@/_api/core/axios.instance"
+import { axiosInstance } from "@/api/core/axios.instance"
 import { authSession } from "@/_auth/auth.session"
 
 type AuthResultDto = {

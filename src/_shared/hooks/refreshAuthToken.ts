@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useAuthStore } from "@/_stores/auth.store";
+import { useAuthStore } from "@/stores/auth.store";
 import { notifications } from "@mantine/notifications";
 
 export async function refreshAuthToken(): Promise<string> {

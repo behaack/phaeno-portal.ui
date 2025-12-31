@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { IconBuilding } from '@tabler/icons-react';
 import { ActionIcon } from '@mantine/core';
-import { useAuthStore } from '@/_stores/auth.store';
-import { useImpersonationStore } from '@/_stores/impersonation.store';
-import { EOrganizationType } from '@/_api/types/enums';
+import { useAuthStore } from '@/stores/auth.store';
+import { useImpersonationStore } from '@/stores/impersonation.store';
+import { EOrganizationType } from '@/api/types/enums';
 import { CustomerSelector,  type IHandles } from '../modals/CustomerSelector.Modal';
 
 export interface IProps {

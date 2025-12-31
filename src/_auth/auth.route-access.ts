@@ -1,5 +1,5 @@
 // auth-session.ts
-import { useAuthStore } from "@/_stores/auth.store"
+import { useAuthStore } from "@/stores/auth.store"
 import type { Role } from "./auth.roles"
 import { RouteArea } from "./auth.route-areas"
 import { ROUTE_ACCESS } from "./auth.route-matix"
