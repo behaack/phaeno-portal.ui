@@ -11,13 +11,10 @@ export function useSignInMutation() {
   const qc = useQueryClient()
 
   return useMutation({
-    mutationFn: (req: SignInRequest): Promise<SignInResponse> => authService.signIn(req),
+    mutationFn: authService.signIn,
 
-    // Invalidate "me" so UI can refresh user after successful auth.
-    // This is safe even when sign-in returns TwoFactorRequired.
-    onSuccess: async () => {
-      await qc.invalidateQueries({ queryKey: ["account","me"] }) // preferred
-      // or: await qc.invalidateQueries({ queryKey: ["account", "me"] })
+    onSuccess: async (res) => {
+      await qc.refetchQueries({ queryKey: ["account", "me"] })
     },
   })
 }
@@ -30,9 +27,8 @@ export function useVerifyTwoFactorMutation() {
     mutationFn: (req: TwoFactorVerifyRequest): Promise<SignInAuthenticated> =>
       authService.verifyTwoFactor(req),
 
-    onSuccess: async () => {
-      await qc.invalidateQueries({ queryKey: ["account","me"] })
-      // or: await qc.invalidateQueries({ queryKey: ["account", "me"] })
+    onSuccess: async (res) => {
+      await qc.refetchQueries({ queryKey: ["account", "me"] })
     },
   })
 }

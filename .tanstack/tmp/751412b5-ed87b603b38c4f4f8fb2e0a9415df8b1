@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/app/files/')({
-  component: FileRoomIndex,
+export const Route = createFileRoute("/app/")({
+  component: AppIndex,
 });
 
-function FileRoomIndex() {
+function AppIndex() {
   return (
     <main>
       <section>        

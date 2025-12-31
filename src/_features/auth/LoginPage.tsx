@@ -35,6 +35,9 @@ export function LoginPage() {
     try {
       const res = await signIn.mutateAsync(values)
       await handleSignInResult(res, navigate)
+      navigate({
+        to: "/app"
+      })
     } catch (err) {
       form.setError("root", { type: "server", message: getApiErrorMessage(err) })
       form.setValue("password", "")
@@ -44,7 +47,7 @@ export function LoginPage() {
   const rootError = form.formState.errors.root?.message
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-4 bg-bg text-fg">
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-4 text-fg">
       <Surface className="w-full max-w-md p-6" elevation="md">
         <h1 className="text-2xl font-semibold">Sign in</h1>
 

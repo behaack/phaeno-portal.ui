@@ -3,14 +3,14 @@ import { useNavigate, useLocation } from '@tanstack/react-router';
 import { Burger, Collapse } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
-import { useAuthStore } from '@/_stores/auth.store';
 import { Subtype } from '../types/IMenuListItem';
 import { Route } from '@/routes/auth/sign-in'
-import { useMeQuery } from '@/_api/hooks/account.hooks';
 import userMenuList from '../menu-lists/menuList';
 import CurrentUser from '../components/CurrentUser';
 import MenuItem from '../components/MenuItem';
 import { SelectedCustomer } from '../components/SelectedCustomer';
+import { authLogout } from '@/_auth/auth.logout';
+import { useAuthStore } from '@/_stores/auth.store';
 // import ApiKeys, { IHandles as IApiKeysHndls } from '@/components/apiKey/ApiKeys.modal';
 // import SecuritySettings, { IHandles } from '@/components/security-settings/SecuritySettings.modal';
 
@@ -19,16 +19,13 @@ export interface IProps {
 }
 
 export function DropdownMenu({ baseRoute }: IProps) {
+  const authStore = useAuthStore()
   const menuRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLButtonElement>(null);
   const [width] = useDeviceSize();
-  const authStore = useAuthStore();
   const navigate = useNavigate();
-  const location = useLocation();
   const [opened, { close, toggle }] = useDisclosure(false);
   
-  const { data: me, isLoading, isError } = useMeQuery() 
-
   const buttonHndl = (buttonType: Subtype) => {
     toggle();
     switch (buttonType) {
@@ -39,14 +36,11 @@ export function DropdownMenu({ baseRoute }: IProps) {
       //   securitySettingFrm.current?.open();
       //   break;
       case 'signout': {
-        // TODO: Call sign-out in API
-        authStore.logout();
-        navigate({
-          to: Route.to,
-          search: {
-            // TODO: Add current route to search 
-          }
-        })
+        authStore.requestLogout()
+        setTimeout(() => {
+          navigate({ to: "/auth/sign-in" })          
+        }, 10)
+        authLogout();
         break;
       }
       default:

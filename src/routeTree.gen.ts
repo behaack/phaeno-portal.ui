@@ -9,110 +9,125 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthRouteRouteImport } from './routes/auth/route'
+import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as R403IndexRouteImport } from './routes/403/index'
-import { Route as AuthTwoFactorIndexRouteImport } from './routes/auth/two-factor/index'
-import { Route as AuthSignInIndexRouteImport } from './routes/auth/sign-in/index'
-import { Route as AuthForgotPasswordIndexRouteImport } from './routes/auth/forgot-password/index'
-import { Route as AppFilesIndexRouteImport } from './routes/app/files/index'
-import { Route as AppBrowserIndexRouteImport } from './routes/app/browser/index'
-import { Route as AppAnalyticsIndexRouteImport } from './routes/app/analytics/index'
+import { Route as AuthTwoFactorRouteImport } from './routes/auth/two-factor'
+import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
+import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
+import { Route as AppFilesRouteImport } from './routes/app/files'
+import { Route as AppBrowserRouteImport } from './routes/app/browser'
+import { Route as AppAnalyticsRouteImport } from './routes/app/analytics'
 
+const AuthRouteRoute = AuthRouteRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthIndexRoute = AuthIndexRouteImport.update({
-  id: '/auth/',
-  path: '/auth/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthRouteRoute,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
-  id: '/app/',
-  path: '/app/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const R403IndexRoute = R403IndexRouteImport.update({
   id: '/403/',
   path: '/403/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthTwoFactorIndexRoute = AuthTwoFactorIndexRouteImport.update({
-  id: '/auth/two-factor/',
-  path: '/auth/two-factor/',
-  getParentRoute: () => rootRouteImport,
+const AuthTwoFactorRoute = AuthTwoFactorRouteImport.update({
+  id: '/two-factor',
+  path: '/two-factor',
+  getParentRoute: () => AuthRouteRoute,
 } as any)
-const AuthSignInIndexRoute = AuthSignInIndexRouteImport.update({
-  id: '/auth/sign-in/',
-  path: '/auth/sign-in/',
-  getParentRoute: () => rootRouteImport,
+const AuthSignInRoute = AuthSignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => AuthRouteRoute,
 } as any)
-const AuthForgotPasswordIndexRoute = AuthForgotPasswordIndexRouteImport.update({
-  id: '/auth/forgot-password/',
-  path: '/auth/forgot-password/',
-  getParentRoute: () => rootRouteImport,
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => AuthRouteRoute,
 } as any)
-const AppFilesIndexRoute = AppFilesIndexRouteImport.update({
-  id: '/app/files/',
-  path: '/app/files/',
-  getParentRoute: () => rootRouteImport,
+const AppFilesRoute = AppFilesRouteImport.update({
+  id: '/files',
+  path: '/files',
+  getParentRoute: () => AppRouteRoute,
 } as any)
-const AppBrowserIndexRoute = AppBrowserIndexRouteImport.update({
-  id: '/app/browser/',
-  path: '/app/browser/',
-  getParentRoute: () => rootRouteImport,
+const AppBrowserRoute = AppBrowserRouteImport.update({
+  id: '/browser',
+  path: '/browser',
+  getParentRoute: () => AppRouteRoute,
 } as any)
-const AppAnalyticsIndexRoute = AppAnalyticsIndexRouteImport.update({
-  id: '/app/analytics/',
-  path: '/app/analytics/',
-  getParentRoute: () => rootRouteImport,
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/auth': typeof AuthRouteRouteWithChildren
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/browser': typeof AppBrowserRoute
+  '/app/files': typeof AppFilesRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/sign-in': typeof AuthSignInRoute
+  '/auth/two-factor': typeof AuthTwoFactorRoute
   '/403': typeof R403IndexRoute
-  '/app': typeof AppIndexRoute
-  '/auth': typeof AuthIndexRoute
-  '/app/analytics': typeof AppAnalyticsIndexRoute
-  '/app/browser': typeof AppBrowserIndexRoute
-  '/app/files': typeof AppFilesIndexRoute
-  '/auth/forgot-password': typeof AuthForgotPasswordIndexRoute
-  '/auth/sign-in': typeof AuthSignInIndexRoute
-  '/auth/two-factor': typeof AuthTwoFactorIndexRoute
+  '/app/': typeof AppIndexRoute
+  '/auth/': typeof AuthIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/browser': typeof AppBrowserRoute
+  '/app/files': typeof AppFilesRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/sign-in': typeof AuthSignInRoute
+  '/auth/two-factor': typeof AuthTwoFactorRoute
   '/403': typeof R403IndexRoute
   '/app': typeof AppIndexRoute
   '/auth': typeof AuthIndexRoute
-  '/app/analytics': typeof AppAnalyticsIndexRoute
-  '/app/browser': typeof AppBrowserIndexRoute
-  '/app/files': typeof AppFilesIndexRoute
-  '/auth/forgot-password': typeof AuthForgotPasswordIndexRoute
-  '/auth/sign-in': typeof AuthSignInIndexRoute
-  '/auth/two-factor': typeof AuthTwoFactorIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/auth': typeof AuthRouteRouteWithChildren
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/browser': typeof AppBrowserRoute
+  '/app/files': typeof AppFilesRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/sign-in': typeof AuthSignInRoute
+  '/auth/two-factor': typeof AuthTwoFactorRoute
   '/403/': typeof R403IndexRoute
   '/app/': typeof AppIndexRoute
   '/auth/': typeof AuthIndexRoute
-  '/app/analytics/': typeof AppAnalyticsIndexRoute
-  '/app/browser/': typeof AppBrowserIndexRoute
-  '/app/files/': typeof AppFilesIndexRoute
-  '/auth/forgot-password/': typeof AuthForgotPasswordIndexRoute
-  '/auth/sign-in/': typeof AuthSignInIndexRoute
-  '/auth/two-factor/': typeof AuthTwoFactorIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/403'
     | '/app'
     | '/auth'
     | '/app/analytics'
@@ -121,10 +136,24 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/sign-in'
     | '/auth/two-factor'
+    | '/403'
+    | '/app/'
+    | '/auth/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/app/analytics'
+    | '/app/browser'
+    | '/app/files'
+    | '/auth/forgot-password'
+    | '/auth/sign-in'
+    | '/auth/two-factor'
     | '/403'
+    | '/app'
+    | '/auth'
+  id:
+    | '__root__'
+    | '/'
     | '/app'
     | '/auth'
     | '/app/analytics'
@@ -133,35 +162,34 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/sign-in'
     | '/auth/two-factor'
-  id:
-    | '__root__'
-    | '/'
     | '/403/'
     | '/app/'
     | '/auth/'
-    | '/app/analytics/'
-    | '/app/browser/'
-    | '/app/files/'
-    | '/auth/forgot-password/'
-    | '/auth/sign-in/'
-    | '/auth/two-factor/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRouteRoute: typeof AppRouteRouteWithChildren
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren
   R403IndexRoute: typeof R403IndexRoute
-  AppIndexRoute: typeof AppIndexRoute
-  AuthIndexRoute: typeof AuthIndexRoute
-  AppAnalyticsIndexRoute: typeof AppAnalyticsIndexRoute
-  AppBrowserIndexRoute: typeof AppBrowserIndexRoute
-  AppFilesIndexRoute: typeof AppFilesIndexRoute
-  AuthForgotPasswordIndexRoute: typeof AuthForgotPasswordIndexRoute
-  AuthSignInIndexRoute: typeof AuthSignInIndexRoute
-  AuthTwoFactorIndexRoute: typeof AuthTwoFactorIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -171,17 +199,17 @@ declare module '@tanstack/react-router' {
     }
     '/auth/': {
       id: '/auth/'
-      path: '/auth'
-      fullPath: '/auth'
+      path: '/'
+      fullPath: '/auth/'
       preLoaderRoute: typeof AuthIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthRouteRoute
     }
     '/app/': {
       id: '/app/'
-      path: '/app'
-      fullPath: '/app'
+      path: '/'
+      fullPath: '/app/'
       preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AppRouteRoute
     }
     '/403/': {
       id: '/403/'
@@ -190,62 +218,92 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R403IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/two-factor/': {
-      id: '/auth/two-factor/'
-      path: '/auth/two-factor'
+    '/auth/two-factor': {
+      id: '/auth/two-factor'
+      path: '/two-factor'
       fullPath: '/auth/two-factor'
-      preLoaderRoute: typeof AuthTwoFactorIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthTwoFactorRouteImport
+      parentRoute: typeof AuthRouteRoute
     }
-    '/auth/sign-in/': {
-      id: '/auth/sign-in/'
-      path: '/auth/sign-in'
+    '/auth/sign-in': {
+      id: '/auth/sign-in'
+      path: '/sign-in'
       fullPath: '/auth/sign-in'
-      preLoaderRoute: typeof AuthSignInIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthSignInRouteImport
+      parentRoute: typeof AuthRouteRoute
     }
-    '/auth/forgot-password/': {
-      id: '/auth/forgot-password/'
-      path: '/auth/forgot-password'
+    '/auth/forgot-password': {
+      id: '/auth/forgot-password'
+      path: '/forgot-password'
       fullPath: '/auth/forgot-password'
-      preLoaderRoute: typeof AuthForgotPasswordIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof AuthRouteRoute
     }
-    '/app/files/': {
-      id: '/app/files/'
-      path: '/app/files'
+    '/app/files': {
+      id: '/app/files'
+      path: '/files'
       fullPath: '/app/files'
-      preLoaderRoute: typeof AppFilesIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppFilesRouteImport
+      parentRoute: typeof AppRouteRoute
     }
-    '/app/browser/': {
-      id: '/app/browser/'
-      path: '/app/browser'
+    '/app/browser': {
+      id: '/app/browser'
+      path: '/browser'
       fullPath: '/app/browser'
-      preLoaderRoute: typeof AppBrowserIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppBrowserRouteImport
+      parentRoute: typeof AppRouteRoute
     }
-    '/app/analytics/': {
-      id: '/app/analytics/'
-      path: '/app/analytics'
+    '/app/analytics': {
+      id: '/app/analytics'
+      path: '/analytics'
       fullPath: '/app/analytics'
-      preLoaderRoute: typeof AppAnalyticsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRouteRoute
     }
   }
 }
 
+interface AppRouteRouteChildren {
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppBrowserRoute: typeof AppBrowserRoute
+  AppFilesRoute: typeof AppFilesRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppBrowserRoute: AppBrowserRoute,
+  AppFilesRoute: AppFilesRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
+
+interface AuthRouteRouteChildren {
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
+  AuthSignInRoute: typeof AuthSignInRoute
+  AuthTwoFactorRoute: typeof AuthTwoFactorRoute
+  AuthIndexRoute: typeof AuthIndexRoute
+}
+
+const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
+  AuthSignInRoute: AuthSignInRoute,
+  AuthTwoFactorRoute: AuthTwoFactorRoute,
+  AuthIndexRoute: AuthIndexRoute,
+}
+
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
+  AuthRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRouteRoute: AppRouteRouteWithChildren,
+  AuthRouteRoute: AuthRouteRouteWithChildren,
   R403IndexRoute: R403IndexRoute,
-  AppIndexRoute: AppIndexRoute,
-  AuthIndexRoute: AuthIndexRoute,
-  AppAnalyticsIndexRoute: AppAnalyticsIndexRoute,
-  AppBrowserIndexRoute: AppBrowserIndexRoute,
-  AppFilesIndexRoute: AppFilesIndexRoute,
-  AuthForgotPasswordIndexRoute: AuthForgotPasswordIndexRoute,
-  AuthSignInIndexRoute: AuthSignInIndexRoute,
-  AuthTwoFactorIndexRoute: AuthTwoFactorIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

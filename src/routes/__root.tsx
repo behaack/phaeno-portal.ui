@@ -1,4 +1,4 @@
-import { AppShellLayout } from '@/_shared/ui/layouts/AppShellLayout';
+import { EmptyShellLayout } from '@/_shared/ui/layouts/EmptyShellLayout';
 import { createRootRoute } from '@tanstack/react-router';
 
 export const Route = createRootRoute({
@@ -6,5 +6,5 @@ export const Route = createRootRoute({
 });
 
 function RootDocument() {
-  return <AppShellLayout />;
+  return <EmptyShellLayout />;
 }

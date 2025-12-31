@@ -7,7 +7,7 @@ import { canAccessArea } from "./auth.route-access"
 export function requireAuth() {
   if (!authSession.isAuthenticated()) {
     throw redirect({
-      to: "/auth/signin",
+      to: "/auth/sign-in",
       search: { reason: "auth" },
     })
   }
@@ -16,7 +16,7 @@ export function requireAuth() {
 export function requireGuest() {
   if (!authSession.hasHydrated()) return
 
-  if (authSession.isAuthenticated()) {
+  if (authSession.isAuthenticated() && !authSession.isLogoutPending()) {
     throw redirect({ to: "/app" })
   }
 }

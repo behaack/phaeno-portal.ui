@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/_stores/auth.store"
+import type { NavigateFn } from "@tanstack/react-router"
 
 export const authSession = {
   // 🔐 tokens
@@ -14,7 +15,12 @@ export const authSession = {
 
   isAuthenticated: () => {
     const s = useAuthStore.getState()
-    return Boolean(s.accessToken && s.userAccount)
+    return s.isAuthenticated()
+  },
+
+  isLogoutPending: () => {
+    const s = useAuthStore.getState()
+    return s.logoutPending
   },
 
   // 🧱 RBAC helpers
@@ -31,5 +37,7 @@ export const authSession = {
   rotateTokens: (accessToken: string, refreshToken: string, expiresInSeconds: number) =>
     useAuthStore.getState().rotateTokens(accessToken, refreshToken, expiresInSeconds),
 
-  logout: () => useAuthStore.getState().logout(),
+  logout: async (navigate?: NavigateFn) => {
+    useAuthStore.getState().logout()
+  }
 }
