@@ -2,14 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/_stores/auth.store";
 import { accountService } from "../services/account.service";
 import { useEffect } from "react";
-import { UserAccount } from "../types/account";
 
 export const meQueryKey = ["account", "me"] as const;
 
 export function useMeQuery() {
+  console.log("useMeQuery mounted")
   const hasHydrated = useAuthStore((s) => s.hasHydrated);
 
-  // Prefer selecting a primitive that flips when auth changes
   const accessToken = useAuthStore((s) => s.accessToken); // adjust to your store
   const setUserAccount = useAuthStore((s) => s.setUserAccount);
 

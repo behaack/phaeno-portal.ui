@@ -1,6 +1,6 @@
-import type IUserMenuItem from './types/IMenuListItem';
+import IMenuListItem from "../types/IMenuListItem";
 
-const userMenuList: IUserMenuItem[] = [
+const userMenuList: IMenuListItem[] = [
   // {
   //   index: 0,
   //   isMain: true,

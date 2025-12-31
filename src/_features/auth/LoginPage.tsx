@@ -35,9 +35,7 @@ export function LoginPage() {
     try {
       const res = await signIn.mutateAsync(values)
       await handleSignInResult(res, navigate)
-      navigate({
-        to: "/app"
-      })
+      navigate({ to: "/app" })
     } catch (err) {
       form.setError("root", { type: "server", message: getApiErrorMessage(err) })
       form.setValue("password", "")

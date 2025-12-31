@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Loader, Table } from '@mantine/core';
-import { statusBkgdColorMapper, TStatusTypeWithStopping } from "@/assets/utils/statusColorMapper";
-import { TStatusType } from "@/assets/types/types";
-import { IDataPipelineItem } from "@/assets/interfaces/_index";
+import { IDataPipelineItem, TStatusType } from "../types/JobPipelineTypes";
+import { statusBkgdColorMapper, TStatusTypeWithStopping } from "../utilities/statusColorMapper";
 
 export interface IProps {
   job: IDataPipelineItem;

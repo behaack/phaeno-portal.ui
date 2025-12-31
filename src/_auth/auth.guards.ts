@@ -16,7 +16,7 @@ export function requireAuth() {
 export function requireGuest() {
   if (!authSession.hasHydrated()) return
 
-  if (authSession.isAuthenticated() && !authSession.isLogoutPending()) {
+  if (authSession.isAuthenticated()) {
     throw redirect({ to: "/app" })
   }
 }

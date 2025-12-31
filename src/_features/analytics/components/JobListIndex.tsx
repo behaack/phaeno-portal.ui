@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import { IPagedList } from "@/assets/interfaces/_index";
 import { useDeviceSize } from "@/_shared/hooks/useDeviceSize";
 import { DataPipelineItem } from "@/_api/types/job-pipeline";
 import { JobList } from "./List";
 import { JobTable } from "./Table";
+import IPagedList from "@/_shared/types/IPagedList";
 
 export interface IProps {
   data: IPagedList<DataPipelineItem>

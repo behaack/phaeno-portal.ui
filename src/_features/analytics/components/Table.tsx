@@ -1,8 +1,8 @@
 import { Table } from '@mantine/core';
-import { IDataPipelineItem } from '@/assets/interfaces/_index';
-import { statusDate } from '@/assets/utils/statusDate';
 import { DisplayStatus } from './DisplayStatus';
 import { ActionButtons } from './ActionButtons';
+import { IDataPipelineItem } from '../types/JobPipelineTypes';
+import { statusDate } from '../utilities/statusDate';
 
 export interface IProps {
   list: IDataPipelineItem[];

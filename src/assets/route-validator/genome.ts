@@ -1,9 +1,0 @@
-import { z } from 'zod';
-
-export const searchSchema = z.object({
-  subject: z.enum(['transcript', 'fasta', 'natural-language']).default('transcript'),
-  sampleid:  z.string().uuid().optional(),
-  pageno: z.coerce.number().int().min(1).default(1),
-  q: z.string().optional(),
-  cursor: z.string().optional()
-});

@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { IconEye } from '@tabler/icons-react';
 import { ActionIcon, Table, Tooltip } from '@mantine/core';
-import { ITranscript } from '@/assets/interfaces/_index';
 import { TranscriptListItem } from '@/_api/types/transcript';
 
 export interface IProps {  

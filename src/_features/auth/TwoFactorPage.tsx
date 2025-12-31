@@ -48,8 +48,8 @@ export function TwoFactorPage() {
         code: values.code.trim(),
         rememberDevice: values.rememberDevice,
       })
-
       await handleSignInResult(res, navigate)
+      navigate({ to: "/app" })      
     } catch (err) {
       form.setError("root", { type: "server", message: getApiErrorMessage(err) })
       form.setValue("code", "")

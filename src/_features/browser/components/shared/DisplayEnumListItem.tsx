@@ -1,4 +1,4 @@
-import { IListItem } from '@/assets/interfaces/_index';
+import IListItem from "@/_shared/types/IListItem";
 
 export interface IProps {
   list: IListItem[];

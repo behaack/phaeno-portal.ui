@@ -1,10 +1,9 @@
-import { useRef } from 'react';
 import { IconEye } from '@tabler/icons-react';
 import { ActionIcon, Tooltip } from '@mantine/core';
-import { ITranscript } from '@/assets/interfaces/_index';
+import { TranscriptListItem } from '@/_api/types/transcript';
 
 export interface IProps {
-  data: ITranscript[];
+  data: TranscriptListItem[];
   forAllSamples: boolean;
 }
 
@@ -19,7 +18,7 @@ export function TranscriptList({
           {data.map((item) => (
             <li key={item.id}>
               <div className="flex justify-between">
-                <div className="list-item primary">{item.gene_symbol}</div>
+                <div className="list-item primary">{item.geneSymbol}</div>
                 <Tooltip label="View details">
                   <ActionIcon 
                     variant="filled" 
@@ -40,15 +39,15 @@ export function TranscriptList({
                 ) : null
               }
               <div>
-                <span className="font-medium">Gene Id</span>: {item.gene_id}
+                <span className="font-medium">Gene Id</span>: {item.geneId}
               </div>
               <div>
-                <span className="font-medium">Transcript Id</span>: {item.transcript_id}
+                <span className="font-medium">Transcript Id</span>: {item.transcriptId}
               </div>
               <div>
                 <span className="font-medium">Definition</span>:
               </div>
-              <div>{item.definition_line}</div>
+              <div>{item.definitionLine}</div>
             </li>
           ))}
         </ul>

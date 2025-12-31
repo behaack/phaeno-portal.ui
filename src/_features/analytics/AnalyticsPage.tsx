@@ -3,9 +3,9 @@ import { JobTypesList, JobType, JobStatusList } from "@/_api/types/job-pipeline"
 import { PButton, PSelect } from "@/_shared/ui/components";
 import { PDivider } from "@/_shared/ui/components/layout";
 import { useGetJobs } from "@/_api/hooks/job-pipeline.hooks";
-import { emptyPagedList } from "@/assets/interfaces/_index";
 import { JobListIndex } from "./components/JobListIndex";
 import { CreateJobModal, IHandles } from "./CreateJob.Modal";
+import { emptyPagedList } from "@/_shared/types/IPagedList";
 
 export function AnalyticsPage() {
   const [jobType, setType] = useState("Report")

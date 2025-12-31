@@ -1,12 +1,12 @@
 import { IconEye } from '@tabler/icons-react';
-import { IFasta } from '@/assets/interfaces/_index';
-import { readNumberList } from '@/assets/lookupLists/_index';
 import { PToolTip } from '@/_shared/ui/components/feedback';
 import { PActionIcon } from '@/_shared/ui/components/inputs';
 import { DisplayEnumListItem } from '../shared/DisplayEnumListItem';
+import { FastaListItem } from '@/_api/types/fasta';
+import readNumberList from './readNumberList';
 
 export interface IProps {
-  data: IFasta[];
+  data: FastaListItem[];
   forAllSamples: boolean;
 }
 
@@ -43,16 +43,16 @@ export function FastaList({
                 ) : null
               }              
               <div>
-                <span className="font-medium">Fragments</span>: {item.num_fragments}
+                <span className="font-medium">Fragments</span>: {item.numFragments}
               </div>
               <div>
                 <span className="font-medium">Read #</span>:{' '}
-                <DisplayEnumListItem list={readNumberList} value={item.read_number} />
+                <DisplayEnumListItem list={readNumberList} value={item.readNumber} />
               </div>
               <div>
                 <span className="font-medium">Definition</span>:
               </div>
-              <div>{item.definition_line}</div>
+              <div>{item.definitionLine}</div>
             </li>
           ))}
         </ul>

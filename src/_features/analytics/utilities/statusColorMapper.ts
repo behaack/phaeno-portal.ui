@@ -1,4 +1,4 @@
-import { TStatusType } from '@/assets/types/types';
+import { TStatusType } from "../types/JobPipelineTypes";
 
 export type TStatusTypeWithStopping = TStatusType | 'Stopping'
 

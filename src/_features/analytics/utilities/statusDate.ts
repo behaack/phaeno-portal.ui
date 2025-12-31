@@ -1,5 +1,5 @@
-import { IDataPipelineItem } from "../interfaces/_index";
 import { DateTime } from "luxon";
+import { IDataPipelineItem } from "../types/JobPipelineTypes";
 
 export const statusDate = (item: IDataPipelineItem): string => {
   let statusDate = "";

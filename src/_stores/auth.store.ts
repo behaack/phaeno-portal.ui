@@ -7,11 +7,9 @@ export interface IAuthState {
   refreshToken: string | null
   accessTokenExpiresAtMs: number | null
   userAccount: UserAccount | null
-  logoutPending: boolean
+
   // hydration flag
   hasHydrated: boolean
-
-  requestLogout: () => void
   setHasHydrated: (v: boolean) => void
   isAccessTokenExpired: () => boolean
   isAuthenticated: () => boolean
@@ -39,7 +37,6 @@ export const useAuthStore = create<IAuthState>()(
         accessTokenExpiresAtMs: null,
         userAccount: null,
         hasHydrated: false,
-        logoutPending: false,
         
         setHasHydrated: (v) => set({ hasHydrated: v }),
 
@@ -64,9 +61,8 @@ export const useAuthStore = create<IAuthState>()(
             accessToken,
             refreshToken,
             accessTokenExpiresAtMs: computeExpiresAtMs(expiresInSeconds),
-            logoutPending: false
           }),
-
+          
         setAccessToken: (accessToken: string, expiresInSeconds: number) =>
           set({ 
             accessToken, 
@@ -79,10 +75,6 @@ export const useAuthStore = create<IAuthState>()(
             refreshToken,
             accessTokenExpiresAtMs: computeExpiresAtMs(expiresInSeconds),
           }),
-        
-        requestLogout: () => set({
-          logoutPending: true
-         }),
 
         logout: () =>
           set({

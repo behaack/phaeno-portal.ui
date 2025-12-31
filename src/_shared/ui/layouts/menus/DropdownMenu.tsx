@@ -36,10 +36,6 @@ export function DropdownMenu({ baseRoute }: IProps) {
       //   securitySettingFrm.current?.open();
       //   break;
       case 'signout': {
-        authStore.requestLogout()
-        setTimeout(() => {
-          navigate({ to: "/auth/sign-in" })          
-        }, 10)
         authLogout();
         break;
       }

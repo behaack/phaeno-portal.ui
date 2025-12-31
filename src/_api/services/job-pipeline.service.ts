@@ -1,7 +1,7 @@
-import type { IPagedList } from "@/assets/interfaces/_index";
 import { axiosInstance } from "../core/axios.instance";
 import type { CreateReportJob, CreateScoreJob, CreateSummaryJob, CreateUmapJob, DataPipelineItem, GetJobsParams } from "../types/job-pipeline";
 import { api } from "../core/api-call";
+import IPagedList from "@/_shared/types/IPagedList";
 
 export const jobPipelineService = {
   submitJob: () => axiosInstance.post("data-pipeline-runs"),

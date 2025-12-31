@@ -18,11 +18,6 @@ export const authSession = {
     return s.isAuthenticated()
   },
 
-  isLogoutPending: () => {
-    const s = useAuthStore.getState()
-    return s.logoutPending
-  },
-
   // 🧱 RBAC helpers
   hasRole: (role: string) =>
     useAuthStore.getState().userAccount?.roles.includes(role) ?? false,
