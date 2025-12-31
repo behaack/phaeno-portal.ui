@@ -3,7 +3,7 @@ import { fastaService } from "@/api/services/fasta.service"
 import type { GenomicListParams } from "@/api/types/genomic.common"
 import { useImpersonationStore } from "@/stores/impersonation.store"
 import { useAuthStore } from "@/stores/auth.store" // or wherever your roles live
-import { isPhaenoEmployee } from "@/api/types/auth.guards"
+import { isPhaenoEmployee } from "@/auth/types/auth.guards"
 import { LookupListParams } from "../types/common"
 
 export function useFastaLookup(params: LookupListParams) {

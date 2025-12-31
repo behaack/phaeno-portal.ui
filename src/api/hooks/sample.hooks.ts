@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { sampleService } from "@/api/services/sample.service"
 import { useImpersonationStore } from "@/stores/impersonation.store"
 import { useAuthStore } from "@/stores/auth.store"
-import { isPhaenoEmployee } from "@/api/types/auth.guards"
+import { isPhaenoEmployee } from "@/auth/types/auth.guards"
 import { LookupListParams } from "../types/common"
 
 export function useSampleLookup(params: LookupListParams) {

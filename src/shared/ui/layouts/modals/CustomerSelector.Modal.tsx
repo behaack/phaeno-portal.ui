@@ -3,7 +3,7 @@ import { IconBuilding, IconSearch } from '@tabler/icons-react';
 import { useImpersonationStore } from '@/stores/impersonation.store';
 import { useRouterState } from '@tanstack/react-router';
 import { PModalDialog }  from '@/shared/ui/modals/PModalDialog'
-import { useCustomerLookup } from '@/api/hooks/org.hooks';
+import { useCustomerLookup } from '@/api/hooks/customer.hooks';
 import { Combobox, Paper, rem, ScrollArea, useCombobox } from '@mantine/core';
 import { PTextInput } from '@/shared/ui/components/inputs';
 import { PBox } from '@/shared/ui/components/layout';

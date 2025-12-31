@@ -1,6 +1,6 @@
 import IMenuListItem from "../types/IMenuListItem";
 
-const userMenuList: IMenuListItem[] = [
+export const userMenuList: IMenuListItem[] = [
   // {
   //   index: 0,
   //   isMain: true,
@@ -41,7 +41,7 @@ const userMenuList: IMenuListItem[] = [
     index: 4,
     isMain: false,
     type: 'button',
-    subtype: 'api keys',
+    subtype: 'api-keys',
     label: 'API Keys',
     route: 'none',
     userDataRoute: false,
@@ -50,22 +50,31 @@ const userMenuList: IMenuListItem[] = [
     index: 5,
     isMain: false,
     type: 'link',
-    subtype: 'manage users',
-    label: 'Manage Users',
-    route: '/app/manage-users?type=user&pageno=1',
+    subtype: 'customers',
+    label: 'Customers',
+    route: '/app/customers',
     userDataRoute: false,
-  },
+  },  
   {
     index: 6,
     isMain: false,
     type: 'button',
-    subtype: 'security settings',
-    label: 'Security Settings',
+    subtype: 'users',
+    label: 'Users',
     route: 'none',
     userDataRoute: false,
   },
   {
     index: 7,
+    isMain: false,
+    type: 'button',
+    subtype: 'security-settings',
+    label: 'Security Settings',
+    route: 'none',
+    userDataRoute: false,
+  },
+  {
+    index: 8,
     isMain: false,
     type: 'button',
     subtype: 'signout',
@@ -74,5 +83,3 @@ const userMenuList: IMenuListItem[] = [
     userDataRoute: false,
   },
 ];
-
-export default userMenuList;

@@ -15,11 +15,13 @@ export function Surface({
   className,
   elevation = "md",
   hover = "none",
+  fullHeight = false,
 }: {
   children: ReactNode
   className?: string
   elevation?: Elevation
   hover?: Hover
+  fullHeight?: boolean
 }) {
   return (
     <div
@@ -27,7 +29,12 @@ export function Surface({
         "bg-surface text-fg rounded-lg",
         elevationMap[elevation],
         "transition-shadow duration-normal ease-smooth",
+
         hover === "lift" && "hover:shadow-lg",
+
+        /* 👇 full page surface */
+        fullHeight &&  "min-h-[calc(100vh-var(--header-h)-(2*var(--container-py)))]",
+
         className
       )}
     >

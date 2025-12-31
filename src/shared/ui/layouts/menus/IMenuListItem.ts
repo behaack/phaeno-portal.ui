@@ -2,11 +2,12 @@ export type Subtype =
   | 'home'
   | 'transcript'
   | 'browser'
-  |  'analytics'
+  | 'analytics'
   | 'files'
-  | 'manage users'
-  | 'api keys'
-  | 'security settings'
+  | 'manage-users'
+  | 'customers'
+  | 'api-keys'
+  | 'security-settings'
   | 'signout';
 
 export default interface IMenuListItem {

@@ -1,8 +1,8 @@
-import MenuItem from '../components/MenuItem';
-import menuList from '../menu-lists/menuList';
+import { MenuItem } from "./MenuItem";
+import { userMenuList } from "../menu-lists/menuList";
 
 export function Menu() { 
-  const mainMenu = menuList.filter((item) => {
+  const mainMenu = userMenuList.filter((item) => {
     return item.isMain === true;
   });  
 

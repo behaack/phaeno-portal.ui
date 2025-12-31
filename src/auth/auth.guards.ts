@@ -3,6 +3,7 @@ import { authSession } from "@/auth/auth.session"
 import { Role } from "./auth.roles"
 import { RouteArea } from "./auth.route-areas"
 import { canAccessArea } from "./auth.route-access"
+import { RoleScope } from "./auth.role-scope"
 
 export function requireAuth() {
   if (!authSession.isAuthenticated()) {
@@ -26,7 +27,17 @@ export function requireRole(...roles: Role[]) {
     if (!authSession.hasHydrated()) return
 
     if (!authSession.hasAnyRole(roles)) {
-      throw redirect({ to: "/403" })
+      throw redirect({ to: "/app/403" })
+    }
+  }
+}
+
+export function requireScope(scope: RoleScope) {
+  return () => {
+    if (!authSession.hasHydrated()) return
+
+    if (!authSession.hasScope(scope)) {
+      throw redirect({ to: "/app/403" })
     }
   }
 }
@@ -46,8 +57,7 @@ export function requireAreaAccess(area: RouteArea) {
     }
 
     if (!canAccessArea(area)) {
-      throw redirect({ to: "/403" })
+      throw redirect({ to: "/app/403" })
     }
   }
 }
-

@@ -3,7 +3,7 @@ import { useDeviceSize } from "@/shared/hooks/useDeviceSize";
 import { DataPipelineItem } from "@/api/types/job-pipeline";
 import { JobList } from "./List";
 import { JobTable } from "./Table";
-import IPagedList from "@/shared/types/IPagedList";
+import { IPagedList } from "@/shared/types/IPagedList";
 
 export interface IProps {
   data: IPagedList<DataPipelineItem>

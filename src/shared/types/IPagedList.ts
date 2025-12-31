@@ -1,12 +1,10 @@
-interface IPagedList<T> {
+export interface IPagedList<T> {
   list: T[];
   pageCount: number;
   pageNumber: number;
   rowsReturned: number;
   totalRowCount: number;
 }
-
-export default IPagedList;
 
 export const emptyPagedList = {
   list: [],

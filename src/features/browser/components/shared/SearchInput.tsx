@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { IconSearch } from '@tabler/icons-react';
 import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
 import { PAutocomplete, PCloseButton } from '@/shared/ui/components/inputs';
@@ -20,15 +20,14 @@ export function SearchInput({
   const [, height] = useDeviceSize();
   const [searchStr, setSearchStr] = useState<string>("");
   const [debouncedSearch] = useDebouncedValue(searchStr, 250)
-  const [clearButtonVisible, setClearButtonVisible] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setSearchStr(value ?? "");
   }, [value]);
 
-  useEffect(() => {
-    setClearButtonVisible(searchStr !== '');
+  const clearButtonVisible = useMemo(() => {
+    return searchStr !== ''
   }, [searchStr]);
 
   const dropdownHeight = (): string => {

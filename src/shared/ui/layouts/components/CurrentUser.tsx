@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/stores/auth.store';
 
-export default function CurrentUser() {
+export function CurrentUser() {
   const store = useAuthStore()
   return (
     <div className="bg-zinc-600 text-white">

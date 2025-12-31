@@ -1,5 +1,7 @@
 import { useAuthStore } from "@/stores/auth.store"
 import type { NavigateFn } from "@tanstack/react-router"
+import { Role } from "./auth.roles"
+import { getRoleScope, RoleScope } from "./auth.role-scope"
 
 export const authSession = {
   // 🔐 tokens
@@ -19,11 +21,18 @@ export const authSession = {
   },
 
   // 🧱 RBAC helpers
-  hasRole: (role: string) =>
+  hasRole: (role: Role) =>
     useAuthStore.getState().userAccount?.roles.includes(role) ?? false,
 
-  hasAnyRole: (roles: string[]) =>
+  hasAnyRole: (roles: Role[]) =>
     roles.some(r => useAuthStore.getState().userAccount?.roles.includes(r)),
+
+  hasScope: (scope: RoleScope) =>
+    useAuthStore
+      .getState()
+      .userAccount
+      ?.roles
+      .some(role => getRoleScope(role) === scope) ?? false,  
 
   // 🔄 lifecycle
   login: (accessToken: string, refreshToken: string, expiresInSeconds: number) =>

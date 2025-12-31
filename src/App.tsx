@@ -8,6 +8,7 @@ import { routeTree } from './routeTree.gen';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from "@/app/providers/queryClient"
 import { NotFoundPage } from './features/not-found/NotFoundPage';
+import { ModalsProvider } from '@mantine/modals';
 
 const router = createRouter({
   routeTree,
@@ -26,10 +27,12 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider theme={theme}>
-        <Notifications position="top-center" zIndex={99999} />
-        <RouterProvider router={router} />
-        <TanStackRouterDevtools router={router}/>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ModalsProvider>
+          <Notifications position="top-center" zIndex={99999} />
+          <RouterProvider router={router} />
+          <TanStackRouterDevtools router={router}/>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ModalsProvider>
       </MantineProvider>
     </QueryClientProvider>
   );

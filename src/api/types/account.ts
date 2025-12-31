@@ -1,3 +1,4 @@
+import { Role } from "@/auth/auth.roles.js"
 import type { EOrganizationType } from "./enums.ts"
 
 export type UserAccount = {
@@ -9,5 +10,5 @@ export type UserAccount = {
   firstName: string
   lastName: string
   isAdmin: boolean
-  roles: string[]
+  roles: Role[]
 }

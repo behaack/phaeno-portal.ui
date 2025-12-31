@@ -14,13 +14,17 @@ import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
-import { Route as R403IndexRouteImport } from './routes/403/index'
 import { Route as AuthTwoFactorRouteImport } from './routes/auth/two-factor'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
 import { Route as AppFilesRouteImport } from './routes/app/files'
 import { Route as AppBrowserRouteImport } from './routes/app/browser'
 import { Route as AppAnalyticsRouteImport } from './routes/app/analytics'
+import { Route as App403RouteImport } from './routes/app/403'
+import { Route as AppUsersIndexRouteImport } from './routes/app/users/index'
+import { Route as AppCustomersIndexRouteImport } from './routes/app/customers/index'
+import { Route as AppUsersIdRouteImport } from './routes/app/users/$id'
+import { Route as AppCustomersIdRouteImport } from './routes/app/customers/$id'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/auth',
@@ -46,11 +50,6 @@ const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppRouteRoute,
-} as any)
-const R403IndexRoute = R403IndexRouteImport.update({
-  id: '/403/',
-  path: '/403/',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthTwoFactorRoute = AuthTwoFactorRouteImport.update({
   id: '/two-factor',
@@ -82,47 +81,84 @@ const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const App403Route = App403RouteImport.update({
+  id: '/403',
+  path: '/403',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppUsersIndexRoute = AppUsersIndexRouteImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppCustomersIndexRoute = AppCustomersIndexRouteImport.update({
+  id: '/customers/',
+  path: '/customers/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppUsersIdRoute = AppUsersIdRouteImport.update({
+  id: '/users/$id',
+  path: '/users/$id',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppCustomersIdRoute = AppCustomersIdRouteImport.update({
+  id: '/customers/$id',
+  path: '/customers/$id',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
+  '/app/403': typeof App403Route
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/browser': typeof AppBrowserRoute
   '/app/files': typeof AppFilesRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
-  '/403': typeof R403IndexRoute
   '/app/': typeof AppIndexRoute
   '/auth/': typeof AuthIndexRoute
+  '/app/customers/$id': typeof AppCustomersIdRoute
+  '/app/users/$id': typeof AppUsersIdRoute
+  '/app/customers': typeof AppCustomersIndexRoute
+  '/app/users': typeof AppUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/403': typeof App403Route
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/browser': typeof AppBrowserRoute
   '/app/files': typeof AppFilesRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
-  '/403': typeof R403IndexRoute
   '/app': typeof AppIndexRoute
   '/auth': typeof AuthIndexRoute
+  '/app/customers/$id': typeof AppCustomersIdRoute
+  '/app/users/$id': typeof AppUsersIdRoute
+  '/app/customers': typeof AppCustomersIndexRoute
+  '/app/users': typeof AppUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
+  '/app/403': typeof App403Route
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/browser': typeof AppBrowserRoute
   '/app/files': typeof AppFilesRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/two-factor': typeof AuthTwoFactorRoute
-  '/403/': typeof R403IndexRoute
   '/app/': typeof AppIndexRoute
   '/auth/': typeof AuthIndexRoute
+  '/app/customers/$id': typeof AppCustomersIdRoute
+  '/app/users/$id': typeof AppUsersIdRoute
+  '/app/customers/': typeof AppCustomersIndexRoute
+  '/app/users/': typeof AppUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -130,48 +166,59 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/auth'
+    | '/app/403'
     | '/app/analytics'
     | '/app/browser'
     | '/app/files'
     | '/auth/forgot-password'
     | '/auth/sign-in'
     | '/auth/two-factor'
-    | '/403'
     | '/app/'
     | '/auth/'
+    | '/app/customers/$id'
+    | '/app/users/$id'
+    | '/app/customers'
+    | '/app/users'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/app/403'
     | '/app/analytics'
     | '/app/browser'
     | '/app/files'
     | '/auth/forgot-password'
     | '/auth/sign-in'
     | '/auth/two-factor'
-    | '/403'
     | '/app'
     | '/auth'
+    | '/app/customers/$id'
+    | '/app/users/$id'
+    | '/app/customers'
+    | '/app/users'
   id:
     | '__root__'
     | '/'
     | '/app'
     | '/auth'
+    | '/app/403'
     | '/app/analytics'
     | '/app/browser'
     | '/app/files'
     | '/auth/forgot-password'
     | '/auth/sign-in'
     | '/auth/two-factor'
-    | '/403/'
     | '/app/'
     | '/auth/'
+    | '/app/customers/$id'
+    | '/app/users/$id'
+    | '/app/customers/'
+    | '/app/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRouteRoute: typeof AppRouteRouteWithChildren
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
-  R403IndexRoute: typeof R403IndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -210,13 +257,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/'
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRouteRoute
-    }
-    '/403/': {
-      id: '/403/'
-      path: '/403'
-      fullPath: '/403'
-      preLoaderRoute: typeof R403IndexRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/auth/two-factor': {
       id: '/auth/two-factor'
@@ -260,21 +300,66 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAnalyticsRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/403': {
+      id: '/app/403'
+      path: '/403'
+      fullPath: '/app/403'
+      preLoaderRoute: typeof App403RouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/users/': {
+      id: '/app/users/'
+      path: '/users'
+      fullPath: '/app/users'
+      preLoaderRoute: typeof AppUsersIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/customers/': {
+      id: '/app/customers/'
+      path: '/customers'
+      fullPath: '/app/customers'
+      preLoaderRoute: typeof AppCustomersIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/users/$id': {
+      id: '/app/users/$id'
+      path: '/users/$id'
+      fullPath: '/app/users/$id'
+      preLoaderRoute: typeof AppUsersIdRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/customers/$id': {
+      id: '/app/customers/$id'
+      path: '/customers/$id'
+      fullPath: '/app/customers/$id'
+      preLoaderRoute: typeof AppCustomersIdRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
   }
 }
 
 interface AppRouteRouteChildren {
+  App403Route: typeof App403Route
   AppAnalyticsRoute: typeof AppAnalyticsRoute
   AppBrowserRoute: typeof AppBrowserRoute
   AppFilesRoute: typeof AppFilesRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppCustomersIdRoute: typeof AppCustomersIdRoute
+  AppUsersIdRoute: typeof AppUsersIdRoute
+  AppCustomersIndexRoute: typeof AppCustomersIndexRoute
+  AppUsersIndexRoute: typeof AppUsersIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
+  App403Route: App403Route,
   AppAnalyticsRoute: AppAnalyticsRoute,
   AppBrowserRoute: AppBrowserRoute,
   AppFilesRoute: AppFilesRoute,
   AppIndexRoute: AppIndexRoute,
+  AppCustomersIdRoute: AppCustomersIdRoute,
+  AppUsersIdRoute: AppUsersIdRoute,
+  AppCustomersIndexRoute: AppCustomersIndexRoute,
+  AppUsersIndexRoute: AppUsersIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -303,7 +388,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRouteRoute: AppRouteRouteWithChildren,
   AuthRouteRoute: AuthRouteRouteWithChildren,
-  R403IndexRoute: R403IndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

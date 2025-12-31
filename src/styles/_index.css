@@ -1,12 +1,23 @@
+/* ---------------------------------------------------------
+   1️⃣ Then import files that use @layer
+--------------------------------------------------------- */
 @import "./tokens.css";
 @import "./app-shell.css";
 @import "./main-menu.scss";
 @import "./dropdown-menu.scss";
+@import "./key-value-list.css";
 
+/* ---------------------------------------------------------
+  2️⃣  Tailwind must come FIRST
+--------------------------------------------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+/* ---------------------------------------------------------
+   3️⃣ Global base styles (optional)
+--------------------------------------------------------- */
 @layer base {
   *,
   *::before,
@@ -21,7 +32,9 @@
 
   body {
     margin: 0;
-    font-fFamily: "Geist, Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif";
+    font-family: Geist, Inter, ui-sans-serif, system-ui,
+      -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 

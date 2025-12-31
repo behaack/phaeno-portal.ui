@@ -11,13 +11,14 @@ import {
 } from '@tabler/icons-react';
 import { Link, useLocation } from '@tanstack/react-router';
 import IUserMenuItem from '../types/IMenuListItem';
+import { IconBuilding } from '@tabler/icons-react';
 
 export interface IProps {
   item: IUserMenuItem;
   onClick?: () => void;
 }
 
-export default function MenuItem({ item, onClick }: IProps) {
+export function MenuItem({ item, onClick }: IProps) {
   const location = useLocation();
   const size = 18;
 
@@ -36,11 +37,13 @@ export default function MenuItem({ item, onClick }: IProps) {
         return <IconBrowser size={size} />;
       case 'analytics':
         return <IconMath size={size} />;        
-      case 'api keys':
+      case 'api-keys':
         return <IconKey size={size} />;
-      case 'manage users':
+      case 'customers':
+        return <IconBuilding size={size} />;        
+      case 'users':
         return <IconUsers size={size} />;
-      case 'security settings':
+      case 'security-settings':
         return <IconSettings size={size} />;
       case 'signout':
         return <IconLogout size={size} />;

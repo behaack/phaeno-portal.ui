@@ -1,35 +1,38 @@
 @layer base {
   :root {
     /* =========================================================
-       COLOR SYSTEM (neutral/pro base + Phaeno green accent)
-       Your app uses: oklch(var(--bg)), etc.
-    ========================================================= */
+       COLOR SYSTEM (OKLCH)
+       ========================================================= */
+
+    /* Surfaces */
     --bg: 0.985 0.004 255;
     --bg-subtle: 0.970 0.006 255;
 
     --surface: 1 0 0;
     --on-surface: 0.22 0.02 255;
 
+    /* Text */
     --fg: 0.22 0.02 255;
     --fg-muted: 0.56 0.02 255;
 
     /* Brand */
-    --primary: 0.62 0.18 145;         /* Phaeno green */
-    --primary-soft: 0.93 0.05 145;    /* soft tint for active pills */
-    --primary-ink: 0.34 0.14 145;     /* readable on light backgrounds */
+    --primary: 0.62 0.18 145;        /* Phaeno green */
+    --primary-soft: 0.93 0.05 145;
+    --primary-ink: 0.34 0.14 145;
     --on-primary: 1 0 0;
 
-    /* Focus */
-    --focus-ring: 0.62 0.18 145;
-
-    /* Semantic (optional) */
+    /* State */
     --success: 0.74 0.14 150;
     --warning: 0.84 0.13 80;
     --error: 0.62 0.20 25;
 
+    /* Focus */
+    --focus-ring: var(--primary);
+
     /* =========================================================
        RADIUS / ELEVATION
-    ========================================================= */
+       ========================================================= */
+
     --radius-sm: 10px;
     --radius-md: 14px;
     --radius-lg: 18px;
@@ -40,49 +43,47 @@
 
     /* =========================================================
        MOTION
-    ========================================================= */
+       ========================================================= */
+
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --fast: 120ms;
     --normal: 160ms;
 
     /* =========================================================
-       APP LAYOUT TOKENS
-    ========================================================= */
+       APP LAYOUT
+       ========================================================= */
+
     --header-h: 64px;
     --container-max: 1280px;
     --gutter: 16px;
 
-    --container-py: 16px;
     --container-px: var(--gutter);
+    --container-py: 16px;
 
     /* =========================================================
-       MENU TOKENS (THE IMPORTANT PART)
-       Fix: give every item the same pill sizing and rely on flex
-    ========================================================= */
-    /* Link hit area is driven by header height */
+       MENU TOKENS
+       ========================================================= */
+
     --menu-link-h: var(--header-h);
     --menu-link-px: 0.5rem;
-
-    /* Keep for compatibility; don’t use for centering */
     --menu-link-py: 0;
 
-    /* ✅ Bigger pill so inactive items don't look "bare" */
     --menu-pill-radius: 999px;
-    --menu-pill-py: 0.44rem;
     --menu-pill-px: 0.80rem;
+    --menu-pill-py: 0.44rem;
     --menu-pill-gap: 0.5rem;
 
     --menu-hover-bg: oklch(var(--fg) / 0.045);
-    --menu-focus-bg: oklch(var(--fg) / 0.060);
+    --menu-focus-bg: oklch(var(--fg) / 0.06);
 
-    /* ✅ “Premium SaaS” active: soft tint + ink text */
     --menu-active-bg: oklch(var(--primary-soft));
     --menu-active-fg: oklch(var(--primary-ink));
     --menu-disabled-fg: oklch(var(--fg) / 0.45);
 
     /* =========================================================
        DROPDOWN TOKENS
-    ========================================================= */
+       ========================================================= */
+
     --dropdown-w: 18rem;
     --dropdown-top: calc(var(--header-h) - 0.8rem);
 
@@ -104,12 +105,30 @@
     --dropdown-px: 0.75rem;
     --dropdown-py: 0.75rem;
     --dropdown-gap: 0.75rem;
+
+    /* =========================================================
+       KEY / VALUE LIST TOKENS
+       ========================================================= */
+
+    --kv-gap-y: 1rem;
+    --kv-row-padding-y: 1rem;
+    --kv-label-width: 180px;
+
+    --kv-label-color: oklch(var(--fg-muted));
+    --kv-value-color: oklch(var(--fg));
+    --kv-border-color: oklch(var(--fg) / 0.12);
+
+    --kv-label-font-size: 0.75rem;
+    --kv-label-letter-spacing: 0.05em;
+    --kv-label-text-transform: uppercase;
+
+    --kv-value-font-size: 0.875rem;
   }
 
   /* =========================================================
      DARK MODE
-     (toggle with: <html data-theme="dark">)
-  ========================================================= */
+     ========================================================= */
+
   [data-theme="dark"] {
     --bg: 0.12 0.01 255;
     --bg-subtle: 0.16 0.01 255;
@@ -133,5 +152,10 @@
 
     --dropdown-item-hover-bg: oklch(var(--fg) / 0.07);
     --dropdown-divider: oklch(var(--fg) / 0.14);
+
+    /* Key / Value dark overrides (explicit for clarity) */
+    --kv-label-color: oklch(0.72 0.01 255);
+    --kv-value-color: oklch(0.96 0.01 255);
+    --kv-border-color: oklch(var(--fg) / 0.18);
   }
 }

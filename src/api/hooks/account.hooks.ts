@@ -6,7 +6,6 @@ import { useEffect } from "react";
 export const meQueryKey = ["account", "me"] as const;
 
 export function useMeQuery() {
-  console.log("useMeQuery mounted")
   const hasHydrated = useAuthStore((s) => s.hasHydrated);
 
   const accessToken = useAuthStore((s) => s.accessToken); // adjust to your store
