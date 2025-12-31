@@ -1,5 +1,5 @@
-import { Role } from "@/_auth/auth.roles"
-import { roleUtils } from "@/_auth/auth.roles-utils"
+import { Role } from "@/auth/auth.roles"
+import { roleUtils } from "@/auth/auth.roles-utils"
 
 export interface IProps {
   role: Role

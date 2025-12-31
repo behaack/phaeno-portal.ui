@@ -1,5 +1,5 @@
 import { redirect } from "@tanstack/react-router"
-import { authSession } from "@/_auth/auth.session"
+import { authSession } from "@/auth/auth.session"
 import { Role } from "./auth.roles"
 import { RouteArea } from "./auth.route-areas"
 import { canAccessArea } from "./auth.route-access"

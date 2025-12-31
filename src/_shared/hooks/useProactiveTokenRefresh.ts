@@ -1,7 +1,7 @@
 // src/_auth/useProactiveTokenRefresh.ts
 import { useEffect } from "react"
 import { useAuthStore } from "@/stores/auth.store"
-import { refreshTokensSingleFlight } from "@/_auth/refresh.manager"
+import { refreshTokensSingleFlight } from "@/auth/refresh.manager"
 
 export function useProactiveTokenRefresh() {
   const hasHydrated = useAuthStore((s) => s.hasHydrated)

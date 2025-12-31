@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios"
 import { AxiosHeaders } from "axios"
-import { authSession } from "@/_auth/auth.session"
+import { authSession } from "@/auth/auth.session"
 import { AuthResult } from "@/api/types/auth"
 
 type RetryConfig = any & { __refreshRetried?: boolean }

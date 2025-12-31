@@ -9,7 +9,7 @@ import userMenuList from '../menu-lists/menuList';
 import CurrentUser from '../components/CurrentUser';
 import MenuItem from '../components/MenuItem';
 import { SelectedCustomer } from '../components/SelectedCustomer';
-import { authLogout } from '@/_auth/auth.logout';
+import { authLogout } from '@/auth/auth.logout';
 import { useAuthStore } from '@/stores/auth.store';
 // import ApiKeys, { IHandles as IApiKeysHndls } from '@/components/apiKey/ApiKeys.modal';
 // import SecuritySettings, { IHandles } from '@/components/security-settings/SecuritySettings.modal';

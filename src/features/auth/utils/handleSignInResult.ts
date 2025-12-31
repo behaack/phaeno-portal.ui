@@ -1,7 +1,7 @@
 import type { NavigateFn } from "@tanstack/react-router"
 import type { SignInResponse } from "@/api/types/auth"
 import { ESignInState } from "@/api/types/auth"
-import { authSession } from "@/_auth/auth.session"
+import { authSession } from "@/auth/auth.session"
 
 export async function handleSignInResult(res: SignInResponse, navigate: NavigateFn) {
   if (res.state === ESignInState.TwoFactorRequired) {

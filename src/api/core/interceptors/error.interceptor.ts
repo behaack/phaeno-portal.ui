@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios"
-import { authSession } from "@/_auth/auth.session"
+import { authSession } from "@/auth/auth.session"
 
 export function attachErrorInterceptor(client: AxiosInstance) {
   client.interceptors.response.use(

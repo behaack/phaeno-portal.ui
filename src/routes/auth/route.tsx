@@ -1,4 +1,4 @@
-import { requireGuest } from '@/_auth/auth.guards'
+import { requireGuest } from '@/auth/auth.guards'
 import { AuthShellLayout } from '@/_shared/ui/layouts/AuthShellLayout'
 import { createFileRoute } from '@tanstack/react-router'
 

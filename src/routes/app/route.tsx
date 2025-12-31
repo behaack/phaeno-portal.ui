@@ -1,4 +1,4 @@
-import { requireAuth } from '@/_auth/auth.guards'
+import { requireAuth } from '@/auth/auth.guards'
 import { AppShellLayout } from '@/_shared/ui/layouts/AppShellLayout'
 import { createFileRoute } from '@tanstack/react-router'
 
