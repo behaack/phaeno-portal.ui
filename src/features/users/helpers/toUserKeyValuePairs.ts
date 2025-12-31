@@ -1,18 +1,12 @@
 import { Organization } from "@/api/types/organization";
 import { UserDetails } from "@/api/types/user";
 
-export function toUserKeyValuePairs(org: UserDetails) {
+export function toUserKeyValuePairs(user: UserDetails) {
   return [
-    { label: "Organization ID", value: org.id },
-    { label: "Organization Name", value: org.organizationName },
-    { label: "Street Address", value: org.street1 },
-    { label: "Address Line 2", value: org.street2 },
-    {
-      label: "Location",
-      value: [org.city, org.state, org.postalCode]
-        .filter(Boolean)
-        .join(", "),
-    },
-    { label: "Country", value: org.countryCode },
+    { label: "User ID", value: user.id },
+    { label: "First Name", value: user.firstName },
+    { label: "Last Name", value: user.lastName },
+    { label: "Is Admin", value: (user.isAdmin) ? "True" : "False" },
+    { label: "Is Set-up", value: (user.isSetup) ? "True" : "False" },
   ];
 }

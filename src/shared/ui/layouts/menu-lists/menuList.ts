@@ -58,10 +58,10 @@ export const userMenuList: IMenuListItem[] = [
   {
     index: 6,
     isMain: false,
-    type: 'button',
+    type: 'link',
     subtype: 'users',
     label: 'Users',
-    route: 'none',
+    route: '/app/users',
     userDataRoute: false,
   },
   {

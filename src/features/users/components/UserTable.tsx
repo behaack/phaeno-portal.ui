@@ -1,14 +1,14 @@
-import { Organization } from "@/api/types/organization"
+import { UserListItem } from "@/api/types/user"
 import { useConfirmAction } from "@/shared/hooks/useConfirmAction"
-import { EListActionType, ListActionMenu } from "@/shared/ui/components/compound"
+import { DisplayBoolean, EListActionType, ListActionMenu } from "@/shared/ui/components/compound"
 import { Table } from "@mantine/core"
 import { useNavigate } from "@tanstack/react-router"
 
 export interface IProps {
-  list: Organization[]
+  list: UserListItem[]
 }
 
-export function CustomerTable({ list }: IProps) {
+export function UserTable({ list }: IProps) {
   const confirm = useConfirmAction()
   const navigate = useNavigate()
 
@@ -17,17 +17,17 @@ export function CustomerTable({ list }: IProps) {
       case EListActionType.Details:
         navigate({
           to: `${id}`
-        })        
+        })
         return
       case EListActionType.Delete:
-        deleteCustomer(id)
+        deleteUser(id)
         return
       default:
         return
     }
   }
 
-  const deleteCustomer = async (id: string) => {
+  const deleteUser = async (id: string) => {
     if (!(await confirm({
       title: "Delete record?",
       message: "Are you sure you want to delete this record?",
@@ -41,13 +41,13 @@ export function CustomerTable({ list }: IProps) {
       <Table.Thead>
         <Table.Tr>
           <Table.Th style={{ backgroundColor: 'black', color: 'white' }}>
-            Customer Name
+            First Name
           </Table.Th>
-          <Table.Th style={{ backgroundColor: 'black', color: 'white', width: '300px' }}>
-            City
-          </Table.Th>
-          <Table.Th style={{ backgroundColor: 'black', color: 'white', width: '25px' }}>
-            Country
+          <Table.Th style={{ backgroundColor: 'black', color: 'white' }}>
+            Last Name
+          </Table.Th>          
+          <Table.Th style={{ backgroundColor: 'black', color: 'white', textAlign: 'center', width: '100px' }}>
+            Is Admin
           </Table.Th>
           <Table.Th style={{ backgroundColor: 'black', color: 'white', width: '25px' }}>
             Action
@@ -57,9 +57,9 @@ export function CustomerTable({ list }: IProps) {
       <Table.Tbody>
         {list.map((item) => (
           <Table.Tr key={item.id}>
-            <Table.Td>{item.organizationName}</Table.Td>
-            <Table.Td>{item.city}</Table.Td>
-            <Table.Td>{item.countryCode}</Table.Td>
+            <Table.Td>{item.firstName}</Table.Td>
+            <Table.Td>{item.lastName}</Table.Td>
+            <Table.Td className="text-center"><DisplayBoolean value={item.isAdmin} /></Table.Td>
             <Table.Td className="text-center">
               <ListActionMenu id={item.id} showDetails showDelete onActionClick={actionClickHndl} />
             </Table.Td>

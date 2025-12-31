@@ -5,15 +5,15 @@ import { UserDetails, UserListItem } from "../types/user";
 
 export const userService = {
   getUserForOwnOrg: (params: PagedListParams) => 
-    api.get<IPagedList<UserListItem>>("/users", {
+    api.get<IPagedList<UserListItem>>("/user/for-self", {
       params: toPagedListQueryParams(params)
     }),
 
   getUsersForCustomer: (params: PagedListParams, id: string) => 
-    api.get<IPagedList<UserListItem>>(`/users/for-organization/${id}`, {
+    api.get<IPagedList<UserListItem>>(`/user/for-organization/${id}`, {
       params: toPagedListQueryParams(params)
     }),    
 
   getUser: (id: string) => 
-    api.get<UserDetails>(`/users/${id}`)
+    api.get<UserDetails>(`/user/${id}`)
 }

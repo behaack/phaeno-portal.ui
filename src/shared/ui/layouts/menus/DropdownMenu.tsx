@@ -26,9 +26,6 @@ export function DropdownMenu({ baseRoute }: IProps) {
   const buttonHndl = (buttonType: Subtype) => {
     toggle();
     switch (buttonType) {
-      case 'users':
-        custFrm.current?.open()
-        return
       case 'signout': {
         authLogout();
         return;

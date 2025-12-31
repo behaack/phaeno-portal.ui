@@ -36,6 +36,31 @@
   border-bottom: 1px solid var(--kv-border-color);
 }
 
+/* ***********************************************
+/********** NEEDS TOKENIZATION *******************
+**************************************************/
+.kv-label-inner,
+.kv-value-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kv-action {
+  margin-left: auto;
+}
+
+.kv-action--label {
+  opacity: 0.7;
+}
+
+.kv-row:hover .kv-action {
+  opacity: 1;
+}
+/* *********************************************** */
+/* *********************************************** */
+/* *********************************************** */
+
 /* desktop */
 @media (min-width: 640px) {
   .kv-list {

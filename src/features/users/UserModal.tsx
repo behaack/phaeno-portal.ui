@@ -16,7 +16,6 @@ export interface IHandles {
 export const UserModal = forwardRef<IHandles, IProps>((props, ref) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [width, height] = useDeviceSize()
-  
 
   useImperativeHandle(ref, () => ({
     open() {
@@ -36,13 +35,6 @@ export const UserModal = forwardRef<IHandles, IProps>((props, ref) => {
       onClose={() => setIsOpen(false)}
     >
       <ScrollArea h={height - 300}>
-        <div>sdasdfasdfasdf</div>
-        <div>sdasdfasdfasdf</div>
-        <div>sdasdfasdfasdf</div>
-        <div>sdasdfasdfasdf</div>
-        <div>sdasdfasdfasdf</div>
-        <div>sdasdfasdfasdf</div>
-        <div>sdasdfasdfasdf</div>
         <div>sdasdfasdfasdf</div>
         <div>sdasdfasdfasdf</div>
         <div>sdasdfasdfasdf</div>

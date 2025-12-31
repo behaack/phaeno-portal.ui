@@ -8,6 +8,9 @@ import { IconBuilding } from '@tabler/icons-react';
 export function CustomerListPage() {
   const [q, setQ] = useState("")
   const results = useGetCustomers({q: q, page: 1, limit: 35})
+
+  if (results.isLoading) return <div>Loading...</div>
+
   return (
     <Surface className="p-8" fullHeight>
       <Text className="flex gap-3 items-center mb-6" variant="heading"><IconBuilding /> Customers</Text>

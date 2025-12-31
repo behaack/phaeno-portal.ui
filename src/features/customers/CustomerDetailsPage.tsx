@@ -10,13 +10,13 @@ import { PActionIcon } from "@/shared/ui/components/inputs";
 import { IconEdit } from "@tabler/icons-react";
 import { PToolTip } from "@/shared/ui/components/feedback";
 import { IconPlus } from "@tabler/icons-react";
-import { UserList } from "../users/UserList";
+import { UserTable } from "../users/components/UserTable";
 
 export function CustomerDetailsPage() {
   const { id } = Route.useParams()
-  const result = useGetCustomer(id)
+  const results = useGetCustomer(id)
 
-  if (result.isLoading) return <div>Loading...</div>
+  if (results.isLoading) return <div>Loading...</div>
 
   return (
     <main>
@@ -28,7 +28,7 @@ export function CustomerDetailsPage() {
               <PActionIcon radius="xl" size="input-md"><IconEdit size={21}/></PActionIcon>
             </PToolTip>
           </div>
-          <KeyValueList items={toOrganizationKeyValuePairs(result.data!)} />
+          <KeyValueList items={toOrganizationKeyValuePairs(results.data!)} />
           <PDivider my={20} size="md" />
           <div className="flex items-center justify-between">
             <Text className="flex gap-3 items-center mb-6" variant="subheading"><IconUsers size={15} /> Users</Text>
@@ -36,7 +36,7 @@ export function CustomerDetailsPage() {
               <PActionIcon radius="xl" size="input-sm"><IconPlus size={18}/></PActionIcon>
             </PToolTip>
           </div>
-          <UserList list={[]}/>
+          <UserTable list={[]}/>
         </Surface>
       </section>
     </main>
