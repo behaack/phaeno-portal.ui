@@ -1,6 +1,6 @@
 import { JSX } from "react";
-import { PCloseButton } from "@/_shared/ui/components/inputs";
-import { PDivider } from "@/_shared/ui/components/layout";
+import { PCloseButton } from "@/shared/ui/components/inputs";
+import { PDivider } from "@/shared/ui/components/layout";
 
 export interface IProps {
   title?: string

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import clsx from "clsx";
-import { Stack } from "@/_shared/ui/primiatives";
+import { Stack } from "@/shared/ui/primiatives";
 
 export interface PFormFieldProps {
   label?: string;

@@ -1,23 +1,23 @@
-import { Controller, useFormContext } from "react-hook-form";
-import { PSelect, type PSelectProps } from "@/_shared/ui/components/inputs";
+import { useFormContext } from "react-hook-form";
+import { PPasswordInput, type PPasswordInputProps } from "@/shared/ui/components/inputs";
 import { PFormField } from "../PFormField";
 
-interface RHFSelectProps extends PSelectProps {
+interface RHFPasswordInputProps extends PPasswordInputProps {
   name: string;
   label?: string;
   description?: string;
   required?: boolean;
 }
 
-export function RHFSelect({
+export function RHFPasswordInput({
   name,
   label,
   description,
   required,
   ...inputProps
-}: RHFSelectProps) {
+}: RHFPasswordInputProps) {
   const {
-    control,
+    register,
     formState: { errors },
   } = useFormContext();
 
@@ -30,13 +30,7 @@ export function RHFSelect({
       error={error}
       required={required}
     >
-      <Controller
-        name={name}
-        control={control}
-        render={({ field }) => (
-          <PSelect {...field} {...inputProps} />
-        )}
-      />
+      <PPasswordInput {...register(name)} {...inputProps} />
     </PFormField>
   );
 }

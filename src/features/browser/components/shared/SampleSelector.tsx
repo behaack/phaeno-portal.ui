@@ -3,7 +3,7 @@ import { IconSearch } from "@tabler/icons-react"
 import { rem } from "@mantine/core"
 import { useDebouncedValue } from "@mantine/hooks"
 import { NIL } from "uuid"
-import { PSelect, type PSelectProps } from "@/_shared/ui/components"
+import { PSelect, type PSelectProps } from "@/shared/ui/components"
 import { useSampleLookup } from "@/api/hooks/sample.hooks"
 
 // Mantine Select values are string | null

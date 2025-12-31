@@ -1,6 +1,6 @@
 import { IconEye } from '@tabler/icons-react';
-import { PToolTip } from '@/_shared/ui/components/feedback';
-import { PActionIcon } from '@/_shared/ui/components/inputs';
+import { PToolTip } from '@/shared/ui/components/feedback';
+import { PActionIcon } from '@/shared/ui/components/inputs';
 import { DisplayEnumListItem } from '../shared/DisplayEnumListItem';
 import { FastaListItem } from '@/api/types/fasta';
 import readNumberList from './readNumberList';

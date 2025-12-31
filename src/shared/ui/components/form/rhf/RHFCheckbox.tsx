@@ -1,6 +1,6 @@
 import { Controller, useFormContext } from "react-hook-form";
 import type { ChangeEvent } from "react";
-import { PCheckbox, type PCheckboxProps } from "@/_shared/ui/components/inputs";
+import { PCheckbox, type PCheckboxProps } from "@/shared/ui/components/inputs";
 import { PFormField } from "../PFormField";
 
 interface RHFCheckboxProps extends PCheckboxProps {

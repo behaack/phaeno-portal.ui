@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
-import { refreshAuthToken } from "@/_shared/hooks/refreshAuthToken";
+import { refreshAuthToken } from "@/shared/hooks/refreshAuthToken";
 import { useAuthStore } from "@/stores/auth.store";
 
 export function usePipelineHub() {

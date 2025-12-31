@@ -1,23 +1,23 @@
-import { useFormContext } from "react-hook-form";
-import { PTextInput, type PTextInputProps } from "@/_shared/ui/components/inputs";
+import { Controller, useFormContext } from "react-hook-form";
+import { PSelect, type PSelectProps } from "@/shared/ui/components/inputs";
 import { PFormField } from "../PFormField";
 
-interface RHFTextInputProps extends PTextInputProps {
+interface RHFSelectProps extends PSelectProps {
   name: string;
   label?: string;
   description?: string;
   required?: boolean;
 }
 
-export function RHFTextInput({
+export function RHFSelect({
   name,
   label,
   description,
   required,
   ...inputProps
-}: RHFTextInputProps) {
+}: RHFSelectProps) {
   const {
-    register,
+    control,
     formState: { errors },
   } = useFormContext();
 
@@ -30,7 +30,13 @@ export function RHFTextInput({
       error={error}
       required={required}
     >
-      <PTextInput {...register(name)} {...inputProps} />
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <PSelect {...field} {...inputProps} />
+        )}
+      />
     </PFormField>
   );
 }

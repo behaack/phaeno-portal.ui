@@ -1,11 +1,11 @@
 import { lazy, Suspense, useRef, useState } from "react";
 import { JobTypesList, JobType, JobStatusList } from "@/api/types/job-pipeline"
-import { PButton, PSelect } from "@/_shared/ui/components";
-import { PDivider } from "@/_shared/ui/components/layout";
+import { PButton, PSelect } from "@/shared/ui/components";
+import { PDivider } from "@/shared/ui/components/layout";
 import { useGetJobs } from "@/api/hooks/job-pipeline.hooks";
 import { JobListIndex } from "./components/JobListIndex";
 import { CreateJobModal, IHandles } from "./CreateJob.Modal";
-import { emptyPagedList } from "@/_shared/types/IPagedList";
+import { emptyPagedList } from "@/shared/types/IPagedList";
 
 export function AnalyticsPage() {
   const [jobType, setType] = useState("Report")

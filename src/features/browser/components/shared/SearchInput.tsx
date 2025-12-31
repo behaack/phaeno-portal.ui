@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { IconSearch } from '@tabler/icons-react';
-import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
-import { PAutocomplete, PCloseButton } from '@/_shared/ui/components/inputs';
+import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
+import { PAutocomplete, PCloseButton } from '@/shared/ui/components/inputs';
 import { useDebouncedValue } from "@mantine/hooks"
 
 export interface IProps {

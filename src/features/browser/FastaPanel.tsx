@@ -4,7 +4,7 @@ import { SearchInput } from "./components/shared/SearchInput";
 import { FastaTable } from "./components/fasta/Table";
 import { ProTable } from "./components/fasta/ProTable";
 import { useBrowserStore } from '@/stores/browser.store';
-import { CursorPaginator } from "@/_shared/ui/components/inputs";
+import { CursorPaginator } from "@/shared/ui/components/inputs";
 
 export interface IProps {
   sampleId: string;

@@ -1,4 +1,4 @@
-import IListItem from "@/_shared/types/IListItem";
+import IListItem from "@/shared/types/IListItem";
 
 export interface IProps {
   list: IListItem[];

@@ -1,7 +1,7 @@
 import { forwardRef, lazy, Suspense, useImperativeHandle, useState } from "react"
 import { IconMath } from "@tabler/icons-react";
-import { PModalHeader } from "@/_shared/ui/modals/Parts/PModalHeader";
-import { PModal } from "@/_shared/ui/modals/Parts/PModal";
+import { PModalHeader } from "@/shared/ui/modals/Parts/PModalHeader";
+import { PModal } from "@/shared/ui/modals/Parts/PModal";
 
 export interface IProps {
   title: string

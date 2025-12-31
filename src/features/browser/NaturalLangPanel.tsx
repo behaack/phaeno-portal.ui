@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from "react";
-import { PButton, PTextArea } from "@/_shared/ui/components";
+import { PButton, PTextArea } from "@/shared/ui/components";
 
 export function NaturalLangPanel()
 {

@@ -2,8 +2,8 @@ import { useEffect, useMemo, useRef } from "react";
 import { IconEye } from "@tabler/icons-react";
 import { IconCancel } from "@tabler/icons-react";
 import { DataPipelineItem } from "@/api/types/job-pipeline";
-import { PActionIcon } from "@/_shared/ui/components/inputs";
-import { PToolTip } from "@/_shared/ui/components/feedback/index"
+import { PActionIcon } from "@/shared/ui/components/inputs";
+import { PToolTip } from "@/shared/ui/components/feedback/index"
 
 export interface IProps {
   job: DataPipelineItem;

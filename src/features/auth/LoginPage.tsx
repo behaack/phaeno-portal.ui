@@ -6,12 +6,12 @@ import { useNavigate } from "@tanstack/react-router"
 import { useSignInMutation } from "@/api/hooks/auth.hooks"
 import { getApiErrorMessage } from "@/api/core/getApiErrorMessage"
 
-import { RHFTextInput } from "@/_shared/ui/components/form/rhf/RHFTextInput"
-import { RHFPasswordInput } from "@/_shared/ui/components/form/rhf/RHFPasswordInput"
-import { PButton } from "@/_shared/ui/components/inputs/PButton"
+import { RHFTextInput } from "@/shared/ui/components/form/rhf/RHFTextInput"
+import { RHFPasswordInput } from "@/shared/ui/components/form/rhf/RHFPasswordInput"
+import { PButton } from "@/shared/ui/components/inputs/PButton"
 
 import { handleSignInResult } from "@/features/auth/utils/handleSignInResult"
-import { Surface } from "@/_shared/ui/primiatives/Surface"
+import { Surface } from "@/shared/ui/primiatives/Surface"
 
 const schema = z.object({
   email: z.string().email("Enter a valid email"),

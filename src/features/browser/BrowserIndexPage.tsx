@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PTabs, PTabsList, PTabsPanel, PTabsTab } from "@/_shared/ui/components/layout";
+import { PTabs, PTabsList, PTabsPanel, PTabsTab } from "@/shared/ui/components/layout";
 import { IconLanguage } from "@tabler/icons-react";
 import { IconDna2 } from "@tabler/icons-react";
 import { IconDna } from "@tabler/icons-react";

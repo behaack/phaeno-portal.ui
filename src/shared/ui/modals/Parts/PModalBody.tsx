@@ -1,5 +1,5 @@
-import { PBox } from "@/_shared/ui/components/layout";
-import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
+import { PBox } from "@/shared/ui/components/layout";
+import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
 
 export interface IProps {
   errorMessage?: string

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useNavigate, useLocation } from '@tanstack/react-router';
 import { Burger, Collapse } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
+import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
 import { Subtype } from '../types/IMenuListItem';
 import { Route } from '@/routes/auth/sign-in'
 import userMenuList from '../menu-lists/menuList';

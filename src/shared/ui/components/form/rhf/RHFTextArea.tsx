@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { PTextArea, type PTextAreaProps } from "@/_shared/ui/components/inputs";
+import { PTextArea, type PTextAreaProps } from "@/shared/ui/components/inputs";
 import { PFormField } from "../PFormField";
 
 interface PRHFTextAreaProps extends PTextAreaProps {

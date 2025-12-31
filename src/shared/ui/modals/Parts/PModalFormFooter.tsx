@@ -1,5 +1,5 @@
-import { PButton } from "@/_shared/ui/components";
-import { PDivider } from "@/_shared/ui/components/layout";
+import { PButton } from "@/shared/ui/components";
+import { PDivider } from "@/shared/ui/components/layout";
 
 export interface IProps {
   submitLabel?: string

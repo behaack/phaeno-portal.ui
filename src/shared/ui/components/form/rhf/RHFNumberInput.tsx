@@ -1,23 +1,23 @@
-import { useFormContext } from "react-hook-form";
-import { PPasswordInput, type PPasswordInputProps } from "@/_shared/ui/components/inputs";
+import { Controller, useFormContext } from "react-hook-form";
+import { PNumberInput, type PNumberInputProps } from "@/shared/ui/components/inputs";
 import { PFormField } from "../PFormField";
 
-interface RHFPasswordInputProps extends PPasswordInputProps {
+interface RHFNumberInputProps extends PNumberInputProps {
   name: string;
   label?: string;
   description?: string;
   required?: boolean;
 }
 
-export function RHFPasswordInput({
+export function RHFNumberInput({
   name,
   label,
   description,
   required,
   ...inputProps
-}: RHFPasswordInputProps) {
+}: RHFNumberInputProps) {
   const {
-    register,
+    control,
     formState: { errors },
   } = useFormContext();
 
@@ -30,7 +30,13 @@ export function RHFPasswordInput({
       error={error}
       required={required}
     >
-      <PPasswordInput {...register(name)} {...inputProps} />
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <PNumberInput {...field} {...inputProps} />
+        )}
+      />
     </PFormField>
   );
 }

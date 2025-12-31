@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useLocation } from '@tanstack/react-router';
-import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
+import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
 import { useAuthStore } from '@/stores/auth.store';
 import { DropdownMenu } from '../menus/DropdownMenu';
 import { Menu } from '../menus/Menu';

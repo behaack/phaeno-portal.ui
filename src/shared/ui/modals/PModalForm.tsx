@@ -1,8 +1,8 @@
 import { JSX } from "react";
 import { PModalFormFooter } from './Parts/PModalFormFooter';
-import { PBox } from '@/_shared/ui/components/layout';
-import { useDeviceSize } from '@/_shared/hooks/useDeviceSize';
-import type { PSize } from '@/_shared/ui/types/PSize'
+import { PBox } from '@/shared/ui/components/layout';
+import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
+import type { PSize } from '@/shared/ui/types/PSize'
 import { PModalHeader } from "./Parts/PModalHeader";
 import { PModal } from "./Parts/PModal";
 import { PModalBody } from "./Parts/PModalBody";

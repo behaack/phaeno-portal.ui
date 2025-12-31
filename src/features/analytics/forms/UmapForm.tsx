@@ -1,9 +1,9 @@
 import z from "zod"
-import { RHFNumberInput, RHFTextInput } from "@/_shared/ui/components/form"
+import { RHFNumberInput, RHFTextInput } from "@/shared/ui/components/form"
 import { FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { PModalBody } from "@/_shared/ui/modals/Parts/PModalBody"
-import { PModalFormFooter } from "@/_shared/ui/modals/Parts/PModalFormFooter"
+import { PModalBody } from "@/shared/ui/modals/Parts/PModalBody"
+import { PModalFormFooter } from "@/shared/ui/modals/Parts/PModalFormFooter"
 import { useCreateUmapJobMutation } from "@/api/hooks/job-pipeline.hooks"
 
 const schema = z.object({
