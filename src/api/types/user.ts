@@ -1,14 +1,21 @@
 export type UserListItem = {
-  id: string,
-  firstName: string,
-  lastName: string,
+  id: string
+  email: string
+  organizationId: string
+  firstName: string
+  lastName: string
   isAdmin: boolean
+  isSetup: boolean
+  rowVersion?: any
 }
 
 export type UserDetails = {
-  id: string,
-  firstName: string,
-  lastName: string,
-  isAdmin: boolean,
+  id: string
+  organizationId: string
+  email: string
+  firstName: string
+  lastName: string
+  isAdmin: boolean
   isSetup: boolean
+  rowVersion?: any
 }

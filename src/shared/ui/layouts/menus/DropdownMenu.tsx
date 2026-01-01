@@ -8,7 +8,6 @@ import { CurrentUser } from '../components/CurrentUser';
 import { MenuItem } from './MenuItem';
 import { SelectedCustomer } from '../components/SelectedCustomer';
 import { authLogout } from '@/auth/auth.logout';
-import { UserModal, IHandles } from '@/features/users/UserModal';
 // import ApiKeys, { IHandles as IApiKeysHndls } from '@/components/apiKey/ApiKeys.modal';
 // import SecuritySettings, { IHandles } from '@/components/security-settings/SecuritySettings.modal';
 
@@ -21,7 +20,6 @@ export function DropdownMenu({ baseRoute }: IProps) {
   const burgerRef = useRef<HTMLButtonElement>(null);
   const [width] = useDeviceSize();
   const [opened, { close, toggle }] = useDisclosure(false);
-  const custFrm = useRef<IHandles>(null)
   
   const buttonHndl = (buttonType: Subtype) => {
     toggle();
@@ -113,7 +111,6 @@ export function DropdownMenu({ baseRoute }: IProps) {
 
   return (
     <nav className="relative">
-      <UserModal ref={custFrm} />
       <Burger
         ref={burgerRef}
         className="menu-burger"

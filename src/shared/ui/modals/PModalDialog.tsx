@@ -1,7 +1,6 @@
 import { JSX } from 'react';
 import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
 import { TComponentSize } from '@/shared/types/TComponentSize';
-import { PBox } from '../components/layout';
 import { PModal } from './Parts/PModal';
 import { PModalHeader } from './Parts/PModalHeader';
 import { PModalDialogFooter } from './Parts/PModalDialogFooter';

@@ -1,11 +1,11 @@
 import { JSX } from "react";
 import { PModalFormFooter } from './Parts/PModalFormFooter';
-import { PBox } from '@/shared/ui/components/layout';
 import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
 import type { PSize } from '@/shared/ui/types/PSize'
 import { PModalHeader } from "./Parts/PModalHeader";
 import { PModal } from "./Parts/PModal";
 import { PModalBody } from "./Parts/PModalBody";
+import { FormProvider, UseFormReturn } from "react-hook-form";
 
 export interface IProps {
   title: string;
@@ -14,11 +14,12 @@ export interface IProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   errorMessage?: string;
   submitLabel?: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   zIndex?: number;
   size?: PSize;
   icon?: JSX.Element;
   children: React.ReactNode;
+  form: UseFormReturn<any, any, any>
 }
 
 export function PModalForm({
@@ -30,9 +31,10 @@ export function PModalForm({
   submitLabel='Save',
   zIndex = 100,
   size = 'md',
-  isDisabled,
+  isDisabled=false,
   icon,
   children,  
+  form
 }: IProps) {
   const [, deviceHeight] = useDeviceSize();
   return (
@@ -50,13 +52,15 @@ export function PModalForm({
         blur: 2,
       }}
     >
-      <form onSubmit={onSubmit}>
-        <PModalHeader title={title} icon={icon} onClose={onClose}/>
-        <PModalBody errorMessage={errorMessage}>
-          {children}
-        </PModalBody>     
-        <PModalFormFooter submitLabel={submitLabel} isDisabled={isDisabled} onClose={onClose} />
-      </form>
+      <FormProvider {...form}>
+        <form onSubmit={onSubmit}>
+          <PModalHeader title={title} icon={icon} onClose={onClose}/>
+          <PModalBody errorMessage={errorMessage}>
+            {children}
+          </PModalBody>     
+          <PModalFormFooter submitLabel={submitLabel} isDisabled={isDisabled} onClose={onClose} />
+        </form>
+      </FormProvider>
     </PModal>
   )
 }
