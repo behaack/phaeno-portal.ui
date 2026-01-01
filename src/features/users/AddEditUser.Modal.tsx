@@ -2,25 +2,27 @@ import { UserDetails } from "@/api/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { NIL } from "uuid";
-import { userSchema } from "../schema/userSchema";
-import { UserForm } from "./UserForm";
 import { PModal } from "@/shared/ui/modals/Parts/PModal";
 import { PModalHeader } from "@/shared/ui/modals/Parts/PModalHeader";
 import { PModalFormFooter } from "@/shared/ui/modals/Parts/PModalFormFooter";
 import { PModalBody } from "@/shared/ui/modals/Parts/PModalBody";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { IconUser } from "@tabler/icons-react";
+import { userSchema } from "./schema/userSchema";
+import { UserForm } from "./components/UserForm";
+import { first } from "lodash";
 
-export interface IProps {
-}
+export type formMode = 'add' | 'edit'
 
 export interface IHandles {
-  open: (organizationId: string) => void;
-  close: () => void;
+  add: (organizationId: string) => void;
+  edit: (user: UserDetails) => void
 }
 
+interface IProps {}
 
-export const AddUserModal = forwardRef<IHandles, IProps>((props, ref) => {
+export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
+  const formMode = useRef<formMode>('add')
   const [isOpen, setIsOpen] = useState<boolean>(false);
   
   const form = useForm<UserDetails>({
@@ -38,19 +40,28 @@ export const AddUserModal = forwardRef<IHandles, IProps>((props, ref) => {
   });
 
   useImperativeHandle(ref, () => ({
-    open(organizationId: string) {
-      setIsOpen(true);
+    add(organizationId: string) {
+      formMode.current = "add"
+      form.reset()
       form.setValue("organizationId", organizationId)
+      setIsOpen(true);
     },
-    close() {
-      setIsOpen(false)
+    edit(user: UserDetails) {
+      formMode.current = "edit"
+      form.reset(user);
+      setIsOpen(true);
     }
   }));    
   
   const submitHndl = (model: UserDetails) => {
-    console.log(model)
+    if (formMode.current === "add") {
+      console.log("add", model);
+    } else {
+      console.log("edit", model);
+    }
+    setIsOpen(false)
   }
-  
+    
   return (
     <PModal    
       onClose={()=>{}}
@@ -61,13 +72,17 @@ export const AddUserModal = forwardRef<IHandles, IProps>((props, ref) => {
           <PModalHeader
             icon={<IconUser size={21} />} 
             title="Add User"
-            onClose={() => {}} />
+            onClose={() => setIsOpen(false)} />
           <PModalBody>
-                <UserForm />
+            <UserForm />
           </PModalBody>
-          <PModalFormFooter onClose={() => {}}/>
+          <PModalFormFooter isDisabled={!form.formState.isValid} onClose={() => setIsOpen(false)}/>
         </form>
       </FormProvider>
     </PModal>
   )
 })
+
+function userRef<T>() {
+  throw new Error("Function not implemented.");
+}

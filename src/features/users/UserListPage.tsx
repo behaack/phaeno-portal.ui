@@ -4,23 +4,25 @@ import { Surface, Text } from '@/shared/ui/primiatives';
 import { UserTable } from './components/UserTable';
 import { useGetUsersForOwnOrg } from '@/api/hooks/userHooks';
 import { PButton } from '@/shared/ui/components';
-import { AddUserModal, IHandles } from './components/AddUser.Modal';
 import { IconUsers, IconUser } from '@tabler/icons-react';
+import { AddEditUserModal, IHandles } from './AddEditUser.Modal';
+import { authSession } from '@/auth/auth.session';
 
 export function UserListPage() {
+  const user = authSession.getUser()
   const addForm = useRef<IHandles>(null)
   const [q, setQ] = useState("")
   const results = useGetUsersForOwnOrg({q: q, page: 1, limit: 35})
 
   const addUser = () => {
-    addForm.current?.open("")
+    addForm.current?.add(user?.organizationId!)
   }
 
-    if (results.isLoading) return <div>Loading...</div>
+  if (results.isLoading) return <div>Loading...</div>
 
   return (
     <Surface className="p-8" fullHeight>
-      <AddUserModal ref={addForm} />
+      <AddEditUserModal ref={addForm} />
       <Text className="flex gap-3 items-center mb-6" variant="heading"><IconUsers />Users</Text>
       <PSearchInput placeholder="Start typing to search for customer" value={q} onChange={setQ} />
       <div className="mt-5">
