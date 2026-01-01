@@ -27,8 +27,8 @@ export function UserDetailsPage() {
   return (
     <Surface className="p-5" fullHeight elevation="sm" hover="none">
       <AddEditUserModal ref={userForm} />
-      <div className="flex items-center justify-between">
-        <Text className="flex gap-3 items-center mb-6" variant="heading"><IconUser /> User Details</Text>
+      <div className="flex items-center justify-between mb-6">
+        <Text className="flex gap-3 items-center" variant="heading"><IconUser /> User Details</Text>
         <PToolTip label="Edit customer details">
           <PActionIcon radius="xl" size="input-md" onClick={editUserHndl}>
             <IconEdit size={21}/>

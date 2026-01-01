@@ -69,12 +69,12 @@ export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
         <form onSubmit={form.handleSubmit(submitHndl)}>
           <PModalHeader
             icon={<IconUser size={21} />} 
-            title="Add User"
+            title={`${(formMode.current === "add") ? "Add" : "Edit"} User`}
             onClose={() => setIsOpen(false)} />
           <PModalBody>
             <UserForm formMode={formMode.current}/>
           </PModalBody>
-          <PModalFormFooter isDisabled={!form.formState.isValid} onClose={() => setIsOpen(false)}/>
+          <PModalFormFooter showRequired isDisabled={!form.formState.isValid} onClose={() => setIsOpen(false)}/>
         </form>
       </FormProvider>
     </PModal>

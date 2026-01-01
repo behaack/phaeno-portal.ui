@@ -80,6 +80,15 @@ export function ListActionMenu({
             View Details
           </Menu.Item>
         }                        
+        {showEmail &&
+          <Menu.Item 
+          disabled={disableEmail} 
+          leftSection={<IconMail size={14} />}
+          onClick={() =>clickHandle(EListActionType.Email)}
+          >
+            Resend Invite
+          </Menu.Item>                
+        }
         {showDelete &&
           <Menu.Item 
             disabled={disableDelete} 
@@ -89,15 +98,6 @@ export function ListActionMenu({
           >
             Delete
           </Menu.Item>        
-        }
-        {showEmail &&
-          <Menu.Item 
-            disabled={disableEmail} 
-            leftSection={<IconMail size={14} />}
-            onClick={() =>clickHandle(EListActionType.Email)}
-          >
-            Email
-          </Menu.Item>                
         }
       </Menu.Dropdown>
 

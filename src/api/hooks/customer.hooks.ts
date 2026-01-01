@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { LookupListParams, PagedListParams } from "../types/common"
 import { customerService } from "@/api/services/customer.service"
 
@@ -10,6 +10,7 @@ export function useCustomerLookup(params: LookupListParams) {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,
+    placeholderData: keepPreviousData,
     retry: 1,    
     queryFn: () => {
       return customerService.customerLookup(params)
@@ -21,6 +22,7 @@ export function useGetCustomers(params: PagedListParams) {
   return useQuery({
     queryKey: ["organization", "customer", "list", { q: params.q, page: params.page }],
     retry: 1,    
+    placeholderData: keepPreviousData,
     queryFn: () => {
       return customerService.getCustomers(params)
     },

@@ -9,7 +9,7 @@ export const userService = {
       params: toPagedListQueryParams(params)
     }),
 
-  getUsersForCustomer: (params: PagedListParams, id: string) => 
+  getUsersForCustomer: (params: PagedListParams, id?: string) => 
     api.get<IPagedList<UserListItem>>(`/user/for-organization/${id}`, {
       params: toPagedListQueryParams(params)
     }),    

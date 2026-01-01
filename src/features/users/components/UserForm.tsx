@@ -1,6 +1,7 @@
-import { Group, Stack } from "@mantine/core";
-import { RHFCheckbox, RHFTextInput } from "@/shared/ui/components/form";
+import { Stack } from "@mantine/core";
+import { RHFTextInput } from "@/shared/ui/components/form";
 import { TFormMode } from "@/shared/types/TFormMode";
+import { RHFSwitch } from "@/shared/ui/components/form/rhf";
 
 export interface IProps {
   formMode: TFormMode
@@ -12,26 +13,26 @@ export function UserForm({formMode}: IProps) {
       <RHFTextInput
         name="firstName"
         label="First name"
-        placeholder="Jane"
+        placeholder="First name"
         required
       />
 
       <RHFTextInput
         name="lastName"
         label="Last name"
-        placeholder="Doe"
+        placeholder="Last name"
         required
       />
 
       <RHFTextInput
         name="email"
         label="Email"
-        placeholder="jane@email.com"
+        placeholder="Email address"
         disabled={formMode === "edit"}
         required
       />
 
-      <RHFCheckbox 
+      <RHFSwitch
         name="isAdmin"
         label="Administrator"
       />

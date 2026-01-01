@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { sampleService } from "@/api/services/sample.service"
 import { useImpersonationStore } from "@/stores/impersonation.store"
 import { useAuthStore } from "@/stores/auth.store"
@@ -23,6 +23,7 @@ export function useSampleLookup(params: LookupListParams) {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,
+    placeholderData: keepPreviousData,
     retry: 1,    
     queryFn: () => {
       if (!employee) return sampleService.sampleLookup(params)

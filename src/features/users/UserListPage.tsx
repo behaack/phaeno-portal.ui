@@ -13,25 +13,29 @@ export function UserListPage() {
   const addForm = useRef<IHandles>(null)
   const [q, setQ] = useState("")
   const results = useGetUsersForOwnOrg({q: q, page: 1, limit: 35})
-
+  
   const addUser = () => {
     addForm.current?.add(user?.organizationId!)
   }
-
-  if (results.isLoading) return <div>Loading...</div>
 
   return (
     <Surface className="p-8" fullHeight>
       <AddEditUserModal ref={addForm} />
       <Text className="flex gap-3 items-center mb-6" variant="heading"><IconUsers />Users</Text>
-      <PSearchInput placeholder="Start typing to search for customer" value={q} onChange={setQ} />
+      <PSearchInput loading={results.isFetching} placeholder="Start typing to search for customer" value={q} onChange={setQ} />
       <div className="mt-5">
-        <div className="flex justify-end">
-          <PButton rightSection={<IconUser size={16} />} onClick={addUser}>
+        <div className="flex justify-end mb-1">
+          <PButton 
+            rightSection={<IconUser size={16} />} 
+            onClick={addUser}
+          >
             Add
           </PButton>
         </div>
-        <UserTable list={results.data?.list!} />
+        {(results.isLoading && !results.data)
+          ? <div className='text-center'>Loading...</div>
+          : <UserTable list={results.data?.list!} />
+        }
       </div>
     </Surface>
   );
