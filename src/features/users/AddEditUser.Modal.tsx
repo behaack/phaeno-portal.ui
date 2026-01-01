@@ -10,9 +10,7 @@ import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { IconUser } from "@tabler/icons-react";
 import { userSchema } from "./schema/userSchema";
 import { UserForm } from "./components/UserForm";
-import { first } from "lodash";
-
-export type formMode = 'add' | 'edit'
+import { TFormMode } from "@/shared/types/TFormMode";
 
 export interface IHandles {
   add: (organizationId: string) => void;
@@ -22,7 +20,7 @@ export interface IHandles {
 interface IProps {}
 
 export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
-  const formMode = useRef<formMode>('add')
+  const formMode = useRef<TFormMode>('add')
   const [isOpen, setIsOpen] = useState<boolean>(false);
   
   const form = useForm<UserDetails>({
@@ -74,7 +72,7 @@ export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
             title="Add User"
             onClose={() => setIsOpen(false)} />
           <PModalBody>
-            <UserForm />
+            <UserForm formMode={formMode.current}/>
           </PModalBody>
           <PModalFormFooter isDisabled={!form.formState.isValid} onClose={() => setIsOpen(false)}/>
         </form>
@@ -82,7 +80,3 @@ export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
     </PModal>
   )
 })
-
-function userRef<T>() {
-  throw new Error("Function not implemented.");
-}

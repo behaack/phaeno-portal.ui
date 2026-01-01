@@ -1,128 +1,150 @@
 @layer base {
-  :root {
-    /* =========================================================
-       COLOR SYSTEM (OKLCH)
-       ========================================================= */
+   :root {
+      /* =========================================================
+         COLOR SYSTEM (OKLCH)
+         ========================================================= */
 
-    /* Surfaces */
-    --bg: 0.985 0.004 255;
-    --bg-subtle: 0.970 0.006 255;
+      /* Surfaces */
+      --bg: 0.985 0.004 255;
+      --bg-subtle: 0.970 0.006 255;
 
-    --surface: 1 0 0;
-    --on-surface: 0.22 0.02 255;
+      --surface: 1 0 0;
+      --on-surface: 0.22 0.02 255;
 
-    /* Text */
-    --fg: 0.22 0.02 255;
-    --fg-muted: 0.56 0.02 255;
+      /* Text */
+      --fg: 0.22 0.02 255;
+      --fg-muted: 0.56 0.02 255;
 
-    /* Brand */
-    --primary: 0.62 0.18 145;        /* Phaeno green */
-    --primary-soft: 0.93 0.05 145;
-    --primary-ink: 0.34 0.14 145;
-    --on-primary: 1 0 0;
+      /* Brand */
+      --primary: 0.62 0.18 145;        /* Phaeno green */
+      --primary-soft: 0.93 0.05 145;
+      --primary-ink: 0.34 0.14 145;
+      --on-primary: 1 0 0;
 
-    /* State */
-    --success: 0.74 0.14 150;
-    --warning: 0.84 0.13 80;
-    --error: 0.62 0.20 25;
+      /* State */
+      --success: 0.74 0.14 150;
+      --warning: 0.84 0.13 80;
+      --error: 0.62 0.20 25;
 
-    /* Focus */
-    --focus-ring: var(--primary);
+      /* Focus */
+      --focus-ring: var(--primary);
 
-    /* =========================================================
-       RADIUS / ELEVATION
-       ========================================================= */
+      /* =========================================================
+         RADIUS / ELEVATION
+         ========================================================= */
 
-    --radius-sm: 10px;
-    --radius-md: 14px;
-    --radius-lg: 18px;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 18px;
 
-    --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.06);
-    --shadow-md: 0 10px 26px oklch(0 0 0 / 0.10);
-    --shadow-lg: 0 22px 54px oklch(0 0 0 / 0.14);
+      --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.06);
+      --shadow-md: 0 10px 26px oklch(0 0 0 / 0.10);
+      --shadow-lg: 0 22px 54px oklch(0 0 0 / 0.14);
 
-    /* =========================================================
-       MOTION
-       ========================================================= */
+      /* =========================================================
+         MOTION
+         ========================================================= */
 
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    --fast: 120ms;
-    --normal: 160ms;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --fast: 120ms;
+      --normal: 160ms;
 
-    /* =========================================================
-       APP LAYOUT
-       ========================================================= */
+      /* =========================================================
+         APP LAYOUT
+         ========================================================= */
 
-    --header-h: 64px;
-    --container-max: 1280px;
-    --gutter: 16px;
+      --header-h: 64px;
+      --container-max: 1280px;
+      --gutter: 16px;
 
-    --container-px: var(--gutter);
-    --container-py: 16px;
+      --container-px: var(--gutter);
+      --container-py: 16px;
 
-    /* =========================================================
-       MENU TOKENS
-       ========================================================= */
+      /* =========================================================
+         MENU TOKENS
+         ========================================================= */
 
-    --menu-link-h: var(--header-h);
-    --menu-link-px: 0.5rem;
-    --menu-link-py: 0;
+      --menu-link-h: var(--header-h);
+      --menu-link-px: 0.5rem;
+      --menu-link-py: 0;
 
-    --menu-pill-radius: 999px;
-    --menu-pill-px: 0.80rem;
-    --menu-pill-py: 0.44rem;
-    --menu-pill-gap: 0.5rem;
+      --menu-pill-radius: 999px;
+      --menu-pill-px: 0.80rem;
+      --menu-pill-py: 0.44rem;
+      --menu-pill-gap: 0.5rem;
 
-    --menu-hover-bg: oklch(var(--fg) / 0.045);
-    --menu-focus-bg: oklch(var(--fg) / 0.06);
+      --menu-hover-bg: oklch(var(--fg) / 0.045);
+      --menu-focus-bg: oklch(var(--fg) / 0.06);
 
-    --menu-active-bg: oklch(var(--primary-soft));
-    --menu-active-fg: oklch(var(--primary-ink));
-    --menu-disabled-fg: oklch(var(--fg) / 0.45);
+      --menu-active-bg: oklch(var(--primary-soft));
+      --menu-active-fg: oklch(var(--primary-ink));
+      --menu-disabled-fg: oklch(var(--fg) / 0.45);
 
-    /* =========================================================
-       DROPDOWN TOKENS
-       ========================================================= */
+      /* =========================================================
+         DROPDOWN TOKENS
+         ========================================================= */
 
-    --dropdown-w: 18rem;
-    --dropdown-top: calc(var(--header-h) - 0.8rem);
+      --dropdown-w: 18rem;
+      --dropdown-top: calc(var(--header-h) - 0.8rem);
 
-    --dropdown-bg: oklch(var(--surface));
-    --dropdown-item-bg: transparent;
-    --dropdown-item-hover-bg: oklch(var(--fg) / 0.045);
-    --dropdown-item-fg: oklch(var(--fg));
-    --dropdown-divider: oklch(var(--fg) / 0.12);
+      --dropdown-bg: oklch(var(--surface));
+      --dropdown-item-bg: transparent;
+      --dropdown-item-hover-bg: oklch(var(--fg) / 0.045);
+      --dropdown-item-fg: oklch(var(--fg));
+      --dropdown-divider: oklch(var(--fg) / 0.12);
 
-    --dropdown-active-bg: oklch(var(--primary));
-    --dropdown-active-fg: oklch(var(--on-primary));
+      --dropdown-active-bg: oklch(var(--primary));
+      --dropdown-active-fg: oklch(var(--on-primary));
 
-    --dropdown-disabled-bg: oklch(var(--fg) / 0.06);
-    --dropdown-disabled-fg: oklch(var(--fg) / 0.45);
+      --dropdown-disabled-bg: oklch(var(--fg) / 0.06);
+      --dropdown-disabled-fg: oklch(var(--fg) / 0.45);
 
-    --dropdown-radius: var(--radius-md);
-    --dropdown-item-radius: 12px;
+      --dropdown-radius: var(--radius-md);
+      --dropdown-item-radius: 12px;
 
-    --dropdown-px: 0.75rem;
-    --dropdown-py: 0.75rem;
-    --dropdown-gap: 0.75rem;
+      --dropdown-px: 0.75rem;
+      --dropdown-py: 0.75rem;
+      --dropdown-gap: 0.75rem;
 
-    /* =========================================================
-       KEY / VALUE LIST TOKENS
-       ========================================================= */
+      /* =========================================================
+         KEY / VALUE LIST TOKENS
+         ========================================================= */
 
-    --kv-gap-y: 1rem;
-    --kv-row-padding-y: 1rem;
-    --kv-label-width: 180px;
+      /* layout */
+      --kv-gap-y: 0.75rem;
+      --kv-col-gap-x: 1.25rem;
+      --kv-label-width: 14rem; /* desktop label column width */
+      --kv-row-padding-y: 0.75rem;
 
-    --kv-label-color: oklch(var(--fg-muted));
-    --kv-value-color: oklch(var(--fg));
-    --kv-border-color: oklch(var(--fg) / 0.12);
+      /* typography */
+      --kv-label-color: var(--text-muted, rgba(0, 0, 0, 0.65));
+      --kv-label-font-size: 0.75rem;
+      --kv-label-letter-spacing: 0.02em;
+      --kv-label-text-transform: uppercase;
 
-    --kv-label-font-size: 0.75rem;
-    --kv-label-letter-spacing: 0.05em;
-    --kv-label-text-transform: uppercase;
+      --kv-value-color: var(--text-default, rgba(0, 0, 0, 0.9));
+      --kv-value-font-size: 0.875rem;
 
-    --kv-value-font-size: 0.875rem;
+      /* borders / separators */
+      --kv-border-color: var(--border-subtle, rgba(0, 0, 0, 0.08));
+      --kv-border-width: 1px;
+      --kv-border-style: solid;
+
+      /* row background & hover (optional but nice) */
+      --kv-row-bg: transparent;
+      --kv-row-bg-hover: rgba(0, 0, 0, 0.02);
+
+      /* inner layout */
+      --kv-inner-gap: 0.5rem;
+      --kv-value-word-break: break-word;
+
+      /* action behavior */
+      --kv-action-opacity: 0.72;
+      --kv-action-opacity-hover: 1;
+      --kv-action-transition: 140ms ease;
+
+      /* action alignment */
+      --kv-value-action-min-width: 2.25rem; /* prevents jitter */
   }
 
   /* =========================================================
@@ -155,7 +177,7 @@
 
     /* Key / Value dark overrides (explicit for clarity) */
     --kv-label-color: oklch(0.72 0.01 255);
-    --kv-value-color: oklch(0.96 0.01 255);
-    --kv-border-color: oklch(var(--fg) / 0.18);
+    --kv-value-color: oklch(0.92 0.01 255);
+    --kv-border-color: oklch(0.45 0.01 255);
   }
 }

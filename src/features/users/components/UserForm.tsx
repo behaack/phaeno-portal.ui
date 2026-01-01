@@ -1,11 +1,12 @@
 import { Group, Stack } from "@mantine/core";
 import { RHFCheckbox, RHFTextInput } from "@/shared/ui/components/form";
+import { TFormMode } from "@/shared/types/TFormMode";
 
 export interface IProps {
+  formMode: TFormMode
 }
 
-export function UserForm({
-}: IProps) {
+export function UserForm({formMode}: IProps) {
   return (
     <Stack gap="md">
       <RHFTextInput
@@ -26,6 +27,7 @@ export function UserForm({
         name="email"
         label="Email"
         placeholder="jane@email.com"
+        disabled={formMode === "edit"}
         required
       />
 

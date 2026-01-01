@@ -7,63 +7,107 @@
   row-gap: var(--kv-gap-y);
 }
 
+/* Each row contains both dt and dd (better than display: contents) */
 .kv-row {
-  display: contents;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--kv-row-bg);
+  border-radius: var(--kv-row-radius, 0); /* optional token hook */
+}
+
+/* separators (applies per row) */
+.kv-row:not(:last-child) {
+  padding-bottom: var(--kv-row-padding-y);
+  border-bottom: var(--kv-border-width) var(--kv-border-style) var(--kv-border-color);
+}
+
+.kv-row:hover {
+  background: var(--kv-row-bg-hover);
+}
+
+/* desktop two-column */
+@media (min-width: 640px) {
+  .kv-row {
+    grid-template-columns: var(--kv-label-width) 1fr;
+    column-gap: var(--kv-col-gap-x);
+    align-items: center;
+  }
 }
 
 /* ================================
-   Row styling
+   Label & value blocks
    ================================ */
 
+.kv-label,
+.kv-value {
+  margin: 0; /* reset dt/dd default */
+}
+
+/* label */
 .kv-label {
-  padding-bottom: var(--kv-row-padding-y);
   color: var(--kv-label-color);
   font-size: var(--kv-label-font-size);
   letter-spacing: var(--kv-label-letter-spacing);
   text-transform: var(--kv-label-text-transform);
 }
 
+/* value */
 .kv-value {
-  padding-bottom: var(--kv-row-padding-y);
   color: var(--kv-value-color);
   font-size: var(--kv-value-font-size);
-  word-break: break-word;
+  word-break: var(--kv-value-word-break);
 }
 
-/* row separators */
-.kv-list > .kv-row:not(:last-child) .kv-label,
-.kv-list > .kv-row:not(:last-child) .kv-value {
-  border-bottom: 1px solid var(--kv-border-color);
-}
+/* ================================
+   Inner flex layout
+   ================================ */
 
-/* ***********************************************
-/********** NEEDS TOKENIZATION *******************
-**************************************************/
 .kv-label-inner,
 .kv-value-inner {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--kv-inner-gap);
+  min-width: 0; /* allow text to shrink/wrap */
 }
+
+.kv-label-text,
+.kv-value-text {
+  min-width: 0;
+}
+
+/* Value row: push valueAction to the far-right end */
+.kv-value-inner {
+  justify-content: space-between;
+}
+
+/* Allows long values to wrap but keep valueAction pinned right */
+.kv-value-text {
+  flex: 1 1 auto;
+}
+
+/* ================================
+   Actions
+   ================================ */
 
 .kv-action {
-  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  opacity: var(--kv-action-opacity);
+  transition: opacity var(--kv-action-transition);
 }
 
+/* label action sits next to label, not far-right */
 .kv-action--label {
-  opacity: 0.7;
+  margin-left: auto; /* align to end of label column */
+}
+
+/* value action is always at the far-right end of the row */
+.kv-action--value {
+  flex: 0 0 auto;
+  min-width: var(--kv-value-action-min-width);
+  justify-content: flex-end;
 }
 
 .kv-row:hover .kv-action {
-  opacity: 1;
-}
-/* *********************************************** */
-/* *********************************************** */
-/* *********************************************** */
-
-/* desktop */
-@media (min-width: 640px) {
-  .kv-list {
-    grid-template-columns: var(--kv-label-width) 1fr;
-  }
+  opacity: var(--kv-action-opacity-hover);
 }
