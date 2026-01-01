@@ -1,4 +1,4 @@
-import { Route } from "@/routes/app/customers/$id"
+import { Route } from "@/routes/app/users/$id"
 import { Surface, Text } from "@/shared/ui/primiatives";
 import { toUserKeyValuePairs } from "./helpers/toUserKeyValuePairs";
 import { KeyValueList } from "@/shared/ui/components/compound";
