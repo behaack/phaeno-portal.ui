@@ -64,6 +64,7 @@ export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
     <PModal    
       onClose={()=>{}}
       opened={isOpen}
+      size="lg"
     >
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(submitHndl)}>

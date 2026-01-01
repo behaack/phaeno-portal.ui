@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AnalyticsPage } from "@/features/analytics/AnalyticsPage";
+import { AnalyticsIndexPage } from "@/features/analytics/AnalyticsIndexPage";
 
 export const Route = createFileRoute("/app/analytics")({
-  component: AnalyticsPage
+  component: AnalyticsIndexPage
 });

@@ -79,12 +79,10 @@ export function FastaPanel({ sampleId }: IProps) {
         onChange={(value) => updateSearchValue(value)}
       />
 
-      <div className="mt-3">
-        <FastaTable data={list.data?.items ?? []} forAllSamples={!sampleId}/>
-        {/* <ProTable data={list.data?.items ?? []} forAllSamples={!sampleId}/> */}
-        <div className="flex justify-center mt-4">
-          <CursorPaginator page={page} onPageChange={onPageChange} hasAdditional={!!list.data?.nextCursor} />
-        </div>
+      <FastaTable data={list.data?.items ?? []} forAllSamples={!sampleId}/>
+      {/* <ProTable data={list.data?.items ?? []} forAllSamples={!sampleId}/> */}
+      <div className="flex justify-center mt-4">
+        <CursorPaginator page={page} onPageChange={onPageChange} hasAdditional={!!list.data?.nextCursor} />
       </div>
     </div>
   );

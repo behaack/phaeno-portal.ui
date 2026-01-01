@@ -79,11 +79,9 @@ export function TranscriptPanel({ sampleId }: IProps) {
         onChange={(value) => updateSearchValue(value)}
       />
 
-      <div className="mt-3">
-        <TranscriptTable data={list.data?.items ?? []} forAllSamples={!sampleId}/>
-        <div className="flex justify-center mt-4">
-          <CursorPaginator page={page} onPageChange={onPageChange} hasAdditional={!!list.data?.nextCursor} />
-        </div>
+      <TranscriptTable data={list.data?.items ?? []} forAllSamples={!sampleId}/>
+      <div className="flex justify-center mt-4">
+        <CursorPaginator page={page} onPageChange={onPageChange} hasAdditional={!!list.data?.nextCursor} />
       </div>
     </div>
   );

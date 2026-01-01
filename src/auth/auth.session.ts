@@ -2,6 +2,7 @@ import { useAuthStore } from "@/stores/auth.store"
 import type { NavigateFn } from "@tanstack/react-router"
 import { Role } from "./auth.roles"
 import { getRoleScope, RoleScope } from "./auth.role-scope"
+import { EOrganizationType } from "@/api/types/enums"
 
 export const authSession = {
   // 🔐 tokens
@@ -11,6 +12,9 @@ export const authSession = {
   // 👤 identity
   getUser: () => useAuthStore.getState().userAccount,
   getRoles: () => useAuthStore.getState().userAccount?.roles ?? [],
+  isCustomer: () => getOrgType() === EOrganizationType.Customer,
+  isPhaeno: () => getOrgType() === EOrganizationType.Phaeno,
+  isPartner: () => getOrgType() === EOrganizationType.Partner,
 
   // 🧠 auth state
   hasHydrated: () => useAuthStore.getState().hasHydrated,
@@ -45,3 +49,6 @@ export const authSession = {
     useAuthStore.getState().logout()
   }
 }
+
+const getOrgType = () =>
+  useAuthStore.getState().userAccount?.organizationType;

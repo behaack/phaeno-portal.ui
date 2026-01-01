@@ -69,7 +69,7 @@ export function SearchInput({
           onChange={changeValue}
           onOptionSubmit={optionSubmit}
           w="100%"
-          size="md"
+          size="sm"
           limit={25}
           withScrollArea
           maxDropdownHeight={dropdownHeight()}

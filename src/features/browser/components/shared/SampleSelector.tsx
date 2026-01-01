@@ -68,7 +68,7 @@ export function SampleSelector({
       searchValue={search}
       onSearchChange={setSearch}
       disabled={props.disabled ?? lookup.isError}
-      size={props.size ?? "md"}
+      size="sm"
       {...props}
     />
   )
