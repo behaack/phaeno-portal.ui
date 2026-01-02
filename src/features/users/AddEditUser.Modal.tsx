@@ -29,7 +29,8 @@ export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
       id: NIL,
       organizationId: "organizationId",
       email: "",
-      firstName: "",
+      firstName: ""
+      ,
       lastName: "",
       isAdmin: false,
       isSetup: false,

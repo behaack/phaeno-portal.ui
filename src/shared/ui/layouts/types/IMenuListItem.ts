@@ -6,8 +6,7 @@ export type Subtype =
   | 'files'
   | 'customers'
   | 'users'
-  | 'api-keys'
-  | 'security-settings'
+  | 'settings'
   | 'signout';
 
 export default interface IMenuListItem {

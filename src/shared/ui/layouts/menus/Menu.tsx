@@ -1,5 +1,5 @@
 import { MenuItem } from "./MenuItem";
-import { userMenuList } from "../menu-lists/menuList";
+import { userMenuList } from "./menu-lists/menuList";
 
 export function Menu() { 
   const mainMenu = userMenuList.filter((item) => {

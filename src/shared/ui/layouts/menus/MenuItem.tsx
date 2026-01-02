@@ -37,13 +37,11 @@ export function MenuItem({ item, onClick }: IProps) {
         return <IconBrowser size={size} />;
       case 'analytics':
         return <IconMath size={size} />;        
-      case 'api-keys':
-        return <IconKey size={size} />;
       case 'customers':
         return <IconBuilding size={size} />;        
       case 'users':
         return <IconUsers size={size} />;
-      case 'security-settings':
+      case 'settings':
         return <IconSettings size={size} />;
       case 'signout':
         return <IconLogout size={size} />;

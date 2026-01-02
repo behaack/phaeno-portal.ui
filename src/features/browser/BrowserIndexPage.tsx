@@ -28,12 +28,11 @@ export function BrowserIndexPage() {
   }
 
   const mayViewData = useMemo(() => {
-    if (authSession.isCustomer()) return true
     if (authSession.isPhaeno()) {
       return (!!impersonationStore.selectedCustomerId)
     }
-    return !true
-  }, [impersonationStore.selectedCustomerId])  
+    return true
+  }, [authSession.isPhaeno(), impersonationStore.selectedCustomerId])  
 
   return (
     <Surface className="p-5" fullHeight elevation="sm" hover="none">

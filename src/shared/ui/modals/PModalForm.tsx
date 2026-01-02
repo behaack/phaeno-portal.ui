@@ -55,7 +55,7 @@ export function PModalForm({
       <FormProvider {...form}>
         <form onSubmit={onSubmit}>
           <PModalHeader title={title} icon={icon} onClose={onClose}/>
-          <PModalBody errorMessage={errorMessage}>
+          <PModalBody>
             {children}
           </PModalBody>     
           <PModalFormFooter submitLabel={submitLabel} isDisabled={isDisabled} onClose={onClose} />

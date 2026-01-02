@@ -1,0 +1,7 @@
+export { PModal } from "./Parts/PModal"
+export { PModalBody } from "./Parts/PModalBody"
+export { PModalFormFooter } from "./Parts/PModalFormFooter"
+export { PModalDialogFooter } from "./Parts/PModalDialogFooter"
+export { PModalEmptyFooter } from "./Parts/PModalEmptyFooter"
+export { PModalHeader } from "./Parts/PModalHeader"
+export { PModalDialog } from "./PModalDialog"

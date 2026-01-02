@@ -1,17 +1,8 @@
-import IMenuListItem from "../types/IMenuListItem";
+import IMenuListItem from "../../types/IMenuListItem";
 
 export const userMenuList: IMenuListItem[] = [
-  // {
-  //   index: 0,
-  //   isMain: true,
-  //   type: 'link',
-  //   subtype: 'home',
-  //   label: 'Home',
-  //   route: '/',
-  //   userDataRoute: false,
-  // },
   {
-    index: 1,
+    index: 0,
     isMain: true,
     type: 'link',
     subtype: 'browser',
@@ -20,7 +11,7 @@ export const userMenuList: IMenuListItem[] = [
     userDataRoute: true,
   },
   {
-    index: 2,
+    index: 1,
     isMain: true,
     type: 'link',
     subtype: 'analytics',
@@ -29,7 +20,7 @@ export const userMenuList: IMenuListItem[] = [
     userDataRoute: true,
   },  
   {
-    index: 3,
+    index: 2,
     isMain: true,
     type: 'link',
     subtype: 'files',
@@ -38,16 +29,7 @@ export const userMenuList: IMenuListItem[] = [
     userDataRoute: true,
   },
   {
-    index: 4,
-    isMain: false,
-    type: 'button',
-    subtype: 'api-keys',
-    label: 'API Keys',
-    route: 'none',
-    userDataRoute: false,
-  },
-  {
-    index: 5,
+    index: 3,
     isMain: false,
     type: 'link',
     subtype: 'customers',
@@ -56,7 +38,7 @@ export const userMenuList: IMenuListItem[] = [
     userDataRoute: false,
   },  
   {
-    index: 6,
+    index: 4,
     isMain: false,
     type: 'link',
     subtype: 'users',
@@ -65,16 +47,16 @@ export const userMenuList: IMenuListItem[] = [
     userDataRoute: false,
   },
   {
-    index: 7,
+    index: 5,
     isMain: false,
     type: 'button',
-    subtype: 'security-settings',
-    label: 'Security Settings',
+    subtype: 'settings',
+    label: 'Settings & Security...',
     route: 'none',
     userDataRoute: false,
   },
   {
-    index: 8,
+    index: 6,
     isMain: false,
     type: 'button',
     subtype: 'signout',

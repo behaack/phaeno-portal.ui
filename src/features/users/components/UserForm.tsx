@@ -1,7 +1,7 @@
-import { Stack } from "@mantine/core";
 import { RHFTextInput } from "@/shared/ui/components/form";
 import { TFormMode } from "@/shared/types/TFormMode";
 import { RHFSwitch } from "@/shared/ui/components/form/rhf";
+import { Stack } from "@/shared/ui/primiatives";
 
 export interface IProps {
   formMode: TFormMode
@@ -9,7 +9,7 @@ export interface IProps {
 
 export function UserForm({formMode}: IProps) {
   return (
-    <Stack gap="md">
+    <Stack gap="gap-3">
       <RHFTextInput
         name="firstName"
         label="First name"

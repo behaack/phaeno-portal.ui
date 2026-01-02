@@ -3,13 +3,12 @@ import { Burger, Collapse } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
 import { Subtype } from '../types/IMenuListItem';
-import { userMenuList } from '../menu-lists/menuList';
+import { userMenuList } from './menu-lists/menuList';
 import { CurrentUser } from '../components/CurrentUser';
 import { MenuItem } from './MenuItem';
 import { SelectedCustomer } from '../components/SelectedCustomer';
 import { authLogout } from '@/auth/auth.logout';
-// import ApiKeys, { IHandles as IApiKeysHndls } from '@/components/apiKey/ApiKeys.modal';
-// import SecuritySettings, { IHandles } from '@/components/security-settings/SecuritySettings.modal';
+import { SettingsPageModal, IHandles } from '@/features/settings/SettingsPage.Modal';
 
 export interface IProps {
   baseRoute: string;
@@ -20,14 +19,17 @@ export function DropdownMenu({ baseRoute }: IProps) {
   const burgerRef = useRef<HTMLButtonElement>(null);
   const [width] = useDeviceSize();
   const [opened, { close, toggle }] = useDisclosure(false);
+  const settingsModal = useRef<IHandles>(null)
   
   const buttonHndl = (buttonType: Subtype) => {
     toggle();
     switch (buttonType) {
-      case 'signout': {
+      case "settings":
+        settingsModal.current?.open()
+        return
+      case 'signout': 
         authLogout();
         return;
-      }
       default:
         break;
     }
@@ -111,6 +113,7 @@ export function DropdownMenu({ baseRoute }: IProps) {
 
   return (
     <nav className="relative">
+      <SettingsPageModal ref={settingsModal}/>
       <Burger
         ref={burgerRef}
         className="menu-burger"
