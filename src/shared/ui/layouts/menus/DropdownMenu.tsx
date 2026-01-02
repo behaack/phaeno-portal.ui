@@ -9,6 +9,7 @@ import { MenuItem } from './MenuItem';
 import { SelectedCustomer } from '../components/SelectedCustomer';
 import { authLogout } from '@/auth/auth.logout';
 import { SettingsPageModal, IHandles } from '@/features/settings/SettingsPage.Modal';
+import { CanRole } from '@/auth/CanRole';
 
 export interface IProps {
   baseRoute: string;
@@ -132,7 +133,9 @@ export function DropdownMenu({ baseRoute }: IProps) {
             </div>
             <ul className="dropdown-menu">
               {filteredMenuList.map((item) => (
-                <MenuItem key={item.index} item={item} onClick={() => buttonHndl(item.subtype)} />
+                <CanRole key={item.index} role={item.roles}>
+                  <MenuItem  item={item} onClick={() => buttonHndl(item.subtype)} />
+                </CanRole>                
               ))}
             </ul>
           </div>

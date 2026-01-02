@@ -1,5 +1,5 @@
 import { useTotpConfirm, useTotpStart } from "@/api/hooks/twofactorMutation.hooks"
-import { PButton, PPasswordInput, PPinInput } from "@/shared/ui/components"
+import { PButton, PPasswordInput, PPinInput, PTextInput } from "@/shared/ui/components"
 import { useState } from "react"
 
 export interface IProp {
@@ -103,14 +103,12 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
 
           <div className="sm:mt-4 flex flex-col items-center sm:items-start">
             <p className="text-xs text-gray-600 mb-1">Enter 6-digit code</p>
-            <PPinInput
-              value={code}
-              onChange={setCode}
-              type="number"
-              oneTimeCode
-              length={6}
-              size="sm"
-              disabled={totpConfirm.isPending}
+            <PTextInput 
+              value={code} 
+              onChange={(e) => setCode(e.currentTarget.value)} 
+              type="number" 
+              maxLength={6} 
+              size="sm" 
             />
           </div>
         </div>

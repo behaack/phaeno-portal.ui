@@ -1,7 +1,7 @@
 import { useOobConfirm, useOobStart } from "@/api/hooks/twofactorMutation.hooks";
 import { ETwoFactorDeliveryChannel } from "@/api/types/enums";
 import { authSession } from "@/auth/auth.session";
-import { PButton, PPasswordInput, PPinInput } from "@/shared/ui/components";
+import { PButton, PPasswordInput, PPinInput, PTextInput } from "@/shared/ui/components";
 import { useMemo, useState } from "react";
 
 export interface IProp {
@@ -72,12 +72,11 @@ export function OopEnrollmentCard({ onClose }: IProp) {
     <div>
       <p className="text-sm mb-3 text-gray-600"><b>Step 2:</b> Scan QR Code, then confirm 6-digit code</p>
       <image />
-      <PPinInput 
+      <PTextInput 
         value={code} 
-        onChange={setCode} 
+        onChange={(e) => setCode(e.currentTarget.value)} 
         type="number" 
-        oneTimeCode 
-        length={6} 
+        maxLength={6} 
         size="sm" 
       />
       <div className="text-right mt-5">

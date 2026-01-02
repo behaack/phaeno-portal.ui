@@ -1,3 +1,5 @@
+import { Role } from "@/auth/auth.roles";
+
 export type Subtype =
   | 'home'
   | 'transcript'
@@ -17,4 +19,5 @@ export default interface IMenuListItem {
   label: string;
   route: string;
   userDataRoute: boolean;
+  roles: Role[] | null
 }

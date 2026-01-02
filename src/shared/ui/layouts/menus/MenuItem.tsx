@@ -3,7 +3,6 @@ import {
   IconBrowser,
   IconFile,
   IconHome,
-  IconKey,
   IconLogout,
   IconSettings,
   IconUsers,

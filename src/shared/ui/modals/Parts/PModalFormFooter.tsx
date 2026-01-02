@@ -9,7 +9,7 @@ export interface IProps {
 
 export function PModalFormFooter({ submitLabel="Submit", isDisabled=false, showRequired=false, onClose }: IProps) {
   return (
-    <div className="px-5  py-3 flex justify-between items-center">
+    <div className="pt-5 flex justify-between items-center">
       <div className="text-xs text-red-800">
         {(showRequired) && <span>* Required field</span>}
       </div>
