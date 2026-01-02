@@ -14,5 +14,5 @@ export async function handleSignInResult(res: SignInResponse, navigate: Navigate
 
   // Authenticated
   authSession.login(res.accessToken, res.refreshToken, res.expiresInSeconds)
-  await navigate({ to: "/" })
+  await navigate({ to: "/app" })
 }

@@ -56,10 +56,22 @@ export type ConfirmOobEnrollmentRequest = {
   code: string
 }
 
+// ------ Password Recovery --------
+
+export type PasswordRecoveryStartRequest = {
+  email: string
+}
+
+export type PasswordRecoveryConfirmRequest = {
+  newPassword: string
+  token: string
+}
+
 // ---------- shared ----------
 export type TwoFactorConfiguredResponse = {
   twoFactorMethod: ETwoFactorMethod
   twoFactorDeliveryChannel?: ETwoFactorDeliveryChannel | null
   deliveryHint?: string | null
 }
+
 

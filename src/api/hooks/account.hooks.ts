@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/stores/auth.store";
 import { accountService } from "../services/account.service";
 import { useEffect } from "react";
@@ -30,4 +30,14 @@ export function useMeQuery() {
   }, [q.status, q.data, setUserAccount]);
 
   return q;
+}
+
+export function usePasswordRecoveryStart() {
+  return useMutation({ mutationFn: accountService.passwordRecoveryStart });
+}
+
+export function usePasswordRecoveryConfirm() {
+  return useMutation({
+    mutationFn: accountService.passwordRecoveryConfirm,
+  });
 }

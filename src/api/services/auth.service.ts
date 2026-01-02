@@ -13,7 +13,7 @@ export const authService = {
   signOut: () => api.post<null, null>("/auth/sign-out"),
 
   verifyTwoFactor: (req: TwoFactorVerifyRequest) =>
-    api.post<SignInAuthenticated, TwoFactorVerifyRequest>("/auth/2fa/verify", req),
+    api.post<SignInAuthenticated, TwoFactorVerifyRequest>("/auth/verify-2fa", req),
 
   resendTwoFactor: (loginChallengeId: string) =>
     api.post<{ ok: true }, { loginChallengeId: string }>(

@@ -48,7 +48,7 @@ export function ChangePasswordForm() {
           />
         </Stack>
         <div className="flex justify-end gap-2 mt-5 text-right">
-          <PButton onClick={() => form.reset()} color="red" type="reset" >Reset</PButton>
+          <PButton disabled={!form.formState.isDirty} onClick={() => form.reset()} color="red" type="reset" >Reset Form</PButton>
           <PButton disabled={!form.formState.isValid} type="submit" >Change Password</PButton>
         </div>
       </form>    

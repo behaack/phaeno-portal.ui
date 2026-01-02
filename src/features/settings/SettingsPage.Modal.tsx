@@ -1,13 +1,11 @@
 import { PTabs, PTabsList, PTabsPanel, PTabsTab } from "@/shared/ui/components/layout";
 import { PModalDialog } from "@/shared/ui/modals/PModalDialog";
-import { TextInput } from "@mantine/core";
 import { IconKey } from "@tabler/icons-react";
-import { IconSettings, IconClock, IconPassword, IconShieldCheck  } from "@tabler/icons-react";
+import { IconSettings, IconPassword, IconShieldCheck  } from "@tabler/icons-react";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { ChangePasswordPanel } from "./ChangePassword/ChangePasswordPanel";
 import { TwoFactorPanel } from "./TwoFactor/TwoFactorPanel";
 import { ApiKeysPanel } from "./ApiKeys/ApiKeysPanel";
-import { OtherSettingsPanel } from "./OtherSettings/OtherSettingsPanel";
 
 export interface IHandles {
   open: () => void;
@@ -48,12 +46,6 @@ export const SettingsPageModal = forwardRef<IHandles, IProps>((props, ref) => {
               Two-factor
             </PTabsTab>  
             <PTabsTab 
-              value="other" 
-              leftSection={<IconSettings size={15} />}
-            >
-              Other Settings
-            </PTabsTab>
-            <PTabsTab 
               value="api-keys" 
               leftSection={<IconKey size={15} />}
             >
@@ -67,9 +59,6 @@ export const SettingsPageModal = forwardRef<IHandles, IProps>((props, ref) => {
             <PTabsPanel value="two-factor">
               <TwoFactorPanel />
             </PTabsPanel>
-            <PTabsPanel value="other">
-              <OtherSettingsPanel />
-            </PTabsPanel>            
             <PTabsPanel value="api-keys">
               <ApiKeysPanel />
             </PTabsPanel>

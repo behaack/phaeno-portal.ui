@@ -3,9 +3,7 @@ import { NIL } from 'uuid';
 
 export const Route = createFileRoute('/')({
   component: () => {
-    return <Navigate 
-            to="/app/browser" 
-           />
+    return <Navigate to="/app/browser" />
   },
 });
 

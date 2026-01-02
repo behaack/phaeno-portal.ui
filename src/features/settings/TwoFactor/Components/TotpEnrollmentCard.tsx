@@ -89,33 +89,36 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
       {totpStart.isPending ? (
         <div className="rounded-md border p-4 text-sm text-gray-600">Generating QR code…</div>
       ) : qrSrc ? (
-        <div className="flex flex-col items-center gap-2 rounded-md border p-4">
-          <img
-            src={qrSrc}
-            alt="Scan this QR code with your authenticator app"
-            className="h-48 w-48"
-          />
-          <p className="text-xs text-gray-600">
-            Scan with Google Authenticator, 1Password, Authy, etc.
-          </p>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+          <div className="flex flex-col items-center sm:items-start">
+            <img
+              src={qrSrc}
+              alt="Scan this QR code with your authenticator app"
+              className="h-36 w-36"
+            />
+            <p className="mt-2 text-xs text-gray-600 max-w-52 text-center sm:text-left">
+              Scan with Google Authenticator, 1Password, Authy, etc.
+            </p>
+          </div>
+
+          <div className="sm:mt-4 flex flex-col items-center sm:items-start">
+            <p className="text-xs text-gray-600 mb-1">Enter 6-digit code</p>
+            <PPinInput
+              value={code}
+              onChange={setCode}
+              type="number"
+              oneTimeCode
+              length={6}
+              size="sm"
+              disabled={totpConfirm.isPending}
+            />
+          </div>
         </div>
       ) : (
         <div className="rounded-md border p-4 text-sm text-gray-600">
           QR code unavailable. Go back and request again.
         </div>
       )}
-
-      <div className="mt-4">
-        <PPinInput
-          value={code}
-          onChange={setCode}
-          type="number"
-          oneTimeCode
-          length={6}
-          size="sm"
-          disabled={totpConfirm.isPending}
-        />
-      </div>
 
       {confirmError ? <p className="text-sm mt-2 text-red-600">{confirmError}</p> : null}
 

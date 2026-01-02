@@ -1,21 +1,38 @@
 import { useMeQuery } from "@/api/hooks/account.hooks"
-import { Outlet, useNavigate } from "@tanstack/react-router"
+import { Outlet, useLocation, useNavigate } from "@tanstack/react-router"
 import { useAuthStore } from "@/stores/auth.store"
-import { useEffect } from "react";
+import { useEffect } from "react"
 
 export function EmptyShellLayout() {
-  const authStore = useAuthStore();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // Select primitives to avoid rerender traps
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated())
+  const hasHydrated = useAuthStore((s) => s.hasHydrated)
 
   useMeQuery()
 
   useEffect(() => {
-    if (!authStore.isAuthenticated()) {
+    if (!hasHydrated) return
+
+    const pathname = location.pathname
+
+    const isAppRoute =
+      pathname === "/app" || pathname.startsWith("/app/")
+
+    if (!isAuthenticated && isAppRoute) {
       navigate({
-        to: "/auth"
+        to: "/auth",
+        replace: true, // prevents back-button loops
       })
     }
-  }, [authStore.isAuthenticated()]) 
+  }, [
+    hasHydrated,
+    isAuthenticated,
+    location.pathname,
+    navigate,
+  ])
 
   return (
     <div>
