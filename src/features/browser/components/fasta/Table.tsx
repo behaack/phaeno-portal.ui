@@ -16,7 +16,7 @@ export function FastaTable({
 }: IProps) {
   return (
     <>
-      <Table withTableBorder withColumnBorders stickyHeader stickyHeaderOffset={50} striped>
+      <Table withTableBorder withColumnBorders stickyHeader striped>
         <Table.Thead>
           <Table.Tr>
             {(forAllSamples)

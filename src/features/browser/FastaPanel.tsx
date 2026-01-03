@@ -76,22 +76,23 @@ export function FastaPanel({ sampleId }: IProps) {
         onChange={updateSearchValue}
       />
 
-      <FastaTable data={rows} forAllSamples={!sampleId} />
-      {/* <ProTable data={rows} forAllSamples={!sampleId}/> */}
-
-      {/* Sentinel + status */}
-      <div ref={sentinelRef} className="flex justify-center mt-4 py-3 text-sm text-muted-foreground">
-        {list.isLoading ? (
-          <span>Loading…</span>
-        ) : list.isFetchingNextPage ? (
-          <span>Loading more…</span>
-        ) : list.hasNextPage ? (
-          <span>Scroll to load more</span>
-        ) : rows.length ? (
-          <span>End of results</span>
-        ) : (
-          <span>No results</span>
-        )}
+      <div className="h-[60vh] overflow-auto rounded-xl border">
+        <FastaTable data={rows} forAllSamples={!sampleId} />
+        {/* <ProTable data={rows} forAllSamples={!sampleId}/> */}
+        {/* Sentinel + status */}
+        <div ref={sentinelRef} className="flex justify-center mt-4 py-3 text-sm text-muted-foreground">
+          {list.isLoading ? (
+            <span>Loading…</span>
+          ) : list.isFetchingNextPage ? (
+            <span>Loading more…</span>
+          ) : list.hasNextPage ? (
+            <span>Scroll to load more</span>
+          ) : rows.length ? (
+            <span>End of results</span>
+          ) : (
+            <span>No results</span>
+          )}
+        </div>
       </div>
     </div>
   )

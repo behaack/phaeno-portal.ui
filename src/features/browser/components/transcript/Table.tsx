@@ -13,7 +13,7 @@ export function TranscriptTable({
   forAllSamples
 }: IProps) {
   return (
-    <Table withTableBorder withColumnBorders striped>
+    <Table withTableBorder stickyHeader withColumnBorders striped>
       <Table.Thead>
         <Table.Tr>
           {(forAllSamples)
