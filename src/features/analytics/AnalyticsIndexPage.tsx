@@ -60,10 +60,11 @@ export function AnalyticsIndexPage() {
             onChange={(value) => setStatus(value ?? "")}
           />        
 
+          <PDivider/>
+
           <div className="text-right">
-            <PButton my={10} onClick={createJobHndl} >Create Job</PButton>
+            <PButton className="mb-1" onClick={createJobHndl} rightSection={<IconMath size={18} />}>Create </PButton>
           </div>
-          <PDivider my={10}/>
           <JobListIndex data={data || emptyPagedList}  />
         </div>
       ) : (

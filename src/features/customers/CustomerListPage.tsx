@@ -29,7 +29,7 @@ export function CustomerListPage() {
         </div>
         {(results.isLoading && !results.data)
           ? <div className='text-center'>Loading...</div>
-          : <CustomerTable list={results.data?.list ?? []} />
+          : <CustomerTable list={results.data?.list!} />
         }                
       </div>
     </Surface>
