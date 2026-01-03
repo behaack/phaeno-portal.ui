@@ -1,89 +1,98 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useFastaList, useFastaLookup } from "@/api/hooks/fasta.hooks";
-import { SearchInput } from "./components/shared/SearchInput";
-import { FastaTable } from "./components/fasta/Table";
-import { ProTable } from "./components/fasta/ProTable";
-import { useBrowserStore } from '@/stores/browser.store';
-import { CursorPaginator } from "@/shared/ui/components/inputs";
+import { useEffect, useMemo, useRef, useState } from "react"
+import { useFastaInfiniteList, useFastaLookup } from "@/api/hooks/fasta.hooks"
+import { SearchInput } from "./components/shared/SearchInput"
+import { FastaTable } from "./components/fasta/Table"
+// import { ProTable } from "./components/fasta/ProTable"
+import { useBrowserStore } from "@/stores/browser.store"
+import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
+import { flattenInfiniteCursorPages } from "@/api/helpers/flattenInfiniteCursorPages"
 
 export interface IProps {
-  sampleId: string;
+  sampleId: string
 }
 
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 50
 
 export function FastaPanel({ sampleId }: IProps) {
-  const [searchValue, setSearchValue] = useState<string | null>("");
   const store = useBrowserStore()
 
-  // paginator state
-  const [page, setPage] = useState(1);
-  const [cursor, setCursor] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string | null>("")
 
-  // restore state from store
   useEffect(() => {
     setSearchValue(store.selectedSmid)
-  }, []) 
+  }, [])
 
-  // cursor history keyed by page so Prev/Next is deterministic
-  const cursorsByPageRef = useRef<Record<number, string>>({ 1: "" });
+  const lookup = useFastaLookup({ q: searchValue ?? "", limit: PAGE_SIZE })
 
-  const lookup = useFastaLookup({ q: searchValue ?? "", limit: PAGE_SIZE });
-
-  const list = useFastaList({
+  const list = useFastaInfiniteList({
     sampleId,
-    cursor,
     limit: PAGE_SIZE,
     q: searchValue ?? "",
-  });
+  })
 
-  // reset paging when the query context changes
+  // Flatten all pages into one array for the table
+  const rows = useMemo(() => flattenInfiniteCursorPages(list.data), [list.data])
+
+  // Sentinel for infinite load
+  const { ref: sentinelRef, inView } = useInViewIntersectionObserver<HTMLDivElement>({
+    root: null,            // window scrolling; set to a container element if needed
+    rootMargin: "250px",   // preload before reaching the end
+    threshold: 0,
+  })
+
+  // When search context changes, start over (TanStack will do this via queryKey change,
+  // but we also want to avoid any weird "inView" immediate fetch after switching)
+  const justResetRef = useRef(false)
   useEffect(() => {
-    setPage(1);
-    setCursor("");
-    cursorsByPageRef.current = { 1: "" };
-  }, [sampleId, searchValue]);
+    justResetRef.current = true
+    const t = window.setTimeout(() => {
+      justResetRef.current = false
+    }, 0)
+    return () => window.clearTimeout(t)
+  }, [sampleId, searchValue])
 
-  // stash nextCursor for page+1 once we have it
+  // Fetch next page when sentinel is visible
   useEffect(() => {
-    const nextCursor = list.data?.nextCursor;
-    if (nextCursor) {
-      cursorsByPageRef.current[page + 1] = nextCursor;
-    }
-  }, [list.data?.nextCursor, page]);
+    if (!inView) return
+    if (justResetRef.current) return
+    if (!list.hasNextPage) return
+    if (list.isFetchingNextPage) return
 
-  const onPageChange = (nextPage: number) => {
-    if (nextPage === page) return;
-
-    const nextCursor = cursorsByPageRef.current[nextPage];
-
-    // If user somehow tries to jump to an unknown page, ignore.
-    // (Prev/Next will always be known.)
-    if (nextCursor === undefined) return;
-
-    setPage(nextPage);
-    setCursor(nextCursor);
-  };
+    list.fetchNextPage()
+  }, [inView, list.hasNextPage, list.isFetchingNextPage, list.fetchNextPage])
 
   const updateSearchValue = (value: string | null) => {
-    setSearchValue(value ?? "")
+    const next = value ?? ""
+    setSearchValue(next)
     store.setSelectedSmid(value)
   }
 
   return (
     <div className="mt-5">
       <SearchInput
-        value={searchValue ?? ""}
+        value={searchValue!}
         data={lookup.data ?? []}
         placeholder="Select a SMID"
-        onChange={(value) => updateSearchValue(value)}
+        onChange={updateSearchValue}
       />
 
-      <FastaTable data={list.data?.items ?? []} forAllSamples={!sampleId}/>
-      {/* <ProTable data={list.data?.items ?? []} forAllSamples={!sampleId}/> */}
-      <div className="flex justify-center mt-4">
-        <CursorPaginator page={page} onPageChange={onPageChange} hasAdditional={!!list.data?.nextCursor} />
+      <FastaTable data={rows} forAllSamples={!sampleId} />
+      {/* <ProTable data={rows} forAllSamples={!sampleId}/> */}
+
+      {/* Sentinel + status */}
+      <div ref={sentinelRef} className="flex justify-center mt-4 py-3 text-sm text-muted-foreground">
+        {list.isLoading ? (
+          <span>Loading…</span>
+        ) : list.isFetchingNextPage ? (
+          <span>Loading more…</span>
+        ) : list.hasNextPage ? (
+          <span>Scroll to load more</span>
+        ) : rows.length ? (
+          <span>End of results</span>
+        ) : (
+          <span>No results</span>
+        )}
       </div>
     </div>
-  );
+  )
 }

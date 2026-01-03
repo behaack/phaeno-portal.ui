@@ -39,7 +39,7 @@ export function FolderPath({ id, fileList }: IProps) {
   }, [id, fileList]);
 
   return (
-    <div className="path-navigator">
+    <div>
       {(navigationPath.length) ? (
         <><Link
           to={Route.to}

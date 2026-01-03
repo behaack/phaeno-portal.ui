@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useTranscriptList, useTranscriptLookup } from "@/api/hooks/transcript.hooks";
+import { useTranscriptInfiniteList, useTranscriptLookup } from "@/api/hooks/transcript.hooks";
 import { SearchInput } from "./components/shared/SearchInput";
 import { TranscriptTable } from ".//components/transcript/Table";
 import { useBrowserStore } from '@/stores/browser.store';
-import { CursorPaginator } from "@/shared/ui/components/inputs";
+import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
+import { flattenInfiniteCursorPages } from "@/api/helpers/flattenInfiniteCursorPages";
 
 export interface IProps {
   sampleId: string;
@@ -12,63 +13,59 @@ export interface IProps {
 const PAGE_SIZE = 50;
 
 export function TranscriptPanel({ sampleId }: IProps) {
-  const [searchValue, setSearchValue] = useState<string | null>("");
   const store = useBrowserStore()
-
-  // paginator state
-  const [page, setPage] = useState(1);
-  const [cursor, setCursor] = useState<string>("");
-
-    // restore state from store
+  
+  const [searchValue, setSearchValue] = useState<string | null>("");
+  
   useEffect(() => {
     setSearchValue(store.selectedGene)
   }, []) 
-
-  // store cursor per page so we can go back/forward reliably
-  // page 1 always maps to empty cursor
-  const cursorsByPageRef = useRef<Record<number, string>>({ 1: "" });
-
+  
   const lookup = useTranscriptLookup({ q: searchValue ?? "", limit: PAGE_SIZE });
 
-  const list = useTranscriptList({
+  const list = useTranscriptInfiniteList({
     sampleId,
-    cursor,
     limit: PAGE_SIZE,
     q: searchValue ?? "",
-  });
+  })
 
-  // reset paging when the query context changes
+  // Flatten all pages into one array for the table
+  const rows = useMemo(() => flattenInfiniteCursorPages(list.data), [list.data])
+
+  // Sentinel for infinite load
+  const { ref: sentinelRef, inView } = useInViewIntersectionObserver<HTMLDivElement>({
+    root: null,            // window scrolling; set to a container element if needed
+    rootMargin: "250px",   // preload before reaching the end
+    threshold: 0,
+  })
+
+  // When search context changes, start over (TanStack will do this via queryKey change,
+  // but we also want to avoid any weird "inView" immediate fetch after switching)
+  const justResetRef = useRef(false)
   useEffect(() => {
-    setPage(1);
-    setCursor("");
-    cursorsByPageRef.current = { 1: "" };
-  }, [sampleId, searchValue]);
+    justResetRef.current = true
+    const t = window.setTimeout(() => {
+      justResetRef.current = false
+    }, 0)
+    return () => window.clearTimeout(t)
+  }, [sampleId, searchValue])
 
-  // whenever we receive a nextCursor for the current page, stash it as the cursor for (page + 1)
+  // Fetch next page when sentinel is visible
   useEffect(() => {
-    const nextCursor = list.data?.nextCursor;
-    if (nextCursor) {
-      cursorsByPageRef.current[page + 1] = nextCursor;
-    }
-  }, [list.data?.nextCursor, page]);
+    if (!inView) return
+    if (justResetRef.current) return
+    if (!list.hasNextPage) return
+    if (list.isFetchingNextPage) return
 
-  const onPageChange = (nextPage: number) => {
-    if (nextPage === page) return;
+    list.fetchNextPage()
+  }, [inView, list.hasNextPage, list.isFetchingNextPage, list.fetchNextPage])
 
-    const nextCursor = cursorsByPageRef.current[nextPage];
-
-    // If user somehow tries to jump to an unknown page, ignore.
-    // (Prev/Next will always be known with our paginator.)
-    if (nextCursor === undefined) return;
-
-    setPage(nextPage);
-    setCursor(nextCursor);
-  };
 
   const updateSearchValue = (value: string | null) => {
-    setSearchValue(value ?? "")
-    store.setSelectedGene(value)
-  }  
+    const next = value ?? ""
+    setSearchValue(next)
+    store.setSelectedSmid(value)
+  }
 
   return (
     <div className="mt-5">
@@ -79,9 +76,20 @@ export function TranscriptPanel({ sampleId }: IProps) {
         onChange={(value) => updateSearchValue(value)}
       />
 
-      <TranscriptTable data={list.data?.items ?? []} forAllSamples={!sampleId}/>
-      <div className="flex justify-center mt-4">
-        <CursorPaginator page={page} onPageChange={onPageChange} hasAdditional={!!list.data?.nextCursor} />
+      <TranscriptTable data={rows} forAllSamples={!sampleId}/>
+      {/* Sentinel + status */}
+      <div ref={sentinelRef} className="flex justify-center mt-4 py-3 text-sm text-muted-foreground">
+        {list.isLoading ? (
+          <span>Loading…</span>
+        ) : list.isFetchingNextPage ? (
+          <span>Loading more…</span>
+        ) : list.hasNextPage ? (
+          <span>Scroll to load more</span>
+        ) : rows.length ? (
+          <span>End of results</span>
+        ) : (
+          <span>No results</span>
+        )}
       </div>
     </div>
   );
