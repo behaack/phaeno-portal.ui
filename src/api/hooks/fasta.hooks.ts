@@ -33,17 +33,16 @@ export function useFastaInfiniteList(params: Omit<GenomicListParams, "cursor">) 
       params.q ?? null,
       limit,
     ] as const,
+    
     enabled,
 
-    // pageParam is your cursor. Start with null/"" based on how your API expects first page.
+    // pageParam is the cursor. Start with null/"" based on how your API expects first page.
     initialPageParam: null as string | null,
 
     queryFn: ({ pageParam }) => {
       const cursor = (pageParam as string | null) ?? null
 
-      if (!employee) {
-        return fastaService.list({ ...params, limit, cursor })
-      }
+      if (!employee) return fastaService.list({ ...params, limit, cursor })
 
       return fastaService.listForOrganization({
         organizationId: selectedOrgId!,

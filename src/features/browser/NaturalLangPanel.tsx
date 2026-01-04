@@ -1,13 +1,29 @@
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 import { PButton, PTextArea } from "@/shared/ui/components";
+import { useAiAssistNaturalLangMutation } from "@/api/hooks/ai-assistant.hooks";
+import { AiAssistDisplayData } from "./components/ai-assistant/AiAssistDisplayData";
+import { AiAssistNextPageRequest, AiAssistResponse, NaturalLangRequest } from "@/api/types/ai-assistant";
 
 export function NaturalLangPanel()
 {
+  const ai = useAiAssistNaturalLangMutation()
+  const [result, setResult] = useState<AiAssistResponse | null>(null)  
+  const [isActive, setIsActive] = useState(false)  
   const [request, setRequest] = useState("")
-  const [isActive, setIsActive] = useState(false)
 
   const submitHndl = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const payload: NaturalLangRequest = {
+      requestString: request
+    }
+
+    ai.mutate(payload, {
+      onSuccess: (data: AiAssistResponse) => {
+        setResult(data)
+      },
+    })
+
     setIsActive(true)
   }
 
@@ -42,7 +58,8 @@ export function NaturalLangPanel()
             Run Request
           </PButton>
         </div>
-      </form>
+      </form>   
+      <AiAssistDisplayData result={result} />
     </div>  
   )
 }
