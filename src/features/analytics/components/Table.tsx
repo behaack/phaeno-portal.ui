@@ -1,11 +1,11 @@
 import { Table } from '@mantine/core';
 import { DisplayStatus } from './DisplayStatus';
 import { ActionButtons } from './ActionButtons';
-import { IDataPipelineItem } from '../types/JobPipelineTypes';
 import { statusDate } from '../utilities/statusDate';
+import { DataPipelineItem } from '@/api/types/job-pipeline';
 
 export interface IProps {
-  list: IDataPipelineItem[];
+  list: DataPipelineItem[];
 }
 export function JobTable({ list }: IProps) {
   return (

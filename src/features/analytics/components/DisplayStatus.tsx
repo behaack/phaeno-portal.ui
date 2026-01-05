@@ -1,20 +1,23 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Loader, Table } from '@mantine/core';
-import { IDataPipelineItem, TStatusType } from "../types/JobPipelineTypes";
 import { statusBkgdColorMapper, TStatusTypeWithStopping } from "../utilities/statusColorMapper";
+import { DataPipelineItem, StatusType } from "@/api/types/job-pipeline";
+import { useAnalyticsStore } from "@/stores/analytics.store";
 
 export interface IProps {
-  job: IDataPipelineItem;
+  job: DataPipelineItem;
   displayType: 'cell' | 'bullet';
 }
 
 export function DisplayStatus({ job, displayType }: IProps) {
-  const prevStatus = useRef<TStatusType | null>(null);
+  const analyticsStore = useAnalyticsStore();
+  const prevStatus = useRef<StatusType | null>(null);
   const ref = useRef<HTMLTableCellElement>(null);
 
   const isStopping = useMemo(() => {
-    return true
-  }, [])
+    const index = analyticsStore.canceledJobs.findIndex(item => item.id === job.id);
+    return index >= 0;
+  }, [job.status, analyticsStore.canceledJobs])
 
   const adjustedStatus = useMemo<TStatusTypeWithStopping>(() => {
     if (job.status === 'Started' && isStopping) {
