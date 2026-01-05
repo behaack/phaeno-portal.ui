@@ -53,13 +53,13 @@ export function BrowserIndexPage() {
               <PTabsTab value="natural-language" leftSection={<IconLanguage size={12} />}>Nat'l Lang</PTabsTab>                         
             </PTabsList>      
             <PTabsPanel value="transcript">
-              <TranscriptPanel sampleId={sampleId ?? ""} />
+              <TranscriptPanel sampleId={sampleId ?? null} />
             </PTabsPanel>
             <PTabsPanel value="fasta">
-              <FastaPanel  sampleId={sampleId ?? ""} />
+              <FastaPanel sampleId={sampleId ?? null} />
             </PTabsPanel>
             <PTabsPanel value="natural-language">
-              <NaturalLangPanel />
+              <NaturalLangPanel sampleId={sampleId ?? null} />
             </PTabsPanel>
           </PTabs>
         </div>

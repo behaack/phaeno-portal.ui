@@ -6,7 +6,7 @@ export enum ERenderType {
 }
 
 export enum ESqlAiEntityType {
-  Aggregation,
+  Aggregate,
   Fasta,
   Transcript
 }

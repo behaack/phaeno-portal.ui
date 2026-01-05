@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranscriptInfiniteList, useTranscriptLookup } from "@/api/hooks/transcript.hooks";
 import { SearchInput } from "./components/shared/SearchInput";
-import { TranscriptTable } from ".//components/transcript/Table";
+import { TranscriptTable } from "./components/transcript/TranscriptTable";
 import { useBrowserStore } from '@/stores/browser.store';
 import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
 import { flattenInfiniteCursorPages } from "@/api/helpers/flattenInfiniteCursorPages";
 
 export interface IProps {
-  sampleId: string;
+  sampleId: string | null;
 }
 
 const PAGE_SIZE = 50;

@@ -1,21 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useFastaInfiniteList, useFastaLookup } from "@/api/hooks/fasta.hooks"
 import { SearchInput } from "./components/shared/SearchInput"
-import { FastaTable } from "./components/fasta/Table"
+import { FastaTable } from "./components/fasta/FastaTable"
 // import { ProTable } from "./components/fasta/ProTable"
 import { useBrowserStore } from "@/stores/browser.store"
 import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
 import { flattenInfiniteCursorPages } from "@/api/helpers/flattenInfiniteCursorPages"
 
 export interface IProps {
-  sampleId: string
+  sampleId: string | null
 }
 
 const PAGE_SIZE = 50
 
 export function FastaPanel({ sampleId }: IProps) {
   const store = useBrowserStore()
-
   const [searchValue, setSearchValue] = useState<string | null>("")
 
   useEffect(() => {
