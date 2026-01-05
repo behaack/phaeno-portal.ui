@@ -7,6 +7,20 @@ import {
 } from "@microsoft/signalr";
 import { refreshAuthToken } from "@/shared/hooks/refreshAuthToken";
 import { useAuthStore } from "@/stores/auth.store";
+import { DataPipelineItem, JobType, StatusType } from "@/api/types/job-pipeline";
+import { queryClient } from "@/app/providers/queryClient";
+import { pipelineRunsKey } from "@/api/hooks/job-pipeline.hooks";
+
+type PipelineJobEventDto = {
+  erroeMessage: string,
+  eventType: JobType
+  jobId: string
+  metrics: object
+  pipeline: string
+  status: StatusType
+  timestamp: string
+  pipelineRun: DataPipelineItem
+};
 
 export function usePipelineHub() {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -15,12 +29,6 @@ export function usePipelineHub() {
   const connectionRef = useRef<HubConnection | null>(null);
 
   useEffect(() => {
-    console.log("PIPELINE HUB effect", {
-      authed: authStore.isAuthenticated(),
-      hasToken: !!token,
-    });
-
-    // 🔴 NOT AUTHENTICATED → DISCONNECT
     if (!authStore.isAuthenticated() || !token) {
       if (connectionRef.current) {
         void connectionRef.current.stop();
@@ -56,54 +64,66 @@ export function usePipelineHub() {
     connection.onreconnected((id) => console.log("✅ reconnected", id));
     connection.onclose((err) => console.warn("🛑 closed", err));
 
-    // ✅ event logs
-    const events = ["Started", "Completed", "Failed", "Canceled", "Stopping"];
-    for (const evt of events) {
-      connection.on(evt, (msg) => console.log(`📩 ${evt}`, msg));
-    }
-
     (async () => {
       try {
         await connection.start();
-        console.log("✅ Pipeline hub connected", {
-          state: HubConnectionState[connection.state],
-          connectionId: connection.connectionId,
-        });
-
-        // IMPORTANT: if server uses groups, you must join.
-        // See section (2) below.
-        // await connection.invoke("JoinOrgGroup");
+        console.log("✅ Pipeline hub connected: ", connection.connectionId);
       } catch (err) {
         console.error("❌ Pipeline hub failed to connect", err);
       }
     })();
 
+
     connectionRef.current = connection;
 
-    connection.on("Started", (msg) =>
-      console.log(msg)
-      //analyticsStore.updateJobStatus(msg.pipelineRun)
-    );
+    // const onPipelineEvent = (evt: PipelineJobEventDto) => {
+    //   const run = evt.pipelineRun;
+    //   if (!run) return;
 
-    connection.on("Completed", (msg) => 
-      console.log(msg)
-      //analyticsStore.updateJobStatus(msg.pipelineRun)
-    );
+    //   // 1) ✅ Instant UI update (optional but awesome)
+    //   queryClient.setQueriesData(
+    //     { queryKey: pipelineRunsKey },
+    //     (old: any) => {
+    //       if (!old) return old;
 
-    connection.on("Failed", (msg) =>
-      console.log(msg)
-      //analyticsStore.updateJobStatus(msg.pipelineRun)
-    );
+    //       // Handle common shapes:
+    //       // a) old is array
+    //       if (Array.isArray(old)) {
+    //         return old.map((r) => (r.id === run.id ? { ...r, ...run } : r));
+    //       }
 
-    connection.on("Canceled", (msg) =>
-      console.log(msg)
-      //analyticsStore.updateJobStatus(msg.pipelineRun)
-    );
+    //       // b) old is paged: { items: [] }
+    //       if (Array.isArray(old.items)) {
+    //         return {
+    //           ...old,
+    //           items: old.items.map((r: any) => (r.id === run.id ? { ...r, ...run } : r)),
+    //         };
+    //       }
 
-    connection.on("Stopping", (msg) =>
-      console.log(msg)
-      //analyticsStore.cancelJob(msg.pipelineRun)
-    );     
+    //       // c) old is infinite query: { pages: [{ items: [] }], pageParams: [] }
+    //       if (Array.isArray(old.pages)) {
+    //         return {
+    //           ...old,
+    //           pages: old.pages.map((p: any) =>
+    //             Array.isArray(p.items)
+    //               ? { ...p, items: p.items.map((r: any) => (r.id === run.id ? { ...r, ...run } : r)) }
+    //               : p
+    //           ),
+    //         };
+    //       }
+
+    //       return old;
+    //     }
+    //   );
+
+    //   // 2) ✅ Safety net: refetch from server (debounce if chatty)
+    //   queryClient.invalidateQueries({ queryKey: ["pipelineRuns"] });
+    // };
+
+    // // Listen to whatever statuses you emit
+    // ["Started", "Completed", "Failed", "Canceled", "CancelRequested"].forEach((name) => {
+    //   connection.on(name, onPipelineEvent);
+    // });    
 
     return () => {
       void connection.stop();

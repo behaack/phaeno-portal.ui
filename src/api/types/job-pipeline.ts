@@ -1,5 +1,6 @@
 export const JobTypesList = 
   ['Report', 'Score', 'Summary', 'Umap'] as const;
+  
 export const JobStatusList = 
   ['Queued', 'Started', 'Completed', 'Failed', 'Canceled'] as const;
 

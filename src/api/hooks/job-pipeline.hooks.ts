@@ -2,6 +2,9 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tansta
 import { CreateReportJob, CreateScoreJob, CreateSummaryJob, CreateUmapJob, DataPipelineItem, GetJobsParams } from "../types/job-pipeline";
 import { jobPipelineService } from "../services/job-pipeline.service";
 
+export const pipelineRunsKey = (jobType: string, status?: string) =>
+  ["job-pipeline", jobType, status ?? "all"] as const;
+
 export function useGetJobs({
   jobType,
   jobStatus,
@@ -11,7 +14,7 @@ export function useGetJobs({
   const enabled = Boolean(jobType) && Boolean(jobStatus) && page > 0 && pageSize > 0;
 
   return useQuery({
-    queryKey: ["job-pipeline", "jobs", { jobType, jobStatus, page, pageSize }],
+    queryKey: pipelineRunsKey(jobType!, jobStatus),
     enabled,
     queryFn: () => jobPipelineService.getJobs({jobType, jobStatus, page, pageSize}),
     placeholderData: keepPreviousData
