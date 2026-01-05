@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react"
 import { PButton, PTextArea } from "@/shared/ui/components"
 import { useAiAssistInfinitePages, useAiAssistNaturalLangMutation } from "@/api/hooks/ai-assistant.hooks"
-import { AiAssistResponse, NaturalLangRequest, ERenderType } from "@/api/types/ai-assistant"
+import { AiAssistResponse, NaturalLangRequest, ERenderType, ESqlAiEntityType } from "@/api/types/ai-assistant"
 import { AiAssistResults } from "./components/ai-assistant/AiAssisResults"
 import { Text } from "@/shared/ui/primiatives"
 import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
@@ -12,7 +12,6 @@ export interface Prop {
 
 export function NaturalLangPanel({ sampleId }: Prop) {
   const ai = useAiAssistNaturalLangMutation()
-
   const [queryId, setQueryId] = useState<string | null>(null)
   const [firstPage, setFirstPage] = useState<AiAssistResponse | null>(null)
   const [isActive, setIsActive] = useState(false)
@@ -28,16 +27,26 @@ export function NaturalLangPanel({ sampleId }: Prop) {
     threshold: 0,
   })
 
-  const enablePaging =
-    !!queryId &&
-    !!firstPage?.nextCursor &&
+  const isAggregateTable =
+    firstPage?.entityType === ESqlAiEntityType.Aggregate &&
     firstPage?.renderType === ERenderType.Table
+
+  // const enablePaging =
+  //   !!queryId &&
+  //   !!firstPage?.nextCursor &&
+  //   firstPage?.renderType === ERenderType.Table
+
+  const enablePaging =
+  !!queryId &&
+  firstPage?.renderType === ERenderType.Table &&
+  (firstPage?.hasAdditional || !!firstPage?.nextCursor)
 
   const pagesQuery = useAiAssistInfinitePages({
     queryId,
     firstNextCursor: firstPage?.nextCursor ?? null,
     limit: 50,
     enabled: enablePaging,
+    isAggregateTable: !!isAggregateTable,
   })
 
   const allPages = useMemo(() => {
@@ -57,7 +66,6 @@ export function NaturalLangPanel({ sampleId }: Prop) {
     if (!enablePaging) return
     if (!pagesQuery.hasNextPage) return
     if (pagesQuery.isFetchingNextPage) return
-
     pagesQuery.fetchNextPage()
   }, [inView, enablePaging, pagesQuery.hasNextPage, pagesQuery.isFetchingNextPage, pagesQuery.fetchNextPage])
 
@@ -81,10 +89,10 @@ export function NaturalLangPanel({ sampleId }: Prop) {
   }
 
   const clearResults = () => {
-    setRequest("")
-    setIsActive(false)
+//    setRequest("")
     setQueryId(null)
     setFirstPage(null)
+    setIsActive(false)
   }
 
   return (
@@ -116,15 +124,8 @@ export function NaturalLangPanel({ sampleId }: Prop) {
         </Text>
       ) : null}
 
-      {/* <div className="mt-2 text-xs text-muted-foreground">
-        Loaded {allRows.length} rows
-        {allPages.at(-1)?.nextCursor ? " • More available" : " • End"}
-      </div> */}
-
-      {/* ✅ scrollable results area */}
       <div ref={scrollRef} className="mt-1 h-[50vh] overflow-auto">
         <AiAssistResults result={result} rows={allRows} />
-
         <div ref={sentinelRef} className="flex justify-center py-3 text-sm text-muted-foreground">
           {pagesQuery.isFetchingNextPage
             ? "Loading more..."

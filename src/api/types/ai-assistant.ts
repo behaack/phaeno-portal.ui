@@ -20,6 +20,7 @@ export interface AiAssistNextPageRequest {
   queryId: string
   cursor: string | null
   limit: number
+  pageNo: number
 }
 
 
@@ -36,5 +37,6 @@ export interface AiAssistResponse {
   columns: string[]
   results: unknown
   nextCursor: string | null
+  hasAdditional: boolean
 }
 

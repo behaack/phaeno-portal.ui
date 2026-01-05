@@ -1,9 +1,9 @@
 import { isPhaenoEmployee } from "@/auth/types/auth.guards"
 import { useAuthStore } from "@/stores/auth.store"
 import { useImpersonationStore } from "@/stores/impersonation.store"
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query"
 import { aiAssistantService } from "../services/ai-assistant.service"
-import { type AiAssistResponse, type AiAssistNextPageRequest, NaturalLangRequest } from "../types/ai-assistant"
+import { type AiAssistResponse, NaturalLangRequest } from "../types/ai-assistant"
 
 export function useAiAssistNaturalLangMutation() {
   const roles = useAuthStore((s) => s.userAccount?.roles)
@@ -31,49 +31,62 @@ export function useAiAssistNaturalLangMutation() {
   })
 }
 
-export function useAiAssistInfinitePages(args: {
+type PageParam =
+  | { mode: "cursor"; cursor: string | null }
+  | { mode: "page"; pageNo: number }
+
+export function useAiAssistInfinitePages(opts: {
   queryId: string | null
-  firstNextCursor: string | null // from the first response
-  limit?: number
-  enabled?: boolean
+  firstNextCursor: string | null
+  limit: number
+  enabled: boolean
+  isAggregateTable: boolean
 }) {
-  const roles = useAuthStore((s) => s.userAccount?.roles)
-  const employee = isPhaenoEmployee(roles)
-  const selectedOrgId = useImpersonationStore((s) => s.selectedCustomerId)
+  const { queryId, firstNextCursor, limit, enabled, isAggregateTable } = opts
 
-  const limit = args.limit ?? 50
+  return useInfiniteQuery<AiAssistResponse, Error, { pages: AiAssistResponse[] }, any, PageParam>({
+    queryKey: ["aiAssist", "pages", queryId, limit, isAggregateTable ? "agg" : "cursor"],
+    enabled: enabled && !!queryId,
 
-  // only enable when:
-  // - we have a queryId
-  // - org is selected if employee
-  // - caller says enabled (e.g. not Metric)
-  const enabled =
-    (args.enabled ?? true) &&
-    !!args.queryId &&
-    (!employee || !!selectedOrgId)
-
-  return useInfiniteQuery<AiAssistResponse>({
-    queryKey: ["ai-assist", "pages", args.queryId, employee ? selectedOrgId : "self", limit] as const,
-    enabled,
-
-    // pageParam will be the cursor to request next page
-    initialPageParam: args.firstNextCursor as string | null,
+    // page 2 param
+    initialPageParam: isAggregateTable
+      ? { mode: "page", pageNo: 2 }
+      : { mode: "cursor", cursor: firstNextCursor },
 
     queryFn: ({ pageParam }) => {
-      const cursor = (pageParam as string | null) ?? null
+      if (!queryId) throw new Error("Missing queryId")
 
-      const body: AiAssistNextPageRequest = {
-        queryId: args.queryId!,
-        cursor, // <-- adjust name if your TS type is nextCursor instead
+      // aggregate paging
+      if (pageParam.mode === "page") {
+        return aiAssistantService.nextPage({
+          queryId,
+          cursor: "",           // unused by server for aggregates
+          limit,
+          pageNo: pageParam.pageNo,
+        })
+      }
+
+      // cursor paging
+      return aiAssistantService.nextPage({
+        queryId,
+        cursor: pageParam.cursor ?? "",
         limit,
-      } as any
-
-      if (!employee) return aiAssistantService.nextPage(body)
-      return aiAssistantService.nextPageForOrg(selectedOrgId!, body)
+        pageNo: 0,             // ignored by server for cursor lists
+      })
     },
 
-    getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    getNextPageParam: (lastPage, allPages) => {
+      // aggregate: drive by hasAdditional
+      if (isAggregateTable) {
+        return lastPage.hasAdditional
+          ? { mode: "page", pageNo: allPages.length + 2 } // +2 because page 1 is firstPage
+          : undefined
+      }
 
-    refetchOnWindowFocus: false,
+      // cursor: drive by nextCursor
+      return lastPage.nextCursor
+        ? { mode: "cursor", cursor: lastPage.nextCursor }
+        : undefined
+    },
   })
 }

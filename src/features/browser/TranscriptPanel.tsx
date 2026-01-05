@@ -64,7 +64,7 @@ export function TranscriptPanel({ sampleId }: IProps) {
   const updateSearchValue = (value: string | null) => {
     const next = value ?? ""
     setSearchValue(next)
-    store.setSelectedSmid(value)
+    store.setSelectedGene(value)
   }
 
   return (
