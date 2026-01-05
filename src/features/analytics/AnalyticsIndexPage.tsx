@@ -1,4 +1,4 @@
-import { lazy, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useMemo, useRef, useState } from "react";
 import { JobTypesList, JobStatusList } from "@/api/types/job-pipeline"
 import { PButton, PSelect } from "@/shared/ui/components";
 import { PDivider } from "@/shared/ui/components/layout";
@@ -18,7 +18,7 @@ export function AnalyticsIndexPage() {
   const [jobStatus, setStatus] = useState("Queued")
   const jobRef = useRef<IHandles>(null)
   const { data } = useGetJobs({ jobType, jobStatus, page: 1})
-  const FormComponent = lazy(() => import('./forms/ReportForm'))
+  const FormComponent = lazy(() => import(`./forms/${jobType}Form`))
 
   const createJobHndl = () => {
     jobRef.current?.open()
@@ -36,11 +36,10 @@ export function AnalyticsIndexPage() {
       <Text className="flex gap-3 items-center mb-6" variant="heading"><IconMath />Data Analytics</Text>
       {(mayViewData) ? (        
         <div>
-          <CreateJobModal 
-            ref={jobRef}
-            title={`Create ${jobType} Job`}
-            >
-            <FormComponent onClose={() => jobRef.current?.close()} />
+          <CreateJobModal ref={jobRef} title={`Create ${jobType} Job`}>
+            <Suspense fallback={<div style={{ minHeight: 280, padding: 16 }}>Loading…</div>}>
+              <FormComponent onClose={() => jobRef.current?.close()} />
+            </Suspense>
           </CreateJobModal>
           <PSelect
             label="Job Type"

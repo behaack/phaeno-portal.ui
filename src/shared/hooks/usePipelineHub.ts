@@ -76,54 +76,15 @@ export function usePipelineHub() {
 
     connectionRef.current = connection;
 
-    // const onPipelineEvent = (evt: PipelineJobEventDto) => {
-    //   const run = evt.pipelineRun;
-    //   if (!run) return;
+    const onPipelineEvent = (evt: PipelineJobEventDto) => {      
+      console.log(evt)
+      queryClient.invalidateQueries({ queryKey: ["job-pipeline","jobs"] })
+    }
 
-    //   // 1) ✅ Instant UI update (optional but awesome)
-    //   queryClient.setQueriesData(
-    //     { queryKey: pipelineRunsKey },
-    //     (old: any) => {
-    //       if (!old) return old;
-
-    //       // Handle common shapes:
-    //       // a) old is array
-    //       if (Array.isArray(old)) {
-    //         return old.map((r) => (r.id === run.id ? { ...r, ...run } : r));
-    //       }
-
-    //       // b) old is paged: { items: [] }
-    //       if (Array.isArray(old.items)) {
-    //         return {
-    //           ...old,
-    //           items: old.items.map((r: any) => (r.id === run.id ? { ...r, ...run } : r)),
-    //         };
-    //       }
-
-    //       // c) old is infinite query: { pages: [{ items: [] }], pageParams: [] }
-    //       if (Array.isArray(old.pages)) {
-    //         return {
-    //           ...old,
-    //           pages: old.pages.map((p: any) =>
-    //             Array.isArray(p.items)
-    //               ? { ...p, items: p.items.map((r: any) => (r.id === run.id ? { ...r, ...run } : r)) }
-    //               : p
-    //           ),
-    //         };
-    //       }
-
-    //       return old;
-    //     }
-    //   );
-
-    //   // 2) ✅ Safety net: refetch from server (debounce if chatty)
-    //   queryClient.invalidateQueries({ queryKey: ["pipelineRuns"] });
-    // };
-
-    // // Listen to whatever statuses you emit
-    // ["Started", "Completed", "Failed", "Canceled", "CancelRequested"].forEach((name) => {
-    //   connection.on(name, onPipelineEvent);
-    // });    
+    // Listen to whatever statuses you emit
+    ["Started", "Completed", "Failed", "Canceled", "CancelRequested"].forEach((name) => {
+      connection.on(name, onPipelineEvent);
+    });    
 
     return () => {
       void connection.stop();

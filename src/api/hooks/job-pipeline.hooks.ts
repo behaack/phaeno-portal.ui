@@ -3,7 +3,7 @@ import { CreateReportJob, CreateScoreJob, CreateSummaryJob, CreateUmapJob, DataP
 import { jobPipelineService } from "../services/job-pipeline.service";
 
 export const pipelineRunsKey = (jobType: string, status?: string) =>
-  ["job-pipeline", jobType, status ?? "all"] as const;
+  ["job-pipeline", "jobs", jobType, status ?? "all"] as const;
 
 export function useGetJobs({
   jobType,
