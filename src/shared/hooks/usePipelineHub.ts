@@ -10,7 +10,7 @@ import { DataPipelineItem, JobType, JobStatusType, JobStatusTypeWithStopping } f
 import { queryClient } from "@/app/providers/queryClient";
 import { useAnalyticsStore } from "@/stores/analytics.store";
 import { notifications } from "@mantine/notifications";
-import { statusColorMapper } from "@/features/analytics/utilities/statusColorMapper";
+import { statusColorMapper } from "@/features/analytics/helpers/statusColorMapper";
 
 type PipelineJobEventDto = {
   erroeMessage: string,

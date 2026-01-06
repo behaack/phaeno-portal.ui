@@ -1,5 +1,5 @@
 import { DisplayStatus } from "./DisplayStatus";
-import { statusDate } from "../utilities/statusDate";
+import { statusDate } from "../helpers/statusDate";
 import { DataPipelineItem } from "@/api/types/job-pipeline";
 
 export interface IProps {

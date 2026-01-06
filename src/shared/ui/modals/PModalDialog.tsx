@@ -8,9 +8,8 @@ import { PModalBody } from './Parts/PModalBody';
 
 export interface IProps {
   opened: boolean;
-  title: string;
+  title?: string;
   onClose: () => void;
-  hideFooter?: boolean;
   zIndex?: number;
   size?: TComponentSize;
   top?: boolean;
@@ -20,9 +19,8 @@ export interface IProps {
 
 export function PModalDialog({
   opened,
-  title,
+  title="",
   onClose,
-  hideFooter = false,
   zIndex = 100,
   size = 'md',
   top = false,

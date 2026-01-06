@@ -37,10 +37,12 @@ export default function ReportForm({ onClose }: IProps) {
   return (    
     <FormProvider {...form}>
       <PModalBody>
-        <form onSubmit={form.handleSubmit(submitHandle)} className="space-y-3">
-          <RHFTextInput name="jobName" label="Job Name" />
-          <RHFTextInput name="h5adPath" label="h5ad File Path" />
-          <RHFTextInput name="outFile" label="Out File Name" />
+        <form onSubmit={form.handleSubmit(submitHandle)}>
+          <div className="pt-3 px-5 space-y-3">
+            <RHFTextInput name="jobName" label="Job Name" />
+            <RHFTextInput name="h5adPath" label="h5ad File Path" />
+            <RHFTextInput name="outFile" label="Out File Name" />
+          </div>
           <PModalFormFooter isDisabled={!form.formState.isValid} onClose={onClose} />
         </form>
       </PModalBody>

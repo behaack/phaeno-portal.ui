@@ -36,9 +36,11 @@ export default function ScoreForm({ onClose }: IProps) {
   return (
     <FormProvider {...form}>
       <PModalBody>
-        <form onSubmit={form.handleSubmit(submitHandle)} className="space-y-3">
-          <RHFTextInput name="jobName" label="Job Name" />
-          <RHFTextInput name="h5adPath" label="h5ad File Path" />
+        <form onSubmit={form.handleSubmit(submitHandle)}>
+          <div className="pt-3 px-5 space-y-3">
+            <RHFTextInput name="jobName" label="Job Name" />
+            <RHFTextInput name="h5adPath" label="h5ad File Path" />
+          </div>
           <PModalFormFooter onClose={onClose} />
         </form>
       </PModalBody>

@@ -40,11 +40,13 @@ export default function Fields({ onClose }: IProps) {
   return (
     <FormProvider {...form}>
       <PModalBody>
-        <form onSubmit={form.handleSubmit(submitHandle)} className="space-y-3">
-          <RHFTextInput name="jobName" label="Job Name" />
-          <RHFTextInput name="h5adPath" label="h5ad File Path" />
-          <RHFNumberInput name="nNeighbors" label="n-Neighbors" min={2} max={200} />
-          <RHFNumberInput name="minDist" label="min-Dist" min={0} max={1} step={0.1} />
+        <form onSubmit={form.handleSubmit(submitHandle)}>
+          <div className="pt-3 px-5 space-y-3">
+            <RHFTextInput name="jobName" label="Job Name" />
+            <RHFTextInput name="h5adPath" label="h5ad File Path" />
+            <RHFNumberInput name="nNeighbors" label="n-Neighbors" min={2} max={200} />
+            <RHFNumberInput name="minDist" label="min-Dist" min={0} max={1} step={0.1} />
+          </div>
           <PModalFormFooter onClose={() => {}} />
       </form>
      </PModalBody>

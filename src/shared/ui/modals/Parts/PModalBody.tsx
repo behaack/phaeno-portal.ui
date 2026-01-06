@@ -7,7 +7,7 @@ export interface IProps {
 
 export function PModalBody({children }: IProps) {
   return (
-  <PBox className="px-5 py-5">
+  <PBox>
     {children}
   </PBox>
   )

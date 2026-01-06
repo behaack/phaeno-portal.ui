@@ -1,4 +1,4 @@
-import { forwardRef, lazy, Suspense, useImperativeHandle, useState } from "react"
+import { forwardRef, useImperativeHandle, useState } from "react"
 import { IconMath } from "@tabler/icons-react";
 import { PModalHeader } from "@/shared/ui/modals/Parts/PModalHeader";
 import { PModal } from "@/shared/ui/modals/Parts/PModal";

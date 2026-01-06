@@ -5,6 +5,7 @@ import { ActionIcon, Anchor, Badge, Group, Table, Text } from "@mantine/core"
 import { IconChevronRight, IconFile, IconFolder } from "@tabler/icons-react"
 import { Route } from "@/routes/app/files"
 import { useNavigate } from "@tanstack/react-router"
+import DisplayFileSize from "./DisplayFileSize"
 
 export interface IProps {
   list: FileRoomListItem[]
@@ -124,7 +125,7 @@ export function FileRoomTable({ list }: IProps) {
                 </Table.Td>
 
                 <Table.Td style={{ textAlign: "right" }}>
-                  {formatBytes(sizeBytes, 1)}
+                  <DisplayFileSize value={sizeBytes}/>
                 </Table.Td>
 
                 <Table.Td className="text-center">
@@ -175,16 +176,4 @@ export function buildFolderSizeIndex(items: FileRoomListItem[]): Map<string, num
   }
 
   return memo
-}
-
-export function formatBytes(bytes: number, decimals = 1): string {
-  if (!bytes) return "0 B"
-
-  const k = 1024 // ✅ most common for file sizes
-  const sizes = ["B", "KB", "MB", "GB", "TB"]
-
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-  const value = bytes / Math.pow(k, i)
-
-  return `${value.toFixed(decimals)} ${sizes[i]}`
 }

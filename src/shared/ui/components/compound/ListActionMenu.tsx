@@ -20,7 +20,7 @@ export interface IProps {
   showEdit? : boolean
   showDelete?: boolean
   showEmail?: boolean
-  showCancel: boolean
+  showCancel?: boolean
   disableAdd?: boolean
   disableDetails?: boolean
   disableEdit?: boolean,

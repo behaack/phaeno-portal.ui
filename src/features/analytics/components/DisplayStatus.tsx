@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Loader, Table } from '@mantine/core';
-import { statusBkgdColorMapper, TStatusTypeWithStopping } from "../utilities/statusColorMapper";
+import { statusBkgdColorMapper, TStatusTypeWithStopping } from "../helpers/statusColorMapper";
 import { DataPipelineItem, JobStatusType } from "@/api/types/job-pipeline";
 import { useAnalyticsStore } from "@/stores/analytics.store";
 
