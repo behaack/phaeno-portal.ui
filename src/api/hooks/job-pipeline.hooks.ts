@@ -1,6 +1,7 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { CreateReportJob, CreateScoreJob, CreateSummaryJob, CreateUmapJob, DataPipelineItem, GetJobsParams } from "../types/job-pipeline";
 import { jobPipelineService } from "../services/job-pipeline.service";
+import { useAnalyticsStore  } from "@/stores/analytics.store";
 
 export const pipelineRunsKey = (jobType: string, status?: string) =>
   ["job-pipeline", "jobs", jobType, status ?? "all"] as const;
@@ -59,4 +60,14 @@ export function useCreateScoreJobMutation() {
       await qc.invalidateQueries({ queryKey: ["job-pipeline","jobs"] })
     },
   })
+}
+
+export function useCancelJobMutation() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (id: string): Promise<unknown> => jobPipelineService.cancelJob(id),
+    onSuccess: (_, id) => {
+      useAnalyticsStore.getState().requestCancel(id)
+    }
+  })  
 }

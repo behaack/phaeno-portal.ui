@@ -1,5 +1,4 @@
 import { DisplayStatus } from "./DisplayStatus";
-import { ActionButtons } from "./ActionButtons";
 import { statusDate } from "../utilities/statusDate";
 import { DataPipelineItem } from "@/api/types/job-pipeline";
 
@@ -30,7 +29,6 @@ export function JobList({ list }: IProps) {
             </div>
           </div>
           <div className="mt-1 mr-1">
-            <ActionButtons job={item} />
           </div>
         </li>
       ))}

@@ -15,7 +15,7 @@ export function DisplayStatus({ job, displayType }: IProps) {
   const ref = useRef<HTMLTableCellElement>(null);
 
   const isStopping = useMemo(() => {
-    const index = analyticsStore.canceledJobs.findIndex(item => item.id === job.id);
+    const index = analyticsStore.canceledJobs.findIndex(item => item === job.id);
     return index >= 0;
   }, [job.status, analyticsStore.canceledJobs])
 

@@ -9,7 +9,6 @@ import { refreshAuthToken } from "@/shared/hooks/refreshAuthToken";
 import { useAuthStore } from "@/stores/auth.store";
 import { DataPipelineItem, JobType, StatusType } from "@/api/types/job-pipeline";
 import { queryClient } from "@/app/providers/queryClient";
-import { pipelineRunsKey } from "@/api/hooks/job-pipeline.hooks";
 
 type PipelineJobEventDto = {
   erroeMessage: string,
@@ -21,6 +20,8 @@ type PipelineJobEventDto = {
   timestamp: string
   pipelineRun: DataPipelineItem
 };
+
+type EventName = "Started" | "Completed" | "Failed" | "Canceled" | "Stopping"
 
 export function usePipelineHub() {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -76,14 +77,15 @@ export function usePipelineHub() {
 
     connectionRef.current = connection;
 
-    const onPipelineEvent = (evt: PipelineJobEventDto) => {      
+    const onPipelineEvent = (evt: PipelineJobEventDto, eventName: EventName) => {      
       console.log(evt)
+      if (eventName === 'Stopping') return // Eat it
       queryClient.invalidateQueries({ queryKey: ["job-pipeline","jobs"] })
     }
 
     // Listen to whatever statuses you emit
-    ["Started", "Completed", "Failed", "Canceled", "CancelRequested"].forEach((name) => {
-      connection.on(name, onPipelineEvent);
+    ["Started", "Completed", "Failed", "Canceled", "Stopping"].forEach((name) => {
+      connection.on(name, (evt) => onPipelineEvent(evt, name as EventName));
     });    
 
     return () => {

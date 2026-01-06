@@ -1,4 +1,5 @@
 import { ActionIcon, Menu } from '@mantine/core'
+import { IconCancel } from '@tabler/icons-react'
 import { IconEye } from '@tabler/icons-react'
 import { IconPlus } from '@tabler/icons-react'
 import { IconEdit, IconMail, IconTrash, IconDotsVertical } from '@tabler/icons-react'
@@ -8,6 +9,7 @@ export enum EListActionType {
   Details,
   Edit,
   Delete,
+  Cancel,
   Email
 }
 
@@ -18,11 +20,13 @@ export interface IProps {
   showEdit? : boolean
   showDelete?: boolean
   showEmail?: boolean
+  showCancel: boolean
   disableAdd?: boolean
   disableDetails?: boolean
   disableEdit?: boolean,
   disableDelete?: boolean,
   disableEmail?: boolean,
+  disableCancel?: boolean
   onActionClick: (id: string, actionType: EListActionType) => void
 }
 
@@ -33,11 +37,13 @@ export function ListActionMenu({
   showDelete=false,
   showDetails=false,
   showEmail=false,
+  showCancel=false,
   disableAdd=false,
   disableEdit=false,
   disableDelete=false,
   disableDetails=false,
   disableEmail=false,
+  disableCancel=false,
   onActionClick,
 }: IProps) {
 
@@ -99,8 +105,17 @@ export function ListActionMenu({
             Delete
           </Menu.Item>        
         }
+        {showCancel &&
+          <Menu.Item 
+            disabled={disableCancel} 
+            color="red" 
+            leftSection={<IconCancel size={14} />}
+            onClick={() =>clickHandle(EListActionType.Cancel)}
+          >
+            Cancel
+          </Menu.Item>        
+        }        
       </Menu.Dropdown>
-
     </Menu>
   )
 }

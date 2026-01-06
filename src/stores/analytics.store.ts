@@ -1,12 +1,11 @@
 import { produce } from 'immer';
 import { create } from 'zustand';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
-import { notifications } from '@mantine/notifications';
-import { DataPipelineItem } from '@/api/types/job-pipeline';
 
 export interface IAnalyticsStoreState {
-  canceledJobs: DataPipelineItem[];
-  cancelJob: (job: DataPipelineItem) => void;
+  canceledJobs: string[];
+  requestCancel: (jobId: string) => void;
+  cancelJob: (jobId: string) => void;
 }
 
 export const useAnalyticsStore = create<IAnalyticsStoreState>()(
@@ -14,15 +13,16 @@ export const useAnalyticsStore = create<IAnalyticsStoreState>()(
     persist(
       (set) => ({
         canceledJobs: [],
-        cancelJob: (job) => {
-          set(
-            produce<IAnalyticsStoreState>((state) => {
-              if (!state.canceledJobs.some(j => j.id === job.id)) {
-                state.canceledJobs.push(job)
-              }
-            })
-          );
+        requestCancel: (jobId: string) => {
+          set((s) => ({
+            canceledJobs: [...s.canceledJobs, jobId],
+          }))
         },
+        cancelJob: (jobId: string) => {
+          set((s) => ({
+            canceledJobs: s.canceledJobs.filter((j) => j !== jobId)
+          }))
+        }
       }),
       {
         name: 'analytics-storage',

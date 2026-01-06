@@ -22,4 +22,7 @@ export const jobPipelineService = {
 
   createSummaryJob: (job: CreateSummaryJob) => 
     api.post<DataPipelineItem, CreateSummaryJob>("data-pipeline/summary", job),
+
+  cancelJob: (id: string) => 
+    api.post<unknown, unknown>(`data-pipeline/cancel/${id}`),
 };

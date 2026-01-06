@@ -4,7 +4,7 @@ import { SelectCustomerMessage } from "../_common/SelectCustomerMessage";
 import { IconFile } from "@tabler/icons-react";
 import { useImpersonationStore } from "@/stores/impersonation.store";
 import { authSession } from "@/auth/auth.session";
-import { useFileRoomContentsForSelf } from "@/api/hooks/fileRoom.hooks";
+import { useFileRoomContentsForSelf } from "@/api/hooks/file-room.hooks";
 import { FileRoomTable } from "./components/FileRoomTable";
 import { FolderPath } from "./components/FolderPath";
 import { Route } from "@/routes/app/files"

@@ -1,13 +1,24 @@
 import { Table } from '@mantine/core';
 import { DisplayStatus } from './DisplayStatus';
-import { ActionButtons } from './ActionButtons';
+import { DataPipelineItem, StatusType } from "@/api/types/job-pipeline";
+import { EListActionType, ListActionMenu } from '@/shared/ui/components/compound';
 import { statusDate } from '../utilities/statusDate';
-import { DataPipelineItem } from '@/api/types/job-pipeline';
+import { useCancelJobMutation } from '@/api/hooks/job-pipeline.hooks';
 
 export interface IProps {
   list: DataPipelineItem[];
 }
 export function JobTable({ list }: IProps) {
+  const cancelMutation = useCancelJobMutation()
+
+  const actionHdl = async (id: string, actionType: EListActionType) => {
+    console.log("CANCEL-1")
+    if (actionType === EListActionType.Cancel) {
+      console.log("CANCEL-2")
+      await cancelMutation.mutateAsync(id);
+    }
+  }
+
   return (
     <Table withTableBorder withColumnBorders stickyHeader striped>
       <Table.Thead>
@@ -40,7 +51,7 @@ export function JobTable({ list }: IProps) {
               {statusDate(item)}
             </Table.Td>
               <Table.Td className="text-center">
-                <ActionButtons job={item} />
+                <ListActionMenu id={item.id} showCancel={item.status===StatusType.Started} showDetails onActionClick={actionHdl}/>
               </Table.Td>            
           </Table.Tr>
         ))}
