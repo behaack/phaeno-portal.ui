@@ -1,10 +1,15 @@
 import { FastaDetailsItem } from "@/api/types/fasta";
-import { DataPipelineItem } from "@/api/types/job-pipeline";
-import { DisplayDateTime, DisplayTimeSpan } from "@/shared/ui/components/compound";
 import { DisplayEnumListItem } from "../components/shared/DisplayEnumListItem";
 import { readNumberList } from "../components/shared/readNumberList";
+import { IconCopy } from "@tabler/icons-react";
+import { PActionIcon } from "@/shared/ui/components/inputs";
+import { PToolTip } from "@/shared/ui/components/feedback";
 
-export function toFastaKeyValuePairs(fasta: FastaDetailsItem | null | undefined) {
+export function toFastaKeyValuePairs(
+  fasta: FastaDetailsItem | null | undefined,
+  toolTipLabel: string,
+  copyToClipboard: (sequence: string) => void
+) {
   if (!fasta) return []; // ✅ ALWAYS return an array
 
   return [
@@ -28,6 +33,13 @@ export function toFastaKeyValuePairs(fasta: FastaDetailsItem | null | undefined)
             {fasta.sequence}
           </div>
         </div>
+      ),
+      valueAction: (
+        <PToolTip label={toolTipLabel}>
+          <PActionIcon onClick={() => copyToClipboard(fasta?.sequence)} size="sm">
+            <IconCopy size={15} />
+          </PActionIcon>
+        </PToolTip>
       )
     }
   ];

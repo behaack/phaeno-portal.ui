@@ -4,7 +4,6 @@ export type TranscriptListItem = {
   transcriptId: string
   geneId: string
   geneSymbol: string
-  sequence: string
   definitionLine: string
 }
 
@@ -15,5 +14,6 @@ export type TranscriptDetailsItem = {
   geneId: string
   geneSymbol: string
   definitionLine: string
+  sequence: string
 }
 

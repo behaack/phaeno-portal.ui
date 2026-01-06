@@ -1,47 +1,47 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from "react"
 import { PModalDialog } from "@/shared/ui/modals";
 import { KeyValueList } from "@/shared/ui/components/compound";
-import { toFastaKeyValuePairs } from "../../helpers/toFastaKeyValuePairs";
-import { useFastaDetails } from "@/api/hooks/fasta.hooks";
-import { IconDna } from "@tabler/icons-react";
+import { IconDna2 } from "@tabler/icons-react";
+import { toTranscriptKeyValuePairs } from "../../helpers/toTranscriptKeyValuePairs";
+import { useTranscriptDetails } from "@/api/hooks/transcript.hooks";
 import { useClipboard, useTimeout } from "@mantine/hooks";
 
 export interface IHandles {
   open: (id: string) => void;
 }
 
-export const FastaDetailsModal = forwardRef<IHandles>((_, ref) => {
+export const TranscriptDetailsModal = forwardRef<IHandles>((_, ref) => {
   const clipboard = useClipboard();
   const [tooltipLabel, setTooltipLabel] = useState<string>('Click to copy value to clipboard');
-  const { start } = useTimeout(() => setTooltipLabel('Click to copy value to clipboard'), 500);
-  const fastaId = useRef<string | null>(null)
+  const { start } = useTimeout(() => setTooltipLabel('Click to copy value to clipboard'), 500);  
+  const transcriptId = useRef<string | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const { data } = useFastaDetails(fastaId.current)
+  const { data } = useTranscriptDetails(transcriptId.current)
 
   const copyToClipboard = (value: string | null | undefined) => {
     clipboard.copy(value);
     setTooltipLabel('Copied to clipboard.');
     start();
-  };
+  };  
 
   useImperativeHandle(ref, () => ({
     open(id: string) {
-      fastaId.current = id
+      transcriptId.current = id
       setIsOpen(true)  
     },
   }));  
 
   return (
     <PModalDialog 
-      title="Fasta Details" 
-      icon={<IconDna size={21} />} 
+      title="Transcript Details" 
+      icon={<IconDna2 size={21} />} 
       opened={isOpen} 
       onClose={() => setIsOpen(false)}
       className="py-3 px-5"
       size="xl"
     >
-      <KeyValueList items={toFastaKeyValuePairs(data, tooltipLabel, copyToClipboard)} />
+      <KeyValueList items={toTranscriptKeyValuePairs(data, tooltipLabel, copyToClipboard)} />
     </PModalDialog>
   )
 })

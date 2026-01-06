@@ -1,6 +1,5 @@
 import { useRef } from 'react';
-import { IconEye } from '@tabler/icons-react';
-import { ActionIcon, Table, Tooltip } from '@mantine/core';
+import { Table } from '@mantine/core';
 import { FastaListItem } from '@/api/types/fasta';
 import { DisplayEnumListItem } from '../shared/DisplayEnumListItem';
 import { readNumberList } from '../shared/readNumberList';
@@ -53,7 +52,7 @@ export function FastaTable({
               style={{
                 backgroundColor: 'black',
                 color: 'white',
-                width: '100px',
+                width: '75px',
                 textAlign: 'center',
               }}
             >
