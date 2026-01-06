@@ -1,8 +1,6 @@
-import { TStatusType } from "../types/JobPipelineTypes";
+import { JobStatusTypeWithStopping } from "@/api/types/job-pipeline";
 
-export type TStatusTypeWithStopping = TStatusType | 'Stopping'
-
-export function statusColorMapper(status: TStatusTypeWithStopping): string {
+export function statusColorMapper(status: JobStatusTypeWithStopping): string {
   switch (status) {
     case "Queued":
       return "blue";
@@ -20,7 +18,7 @@ export function statusColorMapper(status: TStatusTypeWithStopping): string {
   }
 }
 export function statusBkgdColorMapper(
-  status: TStatusTypeWithStopping
+  status: JobStatusTypeWithStopping
 ): { color: string; backgroundColor: string } {
   switch (status) {
     case "Queued":

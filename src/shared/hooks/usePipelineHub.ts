@@ -2,13 +2,15 @@ import { useEffect, useRef } from "react";
 import {
   HubConnection,
   HubConnectionBuilder,
-  HubConnectionState,
   LogLevel,
 } from "@microsoft/signalr";
 import { refreshAuthToken } from "@/shared/hooks/refreshAuthToken";
 import { useAuthStore } from "@/stores/auth.store";
-import { DataPipelineItem, JobType, StatusType } from "@/api/types/job-pipeline";
+import { DataPipelineItem, JobType, JobStatusType, JobStatusTypeWithStopping } from "@/api/types/job-pipeline";
 import { queryClient } from "@/app/providers/queryClient";
+import { useAnalyticsStore } from "@/stores/analytics.store";
+import { notifications } from "@mantine/notifications";
+import { statusColorMapper } from "@/features/analytics/utilities/statusColorMapper";
 
 type PipelineJobEventDto = {
   erroeMessage: string,
@@ -16,18 +18,17 @@ type PipelineJobEventDto = {
   jobId: string
   metrics: object
   pipeline: string
-  status: StatusType
+  status: JobStatusType
   timestamp: string
   pipelineRun: DataPipelineItem
 };
-
-type EventName = "Started" | "Completed" | "Failed" | "Canceled" | "Stopping"
 
 export function usePipelineHub() {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const authStore = useAuthStore();
   const token = authStore.accessToken ?? "";
   const connectionRef = useRef<HubConnection | null>(null);
+  const analyticsStore = useAnalyticsStore()
 
   useEffect(() => {
     if (!authStore.isAuthenticated() || !token) {
@@ -77,15 +78,32 @@ export function usePipelineHub() {
 
     connectionRef.current = connection;
 
-    const onPipelineEvent = (evt: PipelineJobEventDto, eventName: EventName) => {      
-      console.log(evt)
-      if (eventName === 'Stopping') return // Eat it
+    const onPipelineEvent = (evt: PipelineJobEventDto, eventName: JobStatusTypeWithStopping) => {
+      console.log("PIPELINE HUB EVENT ", evt)
+      
+      const color = statusColorMapper(eventName)
+      const verb = (eventName === 'Stopping') ? "is" : 'has'
+      notifications.show({
+        radius: 'md',
+        color: color,
+        title: 'Job Status Update',
+        message: `${evt.pipelineRun.pipelineName} ${verb} ${eventName.toLocaleLowerCase()}`
+      })
+      
+      if (eventName === 'Stopping') {
+        analyticsStore.requestCancel(evt.jobId)
+        return // no further action
+      }
+
+      if (eventName === 'Canceled')  
+        analyticsStore.cancelJob(evt.jobId)
+
       queryClient.invalidateQueries({ queryKey: ["job-pipeline","jobs"] })
     }
 
     // Listen to whatever statuses you emit
     ["Started", "Completed", "Failed", "Canceled", "Stopping"].forEach((name) => {
-      connection.on(name, (evt) => onPipelineEvent(evt, name as EventName));
+      connection.on(name, (evt) => onPipelineEvent(evt, name as JobStatusTypeWithStopping));
     });    
 
     return () => {

@@ -11,7 +11,7 @@ export const JobType = {
   Umap: JobTypesList[3]
 }
 
-export const StatusType = {
+export const JobStatusType = {
   Queued: JobStatusList[0],
   Started: JobStatusList[1],
   Completed: JobStatusList[2],
@@ -21,7 +21,9 @@ export const StatusType = {
 
 export type JobType = typeof JobTypesList[number];
 
-export type StatusType = typeof StatusType[keyof typeof StatusType];
+export type JobStatusType = typeof JobStatusType[keyof typeof JobStatusType];
+
+export type JobStatusTypeWithStopping = JobStatusType | "Stopping"
 
 export type DataPipelineItem = {
   id: string;
@@ -29,7 +31,7 @@ export type DataPipelineItem = {
   userId: string;
   pipelineName: string;
   jobType: JobType
-  status: StatusType;
+  status: JobStatusType;
   submittedAt: string;
   startedAt: string;
   completedAt: string;

@@ -18,6 +18,7 @@ export function useGetJobs({
     queryKey: pipelineRunsKey(jobType!, jobStatus),
     enabled,
     queryFn: () => jobPipelineService.getJobs({jobType, jobStatus, page, pageSize}),
+    refetchInterval: (5 * 60 * 1000), // FIVE MINUTES
     placeholderData: keepPreviousData
   });
 }

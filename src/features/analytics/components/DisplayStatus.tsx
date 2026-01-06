@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Loader, Table } from '@mantine/core';
 import { statusBkgdColorMapper, TStatusTypeWithStopping } from "../utilities/statusColorMapper";
-import { DataPipelineItem, StatusType } from "@/api/types/job-pipeline";
+import { DataPipelineItem, JobStatusType } from "@/api/types/job-pipeline";
 import { useAnalyticsStore } from "@/stores/analytics.store";
 
 export interface IProps {
@@ -11,7 +11,7 @@ export interface IProps {
 
 export function DisplayStatus({ job, displayType }: IProps) {
   const analyticsStore = useAnalyticsStore();
-  const prevStatus = useRef<StatusType | null>(null);
+  const prevStatus = useRef<JobStatusType | null>(null);
   const ref = useRef<HTMLTableCellElement>(null);
 
   const isStopping = useMemo(() => {
