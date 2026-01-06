@@ -4,6 +4,8 @@ import { ActionIcon, Table, Tooltip } from '@mantine/core';
 import { FastaListItem } from '@/api/types/fasta';
 import { DisplayEnumListItem } from '../shared/DisplayEnumListItem';
 import { readNumberList } from '../shared/readNumberList';
+import { EListActionType, ListActionMenu } from '@/shared/ui/components/compound';
+import { FastaDetailsModal, IHandles } from './FastaDetails.Modal';
 
 export interface IProps {
   data: FastaListItem[];
@@ -14,8 +16,19 @@ export function FastaTable({
   data,
   forAllSamples
 }: IProps) {
+  const fastaDetails = useRef<IHandles>(null)
+
+  const actionHdl = async (id: string, actionType: EListActionType) => {
+    switch (actionType) {
+      case EListActionType.Details:
+        fastaDetails.current?.open(id)
+        return
+    }
+  }
+
   return (
     <>
+      <FastaDetailsModal ref={fastaDetails}/>
       <Table withTableBorder withColumnBorders stickyHeader striped>
         <Table.Thead>
           <Table.Tr>
@@ -63,18 +76,11 @@ export function FastaTable({
               </Table.Td>
               <Table.Td>{item.definitionLine}</Table.Td>
               <Table.Td className="text-center">
-                <Tooltip label="View details" openDelay={500}>
-                  <ActionIcon 
-                    variant="filled" 
-                    color="green"
-                    size="sm" 
-                    radius="xl" 
-                    aria-label="Transcript details"
-                    // onClick={() => detailsHndl(item.id)}
-                  >
-                    <IconEye size="1em" />
-                  </ActionIcon>
-                </Tooltip>
+                <ListActionMenu 
+                  id={item.id.toString()} 
+                  showDetails 
+                  onActionClick={actionHdl}
+                />
               </Table.Td>
             </Table.Tr>
           ))}

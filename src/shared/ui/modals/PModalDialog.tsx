@@ -14,6 +14,7 @@ export interface IProps {
   size?: TComponentSize;
   top?: boolean;
   icon?: JSX.Element;
+  className?: string
   children: React.ReactNode;
 }
 
@@ -25,7 +26,9 @@ export function PModalDialog({
   size = 'md',
   top = false,
   icon,
+  className,
   children,
+  c
 }: IProps) {
   const [, deviceHeight] = useDeviceSize();
 
@@ -47,7 +50,7 @@ export function PModalDialog({
     >
       <div>
         <PModalHeader title={title} icon={icon} onClose={onClose}/>
-        <PModalBody>
+        <PModalBody className={className}>
           {children}
         </PModalBody>
         <PModalDialogFooter onClose={onClose} />

@@ -3,21 +3,20 @@ import { CreateReportJob, CreateScoreJob, CreateSummaryJob, CreateUmapJob, DataP
 import { jobPipelineService } from "../services/job-pipeline.service";
 import { useAnalyticsStore  } from "@/stores/analytics.store";
 
-export const pipelineRunsKey = (jobType: string, status?: string) =>
-  ["job-pipeline", "jobs", jobType, status ?? "all"] as const;
+export const pipelineRunsKey = (jobType: string, status?: string, q?: string) =>
+  ["job-pipeline", "jobs", jobType, status ?? "", q] as const;
 
 export function useGetJobs({
   jobType,
   jobStatus,
   page,
+  q,
   pageSize = 30,
 }: GetJobsParams) {
-  const enabled = Boolean(jobType) && Boolean(jobStatus) && page > 0 && pageSize > 0;
 
   return useQuery({
-    queryKey: pipelineRunsKey(jobType!, jobStatus),
-    enabled,
-    queryFn: () => jobPipelineService.getJobs({jobType, jobStatus, page, pageSize}),
+    queryKey: pipelineRunsKey(jobType!, jobStatus, q),
+    queryFn: () => jobPipelineService.getJobs({jobType, jobStatus, page, pageSize, q}),
     refetchInterval: (5 * 60 * 1000), // FIVE MINUTES
     placeholderData: keepPreviousData
   });

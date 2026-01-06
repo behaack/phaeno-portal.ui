@@ -2,13 +2,14 @@ import { axiosInstance } from "../core/axios.instance";
 import type { CreateReportJob, CreateScoreJob, CreateSummaryJob, CreateUmapJob, DataPipelineItem, GetJobsParams } from "../types/job-pipeline";
 import { api } from "../core/api-call";
 import { IPagedList } from "@/shared/types/IPagedList";
+import { FastaDetailsItem } from "../types/fasta";
 
 export const jobPipelineService = {
   submitJob: () => axiosInstance.post("data-pipeline-runs"),
 
-  getJobs: ({ jobType, jobStatus, page, pageSize = 30 }: GetJobsParams) => 
+  getJobs: ({ jobType, jobStatus, page, pageSize = 30, q }: GetJobsParams) => 
     api.get<IPagedList<DataPipelineItem>>("data-pipeline-run", { 
-      params: { jobType, jobStatus, page, pageSize } 
+      params: { jobType, jobStatus, page, pageSize, q } 
     }),
 
   createUmapJob: (job: CreateUmapJob) => 

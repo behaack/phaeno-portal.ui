@@ -44,6 +44,7 @@ export type DataPipelineItem = {
 export type GetJobsParams = {
   jobType?: string;
   jobStatus?: string;
+  q?: string
   page: number;
   pageSize?: number;
 };

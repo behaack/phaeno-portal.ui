@@ -1,13 +1,14 @@
 import { PBox } from "@/shared/ui/components/layout";
 import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
 
-export interface IProps {
+export interface Props {
   children: React.ReactNode;
+  className?: string
 }
 
-export function PModalBody({children }: IProps) {
+export function PModalBody({ className="", children }: Props) {
   return (
-  <PBox>
+  <PBox className={className}>
     {children}
   </PBox>
   )

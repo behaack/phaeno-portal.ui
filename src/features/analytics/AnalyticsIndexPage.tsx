@@ -11,14 +11,32 @@ import { IconMath } from "@tabler/icons-react";
 import { SelectCustomerMessage } from "../_common/SelectCustomerMessage";
 import { authSession } from "@/auth/auth.session";
 import { useImpersonationStore } from "@/stores/impersonation.store";
+import { PSearchInput } from "@/shared/ui/components/compound";
+
+
+const statusMenuList: string[] = [
+  "<All Statuses>",
+  ...JobStatusList  
+]
 
 export function AnalyticsIndexPage() {
   const impersonationStore = useImpersonationStore()
   const [jobType, setType] = useState("Report")
-  const [jobStatus, setStatus] = useState("Queued")
+  const [jobStatus, setStatus] = useState("<All Statuses>")
+  const [q, setQ] = useState("")
   const jobRef = useRef<IHandles>(null)
-  const { data } = useGetJobs({ jobType, jobStatus, page: 1})
+
   const FormComponent = lazy(() => import(`./forms/${jobType}Form`))
+
+  const jobStatusParameter = useMemo(() => {
+    console.log(jobStatus)
+    if(jobStatus === "<All Statuses>") return ""
+    return jobStatus
+  }, [jobStatus])
+
+  console.log(jobStatusParameter)
+
+  const { data } = useGetJobs({ jobType, jobStatus: jobStatusParameter, page: 1, q})
 
   const createJobHndl = () => {
     jobRef.current?.open()
@@ -41,6 +59,7 @@ export function AnalyticsIndexPage() {
               <FormComponent onClose={() => jobRef.current?.close()} />
             </Suspense>
           </CreateJobModal>
+
           <PSelect
             label="Job Type"
             placeholder="Pick value"
@@ -54,15 +73,22 @@ export function AnalyticsIndexPage() {
             label="Status"
             placeholder="Pick value"
             allowDeselect={false}
-            data={JobStatusList}
+            data={statusMenuList}
             value={jobStatus}
             onChange={(value) => setStatus(value ?? "")}
           />        
 
+
           <PDivider/>
 
-          <div className="text-right">
-            <PButton className="mb-1" onClick={createJobHndl} rightSection={<IconMath size={18} />}>Create </PButton>
+          <PSearchInput 
+            placeholder="Search by Job Name"
+            value={q}
+            onChange={(value) => setQ(value)}
+          />
+
+          <div className="text-right my-1">
+            <PButton onClick={createJobHndl} rightSection={<IconMath size={18} />}>Create </PButton>
           </div>
           <JobListIndex data={data || emptyPagedList}  />
         </div>

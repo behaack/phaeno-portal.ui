@@ -1,37 +1,38 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from "react"
 import { IconMath } from "@tabler/icons-react";
 import { PModalDialog } from "@/shared/ui/modals";
-import { DataPipelineItem } from "@/api/types/job-pipeline";
 import { KeyValueList } from "@/shared/ui/components/compound";
-import { toJobKeyValuePairs } from "../helpers/toJobKeyValuePairs";
+import { toFastaKeyValuePairs } from "../../helpers/toFastaKeyValuePairs";
+import { useFastaDetails } from "@/api/hooks/fasta.hooks";
+import { IconDna } from "@tabler/icons-react";
 
 export interface IHandles {
-  open: (job: DataPipelineItem) => void;
+  open: (id: string) => void;
 }
 
-export const JobDetailsModal = forwardRef<IHandles>((_, ref) => {
-  const jobRef = useRef<DataPipelineItem | null>(null)
+export const FastaDetailsModal = forwardRef<IHandles>((_, ref) => {
+  const fastaId = useRef<string | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const { data } = useFastaDetails(fastaId.current)
+
   useImperativeHandle(ref, () => ({
-    open(job: DataPipelineItem) {
-      jobRef.current = job
+    open(id: string) {
+      fastaId.current = id
       setIsOpen(true)  
     },
   }));  
 
-  //if (jobRef.current === null) return null
-
   return (
     <PModalDialog 
-      title="Job Details" 
-      icon={<IconMath size={21} />} 
+      title="Fasta Details" 
+      icon={<IconDna size={21} />} 
       opened={isOpen} 
       onClose={() => setIsOpen(false)}
       className="py-3 px-5"
       size="xl"
     >
-      <KeyValueList items={toJobKeyValuePairs(jobRef.current!)} />
+      <KeyValueList items={toFastaKeyValuePairs(data)} />
     </PModalDialog>
   )
 })

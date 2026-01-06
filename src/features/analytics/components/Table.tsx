@@ -62,7 +62,13 @@ export function JobTable({ list }: IProps) {
                 {statusDate(item)}
               </Table.Td>
                 <Table.Td className="text-center">
-                  <ListActionMenu id={item.id} disableDetails={item.status===JobStatusType.Started} showCancel={item.status===JobStatusType.Started} showDetails onActionClick={actionHdl}/>
+                  <ListActionMenu 
+                    id={item.id} 
+                    disableDetails={item.status===JobStatusType.Started} 
+                    showCancel={item.status===JobStatusType.Started} 
+                    showDetails 
+                    onActionClick={actionHdl}
+                  />
                 </Table.Td>            
             </Table.Tr>
           ))}
