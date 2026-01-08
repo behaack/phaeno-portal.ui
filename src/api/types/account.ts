@@ -26,6 +26,11 @@ export type ChangePassword = {
   confirmPassword: string
 }
 
+export type ResetPasswordRequest = {
+  newPassword: string
+  token: string
+}
+
 // ---------- TOTP ----------
 export type StartTotpEnrollmentRequest = { password: string }
 

@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/stores/auth.store";
 import { accountService } from "../services/account.service";
 import { useEffect } from "react";
+import { PasswordRecoveryStartRequest } from "../types/account";
 
 export const meQueryKey = ["account", "me"] as const;
 
@@ -33,7 +34,10 @@ export function useMeQuery() {
 }
 
 export function usePasswordRecoveryStart() {
-  return useMutation({ mutationFn: accountService.passwordRecoveryStart });
+  return useMutation({ 
+    mutationFn:  (req: PasswordRecoveryStartRequest): Promise<null> =>
+      accountService.passwordRecoveryStart(req) 
+  });
 }
 
 export function usePasswordRecoveryConfirm() {

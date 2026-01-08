@@ -17,9 +17,7 @@ export const accountService = {
 
   passwordRecoveryStart: (body: PasswordRecoveryStartRequest) => 
     api.post<null, PasswordRecoveryStartRequest>(
-      "/account/password-request-reset",
-      body
-    ),
+      "/account/password-request-reset", body),
 
   passwordRecoveryConfirm: (body: PasswordRecoveryConfirmRequest) => 
     api.post<null, PasswordRecoveryConfirmRequest>(

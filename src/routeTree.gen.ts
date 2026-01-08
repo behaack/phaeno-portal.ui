@@ -23,6 +23,7 @@ import { Route as AppAnalyticsRouteImport } from './routes/app/analytics'
 import { Route as App403RouteImport } from './routes/app/403'
 import { Route as AppUsersIndexRouteImport } from './routes/app/users/index'
 import { Route as AppCustomersIndexRouteImport } from './routes/app/customers/index'
+import { Route as AuthPasswordResetTokenRouteImport } from './routes/auth/password-reset/$token'
 import { Route as AppCustomersIdRouteImport } from './routes/app/customers/$id'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -95,6 +96,11 @@ const AppCustomersIndexRoute = AppCustomersIndexRouteImport.update({
   path: '/customers/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AuthPasswordResetTokenRoute = AuthPasswordResetTokenRouteImport.update({
+  id: '/password-reset/$token',
+  path: '/password-reset/$token',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
 const AppCustomersIdRoute = AppCustomersIdRouteImport.update({
   id: '/customers/$id',
   path: '/customers/$id',
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AppIndexRoute
   '/auth/': typeof AuthIndexRoute
   '/app/customers/$id': typeof AppCustomersIdRoute
+  '/auth/password-reset/$token': typeof AuthPasswordResetTokenRoute
   '/app/customers': typeof AppCustomersIndexRoute
   '/app/users': typeof AppUsersIndexRoute
 }
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/app': typeof AppIndexRoute
   '/auth': typeof AuthIndexRoute
   '/app/customers/$id': typeof AppCustomersIdRoute
+  '/auth/password-reset/$token': typeof AuthPasswordResetTokenRoute
   '/app/customers': typeof AppCustomersIndexRoute
   '/app/users': typeof AppUsersIndexRoute
 }
@@ -148,6 +156,7 @@ export interface FileRoutesById {
   '/app/': typeof AppIndexRoute
   '/auth/': typeof AuthIndexRoute
   '/app/customers/$id': typeof AppCustomersIdRoute
+  '/auth/password-reset/$token': typeof AuthPasswordResetTokenRoute
   '/app/customers/': typeof AppCustomersIndexRoute
   '/app/users/': typeof AppUsersIndexRoute
 }
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/auth/'
     | '/app/customers/$id'
+    | '/auth/password-reset/$token'
     | '/app/customers'
     | '/app/users'
   fileRoutesByTo: FileRoutesByTo
@@ -182,6 +192,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/app/customers/$id'
+    | '/auth/password-reset/$token'
     | '/app/customers'
     | '/app/users'
   id:
@@ -199,6 +210,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/auth/'
     | '/app/customers/$id'
+    | '/auth/password-reset/$token'
     | '/app/customers/'
     | '/app/users/'
   fileRoutesById: FileRoutesById
@@ -309,6 +321,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCustomersIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/auth/password-reset/$token': {
+      id: '/auth/password-reset/$token'
+      path: '/password-reset/$token'
+      fullPath: '/auth/password-reset/$token'
+      preLoaderRoute: typeof AuthPasswordResetTokenRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
     '/app/customers/$id': {
       id: '/app/customers/$id'
       path: '/customers/$id'
@@ -350,6 +369,7 @@ interface AuthRouteRouteChildren {
   AuthSignInRoute: typeof AuthSignInRoute
   AuthTwoFactorRoute: typeof AuthTwoFactorRoute
   AuthIndexRoute: typeof AuthIndexRoute
+  AuthPasswordResetTokenRoute: typeof AuthPasswordResetTokenRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
@@ -357,6 +377,7 @@ const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthSignInRoute: AuthSignInRoute,
   AuthTwoFactorRoute: AuthTwoFactorRoute,
   AuthIndexRoute: AuthIndexRoute,
+  AuthPasswordResetTokenRoute: AuthPasswordResetTokenRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(

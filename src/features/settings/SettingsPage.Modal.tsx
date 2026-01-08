@@ -30,7 +30,7 @@ export const SettingsPageModal = forwardRef<IHandles, IProps>((props, ref) => {
       opened={isOpen} 
       onClose={() => setIsOpen(false)}
     >
-      <div className="min-h-96">
+      <div className="min-h-96 py-3 px-2">
         <PTabs className="min-h-96" orientation="vertical" variant="outline" radius="xl" defaultValue="password">
           <PTabsList>
             <PTabsTab               

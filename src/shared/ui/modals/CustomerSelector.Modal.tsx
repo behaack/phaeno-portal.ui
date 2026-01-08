@@ -57,7 +57,6 @@ export const CustomerSelector = forwardRef<IHandles, undefined>((_, ref) => {
       onClose={() => setOpened(false)}
       size="lg"
       icon={<IconBuilding size={21} />}
-      top
     >
       <div className="py-3 px-5">
         <Combobox
