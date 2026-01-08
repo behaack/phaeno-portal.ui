@@ -1,5 +1,5 @@
-import { FormProvider, useForm } from "react-hook-form"
 import { z } from "zod"
+import { FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useNavigate } from "@tanstack/react-router"
 
@@ -7,8 +7,7 @@ import { useVerifyTwoFactorMutation } from "@/api/hooks/auth.hooks"
 import { getApiErrorMessage } from "@/api/core/getApiErrorMessage"
 import { ETwoFactorMethod } from "@/api/types/auth"
 
-import { RHFTextInput } from "@/shared/ui/components/form/rhf/RHFTextInput"
-import { RHFCheckbox } from "@/shared/ui/components/form/rhf/RHFCheckbox"
+import { RHFSwitch, RHFTextInput } from "@/shared/ui/components/form/rhf"
 import { PButton } from "@/shared/ui/components/inputs/PButton"
 import { Surface } from "@/shared/ui/primiatives/Surface"
 
@@ -82,7 +81,7 @@ export function TwoFactorPage() {
               inputMode="numeric"
             />
 
-            <RHFCheckbox name="rememberDevice" label="Remember this device" />
+            <RHFSwitch name="rememberDevice" label="Remember this device" />
 
             <PButton type="submit" loading={verify.isPending} disabled={verify.isPending} fullWidth>
               Verify

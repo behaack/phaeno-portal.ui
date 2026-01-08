@@ -8,13 +8,11 @@ import { Combobox, Paper, rem, ScrollArea, useCombobox } from '@mantine/core';
 import { PTextInput } from '@/shared/ui/components/inputs';
 import { PBox } from '@/shared/ui/components/layout';
 
-export interface IProps {}
-
 export interface IHandles {
   open: () => void;
 }
 
-export const CustomerSelector = forwardRef<IHandles, IProps>((_props, ref) => {
+export const CustomerSelector = forwardRef<IHandles, undefined>((_, ref) => {
   const store = useImpersonationStore()
   const routerState = useRouterState();
   const [opened, setOpened] = useState<boolean>(false);
@@ -59,53 +57,54 @@ export const CustomerSelector = forwardRef<IHandles, IProps>((_props, ref) => {
       onClose={() => setOpened(false)}
       size="lg"
       icon={<IconBuilding size={21} />}
-      hideFooter
       top
     >
-      <Combobox
-        store={combobox}        
-        onOptionSubmit={(val) => {
-          customerSelection(val);
-        }}
-      >
-        <Combobox.Target>
-          <PTextInput
-            label="Pick value or type anything"
-            value={searchValue}
-            onChange={(e) => {
-              setSearchValue(e.currentTarget.value);
-              combobox.updateSelectedOptionIndex();
-            }}
-            leftSection={<IconSearch size={14} />}
-            onFocus={() => combobox.openDropdown()}
-            onBlur={() => combobox.closeDropdown()}
-            placeholder="Pick value or type anything"
-            rightSection={<Combobox.Chevron />}
-          />
-        </Combobox.Target>
+      <div className="py-3 px-5">
+        <Combobox
+          store={combobox}        
+          onOptionSubmit={(val) => {
+            customerSelection(val);
+          }}
+        >
+          <Combobox.Target>
+            <PTextInput
+              label="Pick value or type anything"
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.currentTarget.value);
+                combobox.updateSelectedOptionIndex();
+              }}
+              leftSection={<IconSearch size={14} />}
+              onFocus={() => combobox.openDropdown()}
+              onBlur={() => combobox.closeDropdown()}
+              placeholder="Pick value or type anything"
+              rightSection={<Combobox.Chevron />}
+            />
+          </Combobox.Target>
 
-        <PBox>
-          <Paper withBorder radius="md" mt="xs">
-            <ScrollArea.Autosize mah={220}>
-              <Combobox.Options>
-                {list.length === 0 ? (
-                  <Combobox.Empty>No results</Combobox.Empty>
-                ) : (
-                  list.map((item) => (
-                    <Combobox.Option
-                      key={item.value}
-                      value={item.value}
-                      active={item.value === customer}
-                    >
-                      {item.label}
-                    </Combobox.Option>
-                  ))
-                )}
-              </Combobox.Options>
-            </ScrollArea.Autosize>
-          </Paper>
-        </PBox>
-      </Combobox>
+          <PBox>
+            <Paper withBorder radius="md" mt="xs">
+              <ScrollArea.Autosize mah={220}>
+                <Combobox.Options>
+                  {list.length === 0 ? (
+                    <Combobox.Empty>No results</Combobox.Empty>
+                  ) : (
+                    list.map((item) => (
+                      <Combobox.Option
+                        key={item.value}
+                        value={item.value}
+                        active={item.value === customer}
+                      >
+                        {item.label}
+                      </Combobox.Option>
+                    ))
+                  )}
+                </Combobox.Options>
+              </ScrollArea.Autosize>
+            </Paper>
+          </PBox>
+        </Combobox>
+      </div>
     </PModalDialog>
   );
 });
