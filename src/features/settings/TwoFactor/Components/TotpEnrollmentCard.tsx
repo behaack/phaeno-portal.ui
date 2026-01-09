@@ -36,7 +36,7 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
       await totpConfirm.mutateAsync({ enrollmentId, code })
       onClose()
     } catch {
-      // error lives in totpConfirm.error
+      
     }
   }
 
@@ -64,8 +64,6 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
         value={password}
         onChange={(e) => setPassword(e.currentTarget.value)}
       />
-
-      {startError ? <p className="text-sm mt-2 text-red-600">{startError}</p> : null}
 
       <div className="text-right mt-5">
         <PButton
@@ -118,8 +116,6 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
         </div>
       )}
 
-      {confirmError ? <p className="text-sm mt-2 text-red-600">{confirmError}</p> : null}
-
       <div className="flex justify-end gap-2 mt-5">
         <PButton
           variant="default"
@@ -148,7 +144,7 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
       </p>
 
       {startError || confirmError ? (
-        <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+        <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700 mb-4">
           {startError}
           {confirmError}
         </div>
@@ -169,12 +165,13 @@ function getErrorMessage(err: unknown): string | null {
   if (!err) return null
   if (typeof err === "string") return err
   if (err instanceof Error) return err.message
-
+  
+  
   const anyErr = err as any
   return (
     anyErr?.response?.data?.message ||
     anyErr?.response?.data?.error?.message ||
-    anyErr?.message ||
+    anyErr?.error.message ||
     null
   )
 }

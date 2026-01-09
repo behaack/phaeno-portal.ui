@@ -70,7 +70,7 @@ export function OopEnrollmentCard({ onClose }: IProp) {
 
   const step2 = (
     <div>
-      <p className="text-sm mb-3 text-gray-600"><b>Step 2:</b> Scan QR Code, then confirm 6-digit code</p>
+      <p className="text-sm mb-3 text-gray-600"><b>Step 2:</b> Check you email for 6-digit code, then confirm it here.</p>
       <image />
       <PTextInput 
         value={code} 
@@ -101,7 +101,7 @@ export function OopEnrollmentCard({ onClose }: IProp) {
       </p>   
 
       {startError || confirmError ? (
-        <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+        <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700 mb-5">
           {startError}
           {confirmError}
         </div>
@@ -119,21 +119,17 @@ function maskEmail(email: string) {
   return `${email[0]}***${email.slice(at)}`;
 }
 
-/**
- * Minimal error extraction that won’t crash if your error type changes.
- * If you have a standard ApiErrorEnvelope, swap this to use it.
- */
 function getErrorMessage(err: unknown): string | null {
   if (!err) return null
   if (typeof err === "string") return err
   if (err instanceof Error) return err.message
-
-  // common axios-ish shapes
+  
+  
   const anyErr = err as any
   return (
     anyErr?.response?.data?.message ||
     anyErr?.response?.data?.error?.message ||
-    anyErr?.message ||
+    anyErr?.error.message ||
     null
   )
 }
