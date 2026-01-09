@@ -1,7 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
 import { PTabs, PTabsList, PTabsPanel, PTabsTab } from "@/shared/ui/components/layout";
 import { IconLanguage } from "@tabler/icons-react";
-import { NIL } from "uuid";
 import { TranscriptPanel } from "./TranscriptPanel";
 import { FastaPanel } from "./FastaPanel";
 import { NaturalLangPanel } from "./NaturalLangPanel";
