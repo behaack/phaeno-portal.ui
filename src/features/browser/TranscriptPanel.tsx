@@ -6,13 +6,9 @@ import { useBrowserStore } from '@/stores/browser.store';
 import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
 import { flattenInfiniteCursorPages } from "@/api/helpers/flattenInfiniteCursorPages";
 
-export interface IProps {
-  sampleId: string | null;
-}
-
 const PAGE_SIZE = 50;
 
-export function TranscriptPanel({ sampleId }: IProps) {
+export function TranscriptPanel() {
   const store = useBrowserStore()
   
   const [searchValue, setSearchValue] = useState<string | null>("");
@@ -24,7 +20,7 @@ export function TranscriptPanel({ sampleId }: IProps) {
   const lookup = useTranscriptLookup({ q: searchValue ?? "", limit: PAGE_SIZE });
 
   const list = useTranscriptInfiniteList({
-    sampleId,
+    sampleId: store.selectedSample,
     limit: PAGE_SIZE,
     q: searchValue ?? "",
   })
@@ -42,13 +38,14 @@ export function TranscriptPanel({ sampleId }: IProps) {
   // When search context changes, start over (TanStack will do this via queryKey change,
   // but we also want to avoid any weird "inView" immediate fetch after switching)
   const justResetRef = useRef(false)
+  
   useEffect(() => {
     justResetRef.current = true
     const t = window.setTimeout(() => {
       justResetRef.current = false
     }, 0)
     return () => window.clearTimeout(t)
-  }, [sampleId, searchValue])
+  }, [store.selectedSample, searchValue])
 
   // Fetch next page when sentinel is visible
   useEffect(() => {
@@ -77,7 +74,7 @@ export function TranscriptPanel({ sampleId }: IProps) {
       />
 
       <div className="h-[60vh] overflow-auto rounded-xl border">
-        <TranscriptTable data={rows} forAllSamples={!sampleId}/>
+        <TranscriptTable data={rows} forAllSamples={!store.selectedSample}/>
         {/* Sentinel + status */}
         <div ref={sentinelRef} className="flex justify-center mt-4 py-3 text-sm text-muted-foreground">
           {list.isLoading ? (

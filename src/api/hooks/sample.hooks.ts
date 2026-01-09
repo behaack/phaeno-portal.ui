@@ -8,9 +8,8 @@ import { LookupListParams } from "../types/common"
 export function useSampleLookup(params: LookupListParams) {
   const roles = useAuthStore((s) => s.userAccount?.roles)
   const employee = isPhaenoEmployee(roles)
-
   const selectedOrgId = useImpersonationStore((s) => s.selectedCustomerId)
-
+  
   // customer => enabled
   // employee => enabled only after selecting org
   const enabled = !employee || !!selectedOrgId

@@ -7,13 +7,9 @@ import { useBrowserStore } from "@/stores/browser.store"
 import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
 import { flattenInfiniteCursorPages } from "@/api/helpers/flattenInfiniteCursorPages"
 
-export interface IProps {
-  sampleId: string | null
-}
-
 const PAGE_SIZE = 50
 
-export function FastaPanel({ sampleId }: IProps) {
+export function FastaPanel() {
   const store = useBrowserStore()
   const [searchValue, setSearchValue] = useState<string | null>("")
 
@@ -24,7 +20,7 @@ export function FastaPanel({ sampleId }: IProps) {
   const lookup = useFastaLookup({ q: searchValue ?? "", limit: PAGE_SIZE })
 
   const list = useFastaInfiniteList({
-    sampleId,
+    sampleId: store.selectedSample,
     limit: PAGE_SIZE,
     q: searchValue ?? "",
   })
@@ -48,7 +44,7 @@ export function FastaPanel({ sampleId }: IProps) {
       justResetRef.current = false
     }, 0)
     return () => window.clearTimeout(t)
-  }, [sampleId, searchValue])
+  }, [store.selectedSample, searchValue])
 
   // Fetch next page when sentinel is visible
   useEffect(() => {
@@ -76,7 +72,7 @@ export function FastaPanel({ sampleId }: IProps) {
       />
 
       <div className="h-[60vh] overflow-auto rounded-xl border">
-        <FastaTable data={rows} forAllSamples={!sampleId} />
+        <FastaTable data={rows} forAllSamples={!store.selectedSample} />
         {/* <ProTable data={rows} forAllSamples={!sampleId}/> */}
         {/* Sentinel + status */}
         <div ref={sentinelRef} className="flex justify-center mt-4 py-3 text-sm text-muted-foreground">

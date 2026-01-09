@@ -4,4 +4,6 @@ import type { FileRoomListItem } from "../types/file-room";
 export const fileRoomService = {
   getFileRoomForSelf: () =>
     api.get<FileRoomListItem[]>("/file-room"),
+  getFileRoomForOrg: (organizationId: string) =>
+    api.get<FileRoomListItem[]>(`/file-room/${organizationId}`),
 }

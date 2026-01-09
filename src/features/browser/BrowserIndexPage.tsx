@@ -13,43 +13,30 @@ import { CanViewData } from "../_common/CanViewData";
 
 
 export function BrowserIndexPage() {
-  const [sampleId, changeSampleId] = useState<string | null>()
   const store = useBrowserStore()
-
-  useEffect(() => {
-    changeSampleId(store.selectedSample)
-  }, [])
-
-  const updateSample = (value: string | null) => {
-    changeSampleId(value ?? "")
-    store.setSelectedSample(value)
-  }
 
   return (
     <Surface className="p-5" fullHeight elevation="sm" hover="none">
       <Text className="flex gap-3 items-center mb-6" variant="heading"><IconBrowser />Data Browser</Text>
       <CanViewData>
         <div>
-          <SampleSelector 
-            onSampleChange={(value) => updateSample(value)}
-            sampleId={sampleId ?? NIL}    
-            value={sampleId ?? ""}
-          />
 
-          <PTabs defaultValue="transcript" className="mt-5">
+          <SampleSelector />
+
+          <PTabs value={store.selectedTab} onChange={(tab) => (store.setSelectedTab(tab ?? 'transcript'))} defaultValue="transcript" className="mt-5">
             <PTabsList>
               <PTabsTab value="transcript" leftSection={<IconDna size={12} />}>Transcript</PTabsTab>
               <PTabsTab value="fasta" leftSection={<IconDna2 size={12} />}>FastA</PTabsTab>  
               <PTabsTab value="natural-language" leftSection={<IconLanguage size={12} />}>Nat'l Lang</PTabsTab>                         
             </PTabsList>      
             <PTabsPanel value="transcript">
-              <TranscriptPanel sampleId={sampleId ?? null} />
+              <TranscriptPanel />
             </PTabsPanel>
             <PTabsPanel value="fasta">
-              <FastaPanel sampleId={sampleId ?? null} />
+              <FastaPanel />
             </PTabsPanel>
             <PTabsPanel value="natural-language">
-              <NaturalLangPanel sampleId={sampleId ?? null} />
+              <NaturalLangPanel />
             </PTabsPanel>
           </PTabs>
         </div>

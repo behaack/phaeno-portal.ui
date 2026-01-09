@@ -5,12 +5,10 @@ import { AiAssistResponse, NaturalLangRequest, ERenderType, ESqlAiEntityType } f
 import { AiAssistResults } from "./components/ai-assistant/AiAssisResults"
 import { Text } from "@/shared/ui/primiatives"
 import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
+import { useBrowserStore } from "@/stores/browser.store"
 
-export interface Prop {
-  sampleId?: string | null
-}
-
-export function NaturalLangPanel({ sampleId }: Prop) {
+export function NaturalLangPanel() {
+  const store = useBrowserStore()
   const ai = useAiAssistNaturalLangMutation()
   const [queryId, setQueryId] = useState<string | null>(null)
   const [firstPage, setFirstPage] = useState<AiAssistResponse | null>(null)
@@ -73,7 +71,7 @@ export function NaturalLangPanel({ sampleId }: Prop) {
     e.preventDefault()
 
     const payload: NaturalLangRequest = {
-      sampleId: sampleId!,
+      sampleId: store.selectedSample!,
       requestString: request,
     }
 

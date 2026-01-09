@@ -26,7 +26,7 @@ export function FastaTable({
   }
 
   return (
-    <>
+    <div>
       <FastaDetailsModal ref={fastaDetails}/>
       <Table withTableBorder withColumnBorders stickyHeader striped>
         <Table.Thead>
@@ -85,6 +85,6 @@ export function FastaTable({
           ))}
         </Table.Tbody>
       </Table>
-    </>
+    </div>
   );
 }
