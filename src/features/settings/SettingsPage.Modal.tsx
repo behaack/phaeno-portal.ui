@@ -6,6 +6,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { ChangePasswordPanel } from "./ChangePassword/ChangePasswordPanel";
 import { TwoFactorPanel } from "./TwoFactor/TwoFactorPanel";
 import { ApiKeysPanel } from "./ApiKeys/ApiKeysPanel";
+import { CanRole } from "@/auth/CanRole";
 
 export interface IHandles {
   open: () => void;
@@ -39,18 +40,22 @@ export const SettingsPageModal = forwardRef<IHandles, IProps>((props, ref) => {
             >
               Change Password
             </PTabsTab>
+            
             <PTabsTab 
               value="two-factor" 
               leftSection={<IconShieldCheck size={15} />}
             >
               Two-factor
             </PTabsTab>  
-            <PTabsTab 
-              value="api-keys" 
-              leftSection={<IconKey size={15} />}
-            >
-              Api Keys
-            </PTabsTab>                       
+
+            <CanRole role={['customer-admin', 'partner-admin']}>
+              <PTabsTab 
+                value="api-keys" 
+                leftSection={<IconKey size={15} />}
+              >
+                Api Keys
+              </PTabsTab>                       
+            </CanRole>
           </PTabsList>
           <div className="px-6 w-full">
             <PTabsPanel value="password">

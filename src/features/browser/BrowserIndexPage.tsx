@@ -9,12 +9,10 @@ import { useBrowserStore } from '@/stores/browser.store';
 import { SampleSelector } from "./components/shared/SampleSelector";
 import { Surface, Text } from "@/shared/ui/primiatives";
 import { IconBrowser, IconDna, IconDna2 } from "@tabler/icons-react";
-import { SelectCustomerMessage } from "../_common/SelectCustomerMessage";
-import { authSession } from "@/auth/auth.session";
-import { useImpersonationStore } from "@/stores/impersonation.store";
+import { CanViewData } from "../_common/CanViewData";
+
 
 export function BrowserIndexPage() {
-  const impersonationStore = useImpersonationStore()
   const [sampleId, changeSampleId] = useState<string | null>()
   const store = useBrowserStore()
 
@@ -27,18 +25,10 @@ export function BrowserIndexPage() {
     store.setSelectedSample(value)
   }
 
-  const mayViewData = useMemo(() => {
-    if (authSession.isPhaeno()) {
-      return (!!impersonationStore.selectedCustomerId)
-    }
-    return true
-  }, [authSession.isPhaeno(), impersonationStore.selectedCustomerId])  
-
   return (
     <Surface className="p-5" fullHeight elevation="sm" hover="none">
       <Text className="flex gap-3 items-center mb-6" variant="heading"><IconBrowser />Data Browser</Text>
-
-      {(mayViewData) ? (  
+      <CanViewData>
         <div>
           <SampleSelector 
             onSampleChange={(value) => updateSample(value)}
@@ -63,8 +53,6 @@ export function BrowserIndexPage() {
             </PTabsPanel>
           </PTabs>
         </div>
-      ) : (
-        <SelectCustomerMessage />
-      )}
+      </CanViewData>
     </Surface>
 )}

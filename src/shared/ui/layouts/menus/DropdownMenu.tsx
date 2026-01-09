@@ -129,7 +129,9 @@ export function DropdownMenu({ baseRoute }: IProps) {
           <div>
             <div className="bg-black">
               <CurrentUser />
-              <SelectedCustomer onSelectCustomer={() => close()} />
+              <CanRole role={['phaeno-admin', 'phaeno-user']}>
+                <SelectedCustomer onSelectCustomer={() => close()} />
+              </CanRole>
             </div>
             <ul className="dropdown-menu">
               {filteredMenuList.map((item) => (

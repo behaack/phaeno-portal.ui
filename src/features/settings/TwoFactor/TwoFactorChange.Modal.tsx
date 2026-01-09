@@ -29,7 +29,7 @@ export const TwoFactorChgModal = forwardRef<IHandles, IProps>((props, ref) => {
       <PModalHeader 
         title="Two-Factor Settings" 
         icon={<IconShieldCheck size={21} />} 
-        onClose={() => setIsOpen(false)}        
+        onClose={() => setIsOpen(false)}                
       />
       <PModalBody className="py-3 px-5">
         {(method.current===ETwoFactorMethod.Totp) &&

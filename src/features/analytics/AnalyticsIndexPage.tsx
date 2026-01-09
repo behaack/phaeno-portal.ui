@@ -8,11 +8,10 @@ import { CreateJobModal, IHandles } from "./CreateJob.Modal";
 import { emptyPagedList } from "@/shared/types/IPagedList";
 import { Surface, Text } from "@/shared/ui/primiatives";
 import { IconMath } from "@tabler/icons-react";
-import { SelectCustomerMessage } from "../_common/SelectCustomerMessage";
 import { authSession } from "@/auth/auth.session";
 import { useImpersonationStore } from "@/stores/impersonation.store";
 import { PSearchInput } from "@/shared/ui/components/compound";
-
+import { CanViewData } from "../_common/CanViewData";
 
 const statusMenuList: string[] = [
   "<All Statuses>",
@@ -52,7 +51,7 @@ export function AnalyticsIndexPage() {
   return (
     <Surface className="p-5" fullHeight elevation="sm" hover="none">
       <Text className="flex gap-3 items-center mb-6" variant="heading"><IconMath />Data Analytics</Text>
-      {(mayViewData) ? (        
+      <CanViewData>
         <div>
           <CreateJobModal ref={jobRef} title={`Create ${jobType} Job`}>
             <Suspense fallback={<div style={{ minHeight: 280, padding: 16 }}>Loading…</div>}>
@@ -92,9 +91,7 @@ export function AnalyticsIndexPage() {
           </div>
           <JobListIndex data={data || emptyPagedList}  />
         </div>
-      ) : (
-        <SelectCustomerMessage />
-      )}        
+      </CanViewData>
     </Surface>
   );
 }
