@@ -1,7 +1,7 @@
+import { DataPipelineItem } from "@/api/types/job-pipeline";
 import { DateTime } from "luxon";
-import { IDataPipelineItem } from "../types/JobPipelineTypes";
 
-export const statusDate = (item: IDataPipelineItem): string => {
+export const statusDate = (item: DataPipelineItem): string => {
   let statusDate = "";
   switch (item.status) {
     case "Queued":

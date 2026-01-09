@@ -12,7 +12,7 @@ export interface IHandles {
   open: () => void;
 }
 
-export const CustomerSelector = forwardRef<IHandles, undefined>((_, ref) => {
+export const CustomerSelector = forwardRef<IHandles>((_, ref) => {
   const store = useImpersonationStore()
   const routerState = useRouterState();
   const [opened, setOpened] = useState<boolean>(false);

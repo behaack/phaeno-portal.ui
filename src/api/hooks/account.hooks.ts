@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/stores/auth.store";
 import { accountService } from "../services/account.service";
 import { useEffect } from "react";
@@ -43,5 +43,29 @@ export function usePasswordRecoveryStart() {
 export function usePasswordRecoveryConfirm() {
   return useMutation({
     mutationFn: accountService.passwordRecoveryConfirm,
+  });
+}
+
+export function useTotpStart() {
+  return useMutation({ mutationFn: accountService.totpStart });
+}
+
+export function useTotpConfirm() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: accountService.totpConfirm,
+    onSuccess: () => qc.invalidateQueries({ queryKey: meQueryKey }),
+  });
+}
+
+export function useOobStart() {
+  return useMutation({ mutationFn: accountService.oobStart });
+}
+
+export function useOobConfirm() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: accountService.oobConfirm,
+    onSuccess: () => qc.invalidateQueries({ queryKey: meQueryKey }),
   });
 }

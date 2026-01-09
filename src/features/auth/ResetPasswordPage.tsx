@@ -8,6 +8,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { FormProvider, useForm } from "react-hook-form";
 import { Route } from "@/routes/auth/password-reset/$token"
 import z from "zod";
+import { notifications } from "@mantine/notifications";
 
 const schema = z.object({
   newPassword: z
@@ -50,6 +51,12 @@ export function ResetPasswordPage() {
     }
     try {
       await mutation.mutateAsync(res)
+      notifications.show({
+        radius: 'md',
+        color: 'green',
+        title: 'Job Status Update',
+        message: 'Your password has been reset.'
+      })
       navigate({
         to: "/auth/sign-in"
       })
@@ -65,7 +72,7 @@ export function ResetPasswordPage() {
           <FormProvider {...form}>
             <form onSubmit={submitHndl} className="mt-6 space-y-4">
               <RHFPasswordInput 
-                name="password" 
+                name="newPassword" 
                 label="Password" 
                 placeholder="New password"
                 description="Must contain at least one alpha character, one number and one special character."

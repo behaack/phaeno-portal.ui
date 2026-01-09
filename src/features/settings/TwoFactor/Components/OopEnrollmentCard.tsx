@@ -1,4 +1,4 @@
-import { useOobConfirm, useOobStart } from "@/api/hooks/twofactorMutation.hooks";
+import { useOobConfirm, useOobStart } from "@/api/hooks/account.hooks";
 import { ETwoFactorDeliveryChannel } from "@/api/types/enums";
 import { authSession } from "@/auth/auth.session";
 import { PButton, PPasswordInput, PPinInput, PTextInput } from "@/shared/ui/components";

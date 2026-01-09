@@ -28,7 +28,6 @@ export function PModalDialog({
   icon,
   className,
   children,
-  c
 }: IProps) {
   const [, deviceHeight] = useDeviceSize();
 

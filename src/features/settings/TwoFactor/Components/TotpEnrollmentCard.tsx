@@ -1,5 +1,5 @@
-import { useTotpConfirm, useTotpStart } from "@/api/hooks/twofactorMutation.hooks"
-import { PButton, PPasswordInput, PPinInput, PTextInput } from "@/shared/ui/components"
+import { useTotpConfirm, useTotpStart } from "@/api/hooks/account.hooks"
+import { PButton, PPasswordInput, PTextInput } from "@/shared/ui/components"
 import { useState } from "react"
 
 export interface IProp {
