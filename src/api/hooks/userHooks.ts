@@ -1,6 +1,7 @@
-import { keepPreviousData, queryOptions, useQuery } from "@tanstack/react-query"
-import { LookupListParams, PagedListParams } from "../types/common"
+import { keepPreviousData, queryOptions, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { PagedListParams } from "../types/common"
 import { userService } from "@/api/services/user.service"
+import { UserDetails, UserListItem } from "../types/user"
 
 export function useGetUsersForOwnOrg(params: PagedListParams) {
   return useQuery({
@@ -40,3 +41,21 @@ export const userByIdQueryOptions = (id: string) =>
     enabled: Boolean(id),
     staleTime: 30_000,
   });
+
+export function useAddUser() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (req: UserDetails): Promise<UserListItem> => 
+      userService.addUser(req),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["users", "list" ]}),
+  });
+}
+
+export function useUpdateUser() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (req: UserDetails): Promise<UserListItem> => 
+      userService.updateUser(req),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["users", "list" ]}),
+  });
+}

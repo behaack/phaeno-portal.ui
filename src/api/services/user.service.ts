@@ -15,5 +15,13 @@ export const userService = {
     }),    
 
   getUser: (id: string) => 
-    api.get<UserDetails>(`/user/${id}`)
+    api.get<UserDetails>(`/user/${id}`),
+
+  addUser: (body: UserDetails) => {
+    return api.post<UserDetails, UserListItem>('user', body);
+  },
+
+  updateUser: (body: UserDetails) => {
+    return api.post<UserDetails, UserListItem>('user', body);
+  },
 }
