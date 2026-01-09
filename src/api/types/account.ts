@@ -23,7 +23,6 @@ export type TwoFactor = {
 export type ChangePassword = {
   currentPassword: string
   newPassword: string
-  confirmPassword: string
 }
 
 export type ResetPasswordRequest = {

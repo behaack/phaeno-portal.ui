@@ -1,6 +1,7 @@
 import { PasswordRecoveryConfirmRequest } from './../types/account';
 import { api } from "../core/api-call";
 import type { 
+  ChangePassword,
   ConfirmOobEnrollmentRequest,
   ConfirmTotpEnrollmentRequest,
   PasswordRecoveryStartRequest,
@@ -14,6 +15,9 @@ import type {
 
 export const accountService = {
   me: () => api.get<UserAccount>("/account/me"),
+
+  passwordChange: (body: ChangePassword) => api.post<null, ChangePassword>(
+    "/account/change-password", body),
 
   passwordRecoveryStart: (body: PasswordRecoveryStartRequest) => 
     api.post<null, PasswordRecoveryStartRequest>(
