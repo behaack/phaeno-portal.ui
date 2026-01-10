@@ -1,11 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { authService } from "@/api/services/auth.service"
-import type {
-  SignInRequest,
-  SignInResponse,
-  SignInAuthenticated,
-  TwoFactorVerifyRequest,
-} from "@/api/types/auth"
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { authService } from '@/api/services/auth.service'
+import type { SignInAuthenticated, TwoFactorVerifyRequest } from '@/api/types/auth'
 
 export function useSignInMutation() {
   const qc = useQueryClient()
@@ -14,7 +9,7 @@ export function useSignInMutation() {
     mutationFn: authService.signIn,
 
     onSuccess: async (res) => {
-      await qc.refetchQueries({ queryKey: ["account", "me"] })
+      await qc.refetchQueries({ queryKey: ['account', 'me'] })
     },
   })
 }
@@ -28,7 +23,7 @@ export function useVerifyTwoFactorMutation() {
       authService.verifyTwoFactor(req),
 
     onSuccess: async (res) => {
-      await qc.refetchQueries({ queryKey: ["account", "me"] })
+      await qc.refetchQueries({ queryKey: ['account', 'me'] })
     },
   })
 }

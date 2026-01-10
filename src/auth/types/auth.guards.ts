@@ -10,5 +10,5 @@
 
 export function isPhaenoEmployee(roles: string[] | undefined | null) {
   if (!roles?.length) return false
-  return roles.includes("phaeno-admin") || roles.includes("phaeno-user")
+  return roles.includes('phaeno-admin') || roles.includes('phaeno-user')
 }

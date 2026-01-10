@@ -9,22 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteRouteImport } from './routes/auth/route'
-import { Route as AppRouteRouteImport } from './routes/app/route'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthIndexRouteImport } from './routes/auth/index'
-import { Route as AppIndexRouteImport } from './routes/app/index'
-import { Route as AuthTwoFactorRouteImport } from './routes/auth/two-factor'
-import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
-import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
-import { Route as AppFilesRouteImport } from './routes/app/files'
-import { Route as AppBrowserRouteImport } from './routes/app/browser'
-import { Route as AppAnalyticsRouteImport } from './routes/app/analytics'
 import { Route as App403RouteImport } from './routes/app/403'
-import { Route as AppUsersIndexRouteImport } from './routes/app/users/index'
-import { Route as AppCustomersIndexRouteImport } from './routes/app/customers/index'
-import { Route as AuthPasswordResetTokenRouteImport } from './routes/auth/password-reset/$token'
+import { Route as AppAnalyticsRouteImport } from './routes/app/analytics'
+import { Route as AppBrowserRouteImport } from './routes/app/browser'
 import { Route as AppCustomersIdRouteImport } from './routes/app/customers/$id'
+import { Route as AppCustomersIndexRouteImport } from './routes/app/customers/index'
+import { Route as AppFilesRouteImport } from './routes/app/files'
+import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppRouteRouteImport } from './routes/app/route'
+import { Route as AppUsersIndexRouteImport } from './routes/app/users/index'
+import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
+import { Route as AuthIndexRouteImport } from './routes/auth/index'
+import { Route as AuthPasswordResetTokenRouteImport } from './routes/auth/password-reset/$token'
+import { Route as AuthRouteRouteImport } from './routes/auth/route'
+import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
+import { Route as AuthTwoFactorRouteImport } from './routes/auth/two-factor'
+import { Route as IndexRouteImport } from './routes/index'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/auth',
@@ -360,9 +360,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppUsersIndexRoute: AppUsersIndexRoute,
 }
 
-const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
-  AppRouteRouteChildren,
-)
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(AppRouteRouteChildren)
 
 interface AuthRouteRouteChildren {
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
@@ -380,9 +378,7 @@ const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthPasswordResetTokenRoute: AuthPasswordResetTokenRoute,
 }
 
-const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
-  AuthRouteRouteChildren,
-)
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(AuthRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,

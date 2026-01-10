@@ -1,6 +1,6 @@
 // auth.route-matrix.ts
-import { ROLES, type Role } from "./auth.roles"
-import { ROUTE_AREAS, type RouteArea } from "./auth.route-areas"
+import { ROLES, type Role } from './auth.roles'
+import { ROUTE_AREAS, type RouteArea } from './auth.route-areas'
 
 export const ROUTE_ACCESS: Record<RouteArea, readonly Role[]> = {
   [ROUTE_AREAS.APP]: [
@@ -12,23 +12,11 @@ export const ROUTE_ACCESS: Record<RouteArea, readonly Role[]> = {
     ROLES.PARTNER_ADMIN,
   ],
 
-  [ROUTE_AREAS.ADMIN]: [
-    ROLES.PHAENO_ADMIN,
-  ],
+  [ROUTE_AREAS.ADMIN]: [ROLES.PHAENO_ADMIN],
 
-  [ROUTE_AREAS.CUSTOMER]: [
-    ROLES.CUSTOMER_USER,
-    ROLES.CUSTOMER_ADMIN,
-  ],
+  [ROUTE_AREAS.CUSTOMER]: [ROLES.CUSTOMER_USER, ROLES.CUSTOMER_ADMIN],
 
-  [ROUTE_AREAS.PARTNER]: [
-    ROLES.PARTNER_USER,
-    ROLES.PARTNER_ADMIN,
-  ],
+  [ROUTE_AREAS.PARTNER]: [ROLES.PARTNER_USER, ROLES.PARTNER_ADMIN],
 
-  [ROUTE_AREAS.SETTINGS]: [
-    ROLES.PHAENO_ADMIN,
-    ROLES.CUSTOMER_ADMIN,
-    ROLES.PARTNER_ADMIN,
-  ],
+  [ROUTE_AREAS.SETTINGS]: [ROLES.PHAENO_ADMIN, ROLES.CUSTOMER_ADMIN, ROLES.PARTNER_ADMIN],
 } as const

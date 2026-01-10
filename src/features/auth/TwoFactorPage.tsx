@@ -1,21 +1,18 @@
-import { z } from "zod"
-import { FormProvider, useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useNavigate } from "@tanstack/react-router"
-
-import { useVerifyTwoFactorMutation } from "@/api/hooks/auth.hooks"
-import { getApiErrorMessage } from "@/api/core/getApiErrorMessage"
-import { ETwoFactorMethod } from "@/api/types/auth"
-
-import { RHFSwitch, RHFTextInput } from "@/shared/ui/components/form/rhf"
-import { PButton } from "@/shared/ui/components/inputs/PButton"
-import { Surface } from "@/shared/ui/primiatives/Surface"
-
-import { handleSignInResult } from "@/features/auth/utils/handleSignInResult"
-import { Route as TwoFactorRoute } from "@/routes/auth/two-factor"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from '@tanstack/react-router'
+import { FormProvider, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { getApiErrorMessage } from '@/api/core/getApiErrorMessage'
+import { useVerifyTwoFactorMutation } from '@/api/hooks/auth.hooks'
+import { ETwoFactorMethod } from '@/api/types/auth'
+import { handleSignInResult } from '@/features/auth/utils/handleSignInResult'
+import { Route as TwoFactorRoute } from '@/routes/auth/two-factor'
+import { RHFSwitch, RHFTextInput } from '@/shared/ui/components/form/rhf'
+import { PButton } from '@/shared/ui/components/inputs/PButton'
+import { Surface } from '@/shared/ui/primiatives/Surface'
 
 const schema = z.object({
-  code: z.string().min(4, "Enter the code").max(12, "Invalid code"),
+  code: z.string().min(4, 'Enter the code').max(12, 'Invalid code'),
   rememberDevice: z.boolean(),
 })
 
@@ -30,14 +27,17 @@ export function TwoFactorPage() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { code: "", rememberDevice: false },
+    defaultValues: { code: '', rememberDevice: false },
   })
 
   const onSubmit = form.handleSubmit(async (values) => {
-    form.clearErrors("root")
+    form.clearErrors('root')
 
     if (!loginChallengeId) {
-      form.setError("root", { type: "server", message: "Missing login challenge. Please sign in again." })
+      form.setError('root', {
+        type: 'server',
+        message: 'Missing login challenge. Please sign in again.',
+      })
       return
     }
 
@@ -48,17 +48,16 @@ export function TwoFactorPage() {
         rememberDevice: values.rememberDevice,
       })
       await handleSignInResult(res, navigate)
-      navigate({ to: "/app" })      
+      navigate({ to: '/app' })
     } catch (err) {
-      form.setError("root", { type: "server", message: getApiErrorMessage(err) })
-      form.setValue("code", "")
+      form.setError('root', { type: 'server', message: getApiErrorMessage(err) })
+      form.setValue('code', '')
     }
   })
 
   const rootError = form.formState.errors.root?.message
 
-  const methodLabel =
-    method === ETwoFactorMethod.OutOfBandCode ? "email" : "authenticator app"
+  const methodLabel = method === ETwoFactorMethod.OutOfBandCode ? 'email' : 'authenticator app'
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-4 bg-bg text-fg">

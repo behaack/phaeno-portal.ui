@@ -1,6 +1,6 @@
 // forms/types.ts
-import { JSX } from "react"
-import { ZodSchema } from "zod"
+import { JSX } from 'react'
+import { ZodSchema } from 'zod'
 
 export interface IJobFormContract<T> {
   schema: ZodSchema<T>

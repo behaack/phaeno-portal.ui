@@ -1,5 +1,5 @@
-import { Role } from "@/auth/auth.roles.js"
-import type { EOrganizationType, ETwoFactorDeliveryChannel, ETwoFactorMethod } from "./enums.ts"
+import { Role } from '@/auth/auth.roles.js'
+import type { EOrganizationType, ETwoFactorDeliveryChannel, ETwoFactorMethod } from './enums.ts'
 
 export type UserAccount = {
   userId: string
@@ -10,13 +10,13 @@ export type UserAccount = {
   firstName: string
   lastName: string
   isAdmin: boolean
-  roles: Role[],
+  roles: Role[]
   twoFactor: TwoFactor
 }
 
 export type TwoFactor = {
-  twoFactorMethod: ETwoFactorMethod,
-  twoFactorDeliveryChannel?: ETwoFactorDeliveryChannel,
+  twoFactorMethod: ETwoFactorMethod
+  twoFactorDeliveryChannel?: ETwoFactorDeliveryChannel
   deliveryHint?: string
 }
 
@@ -77,5 +77,3 @@ export type TwoFactorConfiguredResponse = {
   twoFactorDeliveryChannel?: ETwoFactorDeliveryChannel | null
   deliveryHint?: string | null
 }
-
-

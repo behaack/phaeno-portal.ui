@@ -1,11 +1,11 @@
-import { useMemo } from "react"
-import { FileRoomListItem } from "@/api/types/file-room"
-import { ListActionMenu } from "@/shared/ui/components/compound"
-import { ActionIcon, Anchor, Badge, Group, Table, Text } from "@mantine/core"
-import { IconChevronRight, IconFile, IconFolder } from "@tabler/icons-react"
-import { Route } from "@/routes/app/files"
-import { useNavigate } from "@tanstack/react-router"
-import DisplayFileSize from "./DisplayFileSize"
+import { useMemo } from 'react'
+import { IconChevronRight, IconFile, IconFolder } from '@tabler/icons-react'
+import { useNavigate } from '@tanstack/react-router'
+import { ActionIcon, Anchor, Badge, Group, Table, Text } from '@mantine/core'
+import { FileRoomListItem } from '@/api/types/file-room'
+import { Route } from '@/routes/app/files'
+import { ListActionMenu } from '@/shared/ui/components/compound'
+import DisplayFileSize from './DisplayFileSize'
 
 export interface IProps {
   list: FileRoomListItem[]
@@ -20,8 +20,8 @@ export function FileRoomTable({ list }: IProps) {
     navigate({
       to: Route.to,
       search: {
-        parentId: id ?? undefined
-      }
+        parentId: id ?? undefined,
+      },
     })
   }
 
@@ -49,20 +49,18 @@ export function FileRoomTable({ list }: IProps) {
       <Table withTableBorder withColumnBorders striped>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th style={{ backgroundColor: "black", color: "white" }}>
-              Name
-            </Table.Th>
+            <Table.Th style={{ backgroundColor: 'black', color: 'white' }}>Name</Table.Th>
             <Table.Th
               style={{
-                backgroundColor: "black",
-                color: "white",
-                width: "125px",
-                textAlign: "right",
+                backgroundColor: 'black',
+                color: 'white',
+                width: '125px',
+                textAlign: 'right',
               }}
             >
               Size
             </Table.Th>
-            <Table.Th style={{ backgroundColor: "black", color: "white", width: "90px" }}>
+            <Table.Th style={{ backgroundColor: 'black', color: 'white', width: '90px' }}>
               Action
             </Table.Th>
           </Table.Tr>
@@ -73,9 +71,7 @@ export function FileRoomTable({ list }: IProps) {
             const childCount = item.isFolder ? (childrenCountById.get(item.id) ?? 0) : 0
             const hasChildren = childCount > 0
 
-            const sizeBytes = item.isFolder
-              ? (folderSizeById.get(item.id) ?? 0)
-              : item.sizeBytes
+            const sizeBytes = item.isFolder ? (folderSizeById.get(item.id) ?? 0) : item.sizeBytes
 
             const canNavigate = item.isFolder && hasChildren && !!onNavigate
 
@@ -83,11 +79,7 @@ export function FileRoomTable({ list }: IProps) {
               <Table.Tr key={item.id}>
                 <Table.Td>
                   <Group gap="xs" wrap="nowrap">
-                    {item.isFolder ? (
-                      <IconFolder size={18} />
-                    ) : (
-                      <IconFile size={18} />
-                    )}
+                    {item.isFolder ? <IconFolder size={18} /> : <IconFile size={18} />}
 
                     {/* Name + children indicator */}
                     <Group gap="xs" wrap="nowrap">
@@ -96,7 +88,7 @@ export function FileRoomTable({ list }: IProps) {
                           component="button"
                           type="button"
                           onClick={() => onNavigate?.(item.id)}
-                          style={{ textAlign: "left" }}
+                          style={{ textAlign: 'left' }}
                         >
                           {item.name}
                         </Anchor>
@@ -124,8 +116,8 @@ export function FileRoomTable({ list }: IProps) {
                   </Group>
                 </Table.Td>
 
-                <Table.Td style={{ textAlign: "right" }}>
-                  <DisplayFileSize value={sizeBytes}/>
+                <Table.Td style={{ textAlign: 'right' }}>
+                  <DisplayFileSize value={sizeBytes} />
                 </Table.Td>
 
                 <Table.Td className="text-center">
@@ -148,7 +140,7 @@ export function FileRoomTable({ list }: IProps) {
 export function buildFolderSizeIndex(items: FileRoomListItem[]): Map<string, number> {
   const childrenByParent = new Map<string, FileRoomListItem[]>()
   for (const item of items) {
-    const pid = item.parentId ?? "__root__"
+    const pid = item.parentId ?? '__root__'
     const arr = childrenByParent.get(pid) ?? []
     arr.push(item)
     childrenByParent.set(pid, arr)

@@ -1,4 +1,4 @@
-import { Image } from '@mantine/core';
+import { Image } from '@mantine/core'
 
 export function NotAuthorizedPage() {
   return (
@@ -15,5 +15,5 @@ export function NotAuthorizedPage() {
         </div>
       </section>
     </main>
-  );
+  )
 }

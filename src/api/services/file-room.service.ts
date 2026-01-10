@@ -1,9 +1,8 @@
-import { api } from "../core/api-call";
-import type { FileRoomListItem } from "../types/file-room";
+import { api } from '../core/api-call'
+import type { FileRoomListItem } from '../types/file-room'
 
 export const fileRoomService = {
-  getFileRoomForSelf: () =>
-    api.get<FileRoomListItem[]>("/file-room"),
+  getFileRoomForSelf: () => api.get<FileRoomListItem[]>('/file-room'),
   getFileRoomForOrg: (organizationId: string) =>
     api.get<FileRoomListItem[]>(`/file-room/${organizationId}`),
 }

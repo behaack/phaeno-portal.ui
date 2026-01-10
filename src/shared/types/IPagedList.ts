@@ -1,9 +1,9 @@
 export interface IPagedList<T> {
-  list: T[];
-  pageCount: number;
-  pageNumber: number;
-  rowsReturned: number;
-  totalRowCount: number;
+  list: T[]
+  pageCount: number
+  pageNumber: number
+  rowsReturned: number
+  totalRowCount: number
 }
 
 export const emptyPagedList = {
@@ -12,4 +12,4 @@ export const emptyPagedList = {
   pageNumber: 0,
   rowsReturned: 0,
   totalRowCount: 0,
-};
+}

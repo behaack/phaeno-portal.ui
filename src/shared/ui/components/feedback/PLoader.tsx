@@ -1,4 +1,4 @@
-import { Loader, type LoaderProps } from "@mantine/core"
+import { Loader, type LoaderProps } from '@mantine/core'
 
 export type PLoaderProps = LoaderProps
 

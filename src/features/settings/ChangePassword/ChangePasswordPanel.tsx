@@ -1,5 +1,5 @@
-import { Text } from "@/shared/ui/primiatives";
-import { ChangePasswordForm } from "./ChangePasswordForm";
+import { Text } from '@/shared/ui/primiatives'
+import { ChangePasswordForm } from './ChangePasswordForm'
 
 export function ChangePasswordPanel() {
   return (

@@ -1,13 +1,12 @@
-import { Controller, useFormContext } from "react-hook-form";
-import { PSwitch, PSwitchProps } from "../../inputs";
+import { Controller, useFormContext } from 'react-hook-form'
+import { PSwitch, PSwitchProps } from '../../inputs'
 
-export interface RHFSwitchProps
-  extends Omit<PSwitchProps, "checked" | "onChange"> {
-  name: string;
+export interface RHFSwitchProps extends Omit<PSwitchProps, 'checked' | 'onChange'> {
+  name: string
 }
 
 export function RHFSwitch({ name, ...props }: RHFSwitchProps) {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <Controller
@@ -21,5 +20,5 @@ export function RHFSwitch({ name, ...props }: RHFSwitchProps) {
         />
       )}
     />
-  );
+  )
 }

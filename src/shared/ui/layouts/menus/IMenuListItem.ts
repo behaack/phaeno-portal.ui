@@ -8,14 +8,14 @@ export type Subtype =
   | 'customers'
   | 'api-keys'
   | 'security-settings'
-  | 'signout';
+  | 'signout'
 
 export default interface IMenuListItem {
-  index: number;
-  isMain: boolean;
-  type: 'link' | 'button';
-  subtype: Subtype;
-  label: string;
-  route: string;
-  userDataRoute: boolean;
+  index: number
+  isMain: boolean
+  type: 'link' | 'button'
+  subtype: Subtype
+  label: string
+  route: string
+  userDataRoute: boolean
 }

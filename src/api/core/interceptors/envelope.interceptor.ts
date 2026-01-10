@@ -1,12 +1,12 @@
-import type { AxiosInstance, AxiosResponse } from "axios"
-import type { ApiEnvelope, ApiEnvelopeError } from "../types"
+import type { AxiosInstance, AxiosResponse } from 'axios'
+import type { ApiEnvelope, ApiEnvelopeError } from '../types'
 
 function isEnvelope(x: any): x is ApiEnvelope<unknown> {
-  return x && typeof x === "object" && typeof x.success === "boolean" && "data" in x
+  return x && typeof x === 'object' && typeof x.success === 'boolean' && 'data' in x
 }
 
 function isEnvelopeError(x: any): x is ApiEnvelopeError {
-  return x && typeof x === "object" && x.success === false && x.error?.message
+  return x && typeof x === 'object' && x.success === false && x.error?.message
 }
 
 export function attachEnvelopeInterceptor(client: AxiosInstance) {

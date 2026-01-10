@@ -1,6 +1,6 @@
 // src/_auth/refresh.manager.ts
-import { axiosInstance } from "@/api/core/axios.instance"
-import { authSession } from "@/auth/auth.session"
+import { axiosInstance } from '@/api/core/axios.instance'
+import { authSession } from '@/auth/auth.session'
 
 type AuthResultDto = {
   accessToken: string
@@ -14,7 +14,11 @@ export function refreshTokensSingleFlight(): Promise<string> {
   if (inflight) return inflight
 
   inflight = (async () => {
-    const dto = await axiosInstance.post<unknown, AuthResultDto>("/auth/refresh", {}, { withCredentials: true })
+    const dto = await axiosInstance.post<unknown, AuthResultDto>(
+      '/auth/refresh',
+      {},
+      { withCredentials: true }
+    )
     authSession.rotateTokens(dto.accessToken, dto.refreshToken, dto.expiresInSeconds)
     return dto.accessToken
   })()

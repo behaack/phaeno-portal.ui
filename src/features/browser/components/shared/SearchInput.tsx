@@ -1,8 +1,8 @@
-import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
-import { IconSearch } from '@tabler/icons-react';
-import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
-import { PAutocomplete, PCloseButton } from '@/shared/ui/components/inputs';
-import { useDebouncedValue } from "@mantine/hooks"
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
+import { IconSearch } from '@tabler/icons-react'
+import { useDebouncedValue } from '@mantine/hooks'
+import { useDeviceSize } from '@/shared/hooks/useDeviceSize'
+import { PAutocomplete, PCloseButton } from '@/shared/ui/components/inputs'
 
 export interface IProps {
   data: string[]
@@ -11,49 +11,44 @@ export interface IProps {
   value?: string
 }
 
-export function SearchInput({
-  data,
-  placeholder,
-  onChange,
-  value
-}: IProps) {
-  const [, height] = useDeviceSize();
-  const [searchStr, setSearchStr] = useState<string>("");
+export function SearchInput({ data, placeholder, onChange, value }: IProps) {
+  const [, height] = useDeviceSize()
+  const [searchStr, setSearchStr] = useState<string>('')
   const [debouncedSearch] = useDebouncedValue(searchStr, 250)
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    setSearchStr(value ?? "");
-  }, [value]);
+    setSearchStr(value ?? '')
+  }, [value])
 
   const clearButtonVisible = useMemo(() => {
     return searchStr !== ''
-  }, [searchStr]);
+  }, [searchStr])
 
   const dropdownHeight = (): string => {
-    let ddh = height - 300;
-    ddh = ddh < 180 ? 180 : ddh;
-    return `${ddh}px`;
-  };
+    let ddh = height - 300
+    ddh = ddh < 180 ? 180 : ddh
+    return `${ddh}px`
+  }
 
   const clearContents = () => {
-    setSearchStr('');
-  };
+    setSearchStr('')
+  }
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    inputRef.current?.blur();
-  };
+    e.preventDefault()
+    inputRef.current?.blur()
+  }
 
   const optionSubmit = (value: string) => {
-    setSearchStr(value);
-    inputRef.current?.blur();
-  };
+    setSearchStr(value)
+    inputRef.current?.blur()
+  }
 
   const changeValue = (value: string) => {
     setSearchStr(value)
   }
-  
+
   useEffect(() => {
     onChange(debouncedSearch)
   }, [debouncedSearch])
@@ -85,5 +80,5 @@ export function SearchInput({
         <input type="submit" className="border-none h-0 w-0 p-0 m-0 overflow-hidden" />
       </form>
     </div>
-  );
+  )
 }

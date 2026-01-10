@@ -1,6 +1,6 @@
-export { PFormField, type PFormFieldProps } from "./PFormField";
+export { PFormField, type PFormFieldProps } from './PFormField'
 
-export { Form } from "./Form";
+export { Form } from './Form'
 
 export {
   RHFTextInput,
@@ -9,4 +9,4 @@ export {
   RHFPasswordInput,
   RHFSelect,
   RHFCheckbox,
-} from "./rhf";
+} from './rhf'

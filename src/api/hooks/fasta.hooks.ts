@@ -1,11 +1,11 @@
-import { useQuery, keepPreviousData, useInfiniteQuery } from "@tanstack/react-query"
-import { fastaService } from "@/api/services/fasta.service"
-import type { GenomicListParams } from "@/api/types/genomic.common"
-import { useImpersonationStore } from "@/stores/impersonation.store"
-import { useAuthStore } from "@/stores/auth.store" // or wherever your roles live
-import { isPhaenoEmployee } from "@/auth/types/auth.guards"
-import { LookupListParams } from "../types/common"
-import { getNextCursor } from "../helpers/getNextCursor"
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { fastaService } from '@/api/services/fasta.service'
+import type { GenomicListParams } from '@/api/types/genomic.common'
+import { isPhaenoEmployee } from '@/auth/types/auth.guards'
+import { useAuthStore } from '@/stores/auth.store' // or wherever your roles live
+import { useImpersonationStore } from '@/stores/impersonation.store'
+import { getNextCursor } from '../helpers/getNextCursor'
+import { LookupListParams } from '../types/common'
 
 /**
  * Infinite version of useFastaList.
@@ -13,7 +13,7 @@ import { getNextCursor } from "../helpers/getNextCursor"
  * Pass in the same params you used before EXCEPT cursor.
  * TanStack Query will supply cursor via pageParam.
  */
-export function useFastaInfiniteList(params: Omit<GenomicListParams, "cursor">) {
+export function useFastaInfiniteList(params: Omit<GenomicListParams, 'cursor'>) {
   const roles = useAuthStore((s) => s.userAccount?.roles)
   const employee = isPhaenoEmployee(roles)
   const selectedOrgId = useImpersonationStore((s) => s.selectedCustomerId)
@@ -26,14 +26,14 @@ export function useFastaInfiniteList(params: Omit<GenomicListParams, "cursor">) 
 
   return useInfiniteQuery({
     queryKey: [
-      "fasta",
-      "list:infinite",
-      employee ? selectedOrgId : "self",
+      'fasta',
+      'list:infinite',
+      employee ? selectedOrgId : 'self',
       params.sampleId ?? null,
       params.q ?? null,
       limit,
     ] as const,
-    
+
     enabled,
 
     // pageParam is the cursor. Start with null/"" based on how your API expects first page.
@@ -61,7 +61,6 @@ export function useFastaInfiniteList(params: Omit<GenomicListParams, "cursor">) 
   })
 }
 
-
 export function useFastaLookup(params: LookupListParams) {
   const roles = useAuthStore((s) => s.userAccount?.roles) // adapt to your auth store
   const employee = isPhaenoEmployee(roles)
@@ -73,7 +72,7 @@ export function useFastaLookup(params: LookupListParams) {
   const enabled = !employee || selectedOrgId !== null
 
   return useQuery({
-    queryKey: ["fasta", "lookup", employee ? selectedOrgId : "self", params.q],
+    queryKey: ['fasta', 'lookup', employee ? selectedOrgId : 'self', params.q],
     enabled,
     queryFn: () => {
       if (!employee) return fastaService.lookup(params)
@@ -94,9 +93,9 @@ export function useFastaList(params: GenomicListParams) {
 
   return useQuery({
     queryKey: [
-      "fasta",
-      "list",
-      employee ? selectedOrgId : "self",
+      'fasta',
+      'list',
+      employee ? selectedOrgId : 'self',
       params.sampleId ?? null,
       params.q ?? null,
       params.limit ?? 25,
@@ -113,7 +112,7 @@ export function useFastaList(params: GenomicListParams) {
 
 export function useFastaDetails(id: string | null | undefined) {
   return useQuery({
-    queryKey: ["fasta", "details", id ?? null],
+    queryKey: ['fasta', 'details', id ?? null],
     enabled: !!id,
     queryFn: () => fastaService.get(id!),
   })

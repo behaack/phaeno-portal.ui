@@ -1,8 +1,8 @@
-import { useAuthStore } from "@/stores/auth.store"
-import type { NavigateFn } from "@tanstack/react-router"
-import { Role } from "./auth.roles"
-import { getRoleScope, RoleScope } from "./auth.role-scope"
-import { EOrganizationType } from "@/api/types/enums"
+import type { NavigateFn } from '@tanstack/react-router'
+import { EOrganizationType } from '@/api/types/enums'
+import { useAuthStore } from '@/stores/auth.store'
+import { getRoleScope, RoleScope } from './auth.role-scope'
+import { Role } from './auth.roles'
 
 export const authSession = {
   // 🔐 tokens
@@ -25,18 +25,14 @@ export const authSession = {
   },
 
   // 🧱 RBAC helpers
-  hasRole: (role: Role) =>
-    useAuthStore.getState().userAccount?.roles.includes(role) ?? false,
+  hasRole: (role: Role) => useAuthStore.getState().userAccount?.roles.includes(role) ?? false,
 
   hasAnyRole: (roles: Role[]) =>
-    roles.some(r => useAuthStore.getState().userAccount?.roles.includes(r)),
+    roles.some((r) => useAuthStore.getState().userAccount?.roles.includes(r)),
 
   hasScope: (scope: RoleScope) =>
-    useAuthStore
-      .getState()
-      .userAccount
-      ?.roles
-      .some(role => getRoleScope(role) === scope) ?? false,  
+    useAuthStore.getState().userAccount?.roles.some((role) => getRoleScope(role) === scope) ??
+    false,
 
   // 🔄 lifecycle
   login: (accessToken: string, refreshToken: string, expiresInSeconds: number) =>
@@ -47,8 +43,7 @@ export const authSession = {
 
   logout: async (navigate?: NavigateFn) => {
     useAuthStore.getState().logout()
-  }
+  },
 }
 
-const getOrgType = () =>
-  useAuthStore.getState().userAccount?.organizationType;
+const getOrgType = () => useAuthStore.getState().userAccount?.organizationType

@@ -1,5 +1,5 @@
-import { authSession } from "./auth.session"
-import type { Role } from "./auth.roles"
+import type { Role } from './auth.roles'
+import { authSession } from './auth.session'
 
 // USAGE:
 // roleUtils.has(ROLES.PHAENO_ADMIN)
@@ -15,6 +15,6 @@ export const roleUtils = {
   },
 
   hasAll(...roles: Role[]): boolean {
-    return roles.every(r => authSession.hasRole(r))
+    return roles.every((r) => authSession.hasRole(r))
   },
 }

@@ -1,8 +1,13 @@
+import {
+  IconCancel,
+  IconDotsVertical,
+  IconEdit,
+  IconEye,
+  IconMail,
+  IconPlus,
+  IconTrash,
+} from '@tabler/icons-react'
 import { ActionIcon, Menu } from '@mantine/core'
-import { IconCancel } from '@tabler/icons-react'
-import { IconEye } from '@tabler/icons-react'
-import { IconPlus } from '@tabler/icons-react'
-import { IconEdit, IconMail, IconTrash, IconDotsVertical } from '@tabler/icons-react'
 
 export enum EListActionType {
   Add,
@@ -10,43 +15,42 @@ export enum EListActionType {
   Edit,
   Delete,
   Cancel,
-  Email
+  Email,
 }
 
 export interface IProps {
   id: string
   showAdd?: boolean
   showDetails?: boolean
-  showEdit? : boolean
+  showEdit?: boolean
   showDelete?: boolean
   showEmail?: boolean
   showCancel?: boolean
   disableAdd?: boolean
   disableDetails?: boolean
-  disableEdit?: boolean,
-  disableDelete?: boolean,
-  disableEmail?: boolean,
+  disableEdit?: boolean
+  disableDelete?: boolean
+  disableEmail?: boolean
   disableCancel?: boolean
   onActionClick: (id: string, actionType: EListActionType) => void
 }
 
-export function ListActionMenu({ 
+export function ListActionMenu({
   id,
-  showAdd=false,
-  showEdit=false,
-  showDelete=false,
-  showDetails=false,
-  showEmail=false,
-  showCancel=false,
-  disableAdd=false,
-  disableEdit=false,
-  disableDelete=false,
-  disableDetails=false,
-  disableEmail=false,
-  disableCancel=false,
+  showAdd = false,
+  showEdit = false,
+  showDelete = false,
+  showDetails = false,
+  showEmail = false,
+  showCancel = false,
+  disableAdd = false,
+  disableEdit = false,
+  disableDelete = false,
+  disableDetails = false,
+  disableEmail = false,
+  disableCancel = false,
   onActionClick,
 }: IProps) {
-
   const clickHandle = (action: EListActionType) => {
     onActionClick(id, action)
   }
@@ -59,62 +63,62 @@ export function ListActionMenu({
         </ActionIcon>
       </Menu.Target>
       <Menu.Dropdown>
-        {showAdd &&
-          <Menu.Item 
-            disabled={disableAdd} 
+        {showAdd && (
+          <Menu.Item
+            disabled={disableAdd}
             leftSection={<IconPlus size={14} />}
-            onClick={() =>clickHandle(EListActionType.Add)}
+            onClick={() => clickHandle(EListActionType.Add)}
           >
             Add
           </Menu.Item>
-        }
-        {showEdit &&
-          <Menu.Item 
-            disabled={disableEdit} 
+        )}
+        {showEdit && (
+          <Menu.Item
+            disabled={disableEdit}
             leftSection={<IconEdit size={14} />}
-            onClick={() =>clickHandle(EListActionType.Edit)}
+            onClick={() => clickHandle(EListActionType.Edit)}
           >
             Update
           </Menu.Item>
-        }  
-        {showDetails &&
-          <Menu.Item 
-            disabled={disableDetails} 
+        )}
+        {showDetails && (
+          <Menu.Item
+            disabled={disableDetails}
             leftSection={<IconEye size={14} />}
-            onClick={() =>clickHandle(EListActionType.Details)}
+            onClick={() => clickHandle(EListActionType.Details)}
           >
             View Details
           </Menu.Item>
-        }                        
-        {showEmail &&
-          <Menu.Item 
-          disabled={disableEmail} 
-          leftSection={<IconMail size={14} />}
-          onClick={() =>clickHandle(EListActionType.Email)}
+        )}
+        {showEmail && (
+          <Menu.Item
+            disabled={disableEmail}
+            leftSection={<IconMail size={14} />}
+            onClick={() => clickHandle(EListActionType.Email)}
           >
             Resend Invite
-          </Menu.Item>                
-        }
-        {showDelete &&
-          <Menu.Item 
-            disabled={disableDelete} 
-            color="red" 
+          </Menu.Item>
+        )}
+        {showDelete && (
+          <Menu.Item
+            disabled={disableDelete}
+            color="red"
             leftSection={<IconTrash size={14} />}
-            onClick={() =>clickHandle(EListActionType.Delete)}
+            onClick={() => clickHandle(EListActionType.Delete)}
           >
             Delete
-          </Menu.Item>        
-        }
-        {showCancel &&
-          <Menu.Item 
-            disabled={disableCancel} 
-            color="red" 
+          </Menu.Item>
+        )}
+        {showCancel && (
+          <Menu.Item
+            disabled={disableCancel}
+            color="red"
             leftSection={<IconCancel size={14} />}
-            onClick={() =>clickHandle(EListActionType.Cancel)}
+            onClick={() => clickHandle(EListActionType.Cancel)}
           >
             Cancel
-          </Menu.Item>        
-        }        
+          </Menu.Item>
+        )}
       </Menu.Dropdown>
     </Menu>
   )

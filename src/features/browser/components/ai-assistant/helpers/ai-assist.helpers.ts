@@ -9,18 +9,18 @@ export function prettifyName(title: string): string {
     // .replace(/\b(Count|Number)\b/gi, '#')
     // Normalize multiple spaces
     .replace(/\s+/g, ' ')
-    .trim();
+    .trim()
 
-  return spaced;
-};
+  return spaced
+}
 
 export function toRows(results: unknown): any[] {
   return Array.isArray(results) ? results : []
 }
 
 export function toMetric(results: unknown): { value: number | string; label?: string } | null {
-  if (!results || typeof results !== "object") return null
+  if (!results || typeof results !== 'object') return null
   const r = results as any
-  if ("value" in r) return { value: r.value, label: r.label }
+  if ('value' in r) return { value: r.value, label: r.label }
   return null
 }

@@ -8,11 +8,11 @@ export enum ETwoFactorMethod {
   None = 0,
   OutOfBandCode = 1,
   Totp = 2,
-  Push = 3,     // not in use
-  WebAuthn = 4  // not in use
+  Push = 3, // not in use
+  WebAuthn = 4, // not in use
 }
 
 export enum ETwoFactorDeliveryChannel {
   Email = 0,
-  Sms = 1
+  Sms = 1,
 }

@@ -1,5 +1,5 @@
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 type ImpersonationState = {
   // null = employee but not selected yet
@@ -16,21 +16,23 @@ export const useImpersonationStore = create<ImpersonationState>()(
     (set) => ({
       selectedCustomerId: null,
       selectedCustomerName: null,
-      setSelectedCustomer: (id, name) => set({ 
-        selectedCustomerId: id,
-        selectedCustomerName: name 
-      }),
-      clear: () => set({ 
-        selectedCustomerId: null,
-        selectedCustomerName: null 
-      }),
+      setSelectedCustomer: (id, name) =>
+        set({
+          selectedCustomerId: id,
+          selectedCustomerName: name,
+        }),
+      clear: () =>
+        set({
+          selectedCustomerId: null,
+          selectedCustomerName: null,
+        }),
     }),
     {
-      name: "impersonation.store",
+      name: 'impersonation.store',
       // optional: only persist the selected org
-      partialize: (s) => ({ 
+      partialize: (s) => ({
         selectedCustomerId: s.selectedCustomerId,
-        selectedCustomerName: s.selectedCustomerName 
+        selectedCustomerName: s.selectedCustomerName,
       }),
     }
   )

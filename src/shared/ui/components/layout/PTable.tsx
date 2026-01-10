@@ -1,5 +1,5 @@
-import React from "react"
-import { Table, type TableProps } from "@mantine/core"
+import React from 'react'
+import { Table, type TableProps } from '@mantine/core'
 
 export type PTableProps = TableProps
 

@@ -21,16 +21,12 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 400
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 429
       }
     ]
@@ -57,9 +53,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 429
       }
     ]
@@ -86,9 +80,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 403
       }
     ]
@@ -104,9 +96,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Infrastructure.Api.ApiResponse\u00601[[phaeno.api.Infrastructure.Auth.DTOs.Response.MeDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 200
       }
     ]
@@ -133,16 +123,12 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 400
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 410
       }
     ]
@@ -169,16 +155,12 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 400
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 429
       }
     ]
@@ -227,9 +209,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 400
       }
     ]
@@ -256,9 +236,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 400
       }
     ]
@@ -280,20 +258,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.AIAssist.DTOs.SqlAiDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 400
       }
     ]
@@ -320,20 +290,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.AIAssist.DTOs.SqlAiDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 403
       }
     ]
@@ -355,20 +317,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.AIAssist.DTOs.SqlAiDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 400
       }
     ]
@@ -395,20 +349,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.AIAssist.DTOs.SqlAiDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 403
       }
     ]
@@ -440,11 +386,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Common.Paging.Numbered.NumberedPagedListDto\u00601[[phaeno.api.Features.ApiKeys.DTOs.ApiKeyListDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -466,20 +408,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.ApiKeys.DTOs.ApiKeyDetailDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -506,11 +440,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -532,20 +462,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.ApiKeys.DTOs.ApiKeyDetailDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 400
       }
     ]
@@ -567,20 +489,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.ApiKeys.DTOs.ApiKeyDetailDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -617,11 +531,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Common.Paging.Numbered.NumberedPagedListDto\u00601[[phaeno.api.Features.Pipeline.DTOs.Response.PipelineRunResponseDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -643,20 +553,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Pipeline.DTOs.Response.PipelineRunResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -683,11 +585,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -729,20 +627,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Common.Paging.Numbered.NumberedPagedListDto\u00601[[phaeno.api.Features.Pipeline.DTOs.Response.PipelineRunResponseDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 403
       }
     ]
@@ -769,11 +659,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -795,11 +681,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Pipeline.DTOs.Response.PipelineRunResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -821,11 +703,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Pipeline.DTOs.Response.PipelineRunResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -847,20 +725,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Pipeline.DTOs.Response.PipelineRunResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -882,11 +752,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Pipeline.DTOs.Response.PipelineRunResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -908,11 +774,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Pipeline.DTOs.Response.PipelineRunResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -949,11 +811,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Common.Paging.Cursor.CursorPageDto\u00601[[phaeno.api.Features.Fastas.DTOs.FastaListDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -975,20 +833,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Fastas.DTOs.FastaDetailsDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -1030,20 +880,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Common.Paging.Cursor.CursorPageDto\u00601[[phaeno.api.Features.Fastas.DTOs.FastaListDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 403
       }
     ]
@@ -1075,11 +917,7 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -1116,20 +954,12 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 403
       }
     ]
@@ -1208,11 +1038,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Common.Paging.Numbered.NumberedPagedListDto\u00601[[phaeno.api.Features.Organizations.DTOs.Response.OrganizationResponseDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -1234,20 +1060,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Organizations.DTOs.Response.OrganizationResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 400
       }
     ]
@@ -1269,20 +1087,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Organizations.DTOs.Response.OrganizationResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 409
       }
     ]
@@ -1304,20 +1114,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Organizations.DTOs.Response.OrganizationResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -1344,11 +1146,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -1375,11 +1173,7 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[phaeno.api.Common.Paging.Lookup.LookupListItemDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -1443,11 +1237,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 403
       }
     ]
@@ -1484,11 +1274,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Common.Paging.Cursor.CursorPageDto\u00601[[phaeno.api.Features.Transcripts.DTOs.TranscriptListDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -1510,20 +1296,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Features.Transcripts.DTOs.TranscriptDetailsDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 404
       }
     ]
@@ -1565,20 +1343,12 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Common.Paging.Cursor.CursorPageDto\u00601[[phaeno.api.Features.Transcripts.DTOs.TranscriptListDto, phaeno.api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 403
       }
     ]
@@ -1610,11 +1380,7 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       }
     ]
@@ -1651,20 +1417,12 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 403
       }
     ]
@@ -1812,20 +1570,12 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 400
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 429
       }
     ]
@@ -1852,20 +1602,12 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 400
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 429
       }
     ]
@@ -1892,11 +1634,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "MediaTypes": ["text/plain", "application/json", "text/json"],
         "StatusCode": 400
       }
     ]
@@ -1918,9 +1656,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Infrastructure.Auth.DTOs.Response.SignInAuthenticatedDto",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 200
       }
     ]
@@ -1942,9 +1678,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Infrastructure.Auth.DTOs.Response.AuthResultDto",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 200
       }
     ]
@@ -1966,9 +1700,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Infrastructure.Auth.DTOs.Response.SignInResponseDto",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 200
       }
     ]
@@ -1990,9 +1722,7 @@
     "ReturnTypes": [
       {
         "Type": "phaeno.api.Infrastructure.Auth.DTOs.Response.SignInAuthenticatedDto",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "MediaTypes": ["application/json"],
         "StatusCode": 200
       }
     ]
@@ -2035,9 +1765,7 @@
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "image/png"
-        ],
+        "MediaTypes": ["image/png"],
         "StatusCode": 403
       }
     ]

@@ -1,1 +1,1 @@
-export {type MantineSize as TComponentSize} from "@mantine/core";
+export { type MantineSize as TComponentSize } from '@mantine/core'

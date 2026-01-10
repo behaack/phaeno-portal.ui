@@ -1,29 +1,29 @@
-import { useMemo } from 'react';
-import { IconCaretLeft, IconCaretRight } from '@tabler/icons-react';
-import { Button } from '@mantine/core';
+import { useMemo } from 'react'
+import { IconCaretLeft, IconCaretRight } from '@tabler/icons-react'
+import { Button } from '@mantine/core'
 
 export interface IProps {
-  page: number;
-  onPageChange: (page: number) => void;
-  pageCount?: number;
+  page: number
+  onPageChange: (page: number) => void
+  pageCount?: number
 }
 
 export function PPaginator({ page, onPageChange, pageCount = 0 }: IProps) {
   const prevPage = () => {
     if (page > 1) {
-      onPageChange(page - 1);
+      onPageChange(page - 1)
     }
-  };
+  }
 
   const nextPage = () => {
     if (page < pageCount) {
-      onPageChange(page + 1);
+      onPageChange(page + 1)
     }
-  };
+  }
 
   const disableNext = useMemo(() => {
-    return page >= pageCount;
-  }, [page, pageCount]);
+    return page >= pageCount
+  }, [page, pageCount])
 
   return (
     <div className="flex flex-row items-center gap-2 py-2">
@@ -40,5 +40,5 @@ export function PPaginator({ page, onPageChange, pageCount = 0 }: IProps) {
         <IconCaretRight />
       </Button>
     </div>
-  );
+  )
 }

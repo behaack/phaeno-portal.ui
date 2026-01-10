@@ -1,5 +1,5 @@
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 type BrowserState = {
   selectedSample: string | null
@@ -19,19 +19,19 @@ export const useBrowserStore = create<BrowserState>()(
       selectedGene: null,
       selectedSmid: null,
       selectedTab: 'transcript',
-      setSelectedSample: (sample: string | null) => set({selectedSample: sample }),
-      setSelectedGene: (gene: string | null) => set({selectedGene: gene }),
-      setSelectedSmid: (smid: string | null) => set({selectedSmid: smid }),
-      setSelectedTab: (tab: string) => set({selectedTab: tab }),
+      setSelectedSample: (sample: string | null) => set({ selectedSample: sample }),
+      setSelectedGene: (gene: string | null) => set({ selectedGene: gene }),
+      setSelectedSmid: (smid: string | null) => set({ selectedSmid: smid }),
+      setSelectedTab: (tab: string) => set({ selectedTab: tab }),
     }),
     {
-      name: "browser.store",
+      name: 'browser.store',
       // optional: only persist the selected org
-      partialize: (s) => ({ 
+      partialize: (s) => ({
         selectedSample: s.selectedSample,
         selectedGene: s.selectedGene,
         selectedSmid: s.selectedSmid,
-        selectedTab: s.selectedTab
+        selectedTab: s.selectedTab,
       }),
     }
   )

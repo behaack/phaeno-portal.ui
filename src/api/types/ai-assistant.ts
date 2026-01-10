@@ -1,5 +1,3 @@
-import { GenomicListParams } from "@/api/types/genomic.common"
-
 export enum ERenderType {
   Table,
   Metric,
@@ -8,7 +6,7 @@ export enum ERenderType {
 export enum ESqlAiEntityType {
   Aggregate,
   Fasta,
-  Transcript
+  Transcript,
 }
 
 export interface NaturalLangRequest {
@@ -23,20 +21,18 @@ export interface AiAssistNextPageRequest {
   pageNo: number
 }
 
-
-export type AiMetricResult = { 
-  value: number | string; 
-  label?: string 
+export type AiMetricResult = {
+  value: number | string
+  label?: string
 }
 
 export interface AiAssistResponse {
   entityType: ESqlAiEntityType
-  renderType: ERenderType;
+  renderType: ERenderType
   queryId: string
-  title: string | null;
+  title: string | null
   columns: string[]
   results: unknown
   nextCursor: string | null
   hasAdditional: boolean
 }
-

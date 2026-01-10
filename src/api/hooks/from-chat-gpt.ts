@@ -2,11 +2,8 @@
 // // 1) Adjust your mental model
 // // --------------------------------------------------------------
 
-
 // type AiAssistPage = IAiAssistResponse
 // // where each response is one page and includes cursor for next page
-
-
 
 // // --------------------------------------------------------------
 // // 2a) Define a “next page” API shape
@@ -24,7 +21,6 @@
 // // 2b) Strongly type results
 // // Right now results: object is too vague. Make it:
 // // --------------------------------------------------------------
-
 
 // export interface IAiAssistResponse<T = unknown> {
 //   entityType: ESqlAiEntityType
@@ -67,10 +63,6 @@
 //   })
 // }
 
-
-
-
-
 // /// ----------------------------------------------
 // // 4) How to combine first page + subsequent pages cleanly
 // /// ----------------------------------------------
@@ -83,9 +75,6 @@
 //   // list/table types: results is array
 //   return pages.flatMap((p) => (Array.isArray(p.results) ? p.results : []))
 // }, [pages])
-
-
-
 
 // /// ----------------------------------------------
 // // 5) Replace AiAssistDisplayData with a “paged-aware” version
@@ -123,8 +112,6 @@
 //     </div>
 //   )
 // }
-
-
 
 // /// ----------------------------------------------
 // // 6) Wire it all together in NaturalLangPanel with infinite scrolling

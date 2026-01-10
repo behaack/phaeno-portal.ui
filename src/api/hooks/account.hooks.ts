@@ -1,18 +1,18 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAuthStore } from "@/stores/auth.store";
-import { accountService } from "../services/account.service";
-import { useEffect } from "react";
-import { ChangePassword, PasswordRecoveryStartRequest } from "../types/account";
+import { useEffect } from 'react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useAuthStore } from '@/stores/auth.store'
+import { accountService } from '../services/account.service'
+import { ChangePassword, PasswordRecoveryStartRequest } from '../types/account'
 
-export const meQueryKey = ["account", "me"] as const;
+export const meQueryKey = ['account', 'me'] as const
 
 export function useMeQuery() {
-  const hasHydrated = useAuthStore((s) => s.hasHydrated);
+  const hasHydrated = useAuthStore((s) => s.hasHydrated)
 
-  const accessToken = useAuthStore((s) => s.accessToken); // adjust to your store
-  const setUserAccount = useAuthStore((s) => s.setUserAccount);
+  const accessToken = useAuthStore((s) => s.accessToken) // adjust to your store
+  const setUserAccount = useAuthStore((s) => s.setUserAccount)
 
-  const enabled = hasHydrated && Boolean(accessToken);
+  const enabled = hasHydrated && Boolean(accessToken)
 
   const q = useQuery({
     queryKey: meQueryKey,
@@ -23,56 +23,55 @@ export function useMeQuery() {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     retry: false,
-  });
+  })
 
   useEffect(() => {
     // @ts-ignore
-    if (q.status === "success") setUserAccount(q.data);
-  }, [q.status, q.data, setUserAccount]);
+    if (q.status === 'success') setUserAccount(q.data)
+  }, [q.status, q.data, setUserAccount])
 
-  return q;
+  return q
 }
 
 export function useChangePassword() {
   return useMutation({
-    mutationFn: (req: ChangePassword): Promise<null> => 
-      accountService.passwordChange(req)
-  });
+    mutationFn: (req: ChangePassword): Promise<null> => accountService.passwordChange(req),
+  })
 }
 
 export function usePasswordRecoveryStart() {
-  return useMutation({ 
-    mutationFn:  (req: PasswordRecoveryStartRequest): Promise<null> =>
-      accountService.passwordRecoveryStart(req) 
-  });
+  return useMutation({
+    mutationFn: (req: PasswordRecoveryStartRequest): Promise<null> =>
+      accountService.passwordRecoveryStart(req),
+  })
 }
 
 export function usePasswordRecoveryConfirm() {
   return useMutation({
     mutationFn: accountService.passwordRecoveryConfirm,
-  });
+  })
 }
 
 export function useTotpStart() {
-  return useMutation({ mutationFn: accountService.totpStart });
+  return useMutation({ mutationFn: accountService.totpStart })
 }
 
 export function useTotpConfirm() {
-  const qc = useQueryClient();
+  const qc = useQueryClient()
   return useMutation({
     mutationFn: accountService.totpConfirm,
     onSuccess: () => qc.invalidateQueries({ queryKey: meQueryKey }),
-  });
+  })
 }
 
 export function useOobStart() {
-  return useMutation({ mutationFn: accountService.oobStart });
+  return useMutation({ mutationFn: accountService.oobStart })
 }
 
 export function useOobConfirm() {
-  const qc = useQueryClient();
+  const qc = useQueryClient()
   return useMutation({
     mutationFn: accountService.oobConfirm,
     onSuccess: () => qc.invalidateQueries({ queryKey: meQueryKey }),
-  });
+  })
 }

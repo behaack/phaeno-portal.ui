@@ -1,61 +1,53 @@
-import React from "react";
+import React from 'react'
+import { IconDotsVertical, IconDownload, IconEye } from '@tabler/icons-react'
 import {
-  Card,
-  Text,
-  Group,
-  Stack,
   ActionIcon,
-  Menu,
-  Divider,
-  SegmentedControl,
   Box,
-} from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
-import { IconDotsVertical, IconEye, IconDownload } from "@tabler/icons-react";
-import { FastaListItem } from '@/api/types/fasta';
-
+  Card,
+  Divider,
+  Group,
+  Menu,
+  SegmentedControl,
+  Stack,
+  Text,
+} from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
+import { FastaListItem } from '@/api/types/fasta'
 
 export interface IProps {
-  data: FastaListItem[];
-  forAllSamples: boolean;
-   onView?: (row: FastaListItem) => void;
-   onDownload?: (row: FastaListItem) => void;
+  data: FastaListItem[]
+  forAllSamples: boolean
+  onView?: (row: FastaListItem) => void
+  onDownload?: (row: FastaListItem) => void
 }
 
 function formatInt(n?: number | null) {
-  return n == null ? "—" : n.toLocaleString();
+  return n == null ? '—' : n.toLocaleString()
 }
 
-export function ProTable({
-  data,
-  forAllSamples,
-  onView,
-  onDownload
-}: IProps) {
+export function ProTable({ data, forAllSamples, onView, onDownload }: IProps) {
   const stickyHeader = true
   const showDensityToggle = true
-  const isMobile = useMediaQuery("(max-width: 48em)"); // ~768px
-  const isTablet = useMediaQuery("(max-width: 62em)"); // ~992px (hide long text column)
-  const [density, setDensity] = React.useState<"compact" | "comfortable">(
-    "comfortable"
-  );
+  const isMobile = useMediaQuery('(max-width: 48em)') // ~768px
+  const isTablet = useMediaQuery('(max-width: 62em)') // ~992px (hide long text column)
+  const [density, setDensity] = React.useState<'compact' | 'comfortable'>('comfortable')
 
-  const pad = density === "compact" ? "xs" : "sm";
+  const pad = density === 'compact' ? 'xs' : 'sm'
 
   // Desktop grid:
   // - On tablet widths, drop DefinitionLine column to keep it tidy
   const desktopGridStyle: React.CSSProperties = {
-    display: "grid",
+    display: 'grid',
     gridTemplateColumns: isTablet
-      ? "1.4fr 1fr 0.9fr 0.7fr auto" // no definition
-      : "1.3fr 1fr 0.9fr 0.7fr 2.4fr auto",
+      ? '1.4fr 1fr 0.9fr 0.7fr auto' // no definition
+      : '1.3fr 1fr 0.9fr 0.7fr 2.4fr auto',
     gap: 12,
-    alignItems: "center",
-  };
+    alignItems: 'center',
+  }
 
   const headerStyle: React.CSSProperties = stickyHeader
-    ? { position: "sticky", top: 0, zIndex: 2 }
-    : {};
+    ? { position: 'sticky', top: 0, zIndex: 2 }
+    : {}
 
   return (
     <Stack gap="sm">
@@ -65,8 +57,8 @@ export function ProTable({
             value={density}
             onChange={(v) => setDensity(v as any)}
             data={[
-              { label: "Comfortable", value: "comfortable" },
-              { label: "Compact", value: "compact" },
+              { label: 'Comfortable', value: 'comfortable' },
+              { label: 'Compact', value: 'compact' },
             ]}
           />
         </Group>
@@ -103,7 +95,7 @@ export function ProTable({
       )}
 
       {data.map((r) => {
-        const handleView = () => onView?.(r);
+        const handleView = () => onView?.(r)
 
         return (
           <Card
@@ -113,29 +105,29 @@ export function ProTable({
             padding={pad}
             // subtle “row hover” feel
             style={{
-              cursor: onView ? "pointer" : "default",
-              transition: "transform 120ms ease, background-color 120ms ease",
+              cursor: onView ? 'pointer' : 'default',
+              transition: 'transform 120ms ease, background-color 120ms ease',
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.backgroundColor =
-                "var(--mantine-color-gray-0)";
+              ;(e.currentTarget as HTMLDivElement).style.backgroundColor =
+                'var(--mantine-color-gray-0)'
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLDivElement).style.backgroundColor = "";
+              ;(e.currentTarget as HTMLDivElement).style.backgroundColor = ''
             }}
           >
             {!isMobile ? (
               // Desktop: table-like row
               <Box
-                role={onView ? "button" : undefined}
+                role={onView ? 'button' : undefined}
                 tabIndex={onView ? 0 : -1}
                 onClick={onView ? handleView : undefined}
                 onKeyDown={
                   onView
                     ? (e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          handleView();
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          handleView()
                         }
                       }
                     : undefined
@@ -145,7 +137,7 @@ export function ProTable({
                 <Text fw={650}>{r.sampleName}</Text>
                 <Text>{r.smid}</Text>
                 <Text>{formatInt(r.numFragments)}</Text>
-                <Text>{r.readNumber ?? "—"}</Text>
+                <Text>{r.readNumber ?? '—'}</Text>
 
                 {!isTablet && (
                   <Text c="dimmed" lineClamp={1}>
@@ -161,10 +153,7 @@ export function ProTable({
                       </ActionIcon>
                     </Menu.Target>
                     <Menu.Dropdown>
-                      <Menu.Item
-                        leftSection={<IconEye size={16} />}
-                        onClick={() => onView?.(r)}
-                      >
+                      <Menu.Item leftSection={<IconEye size={16} />} onClick={() => onView?.(r)}>
                         View details
                       </Menu.Item>
                       <Menu.Item
@@ -195,10 +184,7 @@ export function ProTable({
                       </ActionIcon>
                     </Menu.Target>
                     <Menu.Dropdown>
-                      <Menu.Item
-                        leftSection={<IconEye size={16} />}
-                        onClick={() => onView?.(r)}
-                      >
+                      <Menu.Item leftSection={<IconEye size={16} />} onClick={() => onView?.(r)}>
                         View details
                       </Menu.Item>
                       <Menu.Item
@@ -224,7 +210,7 @@ export function ProTable({
                   <Text size="sm" c="dimmed">
                     Read #
                   </Text>
-                  <Text size="sm">{r.readNumber ?? "—"}</Text>
+                  <Text size="sm">{r.readNumber ?? '—'}</Text>
                 </Group>
 
                 <Text size="sm" c="dimmed" lineClamp={2}>
@@ -233,11 +219,7 @@ export function ProTable({
 
                 {onView && (
                   <Group justify="flex-end" mt={4}>
-                    <ActionIcon
-                      variant="subtle"
-                      aria-label="View"
-                      onClick={() => onView(r)}
-                    >
+                    <ActionIcon variant="subtle" aria-label="View" onClick={() => onView(r)}>
                       <IconEye size={18} />
                     </ActionIcon>
                   </Group>
@@ -245,8 +227,8 @@ export function ProTable({
               </Stack>
             )}
           </Card>
-        );
+        )
       })}
     </Stack>
-  );
+  )
 }

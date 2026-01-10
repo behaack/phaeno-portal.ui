@@ -1,22 +1,16 @@
-import type { ReactNode } from "react";
-import clsx from "clsx";
-import { Stack } from "@/shared/ui/primiatives";
+import type { ReactNode } from 'react'
+import clsx from 'clsx'
+import { Stack } from '@/shared/ui/primiatives'
 
 export interface PFormFieldProps {
-  label?: string;
-  description?: string;
-  error?: string;
-  required?: boolean;
-  children: ReactNode;
+  label?: string
+  description?: string
+  error?: string
+  required?: boolean
+  children: ReactNode
 }
 
-export function PFormField({
-  label,
-  description,
-  error,
-  required,
-  children,
-}: PFormFieldProps) {
+export function PFormField({ label, description, error, required, children }: PFormFieldProps) {
   return (
     <Stack gap="gap-1">
       {label && (
@@ -26,17 +20,11 @@ export function PFormField({
         </label>
       )}
 
-      {description && (
-        <div className="text-xs text-fg-muted">{description}</div>
-      )}
+      {description && <div className="text-xs text-fg-muted">{description}</div>}
 
       {children}
 
-      {error && (
-        <div className={clsx("text-xs", "text-error")}>
-          {error}
-        </div>
-      )}
+      {error && <div className={clsx('text-xs', 'text-error')}>{error}</div>}
     </Stack>
-  );
+  )
 }

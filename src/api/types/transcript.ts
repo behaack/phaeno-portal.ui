@@ -16,4 +16,3 @@ export type TranscriptDetailsItem = {
   definitionLine: string
   sequence: string
 }
-

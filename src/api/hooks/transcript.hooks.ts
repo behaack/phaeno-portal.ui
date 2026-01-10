@@ -1,13 +1,11 @@
-import { useQuery, keepPreviousData, useInfiniteQuery } from "@tanstack/react-query"
-import { transcriptService } from "@/api/services/transcript.service"
-import type { GenomicListParams } from "@/api/types/genomic.common"
-import { useImpersonationStore } from "@/stores/impersonation.store"
-import { useAuthStore } from "@/stores/auth.store" // or wherever your roles live
-import { isPhaenoEmployee } from "@/auth/types/auth.guards"
-import { LookupListParams } from "../types/common"
-import { getNextCursor } from "../helpers/getNextCursor"
-
-
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { transcriptService } from '@/api/services/transcript.service'
+import type { GenomicListParams } from '@/api/types/genomic.common'
+import { isPhaenoEmployee } from '@/auth/types/auth.guards'
+import { useAuthStore } from '@/stores/auth.store' // or wherever your roles live
+import { useImpersonationStore } from '@/stores/impersonation.store'
+import { getNextCursor } from '../helpers/getNextCursor'
+import { LookupListParams } from '../types/common'
 
 /**
  * Infinite version of useTranscriptList.
@@ -15,7 +13,7 @@ import { getNextCursor } from "../helpers/getNextCursor"
  * Pass in the same params you used before EXCEPT cursor.
  * TanStack Query will supply cursor via pageParam.
  */
-export function useTranscriptInfiniteList(params: Omit<GenomicListParams, "cursor">) {
+export function useTranscriptInfiniteList(params: Omit<GenomicListParams, 'cursor'>) {
   const roles = useAuthStore((s) => s.userAccount?.roles)
   const employee = isPhaenoEmployee(roles)
   const selectedOrgId = useImpersonationStore((s) => s.selectedCustomerId)
@@ -28,9 +26,9 @@ export function useTranscriptInfiniteList(params: Omit<GenomicListParams, "curso
 
   return useInfiniteQuery({
     queryKey: [
-      "transcript",
-      "list:infinite",
-      employee ? selectedOrgId : "self",
+      'transcript',
+      'list:infinite',
+      employee ? selectedOrgId : 'self',
       params.sampleId ?? null,
       params.q ?? null,
       limit,
@@ -75,7 +73,7 @@ export function useTranscriptLookup(params: LookupListParams) {
   const enabled = !employee || selectedOrgId !== null
 
   return useQuery({
-    queryKey: ["transcript", "lookup", employee ? selectedOrgId : "self", params.q],
+    queryKey: ['transcript', 'lookup', employee ? selectedOrgId : 'self', params.q],
     enabled,
     queryFn: () => {
       if (!employee) return transcriptService.lookup(params)
@@ -96,9 +94,9 @@ export function useTranscriptList(params: GenomicListParams) {
 
   return useQuery({
     queryKey: [
-      "transcript",
-      "list",
-      employee ? selectedOrgId : "self",
+      'transcript',
+      'list',
+      employee ? selectedOrgId : 'self',
       params.sampleId ?? null,
       params.q ?? null,
       params.limit ?? 25,
@@ -115,7 +113,7 @@ export function useTranscriptList(params: GenomicListParams) {
 
 export function useTranscriptDetails(id: string | null | undefined) {
   return useQuery({
-    queryKey: ["transcript", "details", id ?? null],
+    queryKey: ['transcript', 'details', id ?? null],
     enabled: !!id,
     queryFn: () => transcriptService.get(id!),
   })

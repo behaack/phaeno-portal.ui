@@ -1,66 +1,67 @@
-import { JobStatusTypeWithStopping } from "@/api/types/job-pipeline";
+import { JobStatusTypeWithStopping } from '@/api/types/job-pipeline'
 
 export function statusColorMapper(status: JobStatusTypeWithStopping): string {
   switch (status) {
-    case "Queued":
-      return "blue";
-    case "Started":
-      return "green";
-    case "Stopping":
-      return "orange";
-    case "Completed":
-      return "grey";
-    case "Failed":
-    case "Canceled":
-      return "red";
+    case 'Queued':
+      return 'blue'
+    case 'Started':
+      return 'green'
+    case 'Stopping':
+      return 'orange'
+    case 'Completed':
+      return 'grey'
+    case 'Failed':
+    case 'Canceled':
+      return 'red'
     default:
-      return "orange";
+      return 'orange'
   }
 }
-export function statusBkgdColorMapper(
-  status: JobStatusTypeWithStopping
-): { color: string; backgroundColor: string } {
+export function statusBkgdColorMapper(status: JobStatusTypeWithStopping): {
+  color: string
+  backgroundColor: string
+} {
   switch (status) {
-    case "Queued":
+    case 'Queued':
       return {
-        color: "#1F4FA3",          // deep blue
-        backgroundColor: "#E8F0FD" // soft blue
-      };
+        color: '#1F4FA3', // deep blue
+        backgroundColor: '#E8F0FD', // soft blue
+      }
 
-    case "Started":
+    case 'Started':
       return {
-        color: "#1F7A4D",          // strong green
-        backgroundColor: "#E6F4ED" // soft green
-      };
+        color: '#1F7A4D', // strong green
+        backgroundColor: '#E6F4ED', // soft green
+      }
 
-    case "Stopping":
+    case 'Stopping':
       return {
-        color: "#B86A00",          // amber
-        backgroundColor: "#FFF3E0" // soft amber
-      };
+        color: '#B86A00', // amber
+        backgroundColor: '#FFF3E0', // soft amber
+      }
 
-    case "Completed":
+    case 'Completed':
       return {
-        color: "black",          
-        backgroundColor: "transparent"
-      };
+        color: 'black',
+        backgroundColor: 'transparent',
+      }
 
-    case "Failed":
+    case 'Failed':
       return {
-        color: "#B00020",          // error red
-        backgroundColor: "#FDECEA" // soft red
-      };
+        color: '#B00020', // error red
+        backgroundColor: '#FDECEA', // soft red
+      }
 
-    case "Canceled":
+    case 'Canceled':
       return {
-        color: "#B00020",          // error red
-        backgroundColor: "#FDECEA" // soft red
-      };
+        color: '#B00020', // error red
+        backgroundColor: '#FDECEA', // soft red
+      }
 
     default:
       return {
-        color: "#1A1A1A",
-        backgroundColor: "#FFFFFF"
-      };
+        color: '#1A1A1A',
+        backgroundColor: '#FFFFFF',
+      }
   }
 }

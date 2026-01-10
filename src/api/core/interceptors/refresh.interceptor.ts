@@ -1,7 +1,7 @@
-import type { AxiosInstance } from "axios"
-import { AxiosHeaders } from "axios"
-import { authSession } from "@/auth/auth.session"
-import { AuthResult } from "@/api/types/auth"
+import type { AxiosInstance } from 'axios'
+import { AxiosHeaders } from 'axios'
+import { AuthResult } from '@/api/types/auth'
+import { authSession } from '@/auth/auth.session'
 
 type RetryConfig = any & { __refreshRetried?: boolean }
 
@@ -9,16 +9,16 @@ let isRefreshing = false
 let waiters: Array<(token: string | null) => void> = []
 
 const NO_REFRESH_PATHS = [
-  "/auth/sign-in",
-  "/auth/two-factor",
-  "/auth/forgot-password",
-  "/auth/reset-password",
-  "/auth/refresh-token", // already handled, but keep here too
+  '/auth/sign-in',
+  '/auth/two-factor',
+  '/auth/forgot-password',
+  '/auth/reset-password',
+  '/auth/refresh-token', // already handled, but keep here too
 ]
 
 function shouldSkipRefresh(config: RetryConfig) {
   if (config.skipAuthRefresh) return true
-  const url = String(config.url ?? "")
+  const url = String(config.url ?? '')
   return NO_REFRESH_PATHS.some((p) => url.includes(p))
 }
 
@@ -29,7 +29,7 @@ function notifyWaiters(token: string | null) {
 
 function setAuthHeader(config: any, token: string) {
   const headers = AxiosHeaders.from(config.headers)
-  headers.set("Authorization", `Bearer ${token}`)
+  headers.set('Authorization', `Bearer ${token}`)
   config.headers = headers
 }
 
@@ -42,15 +42,15 @@ export function attachRefreshInterceptor(client: AxiosInstance) {
     if (status !== 401) throw error
 
     // ✅ NEW: don't refresh for sign-in / auth flows
-    if (shouldSkipRefresh(config)) throw error    
+    if (shouldSkipRefresh(config)) throw error
 
     // prevent infinite loops
     if (config.__refreshRetried) throw error
     config.__refreshRetried = true
 
     // don't refresh a refresh call
-    const url: string = config.url ?? ""
-    if (url.includes("/auth/refresh-token")) {
+    const url: string = config.url ?? ''
+    if (url.includes('/auth/refresh-token')) {
       authSession.logout()
       throw error
     }
@@ -72,13 +72,13 @@ export function attachRefreshInterceptor(client: AxiosInstance) {
       // NOTE: if your envelope interceptor unwraps response.data,
       // this will already be the AuthResultDto.
       const dto = await client.post<unknown, AuthResult>(
-        "/auth/refresh-token",
+        '/auth/refresh-token',
         {},
         { withCredentials: true }
       )
 
-      if (!dto?.accessToken || !dto?.refreshToken || typeof dto.expiresInSeconds !== "number") {
-        throw new Error("Refresh response missing required fields.")
+      if (!dto?.accessToken || !dto?.refreshToken || typeof dto.expiresInSeconds !== 'number') {
+        throw new Error('Refresh response missing required fields.')
       }
 
       authSession.rotateTokens(dto.accessToken, dto.refreshToken, dto.expiresInSeconds)

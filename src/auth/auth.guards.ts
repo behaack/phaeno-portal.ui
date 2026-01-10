@@ -1,15 +1,15 @@
-import { redirect } from "@tanstack/react-router"
-import { authSession } from "@/auth/auth.session"
-import { Role } from "./auth.roles"
-import { RouteArea } from "./auth.route-areas"
-import { canAccessArea } from "./auth.route-access"
-import { RoleScope } from "./auth.role-scope"
+import { redirect } from '@tanstack/react-router'
+import { authSession } from '@/auth/auth.session'
+import { RoleScope } from './auth.role-scope'
+import { Role } from './auth.roles'
+import { canAccessArea } from './auth.route-access'
+import { RouteArea } from './auth.route-areas'
 
 export function requireAuth() {
   if (!authSession.isAuthenticated()) {
     throw redirect({
-      to: "/auth/sign-in",
-      search: { reason: "auth" },
+      to: '/auth/sign-in',
+      search: { reason: 'auth' },
     })
   }
 }
@@ -18,7 +18,7 @@ export function requireGuest() {
   if (!authSession.hasHydrated()) return
 
   if (authSession.isAuthenticated()) {
-    throw redirect({ to: "/app" })
+    throw redirect({ to: '/app' })
   }
 }
 
@@ -27,7 +27,7 @@ export function requireRole(...roles: Role[]) {
     if (!authSession.hasHydrated()) return
 
     if (!authSession.hasAnyRole(roles)) {
-      throw redirect({ to: "/app/403" })
+      throw redirect({ to: '/app/403' })
     }
   }
 }
@@ -37,7 +37,7 @@ export function requireScope(scope: RoleScope) {
     if (!authSession.hasHydrated()) return
 
     if (!authSession.hasScope(scope)) {
-      throw redirect({ to: "/app/403" })
+      throw redirect({ to: '/app/403' })
     }
   }
 }
@@ -53,11 +53,11 @@ export function requireAreaAccess(area: RouteArea) {
     if (!authSession.hasHydrated()) return
 
     if (!authSession.isAuthenticated()) {
-      throw redirect({ to: "/auth/sign-in" })
+      throw redirect({ to: '/auth/sign-in' })
     }
 
     if (!canAccessArea(area)) {
-      throw redirect({ to: "/app/403" })
+      throw redirect({ to: '/app/403' })
     }
   }
 }

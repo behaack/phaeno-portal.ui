@@ -1,14 +1,18 @@
-import { api } from "../core/api-call"
-import type { CursorPage } from "@/api/types/paging"
-import type { GenomicListParams, GenomicListForOrgParams, GenomicLookupItem } from "@/api/types/genomic.common"
-import type { TranscriptListItem, TranscriptDetailsItem } from "@/api/types/transcript"
-import { toListQueryParams } from "@/api/types/genomic.common"
-import { enc, LookupListParams, toLookupListQueryParams } from "../types/common"
+import type {
+  GenomicListForOrgParams,
+  GenomicListParams,
+  GenomicLookupItem,
+} from '@/api/types/genomic.common'
+import { toListQueryParams } from '@/api/types/genomic.common'
+import type { CursorPage } from '@/api/types/paging'
+import type { TranscriptDetailsItem, TranscriptListItem } from '@/api/types/transcript'
+import { api } from '../core/api-call'
+import { enc, LookupListParams, toLookupListQueryParams } from '../types/common'
 
 export const transcriptService = {
   /** GET /transcript (current org from JWT claims) */
   list: (params: GenomicListParams) =>
-    api.get<CursorPage<TranscriptListItem>>("/transcript", {
+    api.get<CursorPage<TranscriptListItem>>('/transcript', {
       params: toListQueryParams(params),
     }),
 
@@ -20,19 +24,17 @@ export const transcriptService = {
     ),
 
   /** GET /transcript/{id} */
-  get: (id: string) =>
-    api.get<TranscriptDetailsItem>(`/transcript/${enc(id)}`),
+  get: (id: string) => api.get<TranscriptDetailsItem>(`/transcript/${enc(id)}`),
 
   /** GET /transcript/lookup (current org) */
   lookup: (params: LookupListParams) =>
-    api.get<GenomicLookupItem[]>("/transcript/lookup", {
-      params: toLookupListQueryParams(params)
+    api.get<GenomicLookupItem[]>('/transcript/lookup', {
+      params: toLookupListQueryParams(params),
     }),
 
   /** GET /transcript/lookup/{organizationId} */
   lookupForOrganization: (params: LookupListParams, organizationId: string) =>
-    api.get<GenomicLookupItem[]>(
-      `/transcript/lookup/${enc(organizationId)}`, {
-          params: toLookupListQueryParams(params)
-      }),
+    api.get<GenomicLookupItem[]>(`/transcript/lookup/${enc(organizationId)}`, {
+      params: toLookupListQueryParams(params),
+    }),
 }

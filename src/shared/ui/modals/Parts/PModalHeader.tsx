@@ -1,14 +1,12 @@
-import { JSX } from "react";
-import { PCloseButton } from "@/shared/ui/components/inputs";
-import { PDivider } from "@/shared/ui/components/layout";
+import { PCloseButton } from '@/shared/ui/components/inputs'
 
 export interface IProps {
   title?: string
-  icon?: React.ReactNode;
+  icon?: React.ReactNode
   onClose: () => void
 }
 
-export function PModalHeader({ title="", icon, onClose }: IProps) {
+export function PModalHeader({ title = '', icon, onClose }: IProps) {
   return (
     <div>
       <div className="font-semibold flex justify-between bg-gray-100 items-center p-2">

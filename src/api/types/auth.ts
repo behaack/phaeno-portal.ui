@@ -8,8 +8,8 @@ export type SignInRequest = {
 
 // Matches C# ESignInState with JsonStringEnumConverter
 export enum ESignInState {
-  Authenticated = "Authenticated",
-  TwoFactorRequired = "TwoFactorRequired",
+  Authenticated = 'Authenticated',
+  TwoFactorRequired = 'TwoFactorRequired',
 }
 
 // Matches C# ETwoFactorMethod
@@ -49,6 +49,7 @@ export type AuthResult = {
   expiresInSeconds: number
 }
 
-export type AuthTokens = Pick<SignInAuthenticated, "accessToken" | "refreshToken" | "expiresInSeconds">
-
-
+export type AuthTokens = Pick<
+  SignInAuthenticated,
+  'accessToken' | 'refreshToken' | 'expiresInSeconds'
+>

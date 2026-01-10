@@ -1,9 +1,9 @@
-import { DisplayStatus } from "./DisplayStatus";
-import { statusDate } from "../helpers/statusDate";
-import { DataPipelineItem } from "@/api/types/job-pipeline";
+import { DataPipelineItem } from '@/api/types/job-pipeline'
+import { statusDate } from '../helpers/statusDate'
+import { DisplayStatus } from './DisplayStatus'
 
 export interface IProps {
-  list: DataPipelineItem[];
+  list: DataPipelineItem[]
 }
 
 export function JobList({ list }: IProps) {
@@ -12,9 +12,7 @@ export function JobList({ list }: IProps) {
       {list.map((item) => (
         <li key={item.id} className="flex justify-between">
           <div className="flex flex-col gap-0.5">
-            <div className="list-item primary">
-              {item.pipelineName}
-            </div>
+            <div className="list-item primary">{item.pipelineName}</div>
             <div>
               <span className="font-semibold">Job Type: </span>
               {item.jobType}
@@ -28,10 +26,9 @@ export function JobList({ list }: IProps) {
               {statusDate(item)}
             </div>
           </div>
-          <div className="mt-1 mr-1">
-          </div>
+          <div className="mt-1 mr-1"></div>
         </li>
       ))}
-    </ul>    
-  );
+    </ul>
+  )
 }

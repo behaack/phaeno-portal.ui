@@ -1,17 +1,17 @@
-import { defineConfig } from 'vite';
-import fs from "node:fs";
-import react from '@vitejs/plugin-react';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import { tanstackRouter } from '@tanstack/router-plugin/vite';
+import fs from 'node:fs'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = import.meta.env.MODE === 'development'
 
 export default defineConfig({
   server: {
     https: {
-      key: fs.readFileSync("certs/localhost-key.pem"),
-      cert: fs.readFileSync("certs/localhost.pem"),
-    },    
+      key: fs.readFileSync('certs/localhost-key.pem'),
+      cert: fs.readFileSync('certs/localhost.pem'),
+    },
   },
   plugins: [
     isDev
@@ -26,9 +26,9 @@ export default defineConfig({
           routesDirectory: './src/routes',
           generatedRouteTree: './src/routeTree.gen.ts',
           autoCodeSplitting: true,
-        }), 
-    react(), 
-    tsconfigPaths()
+        }),
+    react(),
+    tsconfigPaths(),
   ],
   build: {
     rollupOptions: {
@@ -39,18 +39,17 @@ export default defineConfig({
           router: ['@tanstack/react-router'],
           signalr: ['@microsoft/signalr'],
           utils: ['zustand', 'immer'],
-        }
-      },      
+        },
+      },
       onwarn(warning, defaultHandler) {
         if (
-          warning.code === "SOURCEMAP_ERROR" ||
-          (warning.code === "INVALID_ANNOTATION" &&
-            warning.message.includes("/*#__PURE__*/"))
+          warning.code === 'SOURCEMAP_ERROR' ||
+          (warning.code === 'INVALID_ANNOTATION' && warning.message.includes('/*#__PURE__*/'))
         ) {
-          return;
+          return
         }
-        defaultHandler(warning);
+        defaultHandler(warning)
       },
     },
-  },  
-});
+  },
+})

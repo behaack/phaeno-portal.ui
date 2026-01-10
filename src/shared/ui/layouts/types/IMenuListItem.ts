@@ -1,4 +1,4 @@
-import { Role } from "@/auth/auth.roles";
+import { Role } from '@/auth/auth.roles'
 
 export type Subtype =
   | 'home'
@@ -9,15 +9,15 @@ export type Subtype =
   | 'customers'
   | 'users'
   | 'settings'
-  | 'signout';
+  | 'signout'
 
 export default interface IMenuListItem {
-  index: number;
-  isMain: boolean;
-  type: 'link' | 'button';
-  subtype: Subtype;
-  label: string;
-  route: string;
-  userDataRoute: boolean;
+  index: number
+  isMain: boolean
+  type: 'link' | 'button'
+  subtype: Subtype
+  label: string
+  route: string
+  userDataRoute: boolean
   roles: Role[] | null
 }

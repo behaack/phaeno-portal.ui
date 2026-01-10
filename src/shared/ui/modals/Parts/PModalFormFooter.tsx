@@ -1,4 +1,4 @@
-import { PButton } from "@/shared/ui/components";
+import { PButton } from '@/shared/ui/components'
 
 export interface IProps {
   submitLabel?: string
@@ -7,12 +7,15 @@ export interface IProps {
   onClose: () => void
 }
 
-export function PModalFormFooter({ submitLabel="Submit", isDisabled=false, showRequired=false, onClose }: IProps) {
+export function PModalFormFooter({
+  submitLabel = 'Submit',
+  isDisabled = false,
+  showRequired = false,
+  onClose,
+}: IProps) {
   return (
     <div className="pt-5 flex justify-between items-center py-3 px-5">
-      <div className="text-xs text-red-800">
-        {(showRequired) && <span>* Required field</span>}
-      </div>
+      <div className="text-xs text-red-800">{showRequired && <span>* Required field</span>}</div>
       <div>
         <PButton color="black" size="sm" mr={5} onClick={onClose}>
           Cancel

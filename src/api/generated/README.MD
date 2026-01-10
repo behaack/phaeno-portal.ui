@@ -1,6 +1,6 @@
 # Generated Schema
 
-## DO NOT EDIT 
+## DO NOT EDIT
 
 ```
 schema.ts

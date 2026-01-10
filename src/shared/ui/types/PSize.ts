@@ -1,1 +1,1 @@
-export type PSize = "xs" | "sm" | "md" | "lg" | "xl"
+export type PSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'

@@ -1,16 +1,15 @@
-import { forwardRef } from "react"
+import { forwardRef } from 'react'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import {
   Tabs as MantineTabs,
-  type TabsProps as MantineTabsProps,
   type TabsListProps as MantineTabsListProps,
-  type TabsTabProps as MantineTabsTabProps,
   type TabsPanelProps as MantineTabsPanelProps,
-} from "@mantine/core"
-import type { ComponentPropsWithoutRef, ReactNode } from "react"
+  type TabsProps as MantineTabsProps,
+  type TabsTabProps as MantineTabsTabProps,
+} from '@mantine/core'
 
 export interface PTabsProps
-  extends MantineTabsProps,
-    Omit<ComponentPropsWithoutRef<"div">, keyof MantineTabsProps> {
+  extends MantineTabsProps, Omit<ComponentPropsWithoutRef<'div'>, keyof MantineTabsProps> {
   children?: ReactNode
   padded?: boolean
 }
@@ -31,18 +30,14 @@ export interface PTabsProps
 export const PTabs = forwardRef<HTMLDivElement, PTabsProps>(
   ({ children, padded, ...props }, ref) => {
     return (
-      <MantineTabs
-        ref={ref}
-        p={padded ? "md" : (props as any).p}
-        {...props}
-      >
+      <MantineTabs ref={ref} p={padded ? 'md' : (props as any).p} {...props}>
         {children}
       </MantineTabs>
     )
   }
 )
 
-PTabs.displayName = "PTabs"
+PTabs.displayName = 'PTabs'
 
 // -----------------------------------------------------------------------------
 // Subcomponents (re-exported with the same names)

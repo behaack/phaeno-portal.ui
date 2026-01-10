@@ -1,12 +1,12 @@
-import { useFormContext } from "react-hook-form";
-import { PTextInput, type PTextInputProps } from "@/shared/ui/components/inputs";
-import { PFormField } from "../PFormField";
+import { useFormContext } from 'react-hook-form'
+import { PTextInput, type PTextInputProps } from '@/shared/ui/components/inputs'
+import { PFormField } from '../PFormField'
 
 interface RHFTextInputProps extends PTextInputProps {
-  name: string;
-  label?: string;
-  description?: string;
-  required?: boolean;
+  name: string
+  label?: string
+  description?: string
+  required?: boolean
 }
 
 export function RHFTextInput({
@@ -19,18 +19,13 @@ export function RHFTextInput({
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext()
 
-  const error = errors[name]?.message as string | undefined;
+  const error = errors[name]?.message as string | undefined
 
   return (
-    <PFormField
-      label={label}
-      description={description}
-      error={error}
-      required={required}
-    >
+    <PFormField label={label} description={description} error={error} required={required}>
       <PTextInput {...register(name)} {...inputProps} />
     </PFormField>
-  );
+  )
 }

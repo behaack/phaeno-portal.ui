@@ -21,7 +21,7 @@ export function enc(segment: string) {
 export function toLookupListQueryParams(params: LookupListParams) {
   return {
     q: params.q ?? undefined,
-    limit: params.limit ?? 25
+    limit: params.limit ?? 25,
   }
 }
 

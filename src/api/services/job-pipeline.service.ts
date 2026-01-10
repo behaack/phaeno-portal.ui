@@ -1,29 +1,34 @@
-import { axiosInstance } from "../core/axios.instance";
-import type { CreateReportJob, CreateScoreJob, CreateSummaryJob, CreateUmapJob, DataPipelineItem, GetJobsParams } from "../types/job-pipeline";
-import { api } from "../core/api-call";
-import { IPagedList } from "@/shared/types/IPagedList";
-import { FastaDetailsItem } from "../types/fasta";
+import { IPagedList } from '@/shared/types/IPagedList'
+import { api } from '../core/api-call'
+import { axiosInstance } from '../core/axios.instance'
+import type {
+  CreateReportJob,
+  CreateScoreJob,
+  CreateSummaryJob,
+  CreateUmapJob,
+  DataPipelineItem,
+  GetJobsParams,
+} from '../types/job-pipeline'
 
 export const jobPipelineService = {
-  submitJob: () => axiosInstance.post("data-pipeline-runs"),
+  submitJob: () => axiosInstance.post('data-pipeline-runs'),
 
-  getJobs: ({ jobType, jobStatus, page, pageSize = 30, q }: GetJobsParams) => 
-    api.get<IPagedList<DataPipelineItem>>("data-pipeline-run", { 
-      params: { jobType, jobStatus, page, pageSize, q } 
+  getJobs: ({ jobType, jobStatus, page, pageSize = 30, q }: GetJobsParams) =>
+    api.get<IPagedList<DataPipelineItem>>('data-pipeline-run', {
+      params: { jobType, jobStatus, page, pageSize, q },
     }),
 
-  createUmapJob: (job: CreateUmapJob) => 
-    api.post<DataPipelineItem, CreateUmapJob>("data-pipeline/umap", job),
+  createUmapJob: (job: CreateUmapJob) =>
+    api.post<DataPipelineItem, CreateUmapJob>('data-pipeline/umap', job),
 
-  createReportJob: (job: CreateReportJob) => 
-    api.post<DataPipelineItem, CreateReportJob>("data-pipeline/report", job),
+  createReportJob: (job: CreateReportJob) =>
+    api.post<DataPipelineItem, CreateReportJob>('data-pipeline/report', job),
 
-  createScoreJob: (job: CreateScoreJob) => 
-    api.post<DataPipelineItem, CreateScoreJob>("data-pipeline/score", job),
+  createScoreJob: (job: CreateScoreJob) =>
+    api.post<DataPipelineItem, CreateScoreJob>('data-pipeline/score', job),
 
-  createSummaryJob: (job: CreateSummaryJob) => 
-    api.post<DataPipelineItem, CreateSummaryJob>("data-pipeline/summary", job),
+  createSummaryJob: (job: CreateSummaryJob) =>
+    api.post<DataPipelineItem, CreateSummaryJob>('data-pipeline/summary', job),
 
-  cancelJob: (id: string) => 
-    api.post<unknown, unknown>(`data-pipeline/cancel/${id}`),
-};
+  cancelJob: (id: string) => api.post<unknown, unknown>(`data-pipeline/cancel/${id}`),
+}

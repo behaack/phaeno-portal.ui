@@ -1,4 +1,4 @@
-import { Image } from '@mantine/core';
+import { Image } from '@mantine/core'
 
 export function NotFoundPage() {
   return (
@@ -15,5 +15,5 @@ export function NotFoundPage() {
         </div>
       </section>
     </main>
-  );
+  )
 }

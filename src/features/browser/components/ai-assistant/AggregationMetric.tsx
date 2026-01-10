@@ -1,22 +1,21 @@
-import { Surface } from "@/shared/ui/primiatives";
-import { prettifyName } from "./helpers/ai-assist.helpers";
+import { Surface } from '@/shared/ui/primiatives'
+import { prettifyName } from './helpers/ai-assist.helpers'
 
 export interface IProps {
-  label: string  
+  label: string
   value: any
 }
 
 export function AggregationMetric({ label, value }: IProps) {
-
   const formatNumber = (value: any): string => {
-    if (typeof value === "number" && isFinite(value)) {
-      return value.toLocaleString("en-US", {
+    if (typeof value === 'number' && isFinite(value)) {
+      return value.toLocaleString('en-US', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
-      });
+      })
     }
-    return value?.toString?.() ?? "";
-  };
+    return value?.toString?.() ?? ''
+  }
 
   return (
     <div className="flex justify-center">
@@ -27,5 +26,5 @@ export function AggregationMetric({ label, value }: IProps) {
         </div>
       </Surface>
     </div>
-  );
+  )
 }

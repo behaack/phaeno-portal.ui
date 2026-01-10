@@ -1,16 +1,13 @@
-import { IconEye } from '@tabler/icons-react';
-import { ActionIcon, Tooltip } from '@mantine/core';
-import { TranscriptListItem } from '@/api/types/transcript';
+import { IconEye } from '@tabler/icons-react'
+import { ActionIcon, Tooltip } from '@mantine/core'
+import { TranscriptListItem } from '@/api/types/transcript'
 
 export interface IProps {
-  data: TranscriptListItem[];
-  forAllSamples: boolean;
+  data: TranscriptListItem[]
+  forAllSamples: boolean
 }
 
-export function TranscriptList({
-  data,
-  forAllSamples
-}: IProps) {
+export function TranscriptList({ data, forAllSamples }: IProps) {
   return (
     <div>
       {data.length ? (
@@ -20,10 +17,10 @@ export function TranscriptList({
               <div className="flex justify-between">
                 <div className="list-item primary">{item.geneSymbol}</div>
                 <Tooltip label="View details">
-                  <ActionIcon 
-                    variant="filled" 
-                    size="sm" 
-                    radius="xl" 
+                  <ActionIcon
+                    variant="filled"
+                    size="sm"
+                    radius="xl"
                     aria-label="Transcript details"
                     // onClick={() => detailsHndl(item.id)}
                   >
@@ -31,13 +28,11 @@ export function TranscriptList({
                   </ActionIcon>
                 </Tooltip>
               </div>
-              {(forAllSamples)
-                ? (
-                  <div>
-                    <span className="font-medium">Sample</span>: {item.sampleName}
-                  </div>              
-                ) : null
-              }
+              {forAllSamples ? (
+                <div>
+                  <span className="font-medium">Sample</span>: {item.sampleName}
+                </div>
+              ) : null}
               <div>
                 <span className="font-medium">Gene Id</span>: {item.geneId}
               </div>
@@ -51,7 +46,7 @@ export function TranscriptList({
             </li>
           ))}
         </ul>
-      ) : null }
+      ) : null}
     </div>
-  );
+  )
 }

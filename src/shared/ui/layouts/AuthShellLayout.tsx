@@ -1,5 +1,5 @@
-import { Outlet } from "@tanstack/react-router"
-import { AuthHeader } from "./headers/AuthHeader"
+import { Outlet } from '@tanstack/react-router'
+import { AuthHeader } from './headers/AuthHeader'
 
 export function AuthShellLayout() {
   return (

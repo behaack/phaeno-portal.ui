@@ -1,8 +1,8 @@
-import { ESqlAiEntityType } from "@/api/types/ai-assistant"
+import { ESqlAiEntityType } from '@/api/types/ai-assistant'
 
 export type AiViewModel =
   | {
-      kind: "table"
+      kind: 'table'
       title?: string | null
       columns: string[]
       rows: any[]
@@ -10,7 +10,7 @@ export type AiViewModel =
       entityType: ESqlAiEntityType
     }
   | {
-      kind: "metric"
+      kind: 'metric'
       title?: string | null
       metric: { value: string | number; label?: string }
       nextCursor: null

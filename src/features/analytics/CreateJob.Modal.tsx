@@ -1,7 +1,7 @@
-import { forwardRef, useImperativeHandle, useState } from "react"
-import { IconMath } from "@tabler/icons-react";
-import { PModalHeader } from "@/shared/ui/modals/Parts/PModalHeader";
-import { PModal } from "@/shared/ui/modals/Parts/PModal";
+import { forwardRef, useImperativeHandle, useState } from 'react'
+import { IconMath } from '@tabler/icons-react'
+import { PModal } from '@/shared/ui/modals/Parts/PModal'
+import { PModalHeader } from '@/shared/ui/modals/Parts/PModalHeader'
 
 export interface IProps {
   title: string
@@ -9,28 +9,28 @@ export interface IProps {
 }
 
 export interface IHandles {
-  open: () => void;
-  close: () => void;
+  open: () => void
+  close: () => void
 }
 
 export const CreateJobModal = forwardRef<IHandles, IProps>((props, ref) => {
-  const { title, children} = props
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { title, children } = props
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   useImperativeHandle(ref, () => ({
     open() {
-      setIsOpen(true);
+      setIsOpen(true)
     },
     close() {
       setIsOpen(false)
-    }
-  }));  
+    },
+  }))
 
   return (
     <PModal opened={isOpen} onClose={() => setIsOpen(false)}>
       <div>
         <PModalHeader title={title} icon={<IconMath />} onClose={() => setIsOpen(false)} />
-        { children }
+        {children}
       </div>
     </PModal>
   )

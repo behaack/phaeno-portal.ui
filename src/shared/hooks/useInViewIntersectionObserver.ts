@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from 'react'
 
-export function useInViewIntersectionObserver<T extends Element>(options?: IntersectionObserverInit) {
+export function useInViewIntersectionObserver<T extends Element>(
+  options?: IntersectionObserverInit
+) {
   const ref = useRef<T | null>(null)
   const [inView, setInView] = useState(false)
 
@@ -14,7 +16,7 @@ export function useInViewIntersectionObserver<T extends Element>(options?: Inter
 
     obs.observe(el)
     return () => obs.disconnect()
-  }, [options?.root, options?.rootMargin, options?.threshold])
+  }, [options])
 
   return { ref, inView }
 }

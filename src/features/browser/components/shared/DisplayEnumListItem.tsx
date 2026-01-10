@@ -1,18 +1,18 @@
-import IListItem from "@/shared/types/IListItem";
+import IListItem from '@/shared/types/IListItem'
 
 export interface IProps {
-  list: IListItem[];
-  value: number | null | undefined;
+  list: IListItem[]
+  value: number | null | undefined
 }
 
 export function DisplayEnumListItem({ list, value }: IProps) {
   const findValue = (val: number | null | undefined): string => {
-    const index = list.findIndex((item: IListItem) => item.value === val);
+    const index = list.findIndex((item: IListItem) => item.value === val)
     if (index >= 0) {
-      return list[index].label;
+      return list[index].label
     }
-    return '';
-  };
+    return ''
+  }
 
-  return <span>{findValue(value)}</span>;
+  return <span>{findValue(value)}</span>
 }

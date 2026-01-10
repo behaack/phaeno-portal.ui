@@ -1,6 +1,6 @@
-import { CustomerDetailsPage } from "@/features/customers/CustomerDetailsPage";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
+import { CustomerDetailsPage } from '@/features/customers/CustomerDetailsPage'
 
-export const Route = createFileRoute("/app/customers/$id")({
+export const Route = createFileRoute('/app/customers/$id')({
   component: CustomerDetailsPage,
-});
+})

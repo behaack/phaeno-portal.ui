@@ -1,4 +1,4 @@
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon'
 
 export type DateFormat = 'short-date' | 'long-date' | 'short-datetime' | 'long-datetime'
 

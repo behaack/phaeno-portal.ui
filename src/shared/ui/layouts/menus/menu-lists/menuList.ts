@@ -1,4 +1,4 @@
-import IMenuListItem from "../../types/IMenuListItem";
+import IMenuListItem from '../../types/IMenuListItem'
 
 export const userMenuList: IMenuListItem[] = [
   {
@@ -9,7 +9,7 @@ export const userMenuList: IMenuListItem[] = [
     label: 'Browser',
     route: '/app/browser',
     userDataRoute: true,
-    roles: null
+    roles: null,
   },
   {
     index: 1,
@@ -19,8 +19,8 @@ export const userMenuList: IMenuListItem[] = [
     label: 'Analytics',
     route: '/app/analytics',
     userDataRoute: true,
-    roles: null
-  },  
+    roles: null,
+  },
   {
     index: 2,
     isMain: true,
@@ -29,7 +29,7 @@ export const userMenuList: IMenuListItem[] = [
     label: 'Files',
     route: '/app/files',
     userDataRoute: true,
-    roles: null
+    roles: null,
   },
   {
     index: 3,
@@ -40,7 +40,7 @@ export const userMenuList: IMenuListItem[] = [
     route: '/app/customers',
     userDataRoute: false,
     roles: ['phaeno-admin', 'phaeno-user'],
-  },  
+  },
   {
     index: 4,
     isMain: false,
@@ -49,7 +49,7 @@ export const userMenuList: IMenuListItem[] = [
     label: 'Users',
     route: '/app/users',
     userDataRoute: false,
-    roles: ['customer-admin', 'partner-admin', 'phaeno-admin']
+    roles: ['customer-admin', 'partner-admin', 'phaeno-admin'],
   },
   {
     index: 5,
@@ -59,7 +59,7 @@ export const userMenuList: IMenuListItem[] = [
     label: 'Settings & Security...',
     route: 'none',
     userDataRoute: false,
-    roles: null
+    roles: null,
   },
   {
     index: 6,
@@ -69,6 +69,6 @@ export const userMenuList: IMenuListItem[] = [
     label: 'Sign Out',
     route: 'none',
     userDataRoute: false,
-    roles: null
+    roles: null,
   },
-];
+]

@@ -10,7 +10,7 @@ export {
   PSelect,
   PCheckbox,
   PSwitch,
-} from "./inputs";
+} from './inputs'
 
 export type {
   PButtonProps,
@@ -24,10 +24,10 @@ export type {
   PSelectProps,
   PCheckboxProps,
   PSwitchProps,
-} from "./inputs";
+} from './inputs'
 
-export { PFormField } from "./form";
-export type { PFormFieldProps } from "./form";
+export { PFormField } from './form'
+export type { PFormFieldProps } from './form'
 
-export { PChip } from "./feedback";
-export type { PChipProps } from "./feedback";
+export { PChip } from './feedback'
+export type { PChipProps } from './feedback'

@@ -1,26 +1,25 @@
-import { JSX } from 'react';
-import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
-import { TComponentSize } from '@/shared/types/TComponentSize';
-import { PModal } from './Parts/PModal';
-import { PModalHeader } from './Parts/PModalHeader';
-import { PModalDialogFooter } from './Parts/PModalDialogFooter';
-import { PModalBody } from './Parts/PModalBody';
+import { JSX } from 'react'
+import { TComponentSize } from '@/shared/types/TComponentSize'
+import { PModal } from './Parts/PModal'
+import { PModalBody } from './Parts/PModalBody'
+import { PModalDialogFooter } from './Parts/PModalDialogFooter'
+import { PModalHeader } from './Parts/PModalHeader'
 
 export interface IProps {
-  opened: boolean;
-  title?: string;
-  onClose: () => void;
-  zIndex?: number;
-  size?: TComponentSize;
-  top?: boolean;
-  icon?: JSX.Element;
+  opened: boolean
+  title?: string
+  onClose: () => void
+  zIndex?: number
+  size?: TComponentSize
+  top?: boolean
+  icon?: JSX.Element
   className?: string
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export function PModalDialog({
   opened,
-  title="",
+  title = '',
   onClose,
   zIndex = 100,
   size = 'md',
@@ -29,8 +28,6 @@ export function PModalDialog({
   className,
   children,
 }: IProps) {
-  const [, deviceHeight] = useDeviceSize();
-
   return (
     <PModal
       opened={opened}
@@ -48,12 +45,10 @@ export function PModalDialog({
       }}
     >
       <div>
-        <PModalHeader title={title} icon={icon} onClose={onClose}/>
-        <PModalBody className={className}>
-          {children}
-        </PModalBody>
+        <PModalHeader title={title} icon={icon} onClose={onClose} />
+        <PModalBody className={className}>{children}</PModalBody>
         <PModalDialogFooter onClose={onClose} />
       </div>
     </PModal>
-  );
+  )
 }

@@ -1,11 +1,19 @@
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react"
-import { PButton, PTextArea } from "@/shared/ui/components"
-import { useAiAssistInfinitePages, useAiAssistNaturalLangMutation } from "@/api/hooks/ai-assistant.hooks"
-import { AiAssistResponse, NaturalLangRequest, ERenderType, ESqlAiEntityType } from "@/api/types/ai-assistant"
-import { AiAssistResults } from "./components/ai-assistant/AiAssisResults"
-import { Text } from "@/shared/ui/primiatives"
-import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
-import { useBrowserStore } from "@/stores/browser.store"
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  useAiAssistInfinitePages,
+  useAiAssistNaturalLangMutation,
+} from '@/api/hooks/ai-assistant.hooks'
+import {
+  AiAssistResponse,
+  ERenderType,
+  ESqlAiEntityType,
+  NaturalLangRequest,
+} from '@/api/types/ai-assistant'
+import { useInViewIntersectionObserver } from '@/shared/hooks/useInViewIntersectionObserver'
+import { PButton, PTextArea } from '@/shared/ui/components'
+import { Text } from '@/shared/ui/primiatives'
+import { useBrowserStore } from '@/stores/browser.store'
+import { AiAssistResults } from './components/ai-assistant/AiAssisResults'
 
 export function NaturalLangPanel() {
   const store = useBrowserStore()
@@ -13,7 +21,7 @@ export function NaturalLangPanel() {
   const [queryId, setQueryId] = useState<string | null>(null)
   const [firstPage, setFirstPage] = useState<AiAssistResponse | null>(null)
   const [isActive, setIsActive] = useState(false)
-  const [request, setRequest] = useState("")
+  const [request, setRequest] = useState('')
 
   // scroll container
   const scrollRef = useRef<HTMLDivElement | null>(null)
@@ -21,7 +29,7 @@ export function NaturalLangPanel() {
   // sentinel observer (container scrolling)
   const { ref: sentinelRef, inView } = useInViewIntersectionObserver<HTMLDivElement>({
     root: scrollRef.current,
-    rootMargin: "250px",
+    rootMargin: '250px',
     threshold: 0,
   })
 
@@ -35,9 +43,9 @@ export function NaturalLangPanel() {
   //   firstPage?.renderType === ERenderType.Table
 
   const enablePaging =
-  !!queryId &&
-  firstPage?.renderType === ERenderType.Table &&
-  (firstPage?.hasAdditional || !!firstPage?.nextCursor)
+    !!queryId &&
+    firstPage?.renderType === ERenderType.Table &&
+    (firstPage?.hasAdditional || !!firstPage?.nextCursor)
 
   const pagesQuery = useAiAssistInfinitePages({
     queryId,
@@ -65,7 +73,13 @@ export function NaturalLangPanel() {
     if (!pagesQuery.hasNextPage) return
     if (pagesQuery.isFetchingNextPage) return
     pagesQuery.fetchNextPage()
-  }, [inView, enablePaging, pagesQuery.hasNextPage, pagesQuery.isFetchingNextPage, pagesQuery.fetchNextPage])
+  }, [
+    inView,
+    enablePaging,
+    pagesQuery.hasNextPage,
+    pagesQuery.isFetchingNextPage,
+    pagesQuery.fetchNextPage,
+  ])
 
   const submitHndl = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -87,7 +101,7 @@ export function NaturalLangPanel() {
   }
 
   const clearResults = () => {
-//    setRequest("")
+    //    setRequest("")
     setQueryId(null)
     setFirstPage(null)
     setIsActive(false)
@@ -126,10 +140,10 @@ export function NaturalLangPanel() {
         <AiAssistResults result={result} rows={allRows} />
         <div ref={sentinelRef} className="flex justify-center py-3 text-sm text-muted-foreground">
           {pagesQuery.isFetchingNextPage
-            ? "Loading more..."
+            ? 'Loading more...'
             : pagesQuery.hasNextPage
-              ? "Scroll to load more"
-              : "End"}
+              ? 'Scroll to load more'
+              : 'End'}
         </div>
       </div>
     </div>

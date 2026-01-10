@@ -1,4 +1,4 @@
-import IListItem from "@/shared/types/IListItem";
+import IListItem from '@/shared/types/IListItem'
 
 export const readNumberList: IListItem[] = [
   {
@@ -13,4 +13,4 @@ export const readNumberList: IListItem[] = [
     value: 2,
     label: 'Two',
   },
-];
+]

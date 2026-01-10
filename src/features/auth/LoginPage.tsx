@@ -1,21 +1,18 @@
-import { FormProvider, useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useNavigate } from "@tanstack/react-router"
-
-import { useSignInMutation } from "@/api/hooks/auth.hooks"
-import { getApiErrorMessage } from "@/api/core/getApiErrorMessage"
-
-import { RHFTextInput } from "@/shared/ui/components/form/rhf/RHFTextInput"
-import { RHFPasswordInput } from "@/shared/ui/components/form/rhf/RHFPasswordInput"
-import { PButton } from "@/shared/ui/components/inputs/PButton"
-
-import { handleSignInResult } from "@/features/auth/utils/handleSignInResult"
-import { Surface } from "@/shared/ui/primiatives/Surface"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from '@tanstack/react-router'
+import { FormProvider, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { getApiErrorMessage } from '@/api/core/getApiErrorMessage'
+import { useSignInMutation } from '@/api/hooks/auth.hooks'
+import { handleSignInResult } from '@/features/auth/utils/handleSignInResult'
+import { RHFPasswordInput } from '@/shared/ui/components/form/rhf/RHFPasswordInput'
+import { RHFTextInput } from '@/shared/ui/components/form/rhf/RHFTextInput'
+import { PButton } from '@/shared/ui/components/inputs/PButton'
+import { Surface } from '@/shared/ui/primiatives/Surface'
 
 const schema = z.object({
-  email: z.string().email("Enter a valid email"),
-  password: z.string().min(1, "Password is required"),
+  email: z.string().email('Enter a valid email'),
+  password: z.string().min(1, 'Password is required'),
 })
 
 type FormValues = z.infer<typeof schema>
@@ -26,18 +23,18 @@ export function LoginPage() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: '', password: '' },
   })
 
   const onSubmit = form.handleSubmit(async (values) => {
-    form.clearErrors("root")
+    form.clearErrors('root')
 
     try {
       const res = await signIn.mutateAsync(values)
       await handleSignInResult(res, navigate)
     } catch (err) {
-      form.setError("root", { type: "server", message: getApiErrorMessage(err) })
-      form.setValue("password", "")
+      form.setError('root', { type: 'server', message: getApiErrorMessage(err) })
+      form.setValue('password', '')
     }
   })
 
@@ -63,7 +60,7 @@ export function LoginPage() {
               <button
                 type="button"
                 className="text-sm underline opacity-80 hover:opacity-100"
-                onClick={() => navigate({ to: "/auth/forgot-password" })}
+                onClick={() => navigate({ to: '/auth/forgot-password' })}
               >
                 Forgot password?
               </button>

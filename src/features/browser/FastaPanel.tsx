@@ -1,28 +1,28 @@
-import { useEffect, useMemo, useRef, useState } from "react"
-import { useFastaInfiniteList, useFastaLookup } from "@/api/hooks/fasta.hooks"
-import { SearchInput } from "./components/shared/SearchInput"
-import { FastaTable } from "./components/fasta/FastaTable"
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { flattenInfiniteCursorPages } from '@/api/helpers/flattenInfiniteCursorPages'
+import { useFastaInfiniteList, useFastaLookup } from '@/api/hooks/fasta.hooks'
+import { useInViewIntersectionObserver } from '@/shared/hooks/useInViewIntersectionObserver'
 // import { ProTable } from "./components/fasta/ProTable"
-import { useBrowserStore } from "@/stores/browser.store"
-import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
-import { flattenInfiniteCursorPages } from "@/api/helpers/flattenInfiniteCursorPages"
+import { useBrowserStore } from '@/stores/browser.store'
+import { FastaTable } from './components/fasta/FastaTable'
+import { SearchInput } from './components/shared/SearchInput'
 
 const PAGE_SIZE = 50
 
 export function FastaPanel() {
   const store = useBrowserStore()
-  const [searchValue, setSearchValue] = useState<string | null>("")
+  const [searchValue, setSearchValue] = useState<string | null>('')
 
   useEffect(() => {
     setSearchValue(store.selectedSmid)
   }, [])
 
-  const lookup = useFastaLookup({ q: searchValue ?? "", limit: PAGE_SIZE })
+  const lookup = useFastaLookup({ q: searchValue ?? '', limit: PAGE_SIZE })
 
   const list = useFastaInfiniteList({
     sampleId: store.selectedSample,
     limit: PAGE_SIZE,
-    q: searchValue ?? "",
+    q: searchValue ?? '',
   })
 
   // Flatten all pages into one array for the table
@@ -30,8 +30,8 @@ export function FastaPanel() {
 
   // Sentinel for infinite load
   const { ref: sentinelRef, inView } = useInViewIntersectionObserver<HTMLDivElement>({
-    root: null,            // window scrolling; set to a container element if needed
-    rootMargin: "250px",   // preload before reaching the end
+    root: null, // window scrolling; set to a container element if needed
+    rootMargin: '250px', // preload before reaching the end
     threshold: 0,
   })
 
@@ -57,7 +57,7 @@ export function FastaPanel() {
   }, [inView, list.hasNextPage, list.isFetchingNextPage, list.fetchNextPage])
 
   const updateSearchValue = (value: string | null) => {
-    const next = value ?? ""
+    const next = value ?? ''
     setSearchValue(next)
     store.setSelectedSmid(value)
   }
@@ -75,7 +75,10 @@ export function FastaPanel() {
         <FastaTable data={rows} forAllSamples={!store.selectedSample} />
         {/* <ProTable data={rows} forAllSamples={!sampleId}/> */}
         {/* Sentinel + status */}
-        <div ref={sentinelRef} className="flex justify-center mt-4 py-3 text-sm text-muted-foreground">
+        <div
+          ref={sentinelRef}
+          className="flex justify-center mt-4 py-3 text-sm text-muted-foreground"
+        >
           {list.isLoading ? (
             <span>Loading…</span>
           ) : list.isFetchingNextPage ? (

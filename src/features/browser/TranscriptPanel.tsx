@@ -1,28 +1,28 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useTranscriptInfiniteList, useTranscriptLookup } from "@/api/hooks/transcript.hooks";
-import { SearchInput } from "./components/shared/SearchInput";
-import { TranscriptTable } from "./components/transcript/TranscriptTable";
-import { useBrowserStore } from '@/stores/browser.store';
-import { useInViewIntersectionObserver } from "@/shared/hooks/useInViewIntersectionObserver"
-import { flattenInfiniteCursorPages } from "@/api/helpers/flattenInfiniteCursorPages";
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { flattenInfiniteCursorPages } from '@/api/helpers/flattenInfiniteCursorPages'
+import { useTranscriptInfiniteList, useTranscriptLookup } from '@/api/hooks/transcript.hooks'
+import { useInViewIntersectionObserver } from '@/shared/hooks/useInViewIntersectionObserver'
+import { useBrowserStore } from '@/stores/browser.store'
+import { SearchInput } from './components/shared/SearchInput'
+import { TranscriptTable } from './components/transcript/TranscriptTable'
 
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 50
 
 export function TranscriptPanel() {
   const store = useBrowserStore()
-  
-  const [searchValue, setSearchValue] = useState<string | null>("");
-  
+
+  const [searchValue, setSearchValue] = useState<string | null>('')
+
   useEffect(() => {
     setSearchValue(store.selectedGene)
-  }, []) 
-  
-  const lookup = useTranscriptLookup({ q: searchValue ?? "", limit: PAGE_SIZE });
+  }, [])
+
+  const lookup = useTranscriptLookup({ q: searchValue ?? '', limit: PAGE_SIZE })
 
   const list = useTranscriptInfiniteList({
     sampleId: store.selectedSample,
     limit: PAGE_SIZE,
-    q: searchValue ?? "",
+    q: searchValue ?? '',
   })
 
   // Flatten all pages into one array for the table
@@ -30,15 +30,15 @@ export function TranscriptPanel() {
 
   // Sentinel for infinite load
   const { ref: sentinelRef, inView } = useInViewIntersectionObserver<HTMLDivElement>({
-    root: null,            // window scrolling; set to a container element if needed
-    rootMargin: "250px",   // preload before reaching the end
+    root: null, // window scrolling; set to a container element if needed
+    rootMargin: '250px', // preload before reaching the end
     threshold: 0,
   })
 
   // When search context changes, start over (TanStack will do this via queryKey change,
   // but we also want to avoid any weird "inView" immediate fetch after switching)
   const justResetRef = useRef(false)
-  
+
   useEffect(() => {
     justResetRef.current = true
     const t = window.setTimeout(() => {
@@ -57,9 +57,8 @@ export function TranscriptPanel() {
     list.fetchNextPage()
   }, [inView, list.hasNextPage, list.isFetchingNextPage, list.fetchNextPage])
 
-
   const updateSearchValue = (value: string | null) => {
-    const next = value ?? ""
+    const next = value ?? ''
     setSearchValue(next)
     store.setSelectedGene(value)
   }
@@ -67,16 +66,19 @@ export function TranscriptPanel() {
   return (
     <div className="mt-5">
       <SearchInput
-        value={searchValue ?? ""}
+        value={searchValue ?? ''}
         data={lookup.data ?? []}
         placeholder="Select a Gene"
         onChange={(value) => updateSearchValue(value)}
       />
 
       <div className="h-[60vh] overflow-auto rounded-xl border">
-        <TranscriptTable data={rows} forAllSamples={!store.selectedSample}/>
+        <TranscriptTable data={rows} forAllSamples={!store.selectedSample} />
         {/* Sentinel + status */}
-        <div ref={sentinelRef} className="flex justify-center mt-4 py-3 text-sm text-muted-foreground">
+        <div
+          ref={sentinelRef}
+          className="flex justify-center mt-4 py-3 text-sm text-muted-foreground"
+        >
           {list.isLoading ? (
             <span>Loading…</span>
           ) : list.isFetchingNextPage ? (
@@ -91,5 +93,5 @@ export function TranscriptPanel() {
         </div>
       </div>
     </div>
-  );
+  )
 }

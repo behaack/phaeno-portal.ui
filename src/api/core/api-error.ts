@@ -1,4 +1,4 @@
-import type { ApiEnvelopeError } from "@/api/core/types"
+import type { ApiEnvelopeError } from '@/api/core/types'
 
 export function getApiErrorMessage(err: unknown): string {
   const e = err as any
@@ -17,5 +17,5 @@ export function getApiErrorMessage(err: unknown): string {
   }
 
   // Axios/network/etc
-  return e?.message ?? "Something went wrong. Please try again."
+  return e?.message ?? 'Something went wrong. Please try again.'
 }

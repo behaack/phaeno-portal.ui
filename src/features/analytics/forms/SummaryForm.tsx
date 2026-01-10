@@ -1,10 +1,10 @@
-import { z } from "zod"
-import { FormProvider, useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { RHFTextInput } from "@/shared/ui/components/form/rhf"
-import { PModalBody } from "@/shared/ui/modals/Parts/PModalBody"
-import { PModalFormFooter } from "@/shared/ui/modals/Parts/PModalFormFooter"
-import { useCreateSummaryJobMutation } from "@/api/hooks/job-pipeline.hooks"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FormProvider, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useCreateSummaryJobMutation } from '@/api/hooks/job-pipeline.hooks'
+import { RHFTextInput } from '@/shared/ui/components/form/rhf'
+import { PModalBody } from '@/shared/ui/modals/Parts/PModalBody'
+import { PModalFormFooter } from '@/shared/ui/modals/Parts/PModalFormFooter'
 
 const schema = z.object({
   jobName: z.string().min(1),
@@ -22,15 +22,15 @@ export default function SummaryForm({ onClose }: IProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      jobName: "",
-      h5adPath: "",
+      jobName: '',
+      h5adPath: '',
     },
   })
 
   const submitHandle = (data: FormValues) => {
-    jobMutation.mutateAsync(data);
+    jobMutation.mutateAsync(data)
     onClose()
-  }  
+  }
 
   return (
     <FormProvider {...form}>

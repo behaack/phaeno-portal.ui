@@ -1,8 +1,8 @@
 // @/api/core/api-client.ts
-import type { AxiosRequestConfig } from "axios"
-import { axiosInstance } from "./axios.instance" // adjust import path to your file
+import type { AxiosRequestConfig } from 'axios'
+import { axiosInstance } from './axios.instance' // adjust import path to your file
 
-export type HttpMethod = "get" | "post" | "put" | "patch" | "delete"
+export type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete'
 
 // Your interceptors already unwrap to "data", so these resolve to T (not AxiosResponse<T>)
 export const api = {

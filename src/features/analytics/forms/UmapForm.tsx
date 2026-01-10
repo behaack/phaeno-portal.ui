@@ -1,10 +1,10 @@
-import z from "zod"
-import { RHFNumberInput, RHFTextInput } from "@/shared/ui/components/form"
-import { FormProvider, useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { PModalBody } from "@/shared/ui/modals/Parts/PModalBody"
-import { PModalFormFooter } from "@/shared/ui/modals/Parts/PModalFormFooter"
-import { useCreateUmapJobMutation } from "@/api/hooks/job-pipeline.hooks"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FormProvider, useForm } from 'react-hook-form'
+import z from 'zod'
+import { useCreateUmapJobMutation } from '@/api/hooks/job-pipeline.hooks'
+import { RHFNumberInput, RHFTextInput } from '@/shared/ui/components/form'
+import { PModalBody } from '@/shared/ui/modals/Parts/PModalBody'
+import { PModalFormFooter } from '@/shared/ui/modals/Parts/PModalFormFooter'
 
 const schema = z.object({
   jobName: z.string().min(1),
@@ -22,18 +22,18 @@ export interface IProps {
 export default function Fields({ onClose }: IProps) {
   const jobMutation = useCreateUmapJobMutation()
 
-  const form = useForm<FormValues>({    
+  const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      jobName: "",
-      h5adPath: "",
+      jobName: '',
+      h5adPath: '',
       nNeighbors: 15,
       minDist: 0.1,
     },
-  })  
+  })
 
   const submitHandle = (data: FormValues) => {
-    jobMutation.mutateAsync(data);
+    jobMutation.mutateAsync(data)
     onClose()
   }
 
@@ -48,8 +48,8 @@ export default function Fields({ onClose }: IProps) {
             <RHFNumberInput name="minDist" label="min-Dist" min={0} max={1} step={0.1} />
           </div>
           <PModalFormFooter onClose={() => {}} />
-      </form>
-     </PModalBody>
-    </FormProvider>    
+        </form>
+      </PModalBody>
+    </FormProvider>
   )
 }

@@ -2,6 +2,8 @@
 const config = {
   printWidth: 100,
   singleQuote: true,
+  jsxSingleQuote: false,
+  semi: false,
   trailingComma: 'es5',
   plugins: ['@ianvs/prettier-plugin-sort-imports'],
   importOrder: [
@@ -30,6 +32,6 @@ const config = {
       },
     },
   ],
-};
+}
 
-export default config;
+export default config

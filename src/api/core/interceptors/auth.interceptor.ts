@@ -1,6 +1,6 @@
-import type { AxiosInstance } from "axios"
-import { AxiosHeaders } from "axios"
-import { authSession } from "@/auth/auth.session"
+import type { AxiosInstance } from 'axios'
+import { AxiosHeaders } from 'axios'
+import { authSession } from '@/auth/auth.session'
 
 export function attachAuthInterceptor(client: AxiosInstance) {
   client.interceptors.request.use((config) => {
@@ -8,7 +8,7 @@ export function attachAuthInterceptor(client: AxiosInstance) {
     if (!token) return config
 
     const headers = AxiosHeaders.from(config.headers)
-    headers.set("Authorization", `Bearer ${token}`)
+    headers.set('Authorization', `Bearer ${token}`)
     config.headers = headers
 
     return config

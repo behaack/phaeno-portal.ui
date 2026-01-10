@@ -1,6 +1,6 @@
-import { useTotpConfirm, useTotpStart } from "@/api/hooks/account.hooks"
-import { PButton, PPasswordInput, PTextInput } from "@/shared/ui/components"
-import { useState } from "react"
+import { useState } from 'react'
+import { useTotpConfirm, useTotpStart } from '@/api/hooks/account.hooks'
+import { PButton, PPasswordInput, PTextInput } from '@/shared/ui/components'
 
 export interface IProp {
   onClose: () => void
@@ -11,12 +11,12 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
   const totpConfirm = useTotpConfirm()
 
   const [step, setStep] = useState<number>(1)
-  const [password, setPassword] = useState<string>("")
-  const [code, setCode] = useState<string>("")
-  const [enrollmentId, setEnrollmentId] = useState<string>("")
-  const [qrPngBase64, setQrPngBase64] = useState<string>("")
+  const [password, setPassword] = useState<string>('')
+  const [code, setCode] = useState<string>('')
+  const [enrollmentId, setEnrollmentId] = useState<string>('')
+  const [qrPngBase64, setQrPngBase64] = useState<string>('')
 
-  const qrSrc = qrPngBase64 ? qrSrcFromBase64Png(qrPngBase64) : ""
+  const qrSrc = qrPngBase64 ? qrSrcFromBase64Png(qrPngBase64) : ''
 
   const generateQr = async () => {
     try {
@@ -35,22 +35,20 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
     try {
       await totpConfirm.mutateAsync({ enrollmentId, code })
       onClose()
-    } catch {
-      
-    }
+    } catch {}
   }
 
   const resetToStep1 = () => {
     setStep(1)
-    setCode("")
-    setEnrollmentId("")
-    setQrPngBase64("")
+    setCode('')
+    setEnrollmentId('')
+    setQrPngBase64('')
     totpStart.reset()
     totpConfirm.reset()
   }
 
   const startError = getErrorMessage(totpStart.error)
-  const confirmError = getErrorMessage(totpConfirm.error)  
+  const confirmError = getErrorMessage(totpConfirm.error)
 
   const step1 = (
     <div>
@@ -101,12 +99,12 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
 
           <div className="sm:mt-4 flex flex-col items-center sm:items-start">
             <p className="text-xs text-gray-600 mb-1">Enter 6-digit code</p>
-            <PTextInput 
-              value={code} 
-              onChange={(e) => setCode(e.currentTarget.value)} 
-              type="number" 
-              maxLength={6} 
-              size="sm" 
+            <PTextInput
+              value={code}
+              onChange={(e) => setCode(e.currentTarget.value)}
+              type="number"
+              maxLength={6}
+              size="sm"
             />
           </div>
         </div>
@@ -148,7 +146,7 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
           {startError}
           {confirmError}
         </div>
-      ) : null}      
+      ) : null}
 
       {step === 1 && step1}
       {step === 2 && step2}
@@ -157,16 +155,15 @@ export function TotpEnrollmentCard({ onClose }: IProp) {
 }
 
 function qrSrcFromBase64Png(b64: string) {
-  if (!b64) return ""
-  return b64.startsWith("data:") ? b64 : `data:image/png;base64,${b64}`
+  if (!b64) return ''
+  return b64.startsWith('data:') ? b64 : `data:image/png;base64,${b64}`
 }
 
 function getErrorMessage(err: unknown): string | null {
   if (!err) return null
-  if (typeof err === "string") return err
+  if (typeof err === 'string') return err
   if (err instanceof Error) return err.message
-  
-  
+
   const anyErr = err as any
   return (
     anyErr?.response?.data?.message ||

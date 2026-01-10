@@ -1,12 +1,12 @@
-import { RHFTextInput } from "@/shared/ui/components/form";
-import { TFormMode } from "@/shared/types/TFormMode";
-import { Stack } from "@/shared/ui/primiatives";
+import { TFormMode } from '@/shared/types/TFormMode'
+import { RHFTextInput } from '@/shared/ui/components/form'
+import { Stack } from '@/shared/ui/primiatives'
 
 export interface IProps {
   formMode: TFormMode
 }
 
-export function CustomerForm({formMode}: IProps) {
+export function CustomerForm({ formMode }: IProps) {
   return (
     <Stack gap="gap-3">
       <RHFTextInput
@@ -17,13 +17,7 @@ export function CustomerForm({formMode}: IProps) {
         required
       />
 
-      <RHFTextInput
-        name="street1"
-        label="Street"
-        placeholder="Street"
-        maxLength={100}
-        required
-      />
+      <RHFTextInput name="street1" label="Street" placeholder="Street" maxLength={100} required />
 
       <RHFTextInput
         name="street2"
@@ -32,13 +26,7 @@ export function CustomerForm({formMode}: IProps) {
         maxLength={100}
       />
 
-      <RHFTextInput
-        name="city"
-        label="City"
-        placeholder="City"
-        maxLength={100}
-        required
-      />
+      <RHFTextInput name="city" label="City" placeholder="City" maxLength={100} required />
 
       <RHFTextInput
         name="state"
@@ -52,7 +40,7 @@ export function CustomerForm({formMode}: IProps) {
         name="postalCode"
         label="Postal code"
         placeholder="Postal code"
-        maxLength={25}        
+        maxLength={25}
         required
       />
 
@@ -60,9 +48,9 @@ export function CustomerForm({formMode}: IProps) {
         name="countryCode"
         label="Country code"
         placeholder="Country code"
-        maxLength={2}                
+        maxLength={2}
         required
-      />                        
+      />
     </Stack>
-  );
+  )
 }

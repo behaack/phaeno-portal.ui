@@ -1,7 +1,6 @@
-import { authService } from "@/api/services/auth.service"
-import { queryClient } from "@/app/providers/queryClient"
-import { authSession } from "./auth.session"
-import { useAuthStore } from "@/stores/auth.store"
+import { authService } from '@/api/services/auth.service'
+import { queryClient } from '@/app/providers/queryClient'
+import { authSession } from './auth.session'
 
 // auth.logout.ts
 export async function authLogout() {

@@ -1,20 +1,16 @@
-import { IconEye } from '@tabler/icons-react';
-import { PToolTip } from '@/shared/ui/components/feedback';
-import { PActionIcon } from '@/shared/ui/components/inputs';
-import { DisplayEnumListItem } from '../shared/DisplayEnumListItem';
-import { FastaListItem } from '@/api/types/fasta';
-import readNumberList from './readNumberList';
+import { IconEye } from '@tabler/icons-react'
+import { FastaListItem } from '@/api/types/fasta'
+import { PToolTip } from '@/shared/ui/components/feedback'
+import { PActionIcon } from '@/shared/ui/components/inputs'
+import { DisplayEnumListItem } from '../shared/DisplayEnumListItem'
+import readNumberList from './readNumberList'
 
 export interface IProps {
-  data: FastaListItem[];
-  forAllSamples: boolean;
+  data: FastaListItem[]
+  forAllSamples: boolean
 }
 
-export function FastaList({
-  data,
-  forAllSamples
-}: IProps) {
-
+export function FastaList({ data, forAllSamples }: IProps) {
   return (
     <div>
       {data.length ? (
@@ -24,10 +20,10 @@ export function FastaList({
               <div className="flex justify-between">
                 <div className="list-item primary">{item.smid}</div>
                 <PToolTip label="View details">
-                  <PActionIcon 
-                    variant="filled" 
-                    size="sm" 
-                    radius="xl" 
+                  <PActionIcon
+                    variant="filled"
+                    size="sm"
+                    radius="xl"
                     aria-label="Transcript details"
                     // onClick={() => detailsHndl(item.id)}
                   >
@@ -35,13 +31,11 @@ export function FastaList({
                   </PActionIcon>
                 </PToolTip>
               </div>
-              {(forAllSamples)
-                ? (
-                  <div>
-                    <span className="font-medium">Sample</span>: {item.sampleName}
-                  </div>              
-                ) : null
-              }              
+              {forAllSamples ? (
+                <div>
+                  <span className="font-medium">Sample</span>: {item.sampleName}
+                </div>
+              ) : null}
               <div>
                 <span className="font-medium">Fragments</span>: {item.numFragments}
               </div>
@@ -58,5 +52,5 @@ export function FastaList({
         </ul>
       ) : null}
     </div>
-  );
+  )
 }

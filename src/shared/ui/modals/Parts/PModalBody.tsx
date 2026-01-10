@@ -1,16 +1,10 @@
-import { PBox } from "@/shared/ui/components/layout";
-import { useDeviceSize } from '@/shared/hooks/useDeviceSize';
+import { PBox } from '@/shared/ui/components/layout'
 
 export interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
   className?: string
 }
 
-export function PModalBody({ className="", children }: Props) {
-  return (
-  <PBox className={className}>
-    {children}
-  </PBox>
-  )
+export function PModalBody({ className = '', children }: Props) {
+  return <PBox className={className}>{children}</PBox>
 }
-

@@ -1,6 +1,6 @@
-import { UserAccount } from "@/api/types/account"
-import { create } from "zustand"
-import { createJSONStorage, devtools, persist } from "zustand/middleware"
+import { create } from 'zustand'
+import { createJSONStorage, devtools, persist } from 'zustand/middleware'
+import { UserAccount } from '@/api/types/account'
 
 export interface IAuthState {
   accessToken: string | null
@@ -22,7 +22,11 @@ export interface IAuthState {
 }
 
 function computeExpiresAtMs(expiresInSeconds?: number): number | null {
-  if (typeof expiresInSeconds !== "number" || !Number.isFinite(expiresInSeconds) || expiresInSeconds <= 0) {
+  if (
+    typeof expiresInSeconds !== 'number' ||
+    !Number.isFinite(expiresInSeconds) ||
+    expiresInSeconds <= 0
+  ) {
     return null
   }
   return Date.now() + expiresInSeconds * 1000
@@ -37,12 +41,13 @@ export const useAuthStore = create<IAuthState>()(
         accessTokenExpiresAtMs: null,
         userAccount: null,
         hasHydrated: false,
-        
+
         setHasHydrated: (v) => set({ hasHydrated: v }),
 
-        setUserAccount: (userAccount: UserAccount | null) => set({
-          userAccount: userAccount
-        }),
+        setUserAccount: (userAccount: UserAccount | null) =>
+          set({
+            userAccount: userAccount,
+          }),
 
         hasToken: () => !!get().accessToken,
 
@@ -51,7 +56,7 @@ export const useAuthStore = create<IAuthState>()(
           if (exp == null) return false
           if (!Number.isFinite(exp)) return true
           const SKEW_MS = 30_000
-          return Date.now() >= (exp - SKEW_MS)
+          return Date.now() >= exp - SKEW_MS
         },
 
         isAuthenticated: () => !!get().accessToken && !get().isAccessTokenExpired(),
@@ -62,11 +67,11 @@ export const useAuthStore = create<IAuthState>()(
             refreshToken,
             accessTokenExpiresAtMs: computeExpiresAtMs(expiresInSeconds),
           }),
-          
+
         setAccessToken: (accessToken: string, expiresInSeconds: number) =>
-          set({ 
-            accessToken, 
-            accessTokenExpiresAtMs: computeExpiresAtMs(expiresInSeconds) 
+          set({
+            accessToken,
+            accessTokenExpiresAtMs: computeExpiresAtMs(expiresInSeconds),
           }),
 
         rotateTokens: (accessToken, refreshToken, expiresInSeconds) =>
@@ -81,11 +86,11 @@ export const useAuthStore = create<IAuthState>()(
             accessToken: null,
             refreshToken: null,
             accessTokenExpiresAtMs: null,
-            userAccount: null
+            userAccount: null,
           }),
       }),
       {
-        name: "auth-store",
+        name: 'auth-store',
         storage: createJSONStorage(() => sessionStorage),
 
         partialize: (s) => ({

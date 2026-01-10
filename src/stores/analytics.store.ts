@@ -1,11 +1,10 @@
-import { produce } from 'immer';
-import { create } from 'zustand';
-import { createJSONStorage, devtools, persist } from 'zustand/middleware';
+import { create } from 'zustand'
+import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 
 export interface IAnalyticsStoreState {
-  canceledJobs: string[];
-  requestCancel: (jobId: string) => void;
-  cancelJob: (jobId: string) => void;
+  canceledJobs: string[]
+  requestCancel: (jobId: string) => void
+  cancelJob: (jobId: string) => void
 }
 
 export const useAnalyticsStore = create<IAnalyticsStoreState>()(
@@ -20,9 +19,9 @@ export const useAnalyticsStore = create<IAnalyticsStoreState>()(
         },
         cancelJob: (jobId: string) => {
           set((s) => ({
-            canceledJobs: s.canceledJobs.filter((j) => j !== jobId)
+            canceledJobs: s.canceledJobs.filter((j) => j !== jobId),
           }))
-        }
+        },
       }),
       {
         name: 'analytics-storage',
@@ -30,4 +29,4 @@ export const useAnalyticsStore = create<IAnalyticsStoreState>()(
       }
     )
   )
-);
+)

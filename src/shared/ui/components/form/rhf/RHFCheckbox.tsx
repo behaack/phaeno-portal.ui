@@ -1,20 +1,20 @@
-import { Controller, useFormContext } from "react-hook-form";
-import type { ChangeEvent } from "react";
-import { PCheckbox, type PCheckboxProps } from "@/shared/ui/components/inputs";
-import { PFormField } from "../PFormField";
+import type { ChangeEvent } from 'react'
+import { Controller, useFormContext } from 'react-hook-form'
+import { PCheckbox, type PCheckboxProps } from '@/shared/ui/components/inputs'
+import { PFormField } from '../PFormField'
 
 interface RHFCheckboxProps extends PCheckboxProps {
-  name: string;
-  label: string;
+  name: string
+  label: string
 }
 
 export function RHFCheckbox({ name, label, ...props }: RHFCheckboxProps) {
   const {
     control,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext()
 
-  const error = errors[name]?.message as string | undefined;
+  const error = errors[name]?.message as string | undefined
 
   return (
     <PFormField error={error}>
@@ -26,12 +26,10 @@ export function RHFCheckbox({ name, label, ...props }: RHFCheckboxProps) {
             {...props}
             label={label}
             checked={!!field.value}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              field.onChange(e.currentTarget.checked)
-            }
+            onChange={(e: ChangeEvent<HTMLInputElement>) => field.onChange(e.currentTarget.checked)}
           />
         )}
       />
     </PFormField>
-  );
+  )
 }

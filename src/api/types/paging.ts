@@ -5,5 +5,5 @@ export type CursorPage<T> = {
 
 export const emptyCursorPage = {
   items: [],
-  nextCursor: null
+  nextCursor: null,
 }

@@ -1,23 +1,22 @@
-import { DataPipelineItem } from "@/api/types/job-pipeline";
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon'
+import { DataPipelineItem } from '@/api/types/job-pipeline'
 
 export const statusDate = (item: DataPipelineItem): string => {
-  let statusDate = "";
+  let statusDate = ''
   switch (item.status) {
-    case "Queued":
+    case 'Queued':
       statusDate = item.submittedAt
-      break;
-    case "Started":
+      break
+    case 'Started':
       statusDate = item.startedAt
-      break;
-    case "Canceled":
-    case "Failed":
-    case "Completed":
+      break
+    case 'Canceled':
+    case 'Failed':
+    case 'Completed':
       statusDate = item.completedAt
-      break;
+      break
   }
-  return DateTime
-    .fromISO(statusDate, { zone: "utc" })
-    .setZone("local")  
+  return DateTime.fromISO(statusDate, { zone: 'utc' })
+    .setZone('local')
     .toLocaleString(DateTime.DATETIME_MED)
 }
