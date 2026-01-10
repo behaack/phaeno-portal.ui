@@ -22,21 +22,20 @@ export function UserListPage() {
     <Surface className="p-8" fullHeight>
       <AddEditUserModal ref={addForm} />
       <Text className="flex gap-3 items-center mb-6" variant="heading"><IconUsers />Users</Text>
-      <PSearchInput loading={results.isFetching} placeholder="Start typing to search for customer" value={q} onChange={setQ} />
-      <div className="mt-5">
-        <div className="flex justify-end mb-1">
-          <PButton 
-            rightSection={<IconUser size={16} />} 
-            onClick={addUser}
-          >
-            Add
-          </PButton>
-        </div>
-        {(results.isLoading && !results.data)
-          ? <div className='text-center'>Loading...</div>
-          : <UserTable list={results.data?.list!} />
-        }
+      <div className="flex justify-between mb-1">
+        <PSearchInput loading={results.isFetching} placeholder="Search" value={q} onChange={setQ} />
+        <PButton 
+          rightSection={<IconUser size={16} />} 
+          onClick={addUser}
+          variant="outline"
+        >
+          Add
+        </PButton>
       </div>
+      {(results.isLoading && !results.data)
+        ? <div className='text-center'>Loading...</div>
+        : <UserTable list={results.data?.list!} />
+      }
     </Surface>
   );
 }

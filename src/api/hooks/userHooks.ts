@@ -47,7 +47,7 @@ export function useAddUser() {
   return useMutation({
     mutationFn: (req: UserDetails): Promise<UserListItem> => 
       userService.addUser(req),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["users", "list" ]}),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["users", "list"]}),
   });
 }
 
@@ -56,6 +56,6 @@ export function useUpdateUser() {
   return useMutation({
     mutationFn: (req: UserDetails): Promise<UserListItem> => 
       userService.updateUser(req),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["users", "list" ]}),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["users", "list"]}),
   });
 }

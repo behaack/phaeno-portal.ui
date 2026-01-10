@@ -80,14 +80,14 @@ export function AnalyticsIndexPage() {
 
           <PDivider/>
 
-          <PSearchInput 
-            placeholder="Search by Job Name"
-            value={q}
-            onChange={(value) => setQ(value)}
-          />
 
-          <div className="text-right my-1">
-            <PButton onClick={createJobHndl} rightSection={<IconMath size={18} />}>Create </PButton>
+          <div className="flex justify-between mb-1">
+            <PSearchInput 
+              placeholder="Search"              
+              value={q}
+              onChange={(value) => setQ(value)}
+            />
+            <PButton variant="outline" onClick={createJobHndl} rightSection={<IconMath size={18} />}>Create </PButton>
           </div>
           <JobListIndex data={data || emptyPagedList}  />
         </div>
