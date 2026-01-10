@@ -54,6 +54,6 @@ export function useUpdateCustomer() {
   return useMutation({
     mutationFn: (req: Organization): Promise<Organization> => 
       customerService.updateOrganization(req),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["organization", "customer", "list"]})
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["organization", "customer"]})
   })
 }
