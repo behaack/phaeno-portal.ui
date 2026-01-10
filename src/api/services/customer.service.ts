@@ -15,5 +15,11 @@ export const customerService = {
     }),
 
   getCustomer: (id: string) => 
-    api.get<Organization>(`/organization/${id}`)
+    api.get<Organization>(`/organization/${id}`),
+
+  addOrganization: (body: Organization) =>
+    api.post<Organization>('organization', body),
+
+  updateOrganization: (body: Organization) => 
+    api.put<Organization>('organization', body),
 }

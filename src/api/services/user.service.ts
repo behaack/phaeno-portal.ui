@@ -22,6 +22,6 @@ export const userService = {
   },
 
   updateUser: (body: UserDetails) => {
-    return api.post<UserDetails, UserListItem>('user', body);
+    return api.put<UserDetails, UserListItem>('user', body);
   },
 }

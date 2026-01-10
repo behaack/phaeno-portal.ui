@@ -74,7 +74,7 @@ export function ListActionMenu({
             leftSection={<IconEdit size={14} />}
             onClick={() =>clickHandle(EListActionType.Edit)}
           >
-            Edit
+            Update
           </Menu.Item>
         }  
         {showDetails &&

@@ -1,4 +1,3 @@
-import { UserDetails } from "@/api/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { NIL } from "uuid";
@@ -8,64 +7,68 @@ import { PModalFormFooter } from "@/shared/ui/modals/Parts/PModalFormFooter";
 import { PModalBody } from "@/shared/ui/modals/Parts/PModalBody";
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { IconUser } from "@tabler/icons-react";
-import { userSchema } from "./schema/userSchema";
-import { UserForm } from "./components/UserForm";
+import { organizationSchema, FormValues } from "./schema/organizationSchema";
 import { TFormMode } from "@/shared/types/TFormMode";
-import { useAddUser, useUpdateUser } from "@/api/hooks/userHooks";
+import { EOrganizationType } from "@/api/types/enums";
+import { Organization } from "@/api/types/organization";
+import { useAddCustomer, useUpdateCustomer } from "@/api/hooks/customer.hooks";
+import { CustomerForm } from "./components/CustomerForm";
+import { IconBuilding } from "@tabler/icons-react";
 
 export interface IHandles {
-  add: (organizationId: string) => void;
-  edit: (user: UserDetails) => void
+  add: () => void;
+  edit: (organization: Organization) => void
 }
 
 interface IProps {}
 
-export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
-  const addMutation = useAddUser()
-  const editMutation = useUpdateUser()
+export const AddEditCustomerModal = forwardRef<IHandles, IProps>((props, ref) => {
+  const addMutation = useAddCustomer()
+  const updateMutation = useUpdateCustomer()
   const formMode = useRef<TFormMode>('add')
   const [isOpen, setIsOpen] = useState<boolean>(false);
   
-  const form = useForm<UserDetails>({
-    resolver: zodResolver(userSchema),
+  const form = useForm<FormValues>({
+    resolver: zodResolver(organizationSchema),
     defaultValues: {
       id: NIL,
-      organizationId: "organizationId",
-      email: "",
-      firstName: ""
-      ,
-      lastName: "",
-      isAdmin: false,
-      isSetup: false,
+      organizationName: "",
+      organizationType: EOrganizationType.Customer,
+      street1: "",
+      street2: "",
+      city: "",
+      state: "",
+      postalCode: "",
+      countryCode: "",
       rowVersion: null
     },
   });
 
   useImperativeHandle(ref, () => ({
-    add(organizationId: string) {
+    add() {
       formMode.current = "add"
       form.reset()
-      form.setValue("organizationId", organizationId)
       setIsOpen(true);
     },
-    edit(user: UserDetails) {
+    edit(organization: Organization) {
       formMode.current = "edit"
-      form.reset(user);
+      form.reset(organization);
       setIsOpen(true);
     }
   }));    
   
-  const submitHndl = async (model: UserDetails) => {
+  const submitHndl = async (model: FormValues) => {
+    console.log(model);
     if (formMode.current === "add") {
       try {
-        await addMutation.mutateAsync(model)
+        await addMutation.mutateAsync(model as Organization)
         form.reset()
         setIsOpen(false)
       } catch (error) {
       }      
     } else {
       try {
-        await editMutation.mutateAsync(model)
+        await updateMutation.mutateAsync(model as Organization)
         form.reset()
         setIsOpen(false)        
       } catch (error) {
@@ -83,11 +86,11 @@ export const AddEditUserModal = forwardRef<IHandles, IProps>((props, ref) => {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(submitHndl)}>
           <PModalHeader
-            icon={<IconUser size={21} />} 
-            title={`${(formMode.current === "add") ? "Add" : "Update"} User`}
+            icon={<IconBuilding size={21} />} 
+            title={`${(formMode.current === "add") ? "Add" : "Update"} Customer`}
             onClose={() => setIsOpen(false)} />
           <PModalBody className="py-3 px-5">
-            <UserForm formMode={formMode.current}/>
+            <CustomerForm formMode={formMode.current}/>
           </PModalBody>
           <PModalFormFooter 
             submitLabel="Save" 

@@ -3,10 +3,11 @@ import { useConfirmAction } from "@/shared/hooks/useConfirmAction"
 import { DisplayBoolean, EListActionType, ListActionMenu } from "@/shared/ui/components/compound"
 import { AddEditUserModal, IHandles } from '../AddEditUser.Modal';
 import { Table } from "@mantine/core"
-import { useNavigate } from "@tanstack/react-router"
 import { useRef } from "react";
 import { queryClient } from "@/app/providers/queryClient";
 import { userByIdQueryOptions } from "@/api/hooks/userHooks";
+import { authSession } from "@/auth/auth.session";
+
 
 export interface IProps {
   list: UserListItem[]
@@ -15,7 +16,7 @@ export interface IProps {
 export function UserTable({ list }: IProps) {
   const editForm = useRef<IHandles>(null)
   const confirm = useConfirmAction()
-  const navigate = useNavigate()
+  const authUser = authSession.getUser()
 
   const actionClickHndl = (id: string, action: EListActionType) => {
     switch (action) {
@@ -51,10 +52,10 @@ export function UserTable({ list }: IProps) {
         <Table.Thead>
           <Table.Tr>
             <Table.Th style={{ backgroundColor: 'black', color: 'white' }}>
-              First Name
+              Full Name
             </Table.Th>
             <Table.Th style={{ backgroundColor: 'black', color: 'white' }}>
-              Last Name
+              Email
             </Table.Th>          
             <Table.Th style={{ backgroundColor: 'black', color: 'white', textAlign: 'center', width: '100px' }}>
               Is Admin
@@ -67,11 +68,17 @@ export function UserTable({ list }: IProps) {
         <Table.Tbody>
           {list.map((item) => (
             <Table.Tr key={item.id}>
-              <Table.Td>{item.firstName}</Table.Td>
-              <Table.Td>{item.lastName}</Table.Td>
+              <Table.Td>{item.firstName} {item.lastName}</Table.Td>
+              <Table.Td>{item.email}</Table.Td>
               <Table.Td className="text-center"><DisplayBoolean value={item.isAdmin} /></Table.Td>
               <Table.Td className="text-center">
-                <ListActionMenu id={item.id} showEdit showEmail={!item.isSetup} showDelete onActionClick={actionClickHndl} />
+                <ListActionMenu 
+                  id={item.id} 
+                  showEdit 
+                  showEmail={!item.isSetup} 
+                  showDelete={authUser?.userId != item.id} 
+                  onActionClick={actionClickHndl} 
+                />
               </Table.Td>
             </Table.Tr>
           ))}

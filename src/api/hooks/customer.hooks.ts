@@ -1,6 +1,7 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { LookupListParams, PagedListParams } from "../types/common"
 import { customerService } from "@/api/services/customer.service"
+import { Organization } from "../types/organization"
 
 export function useCustomerLookup(params: LookupListParams) {
   return useQuery({
@@ -36,5 +37,23 @@ export function useGetCustomer(id: string) {
     queryFn: () => {
       return customerService.getCustomer(id)
     },
+  })
+}
+
+export function useAddCustomer() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (req: Organization): Promise<Organization> => 
+      customerService.addOrganization(req),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["organization", "customer", "list"]})
+  })
+}
+
+export function useUpdateCustomer() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (req: Organization): Promise<Organization> => 
+      customerService.updateOrganization(req),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["organization", "customer", "list"]})
   })
 }
