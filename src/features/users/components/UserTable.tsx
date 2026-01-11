@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { Table } from '@mantine/core'
 import { userByIdQueryOptions } from '@/api/hooks/userHooks'
 import { UserListItem } from '@/api/types/user'
@@ -9,7 +9,7 @@ import { DisplayBoolean, EListActionType, ListActionMenu } from '@/shared/ui/com
 import { AddEditUserModal, IHandles } from '../AddEditUser.Modal'
 
 export interface IProps {
-  list: UserListItem[]
+  list: UserListItem[] | undefined
 }
 
 export function UserTable({ list }: IProps) {
@@ -47,6 +47,10 @@ export function UserTable({ list }: IProps) {
     console.log('DELETED: ', id)
   }
 
+  const userList = useMemo(() => {
+    return list ?? []
+  }, [list])
+
   return (
     <div>
       <AddEditUserModal ref={editForm} />
@@ -71,7 +75,7 @@ export function UserTable({ list }: IProps) {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {list.map((item) => (
+          {userList.map((item) => (
             <Table.Tr key={item.id}>
               <Table.Td>
                 {item.firstName} {item.lastName}
