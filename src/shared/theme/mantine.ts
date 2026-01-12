@@ -59,5 +59,12 @@ export const theme = createTheme({
         shadow: 'lg',
       },
     },
+    Checkbox: {
+      styles: {
+        input: {
+          borderRadius: 5,
+        },
+      },    
+    }
   },
 })

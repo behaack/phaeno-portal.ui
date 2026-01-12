@@ -3,7 +3,7 @@ export interface IProps {
   decimals?: number
 }
 
-export default function DisplayFileSize({ value, decimals = 1 }: IProps) {
+export function DisplayFileSize({ value, decimals = 1 }: IProps) {
   if (value === 0 || value === undefined) {
     return '0 Bytes'
   }

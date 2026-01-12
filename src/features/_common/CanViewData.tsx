@@ -14,11 +14,10 @@ export function CanViewData({ children }: Props) {
       return !!impersonationStore.selectedCustomerId
     }
     return true
-  }, [authSession.isPhaeno(), impersonationStore.selectedCustomerId])
+  }, [impersonationStore.selectedCustomerId])
 
   return (
     <div>
-      {authSession.isPhaeno() && 'PHAENO'}
       {mayViewData ? (
         children
       ) : (

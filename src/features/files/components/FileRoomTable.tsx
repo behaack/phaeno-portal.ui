@@ -1,11 +1,15 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { IconChevronRight, IconFile, IconFolder } from '@tabler/icons-react'
 import { useNavigate } from '@tanstack/react-router'
 import { ActionIcon, Anchor, Badge, Group, Table, Text } from '@mantine/core'
 import { FileRoomListItem } from '@/api/types/file-room'
 import { Route } from '@/routes/app/files'
 import { ListActionMenu } from '@/shared/ui/components/compound'
-import DisplayFileSize from './DisplayFileSize'
+import { buildFolderSizeIndex } from '../helpers/buildFolderSizeIndex'
+import { DisplayFileSize } from '@/shared/ui/components/compound/'
+import { PButton, PCheckbox } from '@/shared/ui/components'
+import { FolderPath } from './FolderPath'
+import { IconDownload } from '@tabler/icons-react'
 
 export interface IProps {
   list: FileRoomListItem[]
@@ -15,7 +19,59 @@ export function FileRoomTable({ list }: IProps) {
   const navigate = useNavigate()
   const search = Route.useSearch()
   const parentId: string | null = search.parentId ?? null
+  
+  // ---------------------------------------------------------------------------
+  // SELECTION STATE
+  // ---------------------------------------------------------------------------
+  const [selected, setSelected] = useState<Set<string>>(new Set())
+  const[allBoxChecked, setAllBoxChecked] = useState(false)
 
+  // ---------------------------------------------------------------------------
+  // FILTERED LIST (CURRENT FOLDER)
+  // ---------------------------------------------------------------------------
+  const filteredList = useMemo(() => list.filter((item) => item.parentId === parentId), [list, parentId])
+  const visibleIds = useMemo(() => new Set(filteredList.map((r) => r.id)), [filteredList])
+  const selectedVisibleCount = useMemo(() => {
+    let count = 0
+    for (const id of selected) {
+      if (visibleIds.has(id)) count++
+    }
+    return count
+  }, [selected, visibleIds])
+
+  const allSelected = filteredList.length > 0 && selectedVisibleCount === filteredList.length   
+  const noneSelected = selectedVisibleCount === 0
+  const indeterminate = !noneSelected && !allSelected
+
+  const toggleAll = (checked: boolean) => {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      if (checked) {
+        for (const id of visibleIds) next.add(id)
+      } else {
+        for (const id of visibleIds) next.delete(id)
+      }
+      return next
+    })
+    setAllBoxChecked(!allBoxChecked)
+  }
+
+  const toggleOne = (id: string, checked: boolean) => {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      if (checked) next.add(id)
+      else next.delete(id)
+      return next
+    })
+  }
+
+  useEffect(() => {
+    setAllBoxChecked(allSelected)
+  }, [allSelected])  
+
+  // ---------------------------------------------------------------------------
+  // NAVIGATION
+  // ---------------------------------------------------------------------------
   const onNavigate = (id: string | null) => {
     navigate({
       to: Route.to,
@@ -25,11 +81,9 @@ export function FileRoomTable({ list }: IProps) {
     })
   }
 
-  const filteredList = useMemo(() => {
-    return list.filter((item) => item.parentId === parentId)
-  }, [list, parentId])
-
-  // Precompute children counts for fast lookup
+  // ---------------------------------------------------------------------------
+  // PRECOMPUTED METADATA
+  // ---------------------------------------------------------------------------
   const childrenCountById = useMemo(() => {
     const map = new Map<string, number>()
     for (const item of list) {
@@ -39,28 +93,45 @@ export function FileRoomTable({ list }: IProps) {
     return map
   }, [list])
 
-  // Precompute recursive folder sizes (only sums file sizes)
-  const folderSizeById = useMemo(() => {
-    return buildFolderSizeIndex(list)
-  }, [list])
+  const folderSizeById = useMemo(() => buildFolderSizeIndex(list), [list])
 
+  // ---------------------------------------------------------------------------
+  // RENDER
+  // ---------------------------------------------------------------------------
   return (
     <div>
+      <div className="flex justify-between items-center mb-1">
+        <FolderPath fileList={list} id={parentId} />
+        <PButton variant="outline" disabled={noneSelected} leftSection={<IconDownload size={16} />}>Download</PButton>
+      </div>
       <Table withTableBorder withColumnBorders striped>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th style={{ backgroundColor: 'black', color: 'white' }}>Name</Table.Th>
+            <Table.Th style={{ backgroundColor: 'black', color: 'white', width: 40 }}>
+              <PCheckbox
+                checked={allBoxChecked}
+                indeterminate={indeterminate}
+                onChange={(e) => toggleAll(e.currentTarget.checked)}
+                aria-label="Select all rows"
+              />
+            </Table.Th>
+
+            <Table.Th style={{ backgroundColor: 'black', color: 'white' }}>
+              Name
+            </Table.Th>
+
             <Table.Th
               style={{
                 backgroundColor: 'black',
                 color: 'white',
-                width: '125px',
+                width: 125,
                 textAlign: 'right',
               }}
             >
               Size
             </Table.Th>
-            <Table.Th style={{ backgroundColor: 'black', color: 'white', width: '90px' }}>
+
+            <Table.Th style={{ backgroundColor: 'black', color: 'white', width: 90 }}>
               Action
             </Table.Th>
           </Table.Tr>
@@ -68,27 +139,43 @@ export function FileRoomTable({ list }: IProps) {
 
         <Table.Tbody>
           {filteredList.map((item) => {
-            const childCount = item.isFolder ? (childrenCountById.get(item.id) ?? 0) : 0
+            const childCount = item.isFolder
+              ? childrenCountById.get(item.id) ?? 0
+              : 0
+
             const hasChildren = childCount > 0
+            const sizeBytes = item.isFolder
+              ? folderSizeById.get(item.id) ?? 0
+              : item.sizeBytes
 
-            const sizeBytes = item.isFolder ? (folderSizeById.get(item.id) ?? 0) : item.sizeBytes
-
-            const canNavigate = item.isFolder && hasChildren && !!onNavigate
+            const canNavigate = item.isFolder && hasChildren
 
             return (
               <Table.Tr key={item.id}>
                 <Table.Td>
-                  <Group gap="xs" wrap="nowrap">
-                    {item.isFolder ? <IconFolder size={18} /> : <IconFile size={18} />}
+                  <PCheckbox
+                    checked={selected.has(item.id)}
+                    onChange={(e) =>
+                      toggleOne(item.id, e.currentTarget.checked)
+                    }
+                    aria-label={`Select row ${item.name}`}
+                  />
+                </Table.Td>
 
-                    {/* Name + children indicator */}
+                <Table.Td>
+                  <Group gap="xs" wrap="nowrap">
+                    {item.isFolder ? (
+                      <IconFolder size={18} />
+                    ) : (
+                      <IconFile size={18} />
+                    )}
+
                     <Group gap="xs" wrap="nowrap">
                       {canNavigate ? (
                         <Anchor
                           component="button"
                           type="button"
-                          onClick={() => onNavigate?.(item.id)}
-                          style={{ textAlign: 'left' }}
+                          onClick={() => onNavigate(item.id)}
                         >
                           {item.name}
                         </Anchor>
@@ -103,11 +190,10 @@ export function FileRoomTable({ list }: IProps) {
                       )}
                     </Group>
 
-                    {/* Drill-down affordance */}
                     {canNavigate && (
                       <ActionIcon
                         variant="subtle"
-                        onClick={() => onNavigate?.(item.id)}
+                        onClick={() => onNavigate(item.id)}
                         aria-label="Open folder"
                       >
                         <IconChevronRight size={16} />
@@ -121,7 +207,12 @@ export function FileRoomTable({ list }: IProps) {
                 </Table.Td>
 
                 <Table.Td className="text-center">
-                  <ListActionMenu id={item.id} showDetails showDelete onActionClick={() => {}} />
+                  <ListActionMenu
+                    id={item.id}
+                    showDetails
+                    showDelete
+                    onActionClick={() => {}}
+                  />
                 </Table.Td>
               </Table.Tr>
             )
@@ -130,42 +221,4 @@ export function FileRoomTable({ list }: IProps) {
       </Table>
     </div>
   )
-}
-
-/**
- * ✅ Recursive folder size:
- * sums ALL descendant files (not folders) under folderId.
- * Runs in O(n) preprocessing, then O(1) lookup.
- */
-export function buildFolderSizeIndex(items: FileRoomListItem[]): Map<string, number> {
-  const childrenByParent = new Map<string, FileRoomListItem[]>()
-  for (const item of items) {
-    const pid = item.parentId ?? '__root__'
-    const arr = childrenByParent.get(pid) ?? []
-    arr.push(item)
-    childrenByParent.set(pid, arr)
-  }
-
-  const memo = new Map<string, number>()
-
-  const dfs = (folderId: string): number => {
-    if (memo.has(folderId)) return memo.get(folderId)!
-    const children = childrenByParent.get(folderId) ?? []
-
-    let sum = 0
-    for (const child of children) {
-      if (child.isFolder) sum += dfs(child.id)
-      else sum += child.sizeBytes
-    }
-
-    memo.set(folderId, sum)
-    return sum
-  }
-
-  // Only compute for folders (optional, but nice)
-  for (const item of items) {
-    if (item.isFolder) dfs(item.id)
-  }
-
-  return memo
 }
