@@ -24,7 +24,7 @@ export function FileRoomTable({ list }: IProps) {
   // SELECTION STATE
   // ---------------------------------------------------------------------------
   const [selected, setSelected] = useState<Set<string>>(new Set())
-  const[allBoxChecked, setAllBoxChecked] = useState(false)
+  const [allChecked, setAllChecked] = useState(false)
 
   // ---------------------------------------------------------------------------
   // FILTERED LIST (CURRENT FOLDER)
@@ -53,7 +53,7 @@ export function FileRoomTable({ list }: IProps) {
       }
       return next
     })
-    setAllBoxChecked(!allBoxChecked)
+    setAllChecked(!allChecked)
   }
 
   const toggleOne = (id: string, checked: boolean) => {
@@ -66,13 +66,15 @@ export function FileRoomTable({ list }: IProps) {
   }
 
   useEffect(() => {
-    setAllBoxChecked(allSelected)
+    setAllChecked(allSelected)
   }, [allSelected])  
 
   // ---------------------------------------------------------------------------
   // NAVIGATION
   // ---------------------------------------------------------------------------
   const onNavigate = (id: string | null) => {
+    toggleAll(false)
+    setAllChecked(false)
     navigate({
       to: Route.to,
       search: {
@@ -95,21 +97,33 @@ export function FileRoomTable({ list }: IProps) {
 
   const folderSizeById = useMemo(() => buildFolderSizeIndex(list), [list])
 
+  const downloadHndl = () => {
+    console.log(selected)
+    console.log(filteredList)
+  }
+
   // ---------------------------------------------------------------------------
   // RENDER
   // ---------------------------------------------------------------------------
   return (
     <div>
-      <div className="flex justify-between items-center mb-1">
+      <div className="flex justify-between items-end mb-1">
         <FolderPath fileList={list} id={parentId} />
-        <PButton variant="outline" disabled={noneSelected} leftSection={<IconDownload size={16} />}>Download</PButton>
+        <PButton 
+          variant="outline" 
+          disabled={noneSelected && false} 
+          leftSection={<IconDownload size={16} />}
+          onClick={downloadHndl}
+        >
+          Download
+        </PButton>
       </div>
       <Table withTableBorder withColumnBorders striped>
         <Table.Thead>
           <Table.Tr>
             <Table.Th style={{ backgroundColor: 'black', color: 'white', width: 40 }}>
               <PCheckbox
-                checked={allBoxChecked}
+                checked={allChecked}
                 indeterminate={indeterminate}
                 onChange={(e) => toggleAll(e.currentTarget.checked)}
                 aria-label="Select all rows"
