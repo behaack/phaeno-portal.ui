@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
+import reactCompiler from 'babel-plugin-react-compiler'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
@@ -21,7 +22,11 @@ export default defineConfig(({ mode }) => {
         generatedRouteTree: './src/routeTree.gen.ts',
         autoCodeSplitting: !isDev, // disable in dev, enable in prod
       }),
-      react(),
+      react({
+        babel: {
+          plugins: isDev ? [] : [[reactCompiler, { target: '19' }]],
+        },
+      }),
       tsconfigPaths(),
     ],
     build: {

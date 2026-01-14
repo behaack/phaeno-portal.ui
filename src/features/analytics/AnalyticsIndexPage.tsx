@@ -22,7 +22,7 @@ export function AnalyticsIndexPage() {
   const [q, setQ] = useState('')
   const jobRef = useRef<IHandles>(null)
 
-  const FormComponent = lazy(() => import(`./forms/${jobType}Form`))
+  const FormComponent = lazy(() => import(`./forms/${jobType}Form.tsx`))
 
   const jobStatusParameter = useMemo(() => {
     console.log(jobStatus)

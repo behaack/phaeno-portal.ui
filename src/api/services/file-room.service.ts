@@ -5,4 +5,6 @@ export const fileRoomService = {
   getFileRoomForSelf: () => api.get<FileRoomListItem[]>('/file-room'),
   getFileRoomForOrg: (organizationId: string) =>
     api.get<FileRoomListItem[]>(`/file-room/${organizationId}`),
+  prepareDownload: (body: string[]) => api.post<undefined, string[]>('file-room/download/prepare', body),
+  downloadFiles: () => api.get('file-room-downloads/local')
 }
